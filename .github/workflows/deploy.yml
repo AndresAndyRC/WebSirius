@@ -61,13 +61,12 @@ jobs:
         run: npm install --global vercel@latest
 
       # 5 · Pull configuración y env vars desde Vercel
-      #     VERCEL_TOKEN lo lee automáticamente del entorno
       - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
+        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} --token=$VERCEL_TOKEN
 
       # 6 · Build a través de Vercel CLI
       - name: Build project
-        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token=$VERCEL_TOKEN
         env:
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           PUBLIC_SITE_URL:      ${{ secrets.PUBLIC_SITE_URL }}
@@ -76,7 +75,7 @@ jobs:
       - name: Deploy to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt ${{ github.ref == 'refs/heads/main' && '--prod' || '' }})
+          DEPLOY_URL=$(vercel deploy --prebuilt ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token=$VERCEL_TOKEN)
           echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
       # 8 · Mostrar URL en el resumen del job
