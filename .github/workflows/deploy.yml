@@ -60,13 +60,21 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
+      # 4.5 · Validar secretos de Vercel
+      - name: Validate Vercel Secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::error:: Faltan los secretos de Vercel (VERCEL_TOKEN, VERCEL_ORG_ID, o VERCEL_PROJECT_ID). Configúralos en GitHub -> Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+
       # 5 · Pull configuración y env vars desde Vercel
       - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} --token=$VERCEL_TOKEN
+        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} --token="$VERCEL_TOKEN"
 
       # 6 · Build a través de Vercel CLI
       - name: Build project
-        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token=$VERCEL_TOKEN
+        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token="$VERCEL_TOKEN"
         env:
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           PUBLIC_SITE_URL:      ${{ secrets.PUBLIC_SITE_URL }}
@@ -75,7 +83,7 @@ jobs:
       - name: Deploy to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token=$VERCEL_TOKEN)
+          DEPLOY_URL=$(vercel deploy --prebuilt ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token="$VERCEL_TOKEN")
           echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
       # 8 · Mostrar URL en el resumen del job
