@@ -214,8 +214,8 @@ export default function CollectionFilter({ collections }: Props) {
             }}>
               <a
                 href={col.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={col.href.startsWith('http') ? "_blank" : undefined}
+                rel={col.href.startsWith('http') ? "noopener noreferrer" : undefined}
                 aria-label={`Ver colección: ${col.name}`}
                 style={{ display: 'flex', flexDirection: 'column', height: '100%', textDecoration: 'none' }}
                 className="col-card"
