@@ -1,0 +1,195 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  { name: 'Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida', slug: 'aplique-solar-led-2-5w-3000k-con-sensor', watts: 2.5, tipo: 'Aplique Solar', sensor: true,  color: 'Negro' },
+  { name: 'Poste LED 10W Negro Luz Cálida',                          slug: 'poste-led-10w-negro-luz-calida',          watts: 10,  tipo: 'Poste',        sensor: false, color: 'Negro' },
+  { name: 'Poste LED Negro Base E27',                                slug: 'poste-led-base-e27-negro',               watts: 0,   tipo: 'Poste',        sensor: false, color: 'Negro' },
+  { name: 'Poste LED Satín E27',                                     slug: 'poste-led-base-e27-satin',               watts: 0,   tipo: 'Poste',        sensor: false, color: 'Satín' },
+];
+
+const tipoColor: Record<string,string> = { 'Aplique Solar': '#4ADE80', 'Poste': '#FBBF24' };
+---
+<BaseLayout
+  title="Apliques y Postes LED para Exterior y Jardines — SIRIUS"
+  description="Dale vida a tus fachadas y jardines. Apliques LED solares con sensor y postes decorativos resistentes a la lluvia. Catálogo online SIRIUS."
+  canonical="/colecciones/lamparas-jardin"
+  ogImage="/og-default.jpg"
+>
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="coll-breadcrumb" aria-label="Miga de pan">
+        <a href="/" class="coll-breadcrumb__link">Inicio</a><span>›</span>
+        <a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a><span>›</span>
+        <span class="coll-breadcrumb__current">Lámparas de Jardín</span>
+      </nav>
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">Lámparas de <span class="coll-title--accent">Jardín</span></h1>
+      <p class="coll-subtitle">Apliques solares con sensor de movimiento y postes decorativos LED — Resistentes a la lluvia y el exterior.<br/>Ilumina senderos, entradas, fachadas y jardines con diseño elegante y bajo consumo.</p>
+      <div class="coll-style-pills">
+        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80">☀️ Solar + Sensor <em>sin cables</em></span>
+        <span class="coll-style-pill" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:#FBBF24">🌿 Postes Decorativos <em>E27 y 10W integrado</em></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-body">
+    <div class="container coll-layout">
+      <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros">
+        <h2 class="coll-filters__title">Filtrar</h2>
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Tipo</legend>
+          <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
+          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{t==='Aplique Solar'?'☀️':'🌿'} {t}</span></label>)}
+        </fieldset>
+        <div class="coll-cert-badges">
+          <span class="coll-cert">🌿 {products.length} modelos</span>
+          <span class="coll-cert">🌨️ Resistente lluvia</span>
+          <span class="coll-cert">🚚 Envío nacional</span>
+        </div>
+      </aside>
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header">
+          <span class="coll-count" id="product-count">{products.length} productos</span>
+          <button class="coll-mobile-filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-panel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>Filtros
+          </button>
+        </div>
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => {
+            const accent = tipoColor[p.tipo];
+            return (
+              <article class="prod-card glass" data-tipo={p.tipo}>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 0%,${accent}28 0%,${accent}06 100%)`} aria-hidden="true">
+                  <div class="prod-card__visual">
+                    {p.tipo === 'Poste' ? (
+                      <div class="prod-card__post" style={`background:${p.color==='Satín'?'#94A3B8':'#374151'}`}>
+                        <div class="prod-card__post-glow" style={`background:${accent}60`}></div>
+                      </div>
+                    ) : (
+                      <div class="prod-card__solar">
+                        <span class="prod-card__solar-panel">▦</span>
+                        <span class="prod-card__solar-icon">☀️</span>
+                      </div>
+                    )}
+                  </div>
+                  {p.sensor && <span class="prod-card__sensor-tag">📡 Sensor</span>}
+                </div>
+                <div class="prod-card__body">
+                  <div class="prod-card__meta">
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{p.tipo==='Poste'?'🌿':'☀️'} {p.tipo}</span>
+                    <span class="prod-card__install">{p.color}</span>
+                  </div>
+                  <h3 class="prod-card__name">{p.name}</h3>
+                  <div class="prod-card__specs">
+                    {p.watts>0 && <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>}
+                    <span class="prod-card__spec">🌙 Luz Cálida 3000K</span>
+                  </div>
+                </div>
+                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                  Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-info-strip">
+    <div class="container coll-info-strip__inner">
+      <div class="coll-info-card"><span class="coll-info-card__icon">🏡</span><div><strong>Entradas y Fachadas</strong><p>Los postes decorativos negro y satín se instalan en el suelo junto a entradas, senderos y bordes de piscinas.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">☀️</span><div><strong>Solar con Sensor</strong><p>El aplique solar 2.5W con sensor de movimiento se activa automáticamente. Sin cableado, sin consumo de energía red.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">🌿</span><div><strong>Base E27 Universal</strong><p>Los postes con base E27 admiten cualquier bombillo LED, incluyendo nuestros vintage de filamento para un look clásico.</p></div></div>
+    </div>
+  </section>
+
+  <section class="coll-cta-band">
+    <div class="container coll-cta-band__inner">
+      <div>
+        <h2 class="coll-cta-band__title">¿Buscas iluminación solar de mayor potencia?</h2>
+        <p class="coll-cta-band__sub">Luminarias solares de alumbrado público de 30W a 400W para vías, parqueaderos y áreas rurales.</p>
+      </div>
+      <div class="coll-cta-band__actions">
+        <a href="/colecciones/iluminacion-solar" class="btn btn--ghost">Ver Solar</a>
+        <a href="/contacto" class="btn btn--primary">Solicitar asesoría →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const state = { tipo: new Set(['all']) };
+  const grid = document.getElementById('products-grid')!;
+  const countEl = document.getElementById('product-count')!;
+  const emptyEl = document.getElementById('empty-state') as HTMLElement;
+  const cards = Array.from(grid.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+  function applyFilters(){let vis=0;cards.forEach(c=>{const show=state.tipo.has('all')||state.tipo.has(c.dataset.tipo!);c.hidden=!show;if(show)vis++;});countEl.textContent=`${vis} producto${vis!==1?'s':''}`;if(emptyEl)emptyEl.hidden=vis>0;}
+  checks.forEach(cb=>cb.addEventListener('change',()=>{const val=cb.value;if(val==='all'){state.tipo.clear();state.tipo.add('all');checks.filter(c=>c.value!=='all').forEach(c=>{c.checked=false;});cb.checked=true;}else{state.tipo.delete('all');const a=checks.find(c=>c.value==='all')!;a.checked=false;if(cb.checked)state.tipo.add(val);else state.tipo.delete(val);if(state.tipo.size===0){state.tipo.add('all');a.checked=true;}}applyFilters();}));
+  document.getElementById('filter-toggle')?.addEventListener('click',function(){const o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));document.getElementById('filters-panel')?.classList.toggle('is-open');});
+</script>
+
+<style>
+.coll-hero{position:relative;padding:var(--space-16) 0 var(--space-10);overflow:hidden;}
+.coll-hero__glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 15% 0%,rgba(74,222,128,0.08) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 85% 100%,rgba(251,191,36,.07) 0%,transparent 65%);pointer-events:none;}
+.coll-breadcrumb{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin-bottom:var(--space-6);}
+.coll-breadcrumb__link{color:var(--color-text-tertiary);transition:color var(--duration-fast);}.coll-breadcrumb__link:hover{color:var(--color-brand-primary);}.coll-breadcrumb__current{color:var(--color-text-secondary);}
+.coll-eyebrow{display:inline-block;font-size:var(--text-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--color-brand-accent);background:rgba(74,222,128,.10);border:1px solid rgba(74,222,128,.25);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);margin-bottom:var(--space-5);}
+.coll-title{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--fw-extrabold);color:var(--color-text-primary);line-height:var(--lh-tight);margin-bottom:var(--space-4);}
+.coll-title--accent{background:linear-gradient(135deg,#4ADE80,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.coll-subtitle{font-size:var(--text-base);color:var(--color-text-secondary);max-width:640px;line-height:var(--lh-normal);margin-bottom:var(--space-8);}
+.coll-style-pills{display:flex;flex-wrap:wrap;gap:var(--space-3);}
+.coll-style-pill{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:var(--fw-medium);border:1px solid;}
+.coll-style-pill em{font-style:normal;font-size:var(--text-xs);opacity:.6;}
+.coll-body{padding-bottom:var(--space-24);}
+.coll-layout{display:grid;grid-template-columns:240px 1fr;gap:var(--space-8);align-items:start;}
+@media(max-width:860px){.coll-layout{grid-template-columns:1fr;}}
+.coll-filters{position:sticky;top:calc(var(--topbar-h) + var(--header-h) + var(--space-4));border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-5);}
+@media(max-width:860px){.coll-filters{position:static;display:none;}.coll-filters.is-open{display:flex;}}
+.coll-filters__title{font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);letter-spacing:.05em;text-transform:uppercase;}
+.coll-filter-group{border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-2);}
+.coll-filter-group__legend{font-size:var(--text-xs);font-weight:var(--fw-semibold);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-2);}
+.coll-filter-chip{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary);cursor:pointer;padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm);transition:color var(--duration-fast),background var(--duration-fast);}
+.coll-filter-chip:hover{background:rgba(255,255,255,.04);color:var(--color-text-primary);}
+.coll-filter-chip input[type="checkbox"]{accent-color:var(--color-brand-primary);width:15px;height:15px;flex-shrink:0;}
+.coll-cert-badges{display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-3);border-top:1px solid var(--color-surface-divider);}
+.coll-cert{font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.coll-grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6);}
+.coll-count{font-size:var(--text-sm);color:var(--color-text-tertiary);}
+.coll-mobile-filter-btn{display:none;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:var(--fw-medium);color:var(--color-text-secondary);background:var(--color-surface-raised);border:1px solid var(--color-surface-border);border-radius:var(--radius-md);padding:var(--space-2) var(--space-4);cursor:pointer;}
+@media(max-width:860px){.coll-mobile-filter-btn{display:flex;}}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
+.prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
+.prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.prod-card__strip{height:80px;display:flex;align-items:center;justify-content:center;position:relative;}
+.prod-card__visual{display:flex;align-items:center;justify-content:center;}
+.prod-card__post{width:10px;height:52px;border-radius:var(--radius-full);position:relative;}
+.prod-card__post-glow{position:absolute;top:-6px;left:-10px;width:30px;height:22px;border-radius:50%;filter:blur(8px);}
+.prod-card__solar{display:flex;flex-direction:column;align-items:center;gap:var(--space-1);}
+.prod-card__solar-panel{font-size:1.4rem;opacity:.7;}
+.prod-card__solar-icon{font-size:1.6rem;}
+.prod-card__sensor-tag{position:absolute;top:8px;right:10px;font-size:var(--text-xs);font-weight:var(--fw-semibold);padding:2px 8px;border-radius:var(--radius-full);background:rgba(74,222,128,.18);border:1px solid rgba(74,222,128,.40);color:#4ADE80;}
+.prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}
+.prod-card__meta{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-3);}
+.prod-card__badge{font-size:var(--text-xs);font-weight:var(--fw-semibold);padding:2px var(--space-2);border-radius:var(--radius-full);border:1px solid;}
+.prod-card__install{font-size:var(--text-xs);color:var(--color-text-tertiary);background:rgba(255,255,255,.04);border:1px solid var(--color-surface-border);padding:2px var(--space-2);border-radius:var(--radius-full);}
+.prod-card__name{font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-text-primary);line-height:var(--lh-snug);margin-bottom:var(--space-3);}
+.prod-card__specs{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;}
+.prod-card__spec{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.prod-card__cta{display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-brand-accent);border-top:1px solid var(--color-surface-divider);transition:background var(--duration-fast);}
+.prod-card__cta:hover{background:rgba(74,222,128,.05);}
+.coll-info-strip{background:var(--color-surface-raised);border-top:1px solid var(--color-surface-border);border-bottom:1px solid var(--color-surface-border);padding:var(--space-10) 0;}
+.coll-info-strip__inner{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:var(--space-6);}
+.coll-info-card{display:flex;align-items:flex-start;gap:var(--space-4);}
+.coll-info-card__icon{font-size:2rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
+.coll-info-card strong{display:block;font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-info-card p{font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:var(--lh-relaxed);}
+.coll-cta-band{background:linear-gradient(135deg,rgba(74,222,128,.07) 0%,rgba(251,191,36,.05) 100%);border-top:1px solid var(--color-surface-border);padding:var(--space-12) 0;}
+.coll-cta-band__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);flex-wrap:wrap;}
+.coll-cta-band__title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-cta-band__sub{font-size:var(--text-sm);color:var(--color-text-secondary);}
+.coll-cta-band__actions{display:flex;gap:var(--space-3);flex-wrap:wrap;}
+</style>
