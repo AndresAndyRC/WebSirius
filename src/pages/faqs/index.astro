@@ -1,0 +1,393 @@
+---
+/**
+ * FAQs — Preguntas Frecuentes
+ * Route: /faqs
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    q: '¿Los productos tienen garantía?',
+    a: 'Todos nuestros productos tienen 1 año de garantía hasta 5 años dependiendo del producto, por defectos de fábrica. Nuestra garantía cubre fallos en componentes electrónicos, problemas de fabricación y pérdida de eficiencia lumínica fuera de los rangos especificados.',
+    icon: '🛡️',
+  },
+  {
+    q: '¿Realizan envíos a nivel nacional?',
+    a: 'Realizamos despachos a nivel nacional con la transportadora que el cliente desee, con la posibilidad de pago contra entrega del envío. Trabajamos con Servientrega, Coordinadora, Deprisa, TCC y más. Los tiempos de entrega varían entre 2 y 7 días hábiles según la ciudad.',
+    icon: '🚚',
+  },
+  {
+    q: '¿Los productos cumplen con la norma RETIE y RETILAP?',
+    a: 'Todos los productos cuentan con certificación, además de estar avalados por la norma RETIE (Reglamento Técnico de Instalaciones Eléctricas) y RETILAP (Reglamento Técnico de Iluminación y Alumbrado Público), para seguridad del consumidor.',
+    icon: '✅',
+  },
+  {
+    q: '¿Cuáles son los medios de pago disponibles?',
+    a: 'Aceptamos transferencia bancaria, tarjeta de crédito/débito, PSE, nequi, daviplata y pago contra entrega para órdenes dentro del territorio colombiano. Para pedidos mayoristas contacte a nuestro equipo comercial.',
+    icon: '💳',
+  },
+  {
+    q: '¿Pueden asesorarme en la selección del producto adecuado?',
+    a: 'Contamos con un equipo de ingenieros especialistas en iluminación LED que pueden orientarte sobre la temperatura de color, potencia, tipo de instalación y certificaciones requeridas para tu proyecto residencial, comercial o industrial.',
+    icon: '💡',
+  },
+  {
+    q: '¿Manejan precios al por mayor?',
+    a: 'Sí, ofrecemos precios especiales para distribuidores, constructoras y proyectos de alto volumen. Comunícate con nuestro departamento comercial para obtener una cotización personalizada y conocer los beneficios del programa Aliados SIRIUS.',
+    icon: '📦',
+  },
+  {
+    q: '¿Cómo inicio una reclamación de garantía?',
+    a: 'Puedes iniciar una reclamación a través de nuestra página de Contacto adjuntando la factura de compra, descripción del defecto y fotos o vídeo del producto. Nuestro equipo te responderá en un plazo máximo de 48 horas hábiles.',
+    icon: '🔧',
+  },
+  {
+    q: '¿Los productos son compatibles con dimmers?',
+    a: 'Muchos de nuestros paneles y bombillos LED son compatibles con sistemas de atenuación (dimming). En la ficha técnica de cada producto se especifica si es regulable y qué tipo de dimmer es compatible (Triac, 0-10V, DALI).',
+    icon: '🎚️',
+  },
+];
+---
+
+<BaseLayout
+  title="Preguntas Frecuentes | SIRIUS Iluminación"
+  description="Encuentra respuestas rápidas y detalladas a las preguntas más comunes sobre nuestros productos LED, garantías, envíos y normas RETIE/RETILAP."
+  canonical="/faqs"
+  ogImage="/og-default.jpg"
+>
+
+  <!-- ── Hero ── -->
+  <section class="faq-hero">
+    <div class="faq-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <span class="faq-eyebrow">Centro de Ayuda</span>
+      <h1 class="faq-title">Preguntas <span class="faq-title--accent">Frecuentes</span></h1>
+      <p class="faq-subtitle">
+        Todo lo que necesitas saber sobre nuestros productos, envíos,
+        garantías y certificaciones.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ Accordion ── -->
+  <section class="faq-section">
+    <div class="container faq-grid">
+
+      <!-- Left sticky context card -->
+      <aside class="faq-sidebar">
+        <div class="faq-contact-card glass">
+          <span class="faq-contact-card__icon">✦</span>
+          <h2 class="faq-contact-card__title">¿Necesitas más ayuda?</h2>
+          <p class="faq-contact-card__body">
+            Nuestro equipo de especialistas en iluminación está disponible
+            para asesorarte en tu proyecto.
+          </p>
+          <a href="/contacto" class="btn btn--primary faq-contact-card__cta">
+            Contáctanos →
+          </a>
+          <a href="/colecciones" class="btn btn--ghost faq-contact-card__cta">
+            Ver Catálogo
+          </a>
+        </div>
+
+        <div class="faq-badge glass">
+          <span class="faq-badge__icon">🏆</span>
+          <div>
+            <strong class="faq-badge__label">Certificación</strong>
+            <p class="faq-badge__sub">Normas RETIE & RETILAP</p>
+          </div>
+        </div>
+
+        <div class="faq-badge glass">
+          <span class="faq-badge__icon">🚚</span>
+          <div>
+            <strong class="faq-badge__label">Envíos</strong>
+            <p class="faq-badge__sub">A toda Colombia</p>
+          </div>
+        </div>
+
+        <div class="faq-badge glass">
+          <span class="faq-badge__icon">🛡️</span>
+          <div>
+            <strong class="faq-badge__label">Garantía</strong>
+            <p class="faq-badge__sub">1 a 5 años según producto</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Accordion list -->
+      <div class="faq-list">
+        {faqs.map((item, i) => (
+          <details class="faq-item glass" name="faqs">
+            <summary class="faq-item__summary">
+              <span class="faq-item__icon" aria-hidden="true">{item.icon}</span>
+              <span class="faq-item__question">{item.q}</span>
+              <span class="faq-item__chevron" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </summary>
+            <div class="faq-item__body">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA band ── -->
+  <section class="faq-cta-band">
+    <div class="container faq-cta-band__inner">
+      <div>
+        <h2 class="faq-cta-band__title">¿Listo para iluminar tu espacio?</h2>
+        <p class="faq-cta-band__sub">Explora nuestra colección completa de paneles LED de alta eficiencia.</p>
+      </div>
+      <a href="/colecciones/paneles-led-redondos" class="btn btn--primary faq-cta-band__btn">
+        Ver Paneles LED Redondos
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ── Hero ─────────────────────────────── */
+.faq-hero {
+  position: relative;
+  padding: var(--space-20) 0 var(--space-12);
+  text-align: center;
+  overflow: hidden;
+}
+
+.faq-hero__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(245,166,35,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.faq-eyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+  background: rgba(245,166,35,0.10);
+  border: 1px solid rgba(245,166,35,0.20);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-5);
+}
+
+.faq-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.faq-title--accent {
+  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.faq-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: var(--lh-normal);
+}
+
+/* ── Layout ───────────────────────────── */
+.faq-section {
+  padding-bottom: var(--space-24);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-sidebar { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  .faq-contact-card { flex: 1 1 100%; }
+  .faq-badge { flex: 1 1 calc(50% - var(--space-4)); }
+}
+
+/* ── Sidebar ──────────────────────────── */
+.faq-sidebar {
+  position: sticky;
+  top: calc(var(--topbar-h) + var(--header-h) + var(--space-8));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.faq-contact-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  border: 1px solid var(--color-surface-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-contact-card__icon {
+  font-size: var(--text-2xl);
+  color: var(--color-brand-primary);
+}
+
+.faq-contact-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+}
+
+.faq-contact-card__body {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-normal);
+}
+
+.faq-contact-card__cta {
+  text-align: center;
+}
+
+.faq-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-surface-border);
+}
+
+.faq-badge__icon { font-size: 1.5rem; flex-shrink: 0; }
+
+.faq-badge__label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.faq-badge__sub {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ── Accordion items ──────────────────── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-item {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-surface-border);
+  overflow: hidden;
+  transition: border-color var(--duration-normal);
+}
+
+.faq-item[open] {
+  border-color: rgba(245,166,35,0.35);
+  box-shadow: 0 0 0 1px rgba(245,166,35,0.10);
+}
+
+.faq-item__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--duration-fast);
+}
+
+.faq-item__summary::-webkit-details-marker { display: none; }
+
+.faq-item__summary:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.faq-item__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 2.2rem;
+  text-align: center;
+}
+
+.faq-item__question {
+  flex: 1;
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-snug);
+}
+
+.faq-item__chevron {
+  flex-shrink: 0;
+  color: var(--color-text-tertiary);
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.faq-item[open] .faq-item__chevron {
+  transform: rotate(180deg);
+  color: var(--color-brand-primary);
+}
+
+.faq-item__body {
+  padding: 0 var(--space-6) var(--space-5) calc(var(--space-4) + 2.2rem + var(--space-4));
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  border-top: 1px solid var(--color-surface-divider);
+}
+
+/* ── Bottom CTA band ──────────────────── */
+.faq-cta-band {
+  background: linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(0,194,255,0.06) 100%);
+  border-top: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--color-surface-border);
+  padding: var(--space-12) 0;
+}
+
+.faq-cta-band__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.faq-cta-band__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.faq-cta-band__sub {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.faq-cta-band__btn { white-space: nowrap; }
+</style>

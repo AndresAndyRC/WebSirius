@@ -1,0 +1,737 @@
+---
+/**
+ * Paneles LED Redondos — Collection page
+ * Route: /colecciones/paneles-led-redondos
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  // 3W
+  { name: 'Panel LED Redondo de Incrustar 3W 2.5" Luz Blanca',   slug: 'panel-led-3w-2-5-blanco-redondo-incrustar',           watts: 3,  color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 3W Luz Cálida',         slug: 'panel-led-redondo-de-incrustar-3w-luz-calida',         watts: 3,  color: 'Cálida',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 3W 2.5" Luz Cálida',   slug: 'panel-led-redondo-de-incrustar-3w-2-5-luz-calida',    watts: 3,  color: 'Cálida',  install: 'Incrustar' },
+  // 4W
+  { name: 'Panel LED Redondo de Incrustar 4W Luz Blanca',         slug: 'panel-led-4w-3-5-blanco-redondo-incrustar',           watts: 4,  color: 'Blanca',  install: 'Incrustar' },
+  // 6W
+  { name: 'Panel LED Redondo de Incrustar 6W Luz Blanca',         slug: 'panel-led-redondo-de-incrustar-6w-luz-blanca',         watts: 6,  color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 6W 4" Luz Blanca',     slug: 'panel-led-6w-4-blanco-redondo-incrustar',              watts: 6,  color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 6W 4" Luz Neutra',     slug: 'panel-led-6w-4-luz-neutra-redondo-incrustar',          watts: 6,  color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 6W Luz Cálida',         slug: 'panel-led-redondo-de-incrustar-6w-luz-calida',         watts: 6,  color: 'Cálida',  install: 'Incrustar' },
+  // 9W
+  { name: 'Panel LED Redondo de Incrustar 9W Luz Blanca',         slug: 'panel-led-redondo-de-incrustar-9w-luz-blanca',         watts: 9,  color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 9W 5" Luz Blanca',     slug: 'panel-led-9w-5-blanco-redondo-incrustar',              watts: 9,  color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 9W 5" Luz Neutra',     slug: 'panel-led-9w-5-luz-neutra-redondo-incrustar',          watts: 9,  color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 9W Luz Cálida',         slug: 'panel-led-redondo-de-incrustar-9w-luz-calida',         watts: 9,  color: 'Cálida',  install: 'Incrustar' },
+  // 12W
+  { name: 'Panel LED Redondo de Incrustar 12W Luz Blanca',        slug: 'panel-led-redondo-de-incrustar-12w-luz-blanca',        watts: 12, color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 12W Luz Neutra',        slug: 'panel-led-redondo-de-incrustar-12w-luz-neutra',        watts: 12, color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 12W Luz Cálida',        slug: 'panel-led-redondo-de-incrustar-12w-luz-calida',        watts: 12, color: 'Cálida',  install: 'Incrustar' },
+  // 18W
+  { name: 'Panel LED Redondo de Incrustar 18W Luz Blanca',        slug: 'panel-led-redondo-de-incrustar-18w-luz-blanca',        watts: 18, color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 18W Luz Neutra',        slug: 'panel-led-redondo-de-incrustar-18w-luz-neutra',        watts: 18, color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 18W Luz Cálida',        slug: 'panel-led-redondo-de-incrustar-18w-luz-calida',        watts: 18, color: 'Cálida',  install: 'Incrustar' },
+  // 24W
+  { name: 'Panel LED Redondo de Incrustar 24W Luz Blanca',        slug: 'panel-led-redondo-de-incrustar-24w-luz-blanca',        watts: 24, color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 24W Luz Neutra',        slug: 'panel-led-redondo-de-incrustar-24w-luz-neutra',        watts: 24, color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 24W Luz Cálida',        slug: 'panel-led-redondo-de-incrustar-24w-luz-calida',        watts: 24, color: 'Cálida',  install: 'Incrustar' },
+  // 36W
+  { name: 'Panel LED Redondo de Incrustar 36W Luz Blanca',        slug: 'panel-led-redondo-de-incrustar-36w-luz-blanca',        watts: 36, color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 36W Luz Neutra',        slug: 'panel-led-redondo-de-incrustar-36w-luz-neutra',        watts: 36, color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 36W Luz Cálida',        slug: 'panel-led-redondo-de-incrustar-36w-luz-calida',        watts: 36, color: 'Cálida',  install: 'Incrustar' },
+  // 48W
+  { name: 'Panel LED Redondo de Incrustar 48W Luz Blanca',        slug: 'panel-led-redondo-de-incrustar-48w-luz-blanca',        watts: 48, color: 'Blanca',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 48W Luz Neutra',        slug: 'panel-led-redondo-de-incrustar-48w-luz-neutra',        watts: 48, color: 'Neutra',  install: 'Incrustar' },
+  { name: 'Panel LED Redondo de Incrustar 48W Luz Cálida',        slug: 'panel-led-redondo-de-incrustar-48w-luz-calida',        watts: 48, color: 'Cálida',  install: 'Incrustar' },
+  // Sobreponer series
+  { name: 'Panel LED Redondo de Sobreponer 6W Luz Blanca',        slug: 'panel-led-redondo-de-sobreponer-6w-luz-blanca',        watts: 6,  color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 6W Luz Neutra',        slug: 'panel-led-redondo-de-sobreponer-6w-luz-neutra',        watts: 6,  color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 6W Luz Cálida',        slug: 'panel-led-redondo-de-sobreponer-6w-luz-calida',        watts: 6,  color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 9W Luz Blanca',        slug: 'panel-led-redondo-de-sobreponer-9w-luz-blanca',        watts: 9,  color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 9W Luz Neutra',        slug: 'panel-led-redondo-de-sobreponer-9w-luz-neutra',        watts: 9,  color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 9W Luz Cálida',        slug: 'panel-led-redondo-de-sobreponer-9w-luz-calida',        watts: 9,  color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 12W Luz Blanca',       slug: 'panel-led-redondo-de-sobreponer-12w-luz-blanca',       watts: 12, color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 12W Luz Neutra',       slug: 'panel-led-redondo-de-sobreponer-12w-luz-neutra',       watts: 12, color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 12W Luz Cálida',       slug: 'panel-led-redondo-de-sobreponer-12w-luz-calida',       watts: 12, color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 18W Luz Blanca',       slug: 'panel-led-redondo-de-sobreponer-18w-luz-blanca',       watts: 18, color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 18W Luz Neutra',       slug: 'panel-led-redondo-de-sobreponer-18w-luz-neutra',       watts: 18, color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 18W Luz Cálida',       slug: 'panel-led-redondo-de-sobreponer-18w-luz-calida',       watts: 18, color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 24W Luz Blanca',       slug: 'panel-led-redondo-de-sobreponer-24w-luz-blanca',       watts: 24, color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 24W Luz Neutra',       slug: 'panel-led-redondo-de-sobreponer-24w-luz-neutra',       watts: 24, color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 24W Luz Cálida',       slug: 'panel-led-redondo-de-sobreponer-24w-luz-calida',       watts: 24, color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 36W Luz Blanca',       slug: 'panel-led-redondo-de-sobreponer-36w-luz-blanca',       watts: 36, color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 36W Luz Neutra',       slug: 'panel-led-redondo-de-sobreponer-36w-luz-neutra',       watts: 36, color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 36W Luz Cálida',       slug: 'panel-led-redondo-de-sobreponer-36w-luz-calida',       watts: 36, color: 'Cálida',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 48W Luz Blanca',       slug: 'panel-led-redondo-de-sobreponer-48w-luz-blanca',       watts: 48, color: 'Blanca',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 48W Luz Neutra',       slug: 'panel-led-redondo-de-sobreponer-48w-luz-neutra',       watts: 48, color: 'Neutra',  install: 'Sobreponer' },
+  { name: 'Panel LED Redondo de Sobreponer 48W Luz Cálida',       slug: 'panel-led-redondo-de-sobreponer-48w-luz-calida',       watts: 48, color: 'Cálida',  install: 'Sobreponer' },
+];
+
+// Color temperature metadata
+const colorMeta: Record<string, { label: string; css: string; temp: string; icon: string }> = {
+  'Blanca':  { label: 'Luz Blanca',  css: 'cool',    temp: '6000K – 6500K', icon: '❄️' },
+  'Neutra':  { label: 'Luz Neutra',  css: 'neutral', temp: '4000K – 4500K', icon: '☀️' },
+  'Cálida':  { label: 'Luz Cálida',  css: 'warm',    temp: '2700K – 3500K', icon: '🔥' },
+};
+
+const uniqueWatts   = [...new Set(products.map(p => p.watts))].sort((a, b) => a - b);
+const uniqueColors  = ['Blanca', 'Neutra', 'Cálida'];
+const uniqueInstall = ['Incrustar', 'Sobreponer'];
+---
+
+<BaseLayout
+  title="Paneles LED Redondos | Incrustar y Sobreponer — SIRIUS"
+  description="Encuentra la mayor variedad de Paneles LED Redondos en Colombia. Desde 3W hasta 48W, Luz Blanca, neutra o Cálida, para Drywall o Concreto. ¡Renueva con SIRIUS!"
+  canonical="/colecciones/paneles-led-redondos"
+  ogImage="/og-default.jpg"
+>
+
+  <!-- ── Hero ── -->
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="coll-breadcrumb" aria-label="Miga de pan">
+        <a href="/" class="coll-breadcrumb__link">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a>
+        <span aria-hidden="true">›</span>
+        <span class="coll-breadcrumb__current">Paneles LED Redondos</span>
+      </nav>
+
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">
+        Paneles LED <span class="coll-title--accent">Redondos</span>
+      </h1>
+      <p class="coll-subtitle">
+        Desde 3W hasta 48W — Incrustar y Sobreponer — Luz Blanca, Neutra o Cálida.
+        Certificados RETIE & RETILAP. Envíos a toda Colombia.
+      </p>
+
+      <!-- Temperature pills -->
+      <div class="coll-temp-pills">
+        {uniqueColors.map(c => (
+          <span class={`coll-temp-pill coll-temp-pill--${colorMeta[c].css}`}>
+            {colorMeta[c].icon} {colorMeta[c].label}
+            <em>{colorMeta[c].temp}</em>
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Filters + Grid ── -->
+  <section class="coll-body">
+    <div class="container coll-layout">
+
+      <!-- Sidebar filters -->
+      <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros de productos">
+        <h2 class="coll-filters__title">Filtrar</h2>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Potencia (W)</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="watts" value="all" checked id="watts-all" />
+            <span>Todas</span>
+          </label>
+          {uniqueWatts.map(w => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="watts" value={String(w)} id={`watts-${w}`} />
+              <span>{w}W</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Temperatura de color</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="color" value="all" checked id="color-all" />
+            <span>Todas</span>
+          </label>
+          {uniqueColors.map(c => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="color" value={c} id={`color-${c}`} />
+              <span>{colorMeta[c].icon} {colorMeta[c].label}</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Tipo de instalación</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="install" value="all" checked id="install-all" />
+            <span>Ambos</span>
+          </label>
+          {uniqueInstall.map(t => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="install" value={t} id={`install-${t}`} />
+              <span>{t}</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <div class="coll-cert-badges">
+          <span class="coll-cert">✅ RETIE</span>
+          <span class="coll-cert">✅ RETILAP</span>
+          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert">🛡️ Garantía 1–5 años</span>
+        </div>
+      </aside>
+
+      <!-- Product grid -->
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header">
+          <span class="coll-count" id="product-count">{products.length} productos</span>
+          <button class="coll-mobile-filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-panel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/>
+            </svg>
+            Filtros
+          </button>
+        </div>
+
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => (
+            <article
+              class="prod-card glass"
+              data-watts={p.watts}
+              data-color={p.color}
+              data-install={p.install}
+            >
+              <!-- Visual indicator light -->
+              <div class={`prod-card__light prod-card__light--${colorMeta[p.color].css}`} aria-hidden="true"></div>
+
+              <div class="prod-card__body">
+                <div class="prod-card__meta">
+                  <span class={`prod-card__temp prod-card__temp--${colorMeta[p.color].css}`}>
+                    {colorMeta[p.color].icon} {colorMeta[p.color].label}
+                  </span>
+                  <span class="prod-card__install">{p.install}</span>
+                </div>
+
+                <h3 class="prod-card__name">{p.name}</h3>
+
+                <div class="prod-card__specs">
+                  <span class="prod-card__spec">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    {p.watts}W
+                  </span>
+                  <span class="prod-card__spec">{colorMeta[p.color].temp}</span>
+                </div>
+              </div>
+
+              <a
+                href={`https://siriuscol.com/products/${p.slug}`}
+                class="prod-card__cta"
+                aria-label={`Ver producto: ${p.name}`}
+                target="_blank"
+                rel="noopener"
+              >
+                Ver producto
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <!-- Empty state -->
+        <div class="coll-empty" id="empty-state" hidden>
+          <span class="coll-empty__icon">🔦</span>
+          <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
+          <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA band ── -->
+  <section class="coll-cta-band">
+    <div class="container coll-cta-band__inner">
+      <div>
+        <h2 class="coll-cta-band__title">¿Tienes preguntas?</h2>
+        <p class="coll-cta-band__sub">Nuestros especialistas te ayudan a elegir el panel correcto para tu espacio.</p>
+      </div>
+      <div class="coll-cta-band__actions">
+        <a href="/faqs" class="btn btn--ghost">Ver FAQs</a>
+        <a href="/contacto" class="btn btn--primary">Solicitar asesoría →</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // ─── Filter logic ─────────────────────────────────────────
+  type FilterState = { watts: Set<string>; color: Set<string>; install: Set<string> };
+  const state: FilterState = { watts: new Set(['all']), color: new Set(['all']), install: new Set(['all']) };
+
+  const grid        = document.getElementById('products-grid')!;
+  const countEl     = document.getElementById('product-count')!;
+  const emptyEl     = document.getElementById('empty-state')!;
+  const cards       = Array.from(grid.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks      = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach(card => {
+      const wMatch = state.watts.has('all') || state.watts.has(card.dataset.watts!);
+      const cMatch = state.color.has('all')  || state.color.has(card.dataset.color!);
+      const iMatch = state.install.has('all') || state.install.has(card.dataset.install!);
+      const show   = wMatch && cMatch && iMatch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    countEl.textContent = `${visible} producto${visible !== 1 ? 's' : ''}`;
+    emptyEl.hidden = visible > 0;
+  }
+
+  checks.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const key  = cb.dataset.filter as keyof FilterState;
+      const val  = cb.value;
+
+      if (val === 'all') {
+        // selecting "all" deselects others
+        state[key].clear();
+        state[key].add('all');
+        checks.filter(c => c.dataset.filter === key && c.value !== 'all')
+              .forEach(c => { c.checked = false; });
+        cb.checked = true;
+      } else {
+        state[key].delete('all');
+        const allCb = checks.find(c => c.dataset.filter === key && c.value === 'all')!;
+        allCb.checked = false;
+        if (cb.checked)  state[key].add(val);
+        else             state[key].delete(val);
+        // if nothing selected, revert to all
+        if (state[key].size === 0) {
+          state[key].add('all');
+          allCb.checked = true;
+        }
+      }
+      applyFilters();
+    });
+  });
+
+  document.getElementById('reset-filters')?.addEventListener('click', () => {
+    (['watts', 'color', 'install'] as const).forEach(key => {
+      state[key].clear();
+      state[key].add('all');
+    });
+    checks.forEach(cb => { cb.checked = cb.value === 'all'; });
+    applyFilters();
+  });
+
+  // Mobile filter toggle
+  const filterToggle = document.getElementById('filter-toggle');
+  const filtersPanel = document.getElementById('filters-panel');
+  filterToggle?.addEventListener('click', () => {
+    const open = filterToggle.getAttribute('aria-expanded') === 'true';
+    filterToggle.setAttribute('aria-expanded', String(!open));
+    filtersPanel?.classList.toggle('is-open');
+  });
+</script>
+
+<style>
+/* ── Hero ─────────────────────────────── */
+.coll-hero {
+  position: relative;
+  padding: var(--space-16) 0 var(--space-10);
+  overflow: hidden;
+}
+
+.coll-hero__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 0%, rgba(0,194,255,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 80% 100%, rgba(245,166,35,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.coll-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
+}
+.coll-breadcrumb__link { color: var(--color-text-tertiary); transition: color var(--duration-fast); }
+.coll-breadcrumb__link:hover { color: var(--color-brand-primary); }
+.coll-breadcrumb__current { color: var(--color-text-secondary); }
+
+.coll-eyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+  background: rgba(0,194,255,0.08);
+  border: 1px solid rgba(0,194,255,0.20);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-5);
+}
+
+.coll-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.coll-title--accent {
+  background: linear-gradient(135deg, var(--color-brand-accent), #7EC8FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coll-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: var(--lh-normal);
+  margin-bottom: var(--space-8);
+}
+
+.coll-temp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.coll-temp-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  border: 1px solid;
+}
+.coll-temp-pill em {
+  font-style: normal;
+  font-size: var(--text-xs);
+  opacity: 0.6;
+}
+.coll-temp-pill--cool    { background: var(--color-neutral-bg);  border-color: rgba(200,220,255,0.20); color: #B0CFFF; }
+.coll-temp-pill--neutral { background: rgba(255,255,255,0.06);   border-color: rgba(255,255,255,0.15); color: #E0E8FF; }
+.coll-temp-pill--warm    { background: var(--color-warm-bg);     border-color: rgba(255,154,62,0.25);  color: var(--color-warm); }
+
+/* ── Layout ───────────────────────────── */
+.coll-body { padding-bottom: var(--space-24); }
+
+.coll-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .coll-layout { grid-template-columns: 1fr; }
+}
+
+/* ── Filters sidebar ──────────────────── */
+.coll-filters {
+  position: sticky;
+  top: calc(var(--topbar-h) + var(--header-h) + var(--space-4));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-surface-border);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@media (max-width: 860px) {
+  .coll-filters {
+    position: static;
+    display: none;
+  }
+  .coll-filters.is-open { display: flex; }
+}
+
+.coll-filters__title {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.coll-filter-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.coll-filter-group__legend {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
+}
+
+.coll-filter-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast), background var(--duration-fast);
+}
+
+.coll-filter-chip:hover { background: rgba(255,255,255,0.04); color: var(--color-text-primary); }
+
+.coll-filter-chip input[type="checkbox"] {
+  accent-color: var(--color-brand-primary);
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.coll-cert-badges {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-surface-divider);
+}
+
+.coll-cert {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ── Grid header ──────────────────────── */
+.coll-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.coll-count {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.coll-mobile-filter-btn {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: color var(--duration-fast);
+}
+
+@media (max-width: 860px) {
+  .coll-mobile-filter-btn { display: flex; }
+}
+
+/* ── Product grid ─────────────────────── */
+.coll-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+/* ── Product card ─────────────────────── */
+.prod-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-surface-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--duration-normal),
+    transform   var(--duration-normal) var(--ease-out-expo),
+    box-shadow  var(--duration-normal);
+}
+
+.prod-card:hover {
+  border-color: rgba(245,166,35,0.30);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.prod-card__light {
+  height: 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.prod-card__light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.prod-card__light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  border-radius: 2px;
+}
+
+.prod-card__light--cool::before    { background: radial-gradient(ellipse at 50% 30%, rgba(126,200,255,0.35) 0%, rgba(126,200,255,0.05) 70%, transparent 100%); }
+.prod-card__light--cool::after     { background: #7EC8FF; box-shadow: 0 0 12px 4px rgba(126,200,255,0.6); }
+.prod-card__light--neutral::before { background: radial-gradient(ellipse at 50% 30%, rgba(240,248,255,0.30) 0%, rgba(240,248,255,0.05) 70%, transparent 100%); }
+.prod-card__light--neutral::after  { background: #E8F0FF; box-shadow: 0 0 12px 4px rgba(220,235,255,0.7); }
+.prod-card__light--warm::before    { background: radial-gradient(ellipse at 50% 30%, rgba(255,154,62,0.35) 0%, rgba(255,154,62,0.05) 70%, transparent 100%); }
+.prod-card__light--warm::after     { background: var(--color-warm); box-shadow: 0 0 12px 4px rgba(255,154,62,0.6); }
+
+.prod-card__body {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  flex: 1;
+}
+
+.prod-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.prod-card__temp {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  border: 1px solid;
+}
+.prod-card__temp--cool    { background: rgba(126,200,255,0.10); border-color: rgba(126,200,255,0.25); color: #90CFFF; }
+.prod-card__temp--neutral { background: rgba(220,235,255,0.08); border-color: rgba(220,235,255,0.20); color: #C8D8FF; }
+.prod-card__temp--warm    { background: var(--color-warm-bg);   border-color: rgba(255,154,62,0.30);   color: var(--color-warm); }
+
+.prod-card__install {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-surface-border);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+}
+
+.prod-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-snug);
+  margin-bottom: var(--space-2);
+}
+
+.prod-card__specs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.prod-card__spec {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.prod-card__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-primary);
+  border-top: 1px solid var(--color-surface-divider);
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+
+.prod-card__cta:hover {
+  background: rgba(245,166,35,0.06);
+}
+
+/* ── Empty state ──────────────────────── */
+.coll-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: var(--space-20) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.coll-empty__icon { font-size: 3rem; }
+
+.coll-empty__text {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+}
+
+/* ── CTA band ─────────────────────────── */
+.coll-cta-band {
+  background: linear-gradient(135deg, rgba(0,194,255,0.07) 0%, rgba(245,166,35,0.06) 100%);
+  border-top: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--color-surface-border);
+  padding: var(--space-12) 0;
+}
+
+.coll-cta-band__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.coll-cta-band__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.coll-cta-band__sub {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.coll-cta-band__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+</style>

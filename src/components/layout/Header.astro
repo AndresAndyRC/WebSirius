@@ -2,10 +2,10 @@
 /**
  * Header.astro — Primary site header with logo + navigation
  */
-const navLinks = [
+const navLinks: { label: string; href: string; active?: boolean }[] = [
   { label: 'Colecciones', href: '/colecciones' },
   { label: 'Blog',        href: '/blog' },
-  { label: 'FAQs',        href: 'https://siriuscol.com/pages/pushdaddy-faq-1' },
+  { label: 'FAQs',        href: '/faqs' },
   { label: 'Contacto',    href: '/contacto' },
 ];
 ---
@@ -39,7 +39,7 @@ const navLinks = [
     <!-- CTA -->
     <div class="header__actions">
       <a
-        href="https://siriuscol.com/collections/paneles-led-redondos"
+        href="/colecciones/paneles-led-redondos"
         class="btn btn--primary header__cta"
         aria-label="Ver catálogo de productos SIRIUS"
       >
@@ -73,7 +73,7 @@ const navLinks = [
       ))}
       <li>
         <a
-          href="https://siriuscol.com/collections/paneles-led-redondos"
+          href="/colecciones/paneles-led-redondos"
           class="btn btn--primary header__mobile-cta"
         >
           Ver Catálogo →
