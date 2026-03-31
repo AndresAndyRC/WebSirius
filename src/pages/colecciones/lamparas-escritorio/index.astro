@@ -1,0 +1,214 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  { name: 'Lámpara LED Mesa Kids Verde 4W Recargable',       slug: 'lampara-led-mesa-kids-verde-4w-recargable',          watts: 4, tipo: 'Infantil',    feature: 'Recargable', precio: 0 },
+  { name: 'Lámpara LED Escritorio 5W CCT Carga Inalámbrica', slug: 'lampara-led-escritorio-blanco-5w-cct-carga-inalambrica', watts: 5, tipo: 'Inalámbrica', feature: 'CCT', precio: 0 },
+  { name: 'Lámpara LED Escritorio Luxury Negro 5W CCT',       slug: 'lampara-led-escritorio-luxury-negro-5w',              watts: 5, tipo: 'Luxury',      feature: 'CCT', precio: 0 },
+  { name: 'Lámpara LED Escritorio Art Bamboo 7W CCT',         slug: 'lampara-led-escritorio-art-bamboo-7w-cct',            watts: 7, tipo: 'Art/Bamboo',  feature: 'CCT', precio: 0 },
+];
+
+const tipoColor: Record<string, string> = {
+  'Infantil': '#4ADE80', 'Inalámbrica': '#60A5FA', 'Luxury': '#A78BFA', 'Art/Bamboo': '#A3805A',
+};
+const tipoIcon: Record<string, string> = {
+  'Infantil': '🦄', 'Inalámbrica': '📶', 'Luxury': '✨', 'Art/Bamboo': '🎋',
+};
+---
+<BaseLayout
+  title="Lámparas de Escritorio LED | Home Office y Estudio — SIRIUS"
+  description="Mejora tu concentración y protege tu vista. Lámparas LED de Escritorio Recargables, con Carga Inalámbrica, Infantiles y de Lujo. ¡Elige la tuya en SIRIUS!"
+  canonical="/colecciones/lamparas-escritorio"
+  ogImage="/og-default.jpg"
+>
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="coll-breadcrumb" aria-label="Miga de pan">
+        <a href="/" class="coll-breadcrumb__link">Inicio</a><span>›</span>
+        <a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a><span>›</span>
+        <span class="coll-breadcrumb__current">Lámparas de Escritorio</span>
+      </nav>
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">Lámparas de <span class="coll-title--accent">Escritorio</span></h1>
+      <p class="coll-subtitle">Recargables, con carga inalámbrica, infantiles y de lujo — 4W a 7W CCT.<br/>Protege tu vista y mejora tu productividad en el home office, estudio y escritorio infantil.</p>
+      <div class="coll-style-pills">
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">📶 Carga Inalámbrica <em>sin cables</em></span>
+        <span class="coll-style-pill" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:#A78BFA">✨ Luxury Negro <em>alta gama</em></span>
+        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80">🦄 Kids <em>niños y jóvenes</em></span>
+        <span class="coll-style-pill" style="background:rgba(163,128,90,.08);border-color:rgba(163,128,90,.25);color:#A3805A">🎋 Bamboo <em>arte natural</em></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-body">
+    <div class="container coll-layout">
+      <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros">
+        <h2 class="coll-filters__title">Filtrar</h2>
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Tipo</legend>
+          <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
+          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{tipoIcon[t]} {t}</span></label>)}
+        </fieldset>
+        <div class="coll-cert-badges">
+          <span class="coll-cert">🖥️ {products.length} modelos</span>
+          <span class="coll-cert">🔆 CCT ajustable</span>
+          <span class="coll-cert">🔋 Recargables</span>
+          <span class="coll-cert">🚚 Envío nacional</span>
+        </div>
+      </aside>
+
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header">
+          <span class="coll-count" id="product-count">{products.length} productos</span>
+          <button class="coll-mobile-filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-panel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
+            Filtros
+          </button>
+        </div>
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => {
+            const accent = tipoColor[p.tipo];
+            const icon = tipoIcon[p.tipo];
+            return (
+              <article class="prod-card glass" data-tipo={p.tipo}>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 0%,${accent}30 0%,${accent}06 100%)`} aria-hidden="true">
+                  <div class="prod-card__lamp">
+                    <div class="prod-card__lamp-arm" style={`background:${accent}99`}></div>
+                    <div class="prod-card__lamp-head" style={`border-color:${accent}88;box-shadow:0 4px 16px ${accent}55`}></div>
+                    <div class="prod-card__lamp-glow" style={`background:${accent}40`}></div>
+                  </div>
+                  <span class="prod-card__tipo-badge">{icon}</span>
+                </div>
+                <div class="prod-card__body">
+                  <div class="prod-card__meta">
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span>
+                    {p.feature === 'CCT' && <span class="prod-card__feature">🔆 CCT</span>}
+                    {p.feature === 'Recargable' && <span class="prod-card__feature">🔋 Recargable</span>}
+                  </div>
+                  <h3 class="prod-card__name">{p.name}</h3>
+                  <div class="prod-card__specs">
+                    <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
+                    <span class="prod-card__spec">🖥️ Escritorio</span>
+                  </div>
+                </div>
+                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" style={`--cta-hover:${accent}10`} aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                  Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+        <div class="coll-empty" id="empty-state" hidden>
+          <span class="coll-empty__icon">🖥️</span>
+          <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
+          <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-info-strip">
+    <div class="container coll-info-strip__inner">
+      <div class="coll-info-card"><span class="coll-info-card__icon">🏡</span><div><strong>Home Office</strong><p>La Luxury Negro con CCT ajustable es perfecta para largas jornadas de trabajo. Temperatura de color adaptable a cada momento del día.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">🎋</span><div><strong>Diseño Art Bamboo</strong><p>Materiales naturales con tecnología LED. La lámpara perfecta para estaciones de trabajo con estética minimalista o nórdica.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">🦄</span><div><strong>Para los más pequeños</strong><p>La Kids Verde recargable tiene luz suave y forma amigable. Sin cables sueltos y con batería para llevarla a cualquier lugar.</p></div></div>
+    </div>
+  </section>
+
+  <section class="coll-cta-band">
+    <div class="container coll-cta-band__inner">
+      <div>
+        <h2 class="coll-cta-band__title">¿Buscas apliques de pared?</h2>
+        <p class="coll-cta-band__sub">Complementa tu espacio con nuestra colección de apliques decorativos para interiores y exteriores.</p>
+      </div>
+      <div class="coll-cta-band__actions">
+        <a href="/colecciones/apliques-de-pared" class="btn btn--ghost">Ver Apliques</a>
+        <a href="/contacto" class="btn btn--primary">Solicitar asesoría →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const state = { tipo: new Set(['all']) };
+  const grid = document.getElementById('products-grid')!;
+  const countEl = document.getElementById('product-count')!;
+  const emptyEl = document.getElementById('empty-state')!;
+  const cards = Array.from(grid.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+  function applyFilters() {
+    let vis=0; cards.forEach(c=>{const show=state.tipo.has('all')||state.tipo.has(c.dataset.tipo!);c.hidden=!show;if(show)vis++;});
+    countEl.textContent=`${vis} producto${vis!==1?'s':''}`;emptyEl.hidden=vis>0;
+  }
+  checks.forEach(cb=>cb.addEventListener('change',()=>{
+    const val=cb.value;
+    if(val==='all'){state.tipo.clear();state.tipo.add('all');checks.filter(c=>c.value!=='all').forEach(c=>{c.checked=false;});cb.checked=true;}
+    else{state.tipo.delete('all');const a=checks.find(c=>c.value==='all')!;a.checked=false;if(cb.checked)state.tipo.add(val);else state.tipo.delete(val);if(state.tipo.size===0){state.tipo.add('all');a.checked=true;}}
+    applyFilters();
+  }));
+  document.getElementById('reset-filters')?.addEventListener('click',()=>{state.tipo.clear();state.tipo.add('all');checks.forEach(c=>{c.checked=c.value==='all';});applyFilters();});
+  document.getElementById('filter-toggle')?.addEventListener('click',function(){const o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));document.getElementById('filters-panel')?.classList.toggle('is-open');});
+</script>
+
+<style>
+.coll-hero{position:relative;padding:var(--space-16) 0 var(--space-10);overflow:hidden;}
+.coll-hero__glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 20% 0%,rgba(96,165,250,0.10) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 80% 100%,rgba(167,139,250,0.07) 0%,transparent 65%);pointer-events:none;}
+.coll-breadcrumb{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin-bottom:var(--space-6);}
+.coll-breadcrumb__link{color:var(--color-text-tertiary);transition:color var(--duration-fast);}.coll-breadcrumb__link:hover{color:var(--color-brand-primary);}.coll-breadcrumb__current{color:var(--color-text-secondary);}
+.coll-eyebrow{display:inline-block;font-size:var(--text-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--color-brand-accent);background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.20);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);margin-bottom:var(--space-5);}
+.coll-title{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--fw-extrabold);color:var(--color-text-primary);line-height:var(--lh-tight);margin-bottom:var(--space-4);}
+.coll-title--accent{background:linear-gradient(135deg,#60A5FA,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.coll-subtitle{font-size:var(--text-base);color:var(--color-text-secondary);max-width:630px;line-height:var(--lh-normal);margin-bottom:var(--space-8);}
+.coll-style-pills{display:flex;flex-wrap:wrap;gap:var(--space-3);}
+.coll-style-pill{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:var(--fw-medium);border:1px solid;}
+.coll-style-pill em{font-style:normal;font-size:var(--text-xs);opacity:.6;}
+.coll-body{padding-bottom:var(--space-24);}
+.coll-layout{display:grid;grid-template-columns:240px 1fr;gap:var(--space-8);align-items:start;}
+@media(max-width:860px){.coll-layout{grid-template-columns:1fr;}}
+.coll-filters{position:sticky;top:calc(var(--topbar-h) + var(--header-h) + var(--space-4));border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-5);}
+@media(max-width:860px){.coll-filters{position:static;display:none;}.coll-filters.is-open{display:flex;}}
+.coll-filters__title{font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);letter-spacing:.05em;text-transform:uppercase;}
+.coll-filter-group{border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-2);}
+.coll-filter-group__legend{font-size:var(--text-xs);font-weight:var(--fw-semibold);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-2);}
+.coll-filter-chip{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary);cursor:pointer;padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm);transition:color var(--duration-fast),background var(--duration-fast);}
+.coll-filter-chip:hover{background:rgba(255,255,255,.04);color:var(--color-text-primary);}
+.coll-filter-chip input[type="checkbox"]{accent-color:var(--color-brand-primary);width:15px;height:15px;flex-shrink:0;}
+.coll-cert-badges{display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-3);border-top:1px solid var(--color-surface-divider);}
+.coll-cert{font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.coll-grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6);}
+.coll-count{font-size:var(--text-sm);color:var(--color-text-tertiary);}
+.coll-mobile-filter-btn{display:none;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:var(--fw-medium);color:var(--color-text-secondary);background:var(--color-surface-raised);border:1px solid var(--color-surface-border);border-radius:var(--radius-md);padding:var(--space-2) var(--space-4);cursor:pointer;}
+@media(max-width:860px){.coll-mobile-filter-btn{display:flex;}}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
+.prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
+.prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.prod-card__strip{height:86px;display:flex;align-items:flex-end;justify-content:center;position:relative;padding-bottom:0;overflow:hidden;}
+.prod-card__lamp{display:flex;flex-direction:column;align-items:center;position:relative;padding-bottom:0;}
+.prod-card__lamp-arm{width:3px;height:32px;border-radius:var(--radius-full);margin-bottom:0;}
+.prod-card__lamp-head{width:48px;height:22px;border-radius:0 0 50% 50%;border:2px solid;border-top:none;}
+.prod-card__lamp-glow{width:40px;height:10px;border-radius:50%;filter:blur(6px);margin-top:-4px;}
+.prod-card__tipo-badge{position:absolute;top:8px;right:12px;font-size:1.4rem;}
+.prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}
+.prod-card__meta{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-3);}
+.prod-card__badge{font-size:var(--text-xs);font-weight:var(--fw-semibold);padding:2px var(--space-2);border-radius:var(--radius-full);border:1px solid;}
+.prod-card__feature{font-size:var(--text-xs);font-weight:var(--fw-semibold);padding:2px var(--space-2);border-radius:var(--radius-full);border:1px solid;background:rgba(96,165,250,.10);border-color:rgba(96,165,250,.28);color:#60A5FA;}
+.prod-card__name{font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-text-primary);line-height:var(--lh-snug);margin-bottom:var(--space-3);}
+.prod-card__specs{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;}
+.prod-card__spec{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.prod-card__cta{display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-brand-accent);border-top:1px solid var(--color-surface-divider);transition:background var(--duration-fast);}
+.prod-card__cta:hover{background:var(--cta-hover,rgba(96,165,250,.06));}
+.coll-empty{grid-column:1/-1;text-align:center;padding:var(--space-20) var(--space-8);display:flex;flex-direction:column;align-items:center;gap:var(--space-4);}
+.coll-empty__icon{font-size:3rem;}.coll-empty__text{color:var(--color-text-secondary);font-size:var(--text-base);}
+.coll-info-strip{background:var(--color-surface-raised);border-top:1px solid var(--color-surface-border);border-bottom:1px solid var(--color-surface-border);padding:var(--space-10) 0;}
+.coll-info-strip__inner{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:var(--space-6);}
+.coll-info-card{display:flex;align-items:flex-start;gap:var(--space-4);}
+.coll-info-card__icon{font-size:2rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
+.coll-info-card strong{display:block;font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-info-card p{font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:var(--lh-relaxed);}
+.coll-cta-band{background:linear-gradient(135deg,rgba(96,165,250,.07) 0%,rgba(167,139,250,.05) 100%);border-top:1px solid var(--color-surface-border);padding:var(--space-12) 0;}
+.coll-cta-band__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);flex-wrap:wrap;}
+.coll-cta-band__title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-cta-band__sub{font-size:var(--text-sm);color:var(--color-text-secondary);}
+.coll-cta-band__actions{display:flex;gap:var(--space-3);flex-wrap:wrap;}
+</style>

@@ -1,0 +1,236 @@
+---
+/**
+ * Bombillos LED — Collection page
+ * Route: /colecciones/bombillos
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  // ── PinPon E12 ───────────────────────────────────────────
+  { name: 'Bombillo LED Pinpon 1W Luz Blanca', slug: 'bombillo-led-pinpon-1w-luz-blanca', watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Blanca', price: 0 },
+  { name: 'Bombillo LED Pinpon 1W Luz Cálida',  slug: 'bombillo-led-pinpon-1w-luz-calida',  watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Cálida', price: 0 },
+  { name: 'Bombillo LED PinPon 1W Verde',       slug: 'bombillo-led-pinpon-1w-verde',       watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Verde',  price: 0 },
+  { name: 'Bombillo LED Pinpon 1W Azul',        slug: 'bombillo-led-pinpon-1w-azul',        watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Azul',   price: 0 },
+  { name: 'Bombillo LED Pinpon 1W RGB',         slug: 'bombillo-led-pinpon-1w-rgb',         watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'RGB',    price: 0 },
+  // ── E27 Estándar ─────────────────────────────────────────
+  { name: 'Bombillo LED 3W Luz Blanca',  slug: 'bombillo-led-3w-e27-luz-blanca',  watts: 3,  rosca: 'E27', tipo: 'Estándar', color: 'Blanca', price: 0 },
+  { name: 'Bombillo LED 3W Luz Cálida',  slug: 'bombillo-led-3w-e27-luz-calida',  watts: 3,  rosca: 'E27', tipo: 'Estándar', color: 'Cálida', price: 0 },
+  { name: 'Bombillo LED 5W Luz Blanca',  slug: 'bombillo-led-5w-e27-luz-blanca',  watts: 5,  rosca: 'E27', tipo: 'Estándar', color: 'Blanca', price: 0 },
+  // ── GU10 ─────────────────────────────────────────────────
+  { name: 'Bombillo LED GU10 5W Luz Blanca',              slug: 'bombillo-led-gu10-5w-luz-blanca',              watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'Blanca', price: 0 },
+  { name: 'Bombillo LED GU10 5W Luz Cálida',              slug: 'bombillo-led-gu10-5w-luz-calida',              watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'Cálida', price: 0 },
+  { name: 'Bombillo LED GU10 5W RGB con Control Remoto',  slug: 'bombillo-led-gu10-5w-rgb-con-control-remoto',  watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'RGB',    price: 0 },
+  // ── Vela E14 ─────────────────────────────────────────────
+  { name: 'Bombillo LED Vela 5W Luz Blanca', slug: 'bombillo-led-vela-e14-5w-luz-blanca', watts: 5, rosca: 'E14', tipo: 'Vela', color: 'Blanca', price: 0 },
+];
+
+const uniqueRoscas = ['E12', 'E27', 'E14', 'GU10'];
+const uniqueTipos  = ['PinPon', 'Estándar', 'GU10', 'Vela'];
+const colorMap: Record<string, string> = {
+  Blanca: '#E2F0FF', Cálida: '#FDE68A', Verde: '#4ADE80', Azul: '#60A5FA', RGB: 'conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171)',
+};
+---
+
+<BaseLayout
+  title="Bombillos LED para Hogar e Industria — SIRIUS"
+  description="El catálogo más completo de bombillos LED en Colombia. Desde rosca E27 y E14 hasta focos GU10 RGB con control remoto. Ahorra energía con SIRIUS."
+  canonical="/colecciones/bombillos"
+  ogImage="/og-default.jpg"
+>
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="coll-breadcrumb" aria-label="Miga de pan">
+        <a href="/" class="coll-breadcrumb__link">Inicio</a><span>›</span>
+        <a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a><span>›</span>
+        <span class="coll-breadcrumb__current">Bombillos LED</span>
+      </nav>
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">Bombillos <span class="coll-title--accent">LED</span></h1>
+      <p class="coll-subtitle">E12, E14, E27 y GU10 — Luz Blanca, Cálida y RGB — Desde 1W hasta 5W.<br/>Reemplaza cualquier bombillo tradicional y ahorra hasta un 80% en energía.</p>
+      <div class="coll-style-pills">
+        <span class="coll-style-pill coll-style-pill--e27">💡 E27 Estándar <em>uso general</em></span>
+        <span class="coll-style-pill coll-style-pill--gu10">🔦 GU10 <em>dicroico empotrado</em></span>
+        <span class="coll-style-pill coll-style-pill--pp">🟡 PinPon E12 <em>decorativo</em></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-body">
+    <div class="container coll-layout">
+      <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros">
+        <h2 class="coll-filters__title">Filtrar</h2>
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Rosca / Base</legend>
+          <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="rosca" value="all" checked id="r-all"/><span>Todas</span></label>
+          {uniqueRoscas.map(r => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="rosca" value={r} id={`r-${r}`}/><span>{r}</span></label>)}
+        </fieldset>
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Tipo</legend>
+          <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
+          {uniqueTipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{t}</span></label>)}
+        </fieldset>
+        <div class="coll-cert-badges">
+          <span class="coll-cert">💡 {products.length} productos</span>
+          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert">🛡️ Garantía 1 año</span>
+          <span class="coll-cert">⚡ Ahorro 80%</span>
+        </div>
+      </aside>
+
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header">
+          <span class="coll-count" id="product-count">{products.length} productos</span>
+          <button class="coll-mobile-filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-panel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
+            Filtros
+          </button>
+        </div>
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => {
+            const accent = colorMap[p.color] ?? '#E2F0FF';
+            const isRGB = p.color === 'RGB';
+            return (
+              <article class="prod-card glass" data-rosca={p.rosca} data-tipo={p.tipo}>
+                <div class="prod-card__strip" style={isRGB ? `background:${accent}` : `background:radial-gradient(ellipse at 50% 0%,${accent}55 0%,${accent}0a 100%)`} aria-hidden="true">
+                  {isRGB ? <span class="prod-card__strip-icon">🌈</span> : <span class="prod-card__bulb" style={`background:${accent};box-shadow:0 0 20px ${accent}99`}></span>}
+                </div>
+                <div class="prod-card__body">
+                  <div class="prod-card__meta">
+                    <span class={`prod-card__badge prod-card__badge--${p.tipo.toLowerCase()}`}>💡 {p.tipo}</span>
+                    <span class="prod-card__install">{p.rosca}</span>
+                    <span class="prod-card__color-dot" style={`background:${isRGB ? 'conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171)' : accent}`}></span>
+                  </div>
+                  <h3 class="prod-card__name">{p.name}</h3>
+                  <div class="prod-card__specs">
+                    <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
+                    <span class="prod-card__spec">🔆 {p.color === 'Blanca' ? '6000K' : p.color === 'Cálida' ? '2700K' : p.color}</span>
+                  </div>
+                </div>
+                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                  Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+        <div class="coll-empty" id="empty-state" hidden>
+          <span class="coll-empty__icon">💡</span>
+          <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
+          <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll-info-strip">
+    <div class="container coll-info-strip__inner">
+      <div class="coll-info-card"><span class="coll-info-card__icon">💡</span><div><strong>E27 — Rosca Universal</strong><p>El estándar más usado en hogares y oficinas. Compatible con luminarias de 3W y 5W.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">🔦</span><div><strong>GU10 — Foco Dicroico</strong><p>Para empotrar en rieles y spots direccionables. Disponible en blanco, cálido y RGB con mando.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">🟡</span><div><strong>PinPon E12 — Decorativo</strong><p>Miniatura de 1W para guirnaldas, luces navideñas y decoración ambiental en múltiples colores.</p></div></div>
+    </div>
+  </section>
+
+  <section class="coll-cta-band">
+    <div class="container coll-cta-band__inner">
+      <div>
+        <h2 class="coll-cta-band__title">¿Buscas bombillos vintage?</h2>
+        <p class="coll-cta-band__sub">Descubre nuestra línea de filamento retro: G45, ST64, A60 y Globo con luz cálida 2700K.</p>
+      </div>
+      <div class="coll-cta-band__actions">
+        <a href="/colecciones/bombillos-vintage" class="btn btn--ghost">Ver Vintage</a>
+        <a href="/contacto" class="btn btn--primary">Solicitar asesoría →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  type FS = { rosca: Set<string>; tipo: Set<string> };
+  const state: FS = { rosca: new Set(['all']), tipo: new Set(['all']) };
+  const grid = document.getElementById('products-grid')!;
+  const countEl = document.getElementById('product-count')!;
+  const emptyEl = document.getElementById('empty-state')!;
+  const cards = Array.from(grid.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+  function applyFilters() {
+    let vis = 0;
+    cards.forEach(c => { const show = (state.rosca.has('all')||state.rosca.has(c.dataset.rosca!)) && (state.tipo.has('all')||state.tipo.has(c.dataset.tipo!)); c.hidden=!show; if(show)vis++; });
+    countEl.textContent=`${vis} producto${vis!==1?'s':''}`;
+    emptyEl.hidden=vis>0;
+  }
+  checks.forEach(cb => cb.addEventListener('change', () => {
+    const key=cb.dataset.filter as keyof FS; const val=cb.value;
+    if(val==='all'){state[key].clear();state[key].add('all');checks.filter(c=>c.dataset.filter===key&&c.value!=='all').forEach(c=>{c.checked=false;});cb.checked=true;}
+    else{state[key].delete('all');const a=checks.find(c=>c.dataset.filter===key&&c.value==='all')!;a.checked=false;if(cb.checked)state[key].add(val);else state[key].delete(val);if(state[key].size===0){state[key].add('all');a.checked=true;}}
+    applyFilters();
+  }));
+  document.getElementById('reset-filters')?.addEventListener('click',()=>{(['rosca','tipo'] as const).forEach(k=>{state[k].clear();state[k].add('all');});checks.forEach(c=>{c.checked=c.value==='all';});applyFilters();});
+  document.getElementById('filter-toggle')?.addEventListener('click',function(){const o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));document.getElementById('filters-panel')?.classList.toggle('is-open');});
+</script>
+
+<style>
+.coll-hero{position:relative;padding:var(--space-16) 0 var(--space-10);overflow:hidden;}
+.coll-hero__glow{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 15% 0%,rgba(253,230,138,0.12) 0%,transparent 65%),radial-gradient(ellipse 45% 45% at 85% 100%,rgba(96,165,250,0.08) 0%,transparent 65%);pointer-events:none;}
+.coll-breadcrumb{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-tertiary);margin-bottom:var(--space-6);}
+.coll-breadcrumb__link{color:var(--color-text-tertiary);transition:color var(--duration-fast);}
+.coll-breadcrumb__link:hover{color:var(--color-brand-primary);}
+.coll-breadcrumb__current{color:var(--color-text-secondary);}
+.coll-eyebrow{display:inline-block;font-size:var(--text-xs);font-weight:var(--fw-semibold);letter-spacing:.12em;text-transform:uppercase;color:var(--color-brand-accent);background:rgba(0,194,255,.08);border:1px solid rgba(0,194,255,.20);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);margin-bottom:var(--space-5);}
+.coll-title{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:var(--fw-extrabold);color:var(--color-text-primary);line-height:var(--lh-tight);margin-bottom:var(--space-4);}
+.coll-title--accent{background:linear-gradient(135deg,#FDE68A,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.coll-subtitle{font-size:var(--text-base);color:var(--color-text-secondary);max-width:620px;line-height:var(--lh-normal);margin-bottom:var(--space-8);}
+.coll-style-pills{display:flex;flex-wrap:wrap;gap:var(--space-3);}
+.coll-style-pill{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:var(--fw-medium);border:1px solid;}
+.coll-style-pill em{font-style:normal;font-size:var(--text-xs);opacity:.6;}
+.coll-style-pill--e27{background:rgba(253,230,138,0.08);border-color:rgba(253,230,138,0.25);color:#FDE68A;}
+.coll-style-pill--gu10{background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25);color:#60A5FA;}
+.coll-style-pill--pp{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.25);color:#FBBF24;}
+.coll-body{padding-bottom:var(--space-24);}
+.coll-layout{display:grid;grid-template-columns:240px 1fr;gap:var(--space-8);align-items:start;}
+@media(max-width:860px){.coll-layout{grid-template-columns:1fr;}}
+.coll-filters{position:sticky;top:calc(var(--topbar-h) + var(--header-h) + var(--space-4));border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-5);}
+@media(max-width:860px){.coll-filters{position:static;display:none;}.coll-filters.is-open{display:flex;}}
+.coll-filters__title{font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);letter-spacing:.05em;text-transform:uppercase;}
+.coll-filter-group{border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-2);}
+.coll-filter-group__legend{font-size:var(--text-xs);font-weight:var(--fw-semibold);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-2);}
+.coll-filter-chip{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary);cursor:pointer;padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm);transition:color var(--duration-fast),background var(--duration-fast);}
+.coll-filter-chip:hover{background:rgba(255,255,255,.04);color:var(--color-text-primary);}
+.coll-filter-chip input[type="checkbox"]{accent-color:var(--color-brand-primary);width:15px;height:15px;flex-shrink:0;}
+.coll-cert-badges{display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-3);border-top:1px solid var(--color-surface-divider);}
+.coll-cert{font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.coll-grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6);}
+.coll-count{font-size:var(--text-sm);color:var(--color-text-tertiary);}
+.coll-mobile-filter-btn{display:none;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:var(--fw-medium);color:var(--color-text-secondary);background:var(--color-surface-raised);border:1px solid var(--color-surface-border);border-radius:var(--radius-md);padding:var(--space-2) var(--space-4);cursor:pointer;}
+@media(max-width:860px){.coll-mobile-filter-btn{display:flex;}}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
+.prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
+.prod-card:hover{border-color:rgba(253,230,138,.30);transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.prod-card__strip{height:72px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__bulb{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.25);}
+.prod-card__strip-icon{font-size:2rem;}
+.prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}
+.prod-card__meta{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-3);}
+.prod-card__badge{font-size:var(--text-xs);font-weight:var(--fw-semibold);padding:2px var(--space-2);border-radius:var(--radius-full);border:1px solid;background:rgba(253,230,138,.10);border-color:rgba(253,230,138,.28);color:#FDE68A;}
+.prod-card__install{font-size:var(--text-xs);color:var(--color-text-tertiary);background:rgba(255,255,255,.04);border:1px solid var(--color-surface-border);padding:2px var(--space-2);border-radius:var(--radius-full);}
+.prod-card__color-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.20);}
+.prod-card__name{font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-text-primary);line-height:var(--lh-snug);margin-bottom:var(--space-3);}
+.prod-card__specs{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;}
+.prod-card__spec{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);color:var(--color-text-tertiary);}
+.prod-card__cta{display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--color-brand-accent);border-top:1px solid var(--color-surface-divider);transition:background var(--duration-fast);}
+.prod-card__cta:hover{background:rgba(253,230,138,.06);}
+.coll-empty{grid-column:1/-1;text-align:center;padding:var(--space-20) var(--space-8);display:flex;flex-direction:column;align-items:center;gap:var(--space-4);}
+.coll-empty__icon{font-size:3rem;}
+.coll-empty__text{color:var(--color-text-secondary);font-size:var(--text-base);}
+.coll-info-strip{background:var(--color-surface-raised);border-top:1px solid var(--color-surface-border);border-bottom:1px solid var(--color-surface-border);padding:var(--space-10) 0;}
+.coll-info-strip__inner{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:var(--space-6);}
+.coll-info-card{display:flex;align-items:flex-start;gap:var(--space-4);}
+.coll-info-card__icon{font-size:2rem;flex-shrink:0;line-height:1;margin-top:.1rem;}
+.coll-info-card strong{display:block;font-size:var(--text-sm);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-info-card p{font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:var(--lh-relaxed);}
+.coll-cta-band{background:linear-gradient(135deg,rgba(253,230,138,.07) 0%,rgba(245,166,35,.05) 100%);border-top:1px solid var(--color-surface-border);padding:var(--space-12) 0;}
+.coll-cta-band__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);flex-wrap:wrap;}
+.coll-cta-band__title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:var(--fw-bold);color:var(--color-text-primary);margin-bottom:var(--space-1);}
+.coll-cta-band__sub{font-size:var(--text-sm);color:var(--color-text-secondary);}
+.coll-cta-band__actions{display:flex;gap:var(--space-3);flex-wrap:wrap;}
+</style>

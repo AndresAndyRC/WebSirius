@@ -1,0 +1,598 @@
+---
+/**
+ * Paneles LED de Grandes Dimensiones — Collection page
+ * Route: /colecciones/paneles-led-grandes-dimensiones
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  // ── Paneles ────────────────────────────────────────────────
+  {
+    name: 'Panel LED 120x30cm 50W Luz Blanca',
+    slug: 'panel-led-120x30cm-50w-luz-blanca',
+    watts: 50,
+    size: '120×30cm',
+    color: 'Blanca',
+    type: 'Panel',
+    style: 'Estándar',
+    price: 86400,
+  },
+  {
+    name: 'Panel LED Titanium 60x60cm 48W Luz Blanca',
+    slug: 'panel-led-titanium-60x60cm-48w-luz-blanca',
+    watts: 48,
+    size: '60×60cm',
+    color: 'Blanca',
+    type: 'Panel',
+    style: 'Titanium',
+    price: 71300,
+  },
+  {
+    name: 'Panel LED 60x60cm 48W Luz Blanca',
+    slug: 'panel-led-60x60cm-48w-luz-blanca',
+    watts: 48,
+    size: '60×60cm',
+    color: 'Blanca',
+    type: 'Panel',
+    style: 'Estándar',
+    price: 74400,
+  },
+  {
+    name: 'Panel LED Slim 60x60cm 48W Luz Blanca',
+    slug: 'panel-led-slim-60x60cm-48w-luz-blanca',
+    watts: 48,
+    size: '60×60cm',
+    color: 'Blanca',
+    type: 'Panel',
+    style: 'Slim',
+    price: 79800,
+  },
+  // ── Accesorios ─────────────────────────────────────────────
+  {
+    name: 'Driver para Panel LED 48W - 52W',
+    slug: 'driver-para-panel-led-48w-52w',
+    watts: 52,
+    size: '—',
+    color: '—',
+    type: 'Accesorio',
+    style: 'Driver',
+    price: 21300,
+  },
+  {
+    name: 'Ganchos para Incrustar Paneles LED 30x60, 60x60 y 120x30',
+    slug: 'ganchos-para-incrustar-panel-60x60-y-120x30',
+    watts: 0,
+    size: '60×60 / 120×30',
+    color: '—',
+    type: 'Accesorio',
+    style: 'Gancho',
+    price: 7200,
+  },
+];
+
+const uniqueWatts   = [...new Set(products.filter(p => p.watts > 0).map(p => p.watts))].sort((a, b) => a - b);
+const uniqueTypes   = ['Panel', 'Accesorio'];
+const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
+---
+
+<BaseLayout
+  title="Paneles LED de Grandes Dimensiones 60x60 y 120x30 — SIRIUS"
+  description="Catálogo de Paneles LED de Grandes Dimensiones en Colombia. Formatos 60x60cm y 120x30cm. 48W y 50W Luz Blanca. Ideales para oficinas, bodegas y locales. ¡Cotiza en SIRIUS!"
+  canonical="/colecciones/paneles-led-grandes-dimensiones"
+  ogImage="/og-default.jpg"
+>
+
+  <!-- ── Hero ── -->
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="coll-breadcrumb" aria-label="Miga de pan">
+        <a href="/" class="coll-breadcrumb__link">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a>
+        <span aria-hidden="true">›</span>
+        <span class="coll-breadcrumb__current">Paneles LED Grandes Dimensiones</span>
+      </nav>
+
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">
+        Paneles LED <span class="coll-title--accent">Grandes Dimensiones</span>
+      </h1>
+      <p class="coll-subtitle">
+        Formatos 60×60cm y 120×30cm — 48W y 50W — Luz Blanca 6000K–6500K.<br/>
+        Certificados RETIE &amp; RETILAP. Ideales para oficinas, bodegas y locales comerciales.
+      </p>
+
+      <!-- Format pills -->
+      <div class="coll-style-pills">
+        <span class="coll-style-pill coll-style-pill--60x60">
+          ⬛ 60×60 cm
+          <em>formato cuadrado</em>
+        </span>
+        <span class="coll-style-pill coll-style-pill--120x30">
+          ▬ 120×30 cm
+          <em>formato rectangular</em>
+        </span>
+        <span class="coll-style-pill coll-style-pill--accesorios">
+          🔧 Accesorios
+          <em>drivers y ganchos</em>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Filters + Grid ── -->
+  <section class="coll-body">
+    <div class="container coll-layout">
+
+      <!-- Sidebar filters -->
+      <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros de productos">
+        <h2 class="coll-filters__title">Filtrar</h2>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Potencia (W)</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="watts" value="all" checked id="watts-all" />
+            <span>Todas</span>
+          </label>
+          {uniqueWatts.map(w => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="watts" value={String(w)} id={`watts-${w}`} />
+              <span>{w}W</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Tipo de producto</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="prodtype" value="all" checked id="type-all" />
+            <span>Todos</span>
+          </label>
+          {uniqueTypes.map(t => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="prodtype" value={t} id={`type-${t}`} />
+              <span>{t}</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="coll-filter-group">
+          <legend class="coll-filter-group__legend">Diseño / Línea</legend>
+          <label class="coll-filter-chip">
+            <input type="checkbox" class="filter-check" data-filter="style" value="all" checked id="style-all" />
+            <span>Todos</span>
+          </label>
+          {uniqueStyles.map(s => (
+            <label class="coll-filter-chip">
+              <input type="checkbox" class="filter-check" data-filter="style" value={s} id={`style-${s}`} />
+              <span>{s}</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <div class="coll-cert-badges">
+          <span class="coll-cert">✅ RETIE</span>
+          <span class="coll-cert">✅ RETILAP</span>
+          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert">🛡️ Garantía 1–2 años</span>
+        </div>
+      </aside>
+
+      <!-- Product grid -->
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header">
+          <span class="coll-count" id="product-count">{products.length} productos</span>
+          <button class="coll-mobile-filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-panel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/>
+            </svg>
+            Filtros
+          </button>
+        </div>
+
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => (
+            <article
+              class="prod-card glass"
+              data-watts={p.watts}
+              data-prodtype={p.type}
+              data-style={p.style}
+            >
+              <!-- Visual indicator -->
+              <div class={`prod-card__light prod-card__light--${p.type === 'Accesorio' ? 'accessory' : p.style === 'Slim' ? 'slim' : p.style === 'Titanium' ? 'titanium' : 'standard'}`} aria-hidden="true">
+                {p.type === 'Panel' ? (
+                  <div class="prod-card__light-rect"></div>
+                ) : (
+                  <div class="prod-card__light-icon">
+                    {p.style === 'Driver' ? '⚡' : '🔩'}
+                  </div>
+                )}
+              </div>
+
+              <div class="prod-card__body">
+                <div class="prod-card__meta">
+                  <span class={`prod-card__badge prod-card__badge--${p.type === 'Accesorio' ? 'accessory' : p.style.toLowerCase()}`}>
+                    {p.type === 'Panel' ? '📐' : '🔧'} {p.style !== 'Gancho' && p.style !== 'Driver' ? p.style : p.type}
+                  </span>
+                  {p.size !== '—' && <span class="prod-card__install">{p.size}</span>}
+                </div>
+
+                <h3 class="prod-card__name">{p.name}</h3>
+
+                <div class="prod-card__specs">
+                  {p.watts > 0 && (
+                    <span class="prod-card__spec">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                      </svg>
+                      {p.watts}W
+                    </span>
+                  )}
+                  {p.color !== '—' && <span class="prod-card__spec">❄️ 6000K–6500K</span>}
+                  <span class="prod-card__price">${p.price.toLocaleString('es-CO')} COP</span>
+                </div>
+              </div>
+
+              <a
+                href={`https://siriuscol.com/products/${p.slug}`}
+                class="prod-card__cta"
+                aria-label={`Ver producto: ${p.name}`}
+                target="_blank"
+                rel="noopener"
+              >
+                Ver producto
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <!-- Empty state -->
+        <div class="coll-empty" id="empty-state" hidden>
+          <span class="coll-empty__icon">📐</span>
+          <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
+          <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Info strip ── -->
+  <section class="coll-info-strip">
+    <div class="container coll-info-strip__inner">
+      <div class="coll-info-card">
+        <span class="coll-info-card__icon">⬛</span>
+        <div>
+          <strong>60×60 cm</strong>
+          <p>El formato estándar para techos de tipo Armstrong. Perfectos para oficinas, salas de reuniones y locales.</p>
+        </div>
+      </div>
+      <div class="coll-info-card">
+        <span class="coll-info-card__icon">▬</span>
+        <div>
+          <strong>120×30 cm</strong>
+          <p>Formato rectangular de alto impacto visual. Ideal para pasillos largos, supermercados y gimnasios.</p>
+        </div>
+      </div>
+      <div class="coll-info-card">
+        <span class="coll-info-card__icon">💡</span>
+        <div>
+          <strong>48W – 50W</strong>
+          <p>Alta eficiencia lumínica (≥100 lm/W). Ahorra hasta 70% en energía versus fluorescentes tradicionales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA band ── -->
+  <section class="coll-cta-band">
+    <div class="container coll-cta-band__inner">
+      <div>
+        <h2 class="coll-cta-band__title">¿Necesitas paneles pequeños?</h2>
+        <p class="coll-cta-band__sub">También tenemos paneles redondos y cuadrados desde 3W hasta 36W para cada espacio.</p>
+      </div>
+      <div class="coll-cta-band__actions">
+        <a href="/colecciones/paneles-led-cuadrados" class="btn btn--ghost">Ver Paneles Cuadrados</a>
+        <a href="/colecciones/paneles-led-redondos" class="btn btn--ghost">Ver Paneles Redondos</a>
+        <a href="/contacto" class="btn btn--primary">Solicitar asesoría →</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  type FilterState = { watts: Set<string>; prodtype: Set<string>; style: Set<string> };
+  const state: FilterState = { watts: new Set(['all']), prodtype: new Set(['all']), style: new Set(['all']) };
+
+  const grid    = document.getElementById('products-grid')!;
+  const countEl = document.getElementById('product-count')!;
+  const emptyEl = document.getElementById('empty-state')!;
+  const cards   = Array.from(grid.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks  = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach(card => {
+      const wMatch = state.watts.has('all')    || state.watts.has(card.dataset.watts!);
+      const tMatch = state.prodtype.has('all') || state.prodtype.has(card.dataset.prodtype!);
+      const sMatch = state.style.has('all')    || state.style.has(card.dataset.style!);
+      const show   = wMatch && tMatch && sMatch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    countEl.textContent = `${visible} producto${visible !== 1 ? 's' : ''}`;
+    emptyEl.hidden = visible > 0;
+  }
+
+  checks.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const key = cb.dataset.filter as keyof FilterState;
+      const val = cb.value;
+      if (val === 'all') {
+        state[key].clear();
+        state[key].add('all');
+        checks.filter(c => c.dataset.filter === key && c.value !== 'all').forEach(c => { c.checked = false; });
+        cb.checked = true;
+      } else {
+        state[key].delete('all');
+        const allCb = checks.find(c => c.dataset.filter === key && c.value === 'all')!;
+        allCb.checked = false;
+        if (cb.checked) state[key].add(val); else state[key].delete(val);
+        if (state[key].size === 0) { state[key].add('all'); allCb.checked = true; }
+      }
+      applyFilters();
+    });
+  });
+
+  document.getElementById('reset-filters')?.addEventListener('click', () => {
+    (['watts', 'prodtype', 'style'] as const).forEach(key => { state[key].clear(); state[key].add('all'); });
+    checks.forEach(cb => { cb.checked = cb.value === 'all'; });
+    applyFilters();
+  });
+
+  document.getElementById('filter-toggle')?.addEventListener('click', function() {
+    const open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!open));
+    document.getElementById('filters-panel')?.classList.toggle('is-open');
+  });
+</script>
+
+<style>
+/* ── Hero ─────────────────────────────── */
+.coll-hero {
+  position: relative;
+  padding: var(--space-16) 0 var(--space-10);
+  overflow: hidden;
+}
+
+.coll-hero__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 0%, rgba(0,194,255,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 90% 100%, rgba(245,166,35,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.coll-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
+}
+.coll-breadcrumb__link { color: var(--color-text-tertiary); transition: color var(--duration-fast); }
+.coll-breadcrumb__link:hover { color: var(--color-brand-primary); }
+.coll-breadcrumb__current { color: var(--color-text-secondary); }
+
+.coll-eyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+  background: rgba(0,194,255,0.08);
+  border: 1px solid rgba(0,194,255,0.20);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-5);
+}
+
+.coll-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.coll-title--accent {
+  background: linear-gradient(135deg, var(--color-brand-accent), #7EC8FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coll-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 620px;
+  line-height: var(--lh-normal);
+  margin-bottom: var(--space-8);
+}
+
+.coll-style-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.coll-style-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  border: 1px solid;
+}
+.coll-style-pill em { font-style: normal; font-size: var(--text-xs); opacity: 0.6; }
+.coll-style-pill--60x60     { background: rgba(0,194,255,0.07);   border-color: rgba(0,194,255,0.20);   color: #90CFFF; }
+.coll-style-pill--120x30    { background: rgba(245,166,35,0.07);  border-color: rgba(245,166,35,0.25);  color: var(--color-brand-primary); }
+.coll-style-pill--accesorios{ background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); color: var(--color-text-secondary); }
+
+/* ── Layout ───────────────────────────── */
+.coll-body { padding-bottom: var(--space-24); }
+.coll-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+@media (max-width: 860px) { .coll-layout { grid-template-columns: 1fr; } }
+
+/* ── Filters sidebar ──────────────────── */
+.coll-filters {
+  position: sticky;
+  top: calc(var(--topbar-h) + var(--header-h) + var(--space-4));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-surface-border);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+@media (max-width: 860px) {
+  .coll-filters { position: static; display: none; }
+  .coll-filters.is-open { display: flex; }
+}
+.coll-filters__title { font-size: var(--text-sm); font-weight: var(--fw-bold); color: var(--color-text-primary); letter-spacing: 0.05em; text-transform: uppercase; }
+.coll-filter-group { border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.coll-filter-group__legend { font-size: var(--text-xs); font-weight: var(--fw-semibold); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2); }
+.coll-filter-chip { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-secondary); cursor: pointer; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); transition: color var(--duration-fast), background var(--duration-fast); }
+.coll-filter-chip:hover { background: rgba(255,255,255,0.04); color: var(--color-text-primary); }
+.coll-filter-chip input[type="checkbox"] { accent-color: var(--color-brand-primary); width: 15px; height: 15px; flex-shrink: 0; }
+.coll-cert-badges { display: flex; flex-direction: column; gap: var(--space-2); padding-top: var(--space-3); border-top: 1px solid var(--color-surface-divider); }
+.coll-cert { font-size: var(--text-xs); color: var(--color-text-tertiary); }
+
+/* ── Grid header ──────────────────────── */
+.coll-grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
+.coll-count { font-size: var(--text-sm); color: var(--color-text-tertiary); }
+.coll-mobile-filter-btn { display: none; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: var(--fw-medium); color: var(--color-text-secondary); background: var(--color-surface-raised); border: 1px solid var(--color-surface-border); border-radius: var(--radius-md); padding: var(--space-2) var(--space-4); cursor: pointer; transition: color var(--duration-fast); }
+@media (max-width: 860px) { .coll-mobile-filter-btn { display: flex; } }
+
+/* ── Product grid ─────────────────────── */
+.coll-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-5); }
+
+/* ── Product card ─────────────────────── */
+.prod-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-surface-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo), box-shadow var(--duration-normal);
+}
+.prod-card:hover { border-color: rgba(0,194,255,0.30); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* Light visual area */
+.prod-card__light {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.prod-card__light--standard  { background: radial-gradient(ellipse at 50% 40%, rgba(126,200,255,0.25) 0%, rgba(126,200,255,0.04) 70%, transparent 100%); }
+.prod-card__light--titanium  { background: radial-gradient(ellipse at 50% 40%, rgba(200,220,255,0.28) 0%, rgba(160,190,255,0.05) 70%, transparent 100%); }
+.prod-card__light--slim      { background: radial-gradient(ellipse at 50% 40%, rgba(245,166,35,0.22) 0%, rgba(245,166,35,0.04) 70%, transparent 100%); }
+.prod-card__light--accessory { background: radial-gradient(ellipse at 50% 40%, rgba(160,160,160,0.15) 0%, rgba(100,100,100,0.03) 70%, transparent 100%); }
+
+.prod-card__light-rect {
+  width: 64px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+.prod-card__light--standard  .prod-card__light-rect { background: rgba(126,200,255,0.15); border: 2px solid rgba(126,200,255,0.45); box-shadow: 0 0 18px rgba(126,200,255,0.50); }
+.prod-card__light--titanium  .prod-card__light-rect { background: rgba(200,220,255,0.15); border: 2px solid rgba(200,220,255,0.50); box-shadow: 0 0 22px rgba(200,220,255,0.55); }
+.prod-card__light--slim      .prod-card__light-rect { background: rgba(245,166,35,0.10);  border: 1px solid rgba(245,166,35,0.40);  box-shadow: 0 0 20px rgba(245,166,35,0.45); }
+
+.prod-card__light-icon { font-size: 2rem; line-height: 1; }
+
+.prod-card__body { padding: var(--space-4) var(--space-4) var(--space-3); flex: 1; }
+.prod-card__meta { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+
+.prod-card__badge { font-size: var(--text-xs); font-weight: var(--fw-semibold); padding: 2px var(--space-2); border-radius: var(--radius-full); border: 1px solid; }
+.prod-card__badge--estándar  { background: rgba(0,194,255,0.10);   border-color: rgba(0,194,255,0.25);   color: #90CFFF; }
+.prod-card__badge--titanium  { background: rgba(200,220,255,0.10); border-color: rgba(200,220,255,0.30); color: #C8DCFF; }
+.prod-card__badge--slim      { background: rgba(245,166,35,0.10);  border-color: rgba(245,166,35,0.30);  color: var(--color-brand-primary); }
+.prod-card__badge--accessory { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); color: var(--color-text-secondary); }
+
+.prod-card__install { font-size: var(--text-xs); color: var(--color-text-tertiary); background: rgba(255,255,255,0.04); border: 1px solid var(--color-surface-border); padding: 2px var(--space-2); border-radius: var(--radius-full); }
+.prod-card__name { font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--color-text-primary); line-height: var(--lh-snug); margin-bottom: var(--space-3); }
+.prod-card__specs { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.prod-card__spec { display: flex; align-items: center; gap: var(--space-1); font-size: var(--text-xs); color: var(--color-text-tertiary); }
+.prod-card__price { font-size: var(--text-xs); font-weight: var(--fw-bold); color: var(--color-brand-primary); margin-left: auto; }
+
+.prod-card__cta { display: flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--color-brand-accent); border-top: 1px solid var(--color-surface-divider); transition: background var(--duration-fast); }
+.prod-card__cta:hover { background: rgba(0,194,255,0.06); }
+
+/* ── Empty state ──────────────────────── */
+.coll-empty { grid-column: 1/-1; text-align: center; padding: var(--space-20) var(--space-8); display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+.coll-empty__icon { font-size: 3rem; }
+.coll-empty__text { color: var(--color-text-secondary); font-size: var(--text-base); }
+
+/* ── Info strip ───────────────────────── */
+.coll-info-strip {
+  background: var(--color-surface-raised);
+  border-top: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--color-surface-border);
+  padding: var(--space-10) 0;
+}
+.coll-info-strip__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-6);
+}
+.coll-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.coll-info-card__icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+.coll-info-card strong {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+.coll-info-card p {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  line-height: var(--lh-relaxed);
+}
+
+/* ── CTA band ─────────────────────────── */
+.coll-cta-band { background: linear-gradient(135deg, rgba(0,194,255,0.07) 0%, rgba(245,166,35,0.05) 100%); border-top: 1px solid var(--color-surface-border); border-bottom: 1px solid var(--color-surface-border); padding: var(--space-12) 0; }
+.coll-cta-band__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); flex-wrap: wrap; }
+.coll-cta-band__title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--fw-bold); color: var(--color-text-primary); margin-bottom: var(--space-1); }
+.coll-cta-band__sub { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.coll-cta-band__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+</style>
