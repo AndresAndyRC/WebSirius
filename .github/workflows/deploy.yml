@@ -36,6 +36,7 @@ jobs:
     timeout-minutes: 15
 
     env:
+      VERCEL_TOKEN:      ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID:     ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
@@ -60,18 +61,13 @@ jobs:
         run: npm install --global vercel@latest
 
       # 5 · Pull configuración y env vars desde Vercel
+      #     VERCEL_TOKEN lo lee automáticamente del entorno
       - name: Pull Vercel project settings
-        run: |
-          vercel pull --yes \
-            --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} \
-            --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
 
-      # 6 · Build a través de Vercel CLI (usa vercel.json + astro adapter)
+      # 6 · Build a través de Vercel CLI
       - name: Build project
-        run: |
-          vercel build \
-            ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} \
-            --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
         env:
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           PUBLIC_SITE_URL:      ${{ secrets.PUBLIC_SITE_URL }}
@@ -80,16 +76,13 @@ jobs:
       - name: Deploy to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt \
-            ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} \
-            --token=${{ secrets.VERCEL_TOKEN }})
+          DEPLOY_URL=$(vercel deploy --prebuilt ${{ github.ref == 'refs/heads/main' && '--prod' || '' }})
           echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
       # 8 · Mostrar URL en el resumen del job
       - name: Deployment summary
         run: |
           echo "## 🚀 Deployment complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
           echo "**URL:** ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Env:** ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}" >> $GITHUB_STEP_SUMMARY
+
