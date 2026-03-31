@@ -1,0 +1,116 @@
+---
+/**
+ * BlogPostLayout.astro — Two-column blog layout:
+ * left: article content | right: sticky TOC
+ */
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@components/layout/Breadcrumbs.astro';
+import ArticleHero from '@components/blog/ArticleHero.astro';
+import TableOfContents from '@components/blog/TableOfContents.astro';
+import NewsletterForm from '@components/blog/NewsletterForm.astro';
+import Comments from '@components/blog/Comments.astro';
+import type { Props as MetaProps } from '@components/MetaTags.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props extends MetaProps {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry, ...metaProps } = Astro.props;
+const { data } = entry;
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Blog',   href: '/blog' },
+  { label: data.title },
+];
+
+const toc = data.toc ?? [];
+---
+
+<BaseLayout {...metaProps}>
+  <!-- Breadcrumbs -->
+  <div class="blog-breadcrumb-bar">
+    <div class="container">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <ArticleHero
+    title={data.title}
+    excerpt={data.excerpt}
+    category={data.category}
+    publishedDate={data.publishedDate}
+    readingTime={data.readingTime}
+    heroImage={data.heroImage}
+    heroImageAlt={data.heroImageAlt}
+    author={data.author}
+  />
+
+  <!-- Two-column body -->
+  <div class="blog-body">
+    <div class="container">
+      <div class="blog-grid">
+        <!-- Main article -->
+        <article class="blog-article prose" id="article-content" aria-labelledby="article-title">
+          <slot />
+          <NewsletterForm />
+          <Comments />
+        </article>
+
+        <!-- Sidebar TOC -->
+        {toc.length > 0 && (
+          <aside class="blog-sidebar" aria-label="Tabla de contenidos">
+            <div class="blog-toc-wrapper">
+              <TableOfContents items={toc} />
+            </div>
+          </aside>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+.blog-breadcrumb-bar {
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+.blog-body {
+  padding-block: var(--space-12) var(--space-24);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .blog-grid {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: var(--space-16);
+  }
+}
+
+.blog-article {
+  min-width: 0; /* prevent grid blowout */
+  max-width: 100%;
+}
+
+/* TOC sticky wrapper */
+.blog-toc-wrapper {
+  position: sticky;
+  top: var(--toc-top);
+  max-height: calc(100vh - var(--toc-top) - var(--space-8));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: var(--space-2);
+}
+
+.blog-toc-wrapper::-webkit-scrollbar { width: 3px; }
+.blog-toc-wrapper::-webkit-scrollbar-thumb { background: var(--color-surface-border); border-radius: 2px; }
+</style>

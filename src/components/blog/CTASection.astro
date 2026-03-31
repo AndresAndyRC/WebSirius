@@ -1,0 +1,128 @@
+---
+/**
+ * CTASection.astro — Full-width end-of-article CTA banner
+ */
+export interface Props {
+  title?: string;
+  description?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+
+const {
+  title = 'Dale vida a tus espacios hoy mismo',
+  description = 'Explora nuestro catálogo de luminarias LED. Cada producto está diseñado para darte la temperatura exacta que necesitas, con el máximo ahorro de energía.',
+  primaryCta = { label: 'Ver Catálogo Completo 🚀', href: 'https://siriuscol.com/collections/paneles-led-redondos' },
+  secondaryCta = { label: 'Volver al Blog', href: '/blog' },
+} = Astro.props;
+---
+
+<section class="cta-section" aria-labelledby="cta-section-title">
+  <div class="cta-section__glow" aria-hidden="true"></div>
+
+  <div class="cta-section__inner">
+    <div class="cta-section__icon" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+      </svg>
+    </div>
+
+    <h2 class="cta-section__title font-display" id="cta-section-title">
+      {title}
+    </h2>
+
+    <p class="cta-section__desc">{description}</p>
+
+    <div class="cta-section__actions">
+      <a href={primaryCta.href} class="btn btn--primary btn--lg cta-section__primary">
+        {primaryCta.label}
+      </a>
+      <a href={secondaryCta.href} class="btn btn--ghost cta-section__secondary">
+        {secondaryCta.label}
+      </a>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="cta-section__trust" role="list" aria-label="Garantías">
+      <span role="listitem">✓ Envíos a toda Colombia</span>
+      <span class="cta-section__dot" aria-hidden="true">·</span>
+      <span role="listitem">✓ Garantía 2 años</span>
+      <span class="cta-section__dot" aria-hidden="true">·</span>
+      <span role="listitem">✓ Soporte técnico incluido</span>
+    </div>
+  </div>
+</section>
+
+<style>
+.cta-section {
+  position: relative;
+  margin-block: var(--space-12);
+  padding: var(--space-12) var(--space-8);
+  background: var(--color-surface-raised);
+  border: 1px solid rgba(245,166,35,0.20);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  overflow: hidden;
+}
+
+.cta-section__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(30px);
+}
+
+.cta-section__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px; height: 64px;
+  margin: 0 auto var(--space-5);
+  border-radius: var(--radius-xl);
+  background: rgba(245,166,35,0.12);
+  border: 1px solid rgba(245,166,35,0.25);
+  color: var(--color-brand-primary);
+}
+
+.cta-section__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+  line-height: var(--lh-tight);
+}
+
+.cta-section__desc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin: 0 auto var(--space-8);
+  line-height: var(--lh-relaxed);
+}
+
+.cta-section__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.cta-section__trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.cta-section__dot { opacity: 0.4; }
+</style>

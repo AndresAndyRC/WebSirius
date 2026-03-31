@@ -1,0 +1,585 @@
+---
+/**
+ * src/pages/index.astro — Homepage with full dynamic light experience
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LightBeams from '@components/LightBeams.astro';
+import LightParticles from '@components/LightParticles.tsx';
+import RoomSimulator from '@components/blog/RoomSimulator.tsx';
+---
+
+<BaseLayout
+  title="SIRIUS Iluminación LED — Colombia"
+  description="La tecnología LED más avanzada para transformar tus espacios. Paneles, reflectores y accesorios con garantía de 2 años. Envíos a todo Colombia."
+  canonical="https://siriuscol.com"
+>
+  <!-- ═══════════════════════════════════════════════════
+       HERO — Animated light beams + particles + content
+       ═══════════════════════════════════════════════════ -->
+  <section class="home-hero">
+    <!-- CSS animated light beams (no JS) -->
+    <LightBeams variant="hero" />
+
+    <!-- Canvas particle system (hydrates when visible) -->
+    <LightParticles client:only="react" count={50} />
+
+    <!-- Deep glow orbs -->
+    <div class="home-hero__glow home-hero__glow--amber" aria-hidden="true"></div>
+    <div class="home-hero__glow home-hero__glow--blue"  aria-hidden="true"></div>
+
+    <div class="container home-hero__inner">
+      <div class="home-hero__content">
+        <span class="tag home-hero__tag">
+          <span class="tag__dot" aria-hidden="true"></span>
+          LED Premium · Colombia
+        </span>
+
+        <h1 class="home-hero__title font-display">
+          La luz que<br />
+          <span class="gradient-text hero-word">transforma</span><br />
+          <span class="hero-sub">espacios</span>
+        </h1>
+
+        <p class="home-hero__desc">
+          Descubre la diferencia que hace elegir la temperatura de color correcta.
+          Paneles LED ajustables, máximo rendimiento y envíos a toda Colombia.
+        </p>
+
+        <div class="home-hero__actions">
+          <a href="https://siriuscol.com/collections/paneles-led-redondos" class="btn btn--primary btn--lg home-hero__btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            Ver Catálogo Completo
+          </a>
+          <a href="/blog" class="btn btn--secondary btn--lg">
+            Guía de Iluminación →
+          </a>
+        </div>
+
+        <!-- Live stats strip -->
+        <div class="home-hero__stats" role="list">
+          <div role="listitem" class="home-hero__stat">
+            <span class="home-hero__stat-value">3</span>
+            <span class="home-hero__stat-label">Temperaturas de Color</span>
+          </div>
+          <div class="home-hero__stat-divider" aria-hidden="true"></div>
+          <div role="listitem" class="home-hero__stat">
+            <span class="home-hero__stat-value">2<span style="font-size:0.8em">años</span></span>
+            <span class="home-hero__stat-label">Garantía LED</span>
+          </div>
+          <div class="home-hero__stat-divider" aria-hidden="true"></div>
+          <div role="listitem" class="home-hero__stat">
+            <span class="home-hero__stat-value">∞</span>
+            <span class="home-hero__stat-label">Ambientes posibles</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel: CCT Spectrum Visual + animated orb -->
+      <div class="home-hero__visual" aria-hidden="true">
+        <!-- Central light orb -->
+        <div class="light-orb">
+          <div class="light-orb__inner">
+            <div class="light-orb__core"></div>
+            <div class="light-orb__ring light-orb__ring--1"></div>
+            <div class="light-orb__ring light-orb__ring--2"></div>
+            <div class="light-orb__ring light-orb__ring--3"></div>
+            <div class="light-orb__rays">
+              {Array.from({length: 12}).map((_, i) => (
+                <div class="light-orb__ray" style={`transform: rotate(${i * 30}deg)`}></div>
+              ))}
+            </div>
+          </div>
+          <div class="light-orb__label">
+            <span class="light-orb__kelvin">2700–6500K</span>
+            <span class="light-orb__text">CCT Ajustable</span>
+          </div>
+        </div>
+
+        <!-- Spectrum bar -->
+        <div class="home-hero__spectrum">
+          <div class="home-hero__spectrum-bar"></div>
+          <div class="home-hero__spectrum-labels">
+            <span style="color: var(--color-warm)">☀️ 2700K</span>
+            <span style="color: #E8EFFF">⚡ 4000K</span>
+            <span style="color: var(--color-cool)">❄️ 6500K</span>
+          </div>
+        </div>
+
+        <!-- Scene chips -->
+        <div class="home-hero__chips">
+          <div class="home-hero__chip home-hero__chip--warm">🛋️ Sala</div>
+          <div class="home-hero__chip home-hero__chip--neutral">🍳 Cocina</div>
+          <div class="home-hero__chip home-hero__chip--neutral2">🛁 Baño</div>
+          <div class="home-hero__chip home-hero__chip--cool">💻 Oficina</div>
+          <div class="home-hero__chip home-hero__chip--cool2">🏭 Taller</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       ROOM SIMULATOR — Main interactive feature
+       ═══════════════════════════════════════════════ -->
+  <section class="home-simulator section" aria-labelledby="simulator-heading">
+    <div class="container">
+      <div class="home-simulator__header">
+        <span class="tag">Simulador Interactivo</span>
+        <h2 class="home-simulator__title font-display" id="simulator-heading">
+          Ve cómo luce cada temperatura<br />
+          <span class="gradient-text">en tu espacio real</span>
+        </h2>
+        <p class="home-simulator__desc">
+          Elige un espacio y observa cómo cambia la atmósfera con cada tipo de iluminación LED.
+        </p>
+      </div>
+      <RoomSimulator client:visible />
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOG CTA STRIP
+       ═══════════════════════════════════════════ -->
+  <section class="home-blog-strip" aria-labelledby="home-blog-title">
+    <LightBeams variant="subtle" />
+    <div class="container home-blog-strip__inner">
+      <div>
+        <span class="tag" style="margin-bottom: 0.75rem; display: inline-flex;">Blog Educativo</span>
+        <h2 class="home-blog-strip__title font-display" id="home-blog-title">
+          Aprende a iluminar como un profesional
+        </h2>
+        <p class="home-blog-strip__desc">
+          Guías sin tecnicismos sobre CCT, lúmenes, IRC y todo lo que necesitas saber.
+        </p>
+      </div>
+      <a href="/blog" class="btn btn--secondary">
+        Leer el Blog →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Hero ──────────────────────────────────────────────────── */
+.home-hero {
+  position: relative;
+  padding-block: var(--space-20) var(--space-20);
+  overflow: hidden;
+  background: var(--color-surface-base);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.home-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.home-hero__glow--amber {
+  top: -20%;
+  right: -5%;
+  width: 55vw;
+  max-width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.12) 0%, rgba(245,166,35,0.03) 50%, transparent 70%);
+}
+
+.home-hero__glow--blue {
+  bottom: -20%;
+  left: -10%;
+  width: 45vw;
+  max-width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(0,194,255,0.08) 0%, transparent 70%);
+}
+
+.home-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .home-hero__inner { grid-template-columns: 55fr 45fr; }
+}
+
+/* ─ Tag ─ */
+.home-hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brand-primary);
+  box-shadow: 0 0 8px var(--color-brand-primary);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 4px var(--color-brand-primary); transform: scale(1); }
+  50%       { box-shadow: 0 0 16px var(--color-brand-primary), 0 0 32px rgba(245,166,35,0.4); transform: scale(1.3); }
+}
+
+/* ─ Title ─ */
+.home-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.home-hero__title {
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  animation: fade-up 0.8s var(--ease-out-expo) both;
+}
+
+.hero-sub {
+  display: inline-block;
+  font-size: 0.75em;
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.home-hero__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  line-height: var(--lh-relaxed);
+  animation: fade-up 0.8s 0.15s var(--ease-out-expo) both;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  animation: fade-up 0.8s 0.25s var(--ease-out-expo) both;
+}
+
+.home-hero__btn-primary {
+  box-shadow: 0 0 32px rgba(245,166,35,0.35), 0 4px 16px rgba(245,166,35,0.25);
+  animation: btn-glow 3s ease-in-out infinite;
+}
+
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245,166,35,0.30), 0 4px 16px rgba(245,166,35,0.20); }
+  50%       { box-shadow: 0 0 40px rgba(245,166,35,0.55), 0 4px 24px rgba(245,166,35,0.35); }
+}
+
+/* ─ Stats strip ─ */
+.home-hero__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-xl);
+  width: fit-content;
+  animation: fade-up 0.8s 0.35s var(--ease-out-expo) both;
+}
+
+.home-hero__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.home-hero__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-brand-primary);
+  line-height: 1;
+}
+
+.home-hero__stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  font-weight: var(--fw-medium);
+}
+
+.home-hero__stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-surface-border);
+}
+
+/* ── Light Orb ─────────────────────────────────────────── */
+.home-hero__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.light-orb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.light-orb__inner {
+  position: relative;
+  width: clamp(160px, 30vw, 220px);
+  height: clamp(160px, 30vw, 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.light-orb__core {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--color-brand-primary) 40%, rgba(245,166,35,0.3) 70%, transparent 100%);
+  box-shadow:
+    0 0 20px rgba(245,166,35,1),
+    0 0 40px rgba(245,166,35,0.6),
+    0 0 80px rgba(245,166,35,0.3);
+  animation: orb-pulse 4s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 20px rgba(245,166,35,1), 0 0 40px rgba(245,166,35,0.6), 0 0 80px rgba(245,166,35,0.3); }
+  50%       { transform: scale(1.1); box-shadow: 0 0 30px rgba(245,166,35,1), 0 0 60px rgba(245,166,35,0.7), 0 0 120px rgba(245,166,35,0.4); }
+}
+
+.light-orb__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid;
+  animation: ring-spin linear infinite;
+}
+
+.light-orb__ring--1 {
+  width: 90px; height: 90px;
+  border-color: rgba(245,166,35,0.50);
+  animation-duration: 8s;
+}
+
+.light-orb__ring--2 {
+  width: 130px; height: 130px;
+  border-color: rgba(0,194,255,0.25);
+  border-style: dashed;
+  animation-duration: 14s;
+  animation-direction: reverse;
+}
+
+.light-orb__ring--3 {
+  width: 180px; height: 180px;
+  border-color: rgba(245,166,35,0.12);
+  animation-duration: 20s;
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─ Light rays ─ */
+.light-orb__rays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rays-spin 25s linear infinite;
+  z-index: 1;
+}
+
+.light-orb__ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 90px;
+  margin-left: -1px;
+  transform-origin: 50% 0%;
+  background: linear-gradient(to bottom, rgba(245,166,35,0.5) 0%, transparent 100%);
+}
+
+@keyframes rays-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.light-orb__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  z-index: 4;
+}
+
+.light-orb__kelvin {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-brand-primary);
+  text-shadow: 0 0 20px rgba(245,166,35,0.5);
+  letter-spacing: -0.02em;
+}
+
+.light-orb__text {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: var(--fw-semibold);
+}
+
+/* ─ Spectrum ─ */
+.home-hero__spectrum {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  width: 100%;
+}
+
+.home-hero__spectrum-bar {
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #FF9A3E 0%, #FFFFFF 50%, #7EC8FF 100%);
+  box-shadow:
+    0 0 20px rgba(245,166,35,0.30),
+    0 0 40px rgba(245,166,35,0.15),
+    inset 0 1px 1px rgba(255,255,255,0.2);
+  animation: spectrum-glow 4s ease-in-out infinite;
+  margin-bottom: var(--space-3);
+}
+
+@keyframes spectrum-glow {
+  0%, 100% { box-shadow: 0 0 16px rgba(245,166,35,0.25), 0 0 32px rgba(126,200,255,0.12); }
+  50%       { box-shadow: 0 0 28px rgba(245,166,35,0.45), 0 0 56px rgba(126,200,255,0.25); }
+}
+
+.home-hero__spectrum-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+}
+
+/* ─ Chips ─ */
+.home-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  width: 100%;
+}
+
+.home-hero__chip {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  border: 1px solid;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.home-hero__chip:hover { transform: translateY(-2px); }
+
+.home-hero__chip--warm   { background: var(--color-warm-bg);  border-color: rgba(255,154,62,0.30); color: var(--color-warm); }
+.home-hero__chip--neutral{ background: var(--color-neutral-bg);border-color: rgba(200,220,255,0.20);color: #C8DCFF; }
+.home-hero__chip--neutral2{ background: rgba(180,210,255,0.08); border-color: rgba(180,210,255,0.15); color: #B4D2FF; }
+.home-hero__chip--cool   { background: var(--color-cool-bg);  border-color: rgba(126,200,255,0.30); color: var(--color-cool); }
+.home-hero__chip--cool2  { background: rgba(80,180,255,0.06); border-color: rgba(80,180,255,0.25);  color: #5EC4FF; }
+
+/* ── Simulator section ─────────────────────────────────── */
+.home-simulator {
+  background: var(--color-surface-base);
+  border-top: 1px solid var(--color-surface-border);
+}
+
+.home-simulator__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.home-simulator__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.025em;
+}
+
+.home-simulator__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Blog strip ────────────────────────────────────────── */
+.home-blog-strip {
+  position: relative;
+  background: var(--color-surface-raised);
+  border-top: 1px solid var(--color-surface-border);
+  padding-block: var(--space-12);
+  overflow: hidden;
+}
+
+.home-blog-strip__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.home-blog-strip__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.home-blog-strip__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Reduce motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__title, .home-hero__desc, .home-hero__actions, .home-hero__stats {
+    animation: none;
+  }
+  .tag__dot, .home-hero__btn-primary, .home-hero__spectrum-bar,
+  .light-orb__core, .light-orb__ring, .light-orb__rays { animation: none; }
+}
+</style>

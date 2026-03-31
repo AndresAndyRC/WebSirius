@@ -1,0 +1,236 @@
+---
+/**
+ * src/pages/blog/index.astro
+ * Blog listing page — shows all posts sorted by date.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime(),
+);
+
+const siteUrl = Astro.site?.toString() ?? 'https://siriuscol.com';
+const canonicalUrl = `${siteUrl}blog`;
+---
+
+<BaseLayout
+  title="Blog de Iluminación LED — SIRIUS"
+  description="Guías, consejos y tendencias en iluminación LED para transformar tu hogar y negocio. Aprende a elegir la tecnología correcta."
+  canonical={canonicalUrl}
+  ogType="website"
+>
+  <!-- Hero -->
+  <section class="blog-index-hero">
+    <div class="blog-index-hero__glow" aria-hidden="true"></div>
+    <div class="container blog-index-hero__inner">
+      <span class="tag">Blog</span>
+      <h1 class="blog-index-hero__title font-display">
+        Ilumina tus espacios<br />
+        <span class="gradient-text">con conocimiento</span>
+      </h1>
+      <p class="blog-index-hero__desc">
+        Guías prácticas, sin tecnicismos, para elegir la iluminación LED perfecta para cada rincón de tu vida.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts grid -->
+  <section class="blog-index-posts" aria-labelledby="posts-heading">
+    <div class="container">
+      <h2 class="visually-hidden" id="posts-heading">Artículos del blog</h2>
+
+      {allPosts.length === 0 ? (
+        <p class="blog-index-empty">Próximamente más artículos.</p>
+      ) : (
+        <ul class="blog-index-grid" role="list">
+          {allPosts.map(post => {
+            const formattedDate = new Intl.DateTimeFormat('es-CO', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }).format(new Date(post.data.publishedDate));
+
+            return (
+              <li class="blog-card">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="blog-card__link"
+                  aria-label={`Leer artículo: ${post.data.title}`}
+                >
+                  <article class="blog-card__inner">
+                    <div class="blog-card__meta-top">
+                      <span class="tag">{post.data.category}</span>
+                      <span class="blog-card__reading-time">{post.data.readingTime}</span>
+                    </div>
+                    <h2 class="blog-card__title font-display">{post.data.title}</h2>
+                    <p class="blog-card__excerpt">{post.data.excerpt}</p>
+                    <footer class="blog-card__footer">
+                      <time class="blog-card__date" datetime={post.data.publishedDate}>
+                        {formattedDate}
+                      </time>
+                      <span class="blog-card__read-more" aria-hidden="true">
+                        Leer artículo →
+                      </span>
+                    </footer>
+                  </article>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Hero ── */
+.blog-index-hero {
+  position: relative;
+  padding-block: var(--space-20) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-surface-border);
+  overflow: hidden;
+  text-align: center;
+}
+
+.blog-index-hero__glow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.10) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.blog-index-hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.blog-index-hero__title {
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  max-width: 20ch;
+}
+
+.blog-index-hero__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 50ch;
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Posts ── */
+.blog-index-posts {
+  padding-block: var(--space-16) var(--space-24);
+}
+
+.blog-index-empty {
+  text-align: center;
+  color: var(--color-text-tertiary);
+  padding: var(--space-16);
+}
+
+.blog-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: var(--space-6);
+}
+
+/* ── Card ── */
+.blog-card { display: flex; }
+
+.blog-card__link {
+  display: flex;
+  flex: 1;
+  text-decoration: none;
+  border-radius: var(--radius-xl);
+}
+
+.blog-card__inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-xl);
+  transition:
+    border-color var(--duration-normal) var(--ease-out-expo),
+    transform    var(--duration-normal) var(--ease-out-expo),
+    box-shadow   var(--duration-normal) var(--ease-out-expo);
+}
+
+.blog-card__link:hover .blog-card__inner {
+  border-color: rgba(245,166,35,0.35);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(245,166,35,0.08);
+}
+
+.blog-card__meta-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.blog-card__reading-time {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-weight: var(--fw-medium);
+}
+
+.blog-card__title {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.01em;
+}
+
+.blog-card__excerpt {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-surface-divider);
+}
+
+.blog-card__date {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.blog-card__read-more {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-primary);
+  transition: color var(--duration-fast);
+}
+
+.blog-card__link:hover .blog-card__read-more {
+  color: var(--color-brand-gold);
+}
+</style>

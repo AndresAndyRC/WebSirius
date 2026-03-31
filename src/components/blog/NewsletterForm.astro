@@ -1,0 +1,151 @@
+---
+/**
+ * NewsletterForm.astro — Email subscription form (static, progressive enhancement)
+ */
+---
+
+<section class="newsletter" aria-labelledby="newsletter-title">
+  <div class="newsletter__inner">
+    <div class="newsletter__icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </div>
+
+    <div class="newsletter__text">
+      <h2 class="newsletter__title font-display" id="newsletter-title">
+        Suscríbete y ahorra antes que nadie
+      </h2>
+      <p class="newsletter__desc">
+        Sé el primero en conocer nuevas colecciones, ofertas exclusivas y guías de iluminación.
+        Sin spam, solo valor.
+      </p>
+    </div>
+
+    <form
+      class="newsletter__form"
+      action="https://siriuscol.com/contact#newsletter"
+      method="POST"
+      novalidate
+      aria-label="Formulario de suscripción al boletín"
+    >
+      <div class="newsletter__field-group">
+        <div class="form-field">
+          <label for="newsletter-email" class="form-label">
+            Correo electrónico <span aria-hidden="true" style="color:var(--color-brand-primary)">*</span>
+          </label>
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            class="form-input newsletter__input"
+            placeholder="tu@correo.com"
+            required
+            autocomplete="email"
+            aria-required="true"
+            aria-describedby="newsletter-hint"
+          />
+          <p id="newsletter-hint" class="newsletter__hint">
+            Tus datos están seguros. No compartimos tu información.
+          </p>
+        </div>
+
+        <button type="submit" class="btn btn--primary newsletter__submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          Suscribirme
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+.newsletter {
+  margin-block: var(--space-16);
+  padding: var(--space-10) var(--space-8);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(0,194,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.newsletter__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .newsletter__inner {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.newsletter__icon {
+  width: 52px; height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0,194,255,0.10);
+  border: 1px solid rgba(0,194,255,0.25);
+  border-radius: var(--radius-xl);
+  color: var(--color-brand-accent);
+}
+
+.newsletter__text { flex: 1; min-width: 200px; }
+
+.newsletter__title {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.newsletter__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+.newsletter__form { width: 100%; }
+
+.newsletter__field-group {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.newsletter__input {
+  flex: 1;
+  min-width: 240px;
+}
+
+.newsletter__hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.newsletter__submit {
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+</style>

@@ -1,0 +1,371 @@
+---
+/**
+ * ArticleHero.astro — Editorial-style article header
+ * Features: gradient bg, category tag, title, excerpt, author/date/reading-time strip
+ */
+export interface Props {
+  title: string;
+  excerpt: string;
+  category: string;
+  publishedDate: string;
+  readingTime: string;
+  heroImage?: string;
+  heroImageAlt?: string;
+  author: {
+    name: string;
+    role?: string;
+  };
+}
+
+const {
+  title,
+  excerpt,
+  category,
+  publishedDate,
+  readingTime,
+  heroImage,
+  heroImageAlt,
+  author,
+} = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('es-CO', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(new Date(publishedDate));
+---
+
+<header class="hero">
+  <!-- Background glow effect -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__glow hero__glow--amber"></div>
+    <div class="hero__glow hero__glow--blue"></div>
+    <div class="hero__grid-overlay"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <!-- Left: text content -->
+    <div class="hero__content">
+      <div class="hero__meta-top">
+        <span class="tag">{category}</span>
+        <span class="hero__divider" aria-hidden="true">·</span>
+        <time class="hero__date" datetime={publishedDate}>{formattedDate}</time>
+        <span class="hero__divider" aria-hidden="true">·</span>
+        <span class="hero__reading-time">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {readingTime}
+        </span>
+      </div>
+
+      <h1 class="hero__title font-display" id="article-title">
+        {title}
+      </h1>
+
+      <p class="hero__excerpt">{excerpt}</p>
+
+      <!-- Quick summary cards -->
+      <div class="hero__summary" aria-label="Resumen del artículo">
+        <div class="hero__summary-item">
+          <span class="hero__summary-icon" aria-hidden="true">🎯</span>
+          <span>Aprende a elegir el CCT correcto para cada espacio</span>
+        </div>
+        <div class="hero__summary-item">
+          <span class="hero__summary-icon" aria-hidden="true">💡</span>
+          <span>3 temperaturas de color explicadas sin tecnicismos</span>
+        </div>
+        <div class="hero__summary-item">
+          <span class="hero__summary-icon" aria-hidden="true">🚀</span>
+          <span>Tecnología CCT ajustable: la solución definitiva</span>
+        </div>
+      </div>
+
+      <!-- Author strip -->
+      <div class="hero__author">
+        <div class="hero__author-avatar" aria-hidden="true">
+          <span>S</span>
+        </div>
+        <div class="hero__author-info">
+          <span class="hero__author-name">{author.name}</span>
+          {author.role && <span class="hero__author-role">{author.role}</span>}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: light temperature visual -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__temp-display">
+        <div class="hero__temp-bar">
+          <div class="hero__temp-label hero__temp-label--warm">2700K</div>
+          <div class="hero__temp-gradient"></div>
+          <div class="hero__temp-label hero__temp-label--cool">6500K</div>
+        </div>
+        <div class="hero__temp-chips">
+          <span class="hero__chip hero__chip--warm">🛋️ Cálida</span>
+          <span class="hero__chip hero__chip--neutral">🍳 Neutra</span>
+          <span class="hero__chip hero__chip--cool">💻 Fría</span>
+        </div>
+        <p class="hero__temp-caption">Espectro de Temperatura de Color (CCT)</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-16) var(--space-12);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+/* Backgrounds */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.hero__glow--amber {
+  top: -30%;
+  left: -10%;
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.12) 0%, transparent 70%);
+}
+
+.hero__glow--blue {
+  bottom: -30%;
+  right: -10%;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(0,194,255,0.08) 0%, transparent 70%);
+}
+
+.hero__grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Layout */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-16);
+  }
+}
+
+/* Meta top */
+.hero__meta-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.hero__divider {
+  color: var(--color-text-tertiary);
+  opacity: 0.5;
+}
+
+.hero__date {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-weight: var(--fw-medium);
+}
+
+.hero__reading-time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-weight: var(--fw-medium);
+}
+
+/* Title */
+.hero__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-5);
+}
+
+/* Excerpt */
+.hero__excerpt {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+  max-width: 56ch;
+  margin-bottom: var(--space-8);
+}
+
+/* Quick summary */
+.hero__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  padding: var(--space-5);
+  background: rgba(245,166,35,0.05);
+  border: 1px solid rgba(245,166,35,0.15);
+  border-radius: var(--radius-lg);
+}
+
+.hero__summary-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.hero__summary-icon { font-size: 1rem; flex-shrink: 0; }
+
+/* Author */
+.hero__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero__author-avatar {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-brand-primary), #E8941A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  font-size: var(--text-sm);
+  color: var(--color-text-inverse);
+  flex-shrink: 0;
+}
+
+.hero__author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__author-name {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.hero__author-role {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* Visual right panel */
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__temp-display {
+  width: 100%;
+  max-width: 320px;
+  padding: var(--space-6);
+  background: var(--color-surface-overlay);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero__temp-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.hero__temp-label {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__temp-label--warm { color: var(--color-warm); }
+.hero__temp-label--cool { color: var(--color-cool); }
+
+.hero__temp-gradient {
+  flex: 1;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg,
+    #FF9A3E 0%,
+    #FFCC70 25%,
+    #FFFFFF 50%,
+    #C8DCFF 75%,
+    #7EC8FF 100%
+  );
+  box-shadow: 0 0 12px rgba(245,166,35,0.2), 0 0 24px rgba(126,200,255,0.1);
+}
+
+.hero__temp-chips {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.hero__chip {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  border: 1px solid;
+}
+
+.hero__chip--warm {
+  background: var(--color-warm-bg);
+  border-color: rgba(255,154,62,0.30);
+  color: var(--color-warm);
+}
+
+.hero__chip--neutral {
+  background: var(--color-neutral-bg);
+  border-color: rgba(200,220,255,0.20);
+  color: #C8DCFF;
+}
+
+.hero__chip--cool {
+  background: var(--color-cool-bg);
+  border-color: rgba(126,200,255,0.30);
+  color: var(--color-cool);
+}
+
+.hero__temp-caption {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-align: center;
+}
+</style>

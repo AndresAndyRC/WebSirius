@@ -1,0 +1,86 @@
+---
+/**
+ * src/pages/blog/[slug].astro
+ * Dynamic route for all blog posts.
+ * Generates JSON-LD for Article + BreadcrumbList.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BlogPostLayout from '@layouts/BlogPostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props:  { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { data } = entry;
+
+const siteUrl = Astro.site?.toString() ?? 'https://siriuscol.com';
+const canonicalUrl = `${siteUrl}blog/${entry.slug}`;
+
+// Article JSON-LD
+const articleJsonLd = {
+  '@context':          'https://schema.org',
+  '@type':             'Article',
+  headline:            data.title,
+  description:         data.description,
+  datePublished:       data.publishedDate,
+  dateModified:        data.modifiedDate ?? data.publishedDate,
+  author: {
+    '@type': 'Organization',
+    name:    data.author.name,
+    url:     siteUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name:    'SIRIUS Iluminación',
+    logo: {
+      '@type': 'ImageObject',
+      url:     `${siteUrl}favicon.svg`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': '@id',
+    '@id':   canonicalUrl,
+  },
+  ...(data.heroImage ? { image: `${siteUrl}${data.heroImage}` } : {}),
+  keywords: data.tags?.join(', ') ?? '',
+};
+
+// BreadcrumbList JSON-LD
+const breadcrumbJsonLd = {
+  '@context':    'https://schema.org',
+  '@type':       'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Blog',   item: `${siteUrl}blog` },
+    { '@type': 'ListItem', position: 3, name: data.title, item: canonicalUrl },
+  ],
+};
+---
+
+<BlogPostLayout
+  entry={entry}
+  title={`${data.title} – SIRIUS`}
+  description={data.description}
+  canonical={canonicalUrl}
+  ogType="article"
+  ogImage={data.heroImage ?? '/og-default.jpg'}
+  article={{
+    publishedTime: data.publishedDate,
+    modifiedTime:  data.modifiedDate,
+    author:        data.author.name,
+    tags:          data.tags ?? [],
+  }}
+  jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+>
+  <Content />
+</BlogPostLayout>

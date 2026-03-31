@@ -1,0 +1,55 @@
+---
+/**
+ * TopBar.astro — Slim promotional banner at the very top
+ */
+---
+<div class="topbar" role="banner" aria-label="Anuncio promocional">
+  <div class="container">
+    <p class="topbar__text">
+      <span class="topbar__icon" aria-hidden="true">⚡</span>
+      Envíos a todo Colombia · Garantía LED 2 años ·
+      <a href="https://siriuscol.com/collections/paneles-led-redondos" class="topbar__link">
+        Ver catálogo completo →
+      </a>
+    </p>
+  </div>
+</div>
+
+<style>
+.topbar {
+  width: 100%;
+  height: var(--topbar-h);
+  background: linear-gradient(90deg, var(--color-brand-secondary) 0%, #121824 50%, var(--color-brand-secondary) 100%);
+  border-bottom: 1px solid rgba(245,166,35,0.15);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: var(--z-sticky);
+}
+
+.topbar__text {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  text-align: center;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.topbar__icon {
+  margin-right: var(--space-2);
+}
+
+.topbar__link {
+  color: var(--color-brand-primary);
+  font-weight: var(--fw-semibold);
+  transition: color var(--duration-fast);
+  margin-left: var(--space-3);
+}
+
+.topbar__link:hover {
+  color: var(--color-brand-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+</style>

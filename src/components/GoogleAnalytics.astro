@@ -1,0 +1,49 @@
+---
+/**
+ * GoogleAnalytics.astro — GA4 snippet
+ * Cargado solo en producción (import.meta.env.PROD)
+ * Configurable mediante variable de entorno GOOGLE_ANALYTICS_ID
+ * o como prop directa desde BaseLayout.
+ *
+ * Uso en BaseLayout:
+ *   <GoogleAnalytics />
+ *
+ * Variables de entorno requeridas:
+ *   GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX  (en .env o en Vercel dashboard)
+ */
+
+export interface Props {
+  /** Override manual si no se usa variable de entorno */
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+// Usa prop > variable de entorno
+const gaId = id ?? import.meta.env.GOOGLE_ANALYTICS_ID ?? '';
+
+// Solo inyectar en builds de producción y si tenemos un ID válido
+const shouldInject = import.meta.env.PROD && gaId.startsWith('G-');
+---
+
+{shouldInject && (
+  <>
+    <!-- Google tag (gtag.js) — Sólo se carga en producción -->
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+    ></script>
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', gaId, {
+        // Ajustes de privacidad recomendados
+        anonymize_ip:          true,  // anonimiza la IP del usuario
+        cookie_flags:          'SameSite=None;Secure',
+        send_page_view:        true,
+      });
+    </script>
+  </>
+)}

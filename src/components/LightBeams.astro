@@ -1,0 +1,220 @@
+---
+/**
+ * LightBeams.astro — Pure CSS animated light beams for hero sections
+ * No JS — uses CSS animations only.
+ * Place inside a position:relative container.
+ */
+export interface Props {
+  variant?: 'hero' | 'subtle';
+}
+
+const { variant = 'hero' } = Astro.props;
+---
+
+<div class={`beams beams--${variant}`} aria-hidden="true">
+  <div class="beam beam--1"></div>
+  <div class="beam beam--2"></div>
+  <div class="beam beam--3"></div>
+  <div class="beam beam--4"></div>
+  <div class="beam beam--5"></div>
+
+  <!-- radial lens flare -->
+  <div class="flare flare--main"></div>
+  <div class="flare flare--secondary"></div>
+
+  <!-- Dust motes (pure CSS) -->
+  <div class="motes">
+    <div class="mote mote--1"></div>
+    <div class="mote mote--2"></div>
+    <div class="mote mote--3"></div>
+    <div class="mote mote--4"></div>
+    <div class="mote mote--5"></div>
+    <div class="mote mote--6"></div>
+  </div>
+</div>
+
+<style>
+.beams {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Light Beams ──────────────────────────────────────────── */
+.beam {
+  position: absolute;
+  top: -10%;
+  width: 2px;
+  height: 130%;
+  transform-origin: top center;
+  background: linear-gradient(to bottom,
+    rgba(245,166,35,0.0) 0%,
+    rgba(245,166,35,0.06) 20%,
+    rgba(245,166,35,0.10) 50%,
+    rgba(245,166,35,0.03) 80%,
+    rgba(245,166,35,0.0) 100%
+  );
+  filter: blur(1px);
+  will-change: opacity, transform;
+}
+
+/* Beam positions and custom animations */
+.beam--1 {
+  left: 15%;
+  width: 1px;
+  transform: rotate(-12deg);
+  animation: beam-pulse 8s ease-in-out infinite;
+  animation-delay: 0s;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(245,166,35,0.12) 30%,
+    rgba(245,166,35,0.08) 70%,
+    transparent 100%
+  );
+}
+
+.beam--2 {
+  left: 30%;
+  width: 3px;
+  transform: rotate(-6deg);
+  animation: beam-pulse 10s ease-in-out infinite;
+  animation-delay: -2s;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,194,255,0.08) 25%,
+    rgba(0,194,255,0.12) 55%,
+    transparent 100%
+  );
+  filter: blur(2px);
+}
+
+.beam--3 {
+  left: 50%;
+  width: 4px;
+  transform: rotate(0deg);
+  animation: beam-pulse 7s ease-in-out infinite;
+  animation-delay: -4s;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(245,166,35,0.15) 20%,
+    rgba(255,210,100,0.10) 60%,
+    transparent 100%
+  );
+  filter: blur(3px);
+}
+
+.beam--4 {
+  left: 68%;
+  width: 2px;
+  transform: rotate(5deg);
+  animation: beam-pulse 11s ease-in-out infinite;
+  animation-delay: -6s;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,194,255,0.06) 30%,
+    rgba(0,194,255,0.10) 65%,
+    transparent 100%
+  );
+  filter: blur(1.5px);
+}
+
+.beam--5 {
+  left: 83%;
+  width: 1px;
+  transform: rotate(10deg);
+  animation: beam-pulse 9s ease-in-out infinite;
+  animation-delay: -3s;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(245,166,35,0.08) 40%,
+    rgba(245,166,35,0.05) 75%,
+    transparent 100%
+  );
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* subtle variant — softer beams */
+.beams--subtle .beam {
+  opacity: 0.5;
+  filter: blur(3px);
+}
+
+/* ── Lens Flares ────────────────────────────────────────── */
+.flare {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: flare-glow 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.flare--main {
+  top: -5%;
+  left: 48%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(245,166,35,0.18) 0%, rgba(245,166,35,0.08) 40%, transparent 70%);
+  filter: blur(12px);
+  animation-delay: 0s;
+}
+
+.flare--secondary {
+  top: -3%;
+  left: 46%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(245,166,35,0.15) 50%, transparent 70%);
+  filter: blur(4px);
+  animation-delay: -3s;
+  animation-name: flare-sharp;
+}
+
+@keyframes flare-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.15); }
+}
+
+@keyframes flare-sharp {
+  0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+  33%       { opacity: 1;   transform: scale(1.2) rotate(3deg); }
+  66%       { opacity: 0.7; transform: scale(0.95) rotate(-2deg); }
+}
+
+/* ── Dust Motes ─────────────────────────────────────────── */
+.motes {
+  position: absolute;
+  inset: 0;
+}
+
+.mote {
+  position: absolute;
+  border-radius: 50%;
+  animation: mote-float linear infinite;
+  will-change: transform, opacity;
+}
+
+.mote--1 { width:3px; height:3px; top:15%; left:22%; background:rgba(245,166,35,0.6); animation-duration:14s; animation-delay:0s; }
+.mote--2 { width:2px; height:2px; top:30%; left:45%; background:rgba(0,194,255,0.5);   animation-duration:18s; animation-delay:-4s; }
+.mote--3 { width:4px; height:4px; top:10%; left:60%; background:rgba(255,210,100,0.45); animation-duration:11s; animation-delay:-7s; }
+.mote--4 { width:2px; height:2px; top:50%; left:35%; background:rgba(245,166,35,0.4); animation-duration:16s; animation-delay:-2s; }
+.mote--5 { width:3px; height:3px; top:25%; left:75%; background:rgba(0,194,255,0.4);   animation-duration:13s; animation-delay:-9s; }
+.mote--6 { width:2px; height:2px; top:40%; left:15%; background:rgba(255,180,80,0.5);  animation-duration:20s; animation-delay:-5s; }
+
+@keyframes mote-float {
+  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translateY(-80px) translateX(20px) scale(1.3); }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-160px) translateX(-10px) scale(0.8); opacity: 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .beam, .flare, .mote { animation: none; opacity: 0.3; }
+}
+</style>

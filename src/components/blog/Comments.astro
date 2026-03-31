@@ -1,0 +1,129 @@
+---
+/**
+ * Comments.astro — Comment section placeholder with moderation notice
+ */
+---
+
+<section class="comments" id="comments" aria-labelledby="comments-title">
+  <div class="comments__header">
+    <h2 class="comments__title font-display" id="comments-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Deja un comentario
+    </h2>
+    <p class="comments__notice">
+      Los comentarios se publican tras revisión. Tu correo no será visible.
+    </p>
+  </div>
+
+  <form
+    class="comments__form"
+    action="#"
+    method="POST"
+    aria-label="Formulario de comentarios"
+  >
+    <div class="comments__fields">
+      <div class="form-field">
+        <label for="comment-name" class="form-label">
+          Nombre <span aria-hidden="true" style="color:var(--color-brand-primary)">*</span>
+        </label>
+        <input
+          type="text"
+          id="comment-name"
+          name="name"
+          class="form-input"
+          placeholder="Tu nombre"
+          required
+          autocomplete="name"
+          aria-required="true"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="comment-email" class="form-label">
+          Correo electrónico <span aria-hidden="true" style="color:var(--color-brand-primary)">*</span>
+        </label>
+        <input
+          type="email"
+          id="comment-email"
+          name="email"
+          class="form-input"
+          placeholder="tu@correo.com"
+          required
+          autocomplete="email"
+          aria-required="true"
+        />
+      </div>
+
+      <div class="form-field comments__message-field">
+        <label for="comment-body" class="form-label">
+          Comentario <span aria-hidden="true" style="color:var(--color-brand-primary)">*</span>
+        </label>
+        <textarea
+          id="comment-body"
+          name="body"
+          class="form-input comments__textarea"
+          placeholder="¿Tienes alguna pregunta o experiencia con el CCT en tus espacios?"
+          rows={5}
+          required
+          aria-required="true"
+        ></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn--secondary comments__submit">
+      Publicar comentario
+    </button>
+  </form>
+</section>
+
+<style>
+.comments {
+  margin-top: var(--space-12);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--color-surface-border);
+}
+
+.comments__header {
+  margin-bottom: var(--space-8);
+}
+
+.comments__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.comments__notice {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.comments__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 600px) {
+  .comments__fields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .comments__message-field {
+    grid-column: 1 / -1;
+  }
+}
+
+.comments__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.comments__submit { min-width: 200px; }
+</style>

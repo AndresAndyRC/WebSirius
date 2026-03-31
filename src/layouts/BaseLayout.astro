@@ -1,0 +1,67 @@
+---
+/**
+ * BaseLayout.astro — Root HTML shell: fonts, styles, SEO head, TopBar, Header, Footer
+ */
+import TopBar from '@components/layout/TopBar.astro';
+import Header from '@components/layout/Header.astro';
+import Footer from '@components/layout/Footer.astro';
+import MetaTags from '@components/MetaTags.astro';
+import GoogleAnalytics from '@components/GoogleAnalytics.astro';
+import LightCursor from '@components/LightCursor.tsx';
+import type { Props as MetaProps } from '@components/MetaTags.astro';
+
+import '@styles/global.css';
+
+interface Props extends MetaProps {}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <MetaTags {...props} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Google Analytics 4 — solo production -->
+    <GoogleAnalytics />
+  </head>
+
+  <body>
+    <!-- Skip to content for keyboard users -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <TopBar />
+    <Header />
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <Footer />
+    <!-- Global cursor light glow (only desktop/hover devices) -->
+    <LightCursor client:only="react" />
+  </body>
+</html>
+
+<style is:global>
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 9999;
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-sm);
+  transition: top var(--duration-fast);
+}
+.skip-link:focus {
+  top: var(--space-2);
+}
+</style>

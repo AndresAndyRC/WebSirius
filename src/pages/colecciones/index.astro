@@ -1,0 +1,730 @@
+---
+/**
+ * src/pages/colecciones/index.astro
+ * Premium reinvention of siriuscol.com/collections
+ * Filtered, searchable catalog with React island + Astro shell.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LightBeams from '@components/LightBeams.astro';
+import CollectionFilter from '@components/collections/CollectionFilter.tsx';
+import type { Collection } from '@components/collections/CollectionFilter.tsx';
+
+// ─────────────────────────────────────────────────────────
+// Full collections data  (preserves original names & hrefs)
+// Categories: iluminacion | electrico | exterior | especial | hogar
+// ─────────────────────────────────────────────────────────
+const BASE = 'https://siriuscol.com/collections/';
+
+const COLLECTIONS: Collection[] = [
+  // ── Iluminación LED ───────────────────────────────────────
+  {
+    id: 'paneles-redondos',
+    name: 'Paneles LED Redondos',
+    description: 'La solución más elegante para techos modernos. Luz uniforme, bajo consumo y temperatura ajustable de 2700K a 6500K en un solo panel.',
+    href: `${BASE}paneles-led-redondos`,
+    category: 'iluminacion',
+    tags: ['panel', 'led', 'techo', 'circular', 'cct'],
+    icon: '⭕',
+    featured: true,
+  },
+  {
+    id: 'paneles-cuadrados',
+    name: 'Paneles LED Cuadrados',
+    description: 'Dale un toque moderno y simétrico a tus espacios. Diseño minimalista, máxima eficiencia energética para oficinas y locales comerciales.',
+    href: `${BASE}paneles-led-cuadrados`,
+    category: 'iluminacion',
+    tags: ['panel', 'led', 'techo', 'cuadrado', 'oficina'],
+    icon: '🟦',
+    featured: true,
+  },
+  {
+    id: 'paneles-grandes',
+    name: 'Paneles LED de Grandes Dimensiones',
+    description: 'Luz uniforme y eficiente para espacios de alto rendimiento: bodegas, supermercados, gimnasios y áreas industriales.',
+    href: `${BASE}paneles-led-de-grandes-dimensiones`,
+    category: 'iluminacion',
+    tags: ['panel', 'led', 'industrial', 'bodega', 'grande'],
+    icon: '📐',
+  },
+  {
+    id: 'cintas-led',
+    name: 'Cintas LED',
+    description: 'La solución flexible para decoración e iluminación: retroiluminación, escaleras, muebles y ambientes. Disponibles en versiones RGB y CCT.',
+    href: `${BASE}cintas-led`,
+    category: 'iluminacion',
+    tags: ['cinta', 'led', 'flexible', 'rgb', 'decoracion', 'strip'],
+    icon: '🎞️',
+  },
+  {
+    id: 'bombillos',
+    name: 'Bombillos LED',
+    description: 'Tecnología, ahorro y variedad en un solo lugar. Reemplaza cualquier bombillo tradicional y ahorra hasta un 80% en energía.',
+    href: `${BASE}bombillos`,
+    category: 'iluminacion',
+    tags: ['bombillo', 'led', 'e27', 'ahorro', 'hogar'],
+    icon: '💡',
+  },
+  {
+    id: 'bombillo-vintage',
+    name: 'Bombillo LED Vintage',
+    description: 'Eleva la estética de tus espacios con filamento LED. Luz cálida con estilo retro, eficiencia moderna. Perfectos para restaurantes y cafés.',
+    href: `${BASE}bombillo-led-vintage`,
+    category: 'iluminacion',
+    tags: ['bombillo', 'vintage', 'filamento', 'retro', 'decoracion'],
+    icon: '🕯️',
+  },
+  {
+    id: 'lamparas-colgantes',
+    name: 'Lámparas Colgantes',
+    description: 'El punto focal que transforma por completo la energía de tus espacios. Comedores, recepciones y estudios creativos.',
+    href: `${BASE}lamparas-colgantes`,
+    category: 'iluminacion',
+    tags: ['lampara', 'colgante', 'pendiente', 'decoracion', 'comedor'],
+    icon: '🪔',
+  },
+  {
+    id: 'lamparas-alta-potencia',
+    name: 'Lámparas de Alta Potencia',
+    description: 'Luz potente para espacios grandes: bodegas, talleres, canchas y parqueaderos. UFO LED de gran eficiencia lumínica.',
+    href: `${BASE}lamparas-de-alta-potencia`,
+    category: 'iluminacion',
+    tags: ['lampara', 'industrial', 'ufo', 'potencia', 'bodega', 'taller'],
+    icon: '🏭',
+  },
+  {
+    id: 'lamparas-escritorio',
+    name: 'Lámparas de Escritorio',
+    description: 'La luz correcta para cada idea. Teletrabajo, estudio o lectura con regulación de intensidad y temperatura de color.',
+    href: `${BASE}lamparas-de-escritorio`,
+    category: 'iluminacion',
+    tags: ['lampara', 'escritorio', 'estudio', 'lectura', 'teletrabajo'],
+    icon: '🖥️',
+  },
+  {
+    id: 'apliques-pared',
+    name: 'Apliques de Pared',
+    description: 'Iluminación que resalta la arquitectura de tu hogar. Diseños elegantes para salas, pasillos y recámaras.',
+    href: `${BASE}apliques-de-pared`,
+    category: 'iluminacion',
+    tags: ['aplique', 'pared', 'decoracion', 'sala', 'pasillo'],
+    icon: '🌅',
+  },
+  {
+    id: 'balas-piso-techo',
+    name: 'Balas LED de Piso y Techo',
+    description: 'Soluciones de luz para cada superficie de tu proyecto. Direccionables, de gran ángulo y alta eficiencia lumínica.',
+    href: `${BASE}balas-led-de-piso-y-techo`,
+    category: 'iluminacion',
+    tags: ['bala', 'spot', 'downlight', 'techo', 'piso'],
+    icon: '🔦',
+  },
+  {
+    id: 'linternas-led',
+    name: 'Linternas LED',
+    description: 'Iluminación potente en tu bolsillo, sin gastar en baterías. Recargables USB, impermeables y de máxima duración.',
+    href: `${BASE}linternas-led`,
+    category: 'iluminacion',
+    tags: ['linterna', 'led', 'recargable', 'camping', 'emergencia'],
+    icon: '🔦',
+  },
+  {
+    id: 'iluminacion-emergencia',
+    name: 'Iluminación de Emergencia',
+    description: 'No te quedes a oscuras: seguridad y autonomía garantizada. Luces de emergencia con batería recargable integrada.',
+    href: `${BASE}iluminacion-de-emergencia`,
+    category: 'especial',
+    tags: ['emergencia', 'bateria', 'autonomia', 'seguridad'],
+    icon: '🚨',
+  },
+
+  // ── Exterior & Jardín ─────────────────────────────────────
+  {
+    id: 'lamparas-jardin',
+    name: 'Lámparas de Jardín',
+    description: 'Transforma la oscuridad en diseño: tu fachada merece brillar. Iluminación exterior resistente a la intemperie.',
+    href: `${BASE}aplique-de-jardin-led`,
+    category: 'exterior',
+    tags: ['jardin', 'exterior', 'fachada', 'ip65', 'decoracion'],
+    icon: '🌿',
+    featured: true,
+  },
+  {
+    id: 'iluminacion-solar',
+    name: 'Iluminación Solar',
+    description: '¡El sol paga la cuenta! Ilumina sin cables y sin costos. Faroles solares y reflectores recargables con panel fotovoltaico.',
+    href: `${BASE}iluminacion-solar`,
+    category: 'exterior',
+    tags: ['solar', 'exterior', 'sin cables', 'ecologico', 'autonomo'],
+    icon: '☀️',
+  },
+  {
+    id: 'balas-sumergibles',
+    name: 'Balas LED Sumergibles',
+    description: 'Crea un espectáculo visual en tus zonas húmedas: piscinas, fuentes, estanques y jacuzzis. RGB sumergibles IP68.',
+    href: `${BASE}balas-led-sumergibles`,
+    category: 'exterior',
+    tags: ['sumergible', 'piscina', 'fuente', 'ip68', 'rgb', 'agua'],
+    icon: '💧',
+  },
+  {
+    id: 'llaves-jardin',
+    name: 'Llaves de Jardín',
+    description: 'Olvídate de las llaves que gotean o se parten al cerrar. Griferías de jardín resistentes con cierre suave y preciso.',
+    href: `${BASE}llaves-de-jardin`,
+    category: 'exterior',
+    tags: ['grifo', 'jardin', 'agua', 'manguera'],
+    icon: '🚿',
+  },
+  {
+    id: 'extractores-aire',
+    name: 'Extractores de Aire',
+    description: 'Respira aire limpio y protege tu hogar. Extractores silenciosos para baños, cocinas y áreas de humedad.',
+    href: `${BASE}extractor-de-aire`,
+    category: 'exterior',
+    tags: ['extractor', 'ventilacion', 'bano', 'cocina', 'humedad'],
+    icon: '💨',
+  },
+
+  // ── Eléctrico ─────────────────────────────────────────────
+  {
+    id: 'accesorios-electricos',
+    name: 'Accesorios Eléctricos',
+    description: 'El respaldo oculto que hace que toda instalación sea segura y duradera: conectores, prensaestopas, canaletas, tuberías.',
+    href: `${BASE}accesorios-electricos`,
+    category: 'electrico',
+    tags: ['accesorio', 'electrico', 'instalacion', 'conector', 'canaleta'],
+    icon: '🔌',
+  },
+  {
+    id: 'interruptores-toma',
+    name: 'Interruptores y Tomacorrientes',
+    description: 'Elementos esenciales para una instalación eléctrica segura, estética y funcional. Líneas modernas y clásicas.',
+    href: `${BASE}tomacorrientes-e-interruptores`,
+    category: 'electrico',
+    tags: ['interruptor', 'tomacorriente', 'enchufe', 'pared', 'instalacion'],
+    icon: '🔘',
+    featured: true,
+  },
+  {
+    id: 'cables-electricos',
+    name: 'Cables Eléctricos',
+    description: 'El conductor ideal para cada proyecto. Cables THHN, TTU y dúplex en distintas calibres para instalaciones residenciales e industriales.',
+    href: `${BASE}cables-electricos`,
+    category: 'electrico',
+    tags: ['cable', 'conductor', 'thhn', 'calibre', 'instalacion'],
+    icon: '🔗',
+  },
+  {
+    id: 'breakers',
+    name: "Breaker's (Interruptores de Circuito)",
+    description: 'El corazón de una instalación eléctrica segura. Breakers térmicos y GFCI para proteger tu red eléctrica contra sobrecargas.',
+    href: `${BASE}breaker-s`,
+    category: 'electrico',
+    tags: ['breaker', 'disyuntor', 'proteccion', 'tablero', 'electrico'],
+    icon: '⚡',
+  },
+  {
+    id: 'medidores-tableros',
+    name: 'Medidores y Tableros Eléctricos',
+    description: 'El corazón de tu instalación eléctrica: precisión en el cobro y seguridad en la distribución. Tableros monofásicos y trifásicos.',
+    href: `${BASE}medidores-y-tableros-electricos`,
+    category: 'electrico',
+    tags: ['medidor', 'tablero', 'electrico', 'distribucion', 'industrial'],
+    icon: '📊',
+  },
+  {
+    id: 'extensiones',
+    name: 'Extensiones Eléctricas',
+    description: 'Energía segura donde la necesites: extensiones con protector de sobrecarga, tierra física y certificación de seguridad eléctrica.',
+    href: `${BASE}extension`,
+    category: 'electrico',
+    tags: ['extension', 'alargue', 'enchufe', 'sobrecarga'],
+    icon: '🔋',
+  },
+  {
+    id: 'multitomas',
+    name: 'Multitomas',
+    description: 'La solución definitiva para la falta de enchufes y el desorden de cables. Multitomas con USB, protector y diseño compacto.',
+    href: `${BASE}multitomas`,
+    category: 'electrico',
+    tags: ['multitoma', 'regleta', 'usb', 'enchufe', 'computador'],
+    icon: '🔌',
+  },
+  {
+    id: 'limpiadores',
+    name: 'Limpiadores y Lubricantes',
+    description: 'La química exacta para reparar, proteger y embellecer. WD-40, flux eléctrico, limpiador de contactos y desmoldantes.',
+    href: `${BASE}limpiadores-y-lubricantes`,
+    category: 'electrico',
+    tags: ['lubricante', 'limpiador', 'wd40', 'mantenimiento', 'electrico'],
+    icon: '🧪',
+  },
+
+  // ── Hogar & Baño ─────────────────────────────────────────
+  {
+    id: 'accesorios-bano',
+    name: 'Accesorios para Baño',
+    description: 'Elegancia y funcionalidad en cada detalle. Sets de grifería, barras, toalleros y portarrollos con acabados en cromo y satinado.',
+    href: `${BASE}accesorios-para-bano`,
+    category: 'hogar',
+    tags: ['bano', 'grifo', 'toallero', 'cromo', 'decoracion'],
+    icon: '🚿',
+    featured: true,
+  },
+  {
+    id: 'llaves-lavaplatos',
+    name: 'Llaves de Lavaplatos (Grifería)',
+    description: 'El corazón de tu cocina merece una grifería que dure. Griferías de cocina en acabados modernos con cartucho cerámico.',
+    href: `${BASE}llave-de-lavaplatos`,
+    category: 'hogar',
+    tags: ['grifo', 'cocina', 'lavaplatos', 'ceramico', 'cromo'],
+    icon: '🚰',
+  },
+
+  // ── Ferretería & Especiales ───────────────────────────────
+  {
+    id: 'accesorios-ferreteria',
+    name: 'Accesorios de Ferretería',
+    description: 'Todo lo que necesitas para construir, reparar y asegurar. Tornillos, tuercas, clavos, anclas y herramientas de sujeción.',
+    href: `${BASE}accesorios-de-ferreteria`,
+    category: 'especial',
+    tags: ['ferreteria', 'tornillo', 'ancla', 'herramienta', 'construccion'],
+    icon: '🔧',
+  },
+];
+
+const STATS = [
+  { value: `${COLLECTIONS.length}+`, label: 'Colecciones' },
+  { value: '2 años',   label: 'Garantía LED' },
+  { value: '📦',       label: 'Envío a toda Colombia' },
+  { value: 'A+',       label: 'Eficiencia Energética' },
+];
+---
+
+<BaseLayout
+  title="Catálogo Completo — SIRIUS Iluminación LED Colombia"
+  description="Explora todas las colecciones de SIRIUS: paneles LED, cintas RGB, bombillos vintage, grifería, accesorios eléctricos y más. Envíos a toda Colombia."
+  canonical="https://siriuscol.com/collections"
+  ogType="website"
+>
+  <!-- ══════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════ -->
+  <section class="cats-hero">
+    <LightBeams variant="subtle" />
+    <div class="cats-hero__glow cats-hero__glow--left"  aria-hidden="true"></div>
+    <div class="cats-hero__glow cats-hero__glow--right" aria-hidden="true"></div>
+
+    <div class="container cats-hero__inner">
+      <!-- Breadcrumb -->
+      <nav aria-label="Ruta de navegación" class="cats-breadcrumb">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Colecciones</span>
+      </nav>
+
+      <h1 class="cats-hero__title font-display">
+        Todo lo que <span class="gradient-text">ilumina</span><br />
+        y potencia tu espacio
+      </h1>
+      <p class="cats-hero__desc">
+        {COLLECTIONS.length} colecciones cuidadosamente seleccionadas: iluminación LED,
+        eléctrico, exterior y hogar. Con envíos a toda Colombia y garantía de 2 años.
+      </p>
+
+      <!-- Stats strip -->
+      <ul class="cats-hero__stats" role="list">
+        {STATS.map(s => (
+          <li role="listitem" class="cats-stat">
+            <span class="cats-stat__value">{s.value}</span>
+            <span class="cats-stat__label">{s.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CATEGORY SPOTLIGHT CARDS (static — above fold)
+       ══════════════════════════════════════════ -->
+  <section class="cats-spotlight section--sm" aria-labelledby="spotlight-heading">
+    <div class="container">
+      <h2 class="visually-hidden" id="spotlight-heading">Categorías destacadas</h2>
+      <div class="cats-spotlight__grid">
+        {[
+          {
+            category: 'iluminacion',
+            title: 'Iluminación LED',
+            desc: 'Paneles, bombillos, cintas y lámparas con tecnología de última generación.',
+            icon: '💡',
+            color: '#F5A623',
+            bg: 'rgba(245,166,35,0.07)',
+            border: 'rgba(245,166,35,0.20)',
+          },
+          {
+            category: 'electrico',
+            title: 'Eléctrico',
+            desc: 'Cables, breakers, tableros y todo para una instalación segura y duradera.',
+            icon: '⚡',
+            color: '#00C2FF',
+            bg: 'rgba(0,194,255,0.07)',
+            border: 'rgba(0,194,255,0.20)',
+          },
+          {
+            category: 'exterior',
+            title: 'Exterior & Jardín',
+            desc: 'Lámparas solares, sumergibles y fachadas. Tu exterior merece brillar.',
+            icon: '🌿',
+            color: '#4ADE80',
+            bg: 'rgba(74,222,128,0.07)',
+            border: 'rgba(74,222,128,0.20)',
+          },
+          {
+            category: 'hogar',
+            title: 'Hogar & Baño',
+            desc: 'Grifería premium, accesorios de baño y detalles que marcan la diferencia.',
+            icon: '🏠',
+            color: '#F472B6',
+            bg: 'rgba(244,114,182,0.07)',
+            border: 'rgba(244,114,182,0.20)',
+          },
+        ].map(cat => (
+          <div
+            class="spotlight-card"
+            style={`--s-color:${cat.color};--s-bg:${cat.bg};--s-border:${cat.border}`}
+          >
+            <div class="spotlight-card__icon">{cat.icon}</div>
+            <h3 class="spotlight-card__title">{cat.title}</h3>
+            <p class="spotlight-card__desc">{cat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FILTER + GRID (React island — client:load)
+       ══════════════════════════════════════════ -->
+  <section class="cats-catalog section" aria-labelledby="catalog-heading">
+    <div class="container">
+      <div class="cats-catalog__header">
+        <h2 class="font-display cats-catalog__title" id="catalog-heading">
+          Catálogo completo
+        </h2>
+        <p class="cats-catalog__sub">
+          Busca o filtra por categoría para encontrar exactamente lo que necesitas.
+        </p>
+      </div>
+      <CollectionFilter
+        client:load
+        collections={COLLECTIONS}
+      />
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TRUST BANNER
+       ══════════════════════════════════════════ -->
+  <section class="cats-trust" aria-labelledby="trust-heading">
+    <div class="container cats-trust__inner">
+      <h2 class="visually-hidden" id="trust-heading">Por qué elegir SIRIUS</h2>
+      {[
+        { icon: '🚀', title: 'Envío Gratis', desc: 'A toda Colombia en pedidos seleccionados' },
+        { icon: '🛡️', title: 'Garantía 2 Años', desc: 'Todos nuestros productos LED certificados' },
+        { icon: '💡', title: 'Asesoría Gratuita', desc: 'Expertos disponibles para tu proyecto' },
+        { icon: '♻️', title: 'Ahorro Energético', desc: 'Hasta 80% menos consumo que iluminación tradicional' },
+      ].map(item => (
+        <div class="trust-item">
+          <span class="trust-item__icon" aria-hidden="true">{item.icon}</span>
+          <div>
+            <p class="trust-item__title">{item.title}</p>
+            <p class="trust-item__desc">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BOTTOM CTA
+       ══════════════════════════════════════════ -->
+  <section class="cats-cta">
+    <LightBeams variant="hero" />
+    <div class="container cats-cta__inner">
+      <span class="tag">¿Necesitas asesoría?</span>
+      <h2 class="cats-cta__title font-display">
+        Nuestros expertos te ayudan a<br />
+        <span class="gradient-text">elegir la iluminación perfecta</span>
+      </h2>
+      <p class="cats-cta__desc">
+        Cuéntanos tu proyecto: metraje, uso del espacio y presupuesto.
+        Te enviamos la especificación completa sin costo.
+      </p>
+      <div class="cats-cta__actions">
+        <a href="https://wa.me/573001234567" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+          💬 Chatear en WhatsApp
+        </a>
+        <a href="/blog" class="btn btn--secondary btn--lg">
+          Leer la Guía LED →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ── Hero ────────────────────────────────────────────────── */
+.cats-hero {
+  position: relative;
+  padding-block: var(--space-16) var(--space-12);
+  overflow: hidden;
+  background: var(--color-surface-base);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+.cats-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.cats-hero__glow--left {
+  top: -30%; left: -10%;
+  width: 45vw; height: 400px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.10) 0%, transparent 70%);
+}
+
+.cats-hero__glow--right {
+  bottom: -30%; right: -5%;
+  width: 35vw; height: 350px;
+  background: radial-gradient(ellipse, rgba(0,194,255,0.07) 0%, transparent 70%);
+}
+
+.cats-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cats-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.cats-breadcrumb a {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.cats-breadcrumb a:hover { color: var(--color-brand-primary); }
+
+.cats-hero__title {
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  max-width: 18ch;
+}
+
+.cats-hero__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+  line-height: var(--lh-relaxed);
+}
+
+/* ─ Stats ─ */
+.cats-hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+  margin-top: var(--space-2);
+}
+
+.cats-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--radius-lg);
+}
+
+.cats-stat__value {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--color-brand-primary);
+  line-height: 1;
+}
+
+.cats-stat__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+/* ── Spotlight ───────────────────────────────────────────── */
+.section--sm { padding-block: var(--space-10); }
+
+.cats-spotlight__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-4);
+}
+
+.spotlight-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--s-bg);
+  border: 1px solid var(--s-border);
+  border-radius: var(--radius-xl);
+  transition: transform var(--duration-normal) var(--ease-out-expo), box-shadow var(--duration-normal);
+}
+
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+
+.spotlight-card__icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-surface-overlay);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--s-border);
+}
+
+.spotlight-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
+  color: var(--s-color);
+  line-height: 1.2;
+}
+
+.spotlight-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Catalog ─────────────────────────────────────────────── */
+.cats-catalog {
+  background: var(--color-surface-base);
+  border-top: 1px solid var(--color-surface-border);
+}
+
+.cats-catalog__header {
+  margin-bottom: var(--space-8);
+}
+
+.cats-catalog__title {
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-2);
+}
+
+.cats-catalog__sub {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+/* ── Trust ───────────────────────────────────────────────── */
+.cats-trust {
+  background: var(--color-surface-raised);
+  border-top: 1px solid var(--color-surface-border);
+  padding-block: var(--space-10);
+}
+
+.cats-trust__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-6);
+}
+
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.trust-item__icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.125rem;
+}
+
+.trust-item__title {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.trust-item__desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  line-height: var(--lh-relaxed);
+}
+
+/* ── Bottom CTA ──────────────────────────────────────────── */
+.cats-cta {
+  position: relative;
+  text-align: center;
+  padding-block: var(--space-20);
+  background: var(--color-surface-base);
+  border-top: 1px solid var(--color-surface-border);
+  overflow: hidden;
+}
+
+.cats-cta__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.cats-cta__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.025em;
+}
+
+.cats-cta__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 50ch;
+  line-height: var(--lh-relaxed);
+}
+
+.cats-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
+}
+</style>

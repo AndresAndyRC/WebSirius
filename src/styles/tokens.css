@@ -1,0 +1,124 @@
+/* =============================================================
+   SIRIUS — Design Tokens
+   Premium LED lighting brand identity system
+   ============================================================= */
+
+:root {
+  /* ─── Brand Palette ─────────────────────────────────────── */
+  --color-brand-primary:   #F5A623;   /* Warm amber — main accent */
+  --color-brand-secondary: #1A1F2E;   /* Deep navy */
+  --color-brand-accent:    #00C2FF;   /* Electric blue — cool accent */
+  --color-brand-gold:      #D4A843;   /* Rich gold for premium feel */
+
+  /* ─── Surface System ────────────────────────────────────── */
+  --color-surface-base:    #0D1117;   /* Page background */
+  --color-surface-raised:  #161B27;   /* Cards, panels */
+  --color-surface-overlay: #1E2537;   /* Modals, popovers */
+  --color-surface-border:  rgba(255,255,255,0.08);
+  --color-surface-divider: rgba(255,255,255,0.05);
+
+  /* ─── Text Hierarchy ────────────────────────────────────── */
+  --color-text-primary:   #F0F4FF;
+  --color-text-secondary: rgba(240,244,255,0.70);
+  --color-text-tertiary:  rgba(240,244,255,0.42);
+  --color-text-inverse:   #0D1117;
+
+  /* ─── Light Temperature Colors ──────────────────────────── */
+  --color-warm:   #FF9A3E;   /* 2700K–3500K amber */
+  --color-warm-bg: rgba(255,154,62,0.10);
+  --color-neutral:#FFFFFF;   /* 4000K–4500K white */
+  --color-neutral-bg: rgba(200,220,255,0.08);
+  --color-cool:  #7EC8FF;    /* 5000K–6500K blue-white */
+  --color-cool-bg: rgba(126,200,255,0.08);
+
+  /* ─── Semantic Colors ───────────────────────────────────── */
+  --color-success: #22C55E;
+  --color-warning: #F5A623;
+  --color-error:   #EF4444;
+  --color-info:    #00C2FF;
+
+  /* ─── Typography ────────────────────────────────────────── */
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ─── Type Scale (fluid) ────────────────────────────────── */
+  --text-xs:   clamp(0.70rem, 0.68rem + 0.10vw, 0.75rem);
+  --text-sm:   clamp(0.85rem, 0.83rem + 0.12vw, 0.938rem);
+  --text-base: clamp(1rem,    0.97rem + 0.15vw, 1.063rem);
+  --text-lg:   clamp(1.125rem,1.08rem + 0.22vw, 1.25rem);
+  --text-xl:   clamp(1.25rem, 1.18rem + 0.35vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem,  1.41rem + 0.44vw, 1.875rem);
+  --text-3xl:  clamp(1.875rem,1.73rem + 0.73vw, 2.5rem);
+  --text-4xl:  clamp(2.5rem,  2.2rem  + 1.5vw,  3.5rem);
+  --text-5xl:  clamp(3rem,    2.5rem  + 2.5vw,  5rem);
+
+  /* ─── Font Weights ──────────────────────────────────────── */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+  --fw-extrabold:800;
+
+  /* ─── Line Heights ──────────────────────────────────────── */
+  --lh-tight:  1.15;
+  --lh-snug:   1.35;
+  --lh-normal: 1.6;
+  --lh-relaxed:1.75;
+
+  /* ─── Spacing Scale ─────────────────────────────────────── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ─── Border Radius ─────────────────────────────────────── */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 24px;
+  --radius-full:9999px;
+
+  /* ─── Shadows ────────────────────────────────────────────── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-lg:  0 10px 30px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.3);
+  --shadow-glow-amber: 0 0 24px rgba(245,166,35,0.25), 0 0 48px rgba(245,166,35,0.12);
+  --shadow-glow-blue:  0 0 24px rgba(0,194,255,0.20), 0 0 48px rgba(0,194,255,0.08);
+
+  /* ─── Layout ─────────────────────────────────────────────── */
+  --container-max:  1280px;
+  --container-blog: 768px;
+  --container-wide: 1100px;
+  --grid-gap:  clamp(1rem, 3vw, 2rem);
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+
+  /* ─── Z-Index ────────────────────────────────────────────── */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-modal:    300;
+  --z-toast:    400;
+
+  /* ─── TopBar Height ─────────────────────────────────────── */
+  --topbar-h:  40px;
+  --header-h:  72px;
+  --toc-top:   calc(var(--topbar-h) + var(--header-h) + var(--space-8));
+}
