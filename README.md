@@ -103,3 +103,5 @@ Configurados en `vercel.json`:
 | `/pages/contact` | `/contacto` |
 | `/blogs/ilumina-tus-espacios-blog` | `/blog` |
 | `/blogs/ilumina-tus-espacios-blog/:slug` | `/blog/:slug` |
+
+
