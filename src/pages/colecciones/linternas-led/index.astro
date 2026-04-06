@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 const products = [
   { name: 'Linterna Recargable 4LED',          slug: 'linterna-recargable-4led',          leds: 4,  tipo: 'Mano',   price: 0 },
@@ -65,21 +66,31 @@ const powerLabel: Record<number,string> = { 4:'Básica', 7:'Estándar', 15:'Prof
           {products.map(p => {
             const accent = tipoColor[p.tipo];
             const power = powerLabel[p.leds] ?? '';
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
             return (
               <article class="prod-card glass" data-tipo={p.tipo}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 40% 50%,${accent}28 0%,${accent}06 80%)`} aria-hidden="true">
-                  {p.tipo === 'Minera' ? (
-                    <div class="prod-card__miner">
-                      <div class="prod-card__miner-band" style={`border-color:${accent}66`}></div>
-                      <div class="prod-card__miner-light" style={`background:${accent};box-shadow:0 0 20px ${accent}`}></div>
-                      <div class="prod-card__miner-beam" style={`background:linear-gradient(to right,${accent}66,transparent)`}></div>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 40% 50%,${accent}28 0%,${accent}08 80%)`} aria-hidden="true">
+                  {img1 ? (
+                    <div class="prod-card__img-wrap group">
+                      <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                      {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
                     </div>
                   ) : (
-                    <div class="prod-card__torch">
-                      <div class="prod-card__torch-body" style={`background:linear-gradient(to right,#374151,#1F2937)`}></div>
-                      <div class="prod-card__torch-head" style={`border-color:${accent}88;box-shadow:0 0 22px ${accent}`}></div>
-                      <div class="prod-card__torch-beam" style={`background:linear-gradient(to right,${accent}77,transparent)`}></div>
-                    </div>
+                    <>
+                      {p.tipo === 'Minera' ? (
+                        <div class="prod-card__miner">
+                          <div class="prod-card__miner-band" style={`border-color:${accent}66`}></div>
+                          <div class="prod-card__miner-light" style={`background:${accent};box-shadow:0 0 20px ${accent}`}></div>
+                          <div class="prod-card__miner-beam" style={`background:linear-gradient(to right,${accent}66,transparent)`}></div>
+                        </div>
+                      ) : (
+                        <div class="prod-card__torch">
+                          <div class="prod-card__torch-body" style={`background:linear-gradient(to right,#374151,#1F2937)`}></div>
+                          <div class="prod-card__torch-head" style={`border-color:${accent}88;box-shadow:0 0 22px ${accent}`}></div>
+                          <div class="prod-card__torch-beam" style={`background:linear-gradient(to right,${accent}77,transparent)`}></div>
+                        </div>
+                      )}
+                    </>
                   )}
                   <span class="prod-card__leds-badge" style={`background:${accent}22;color:${accent};border-color:${accent}55`}>{p.leds} LEDs</span>
                 </div>
@@ -177,7 +188,8 @@ const powerLabel: Record<number,string> = { 4:'Básica', 7:'Estándar', 15:'Prof
 .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-.prod-card__strip{height:80px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
 /* Torch render */
 .prod-card__torch{display:flex;align-items:center;gap:0;position:relative;}
 .prod-card__torch-body{width:42px;height:18px;border-radius:4px 0 0 4px;}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 const products = [
   { name: 'Bombillo Solar de Emergencia LED 12W',  slug: 'bombillo-solar-led-emergencia-12w',                    watts: 12, tipo: 'Solar',     feature: 'Solar + Batería' },
@@ -67,11 +68,21 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
         <div class="coll-grid" id="products-grid">
           {products.map(p => {
             const accent = tipoColor[p.tipo];
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
             return (
               <article class="prod-card glass" data-tipo={p.tipo}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}30 0%,${accent}07 100%)`} aria-hidden="true">
-                  <div class="prod-card__emerg-icon">{tipoIcon[p.tipo]}</div>
-                  <div class="prod-card__pulse" style={`border-color:${accent}55;box-shadow:0 0 0 8px ${accent}15`}></div>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}30 0%,${accent}08 100%)`} aria-hidden="true">
+                  {img1 ? (
+                    <div class="prod-card__img-wrap group">
+                      <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                      {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
+                    </div>
+                  ) : (
+                    <>
+                      <div class="prod-card__emerg-icon">{tipoIcon[p.tipo]}</div>
+                      <div class="prod-card__pulse" style={`border-color:${accent}55;box-shadow:0 0 0 8px ${accent}15`}></div>
+                    </>
+                  )}
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
@@ -167,7 +178,8 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
 .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-.prod-card__strip{height:80px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
 .prod-card__emerg-icon{font-size:2.2rem;position:relative;z-index:1;}
 .prod-card__pulse{width:52px;height:52px;border-radius:50%;border:2px solid;position:absolute;}
 .prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}

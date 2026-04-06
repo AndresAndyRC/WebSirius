@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 const products = [
   { name: 'Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida', slug: 'aplique-solar-led-2-5w-3000k-con-sensor', watts: 2.5, tipo: 'Aplique Solar', sensor: true,  color: 'Negro' },
@@ -59,21 +60,29 @@ const tipoColor: Record<string,string> = { 'Aplique Solar': '#4ADE80', 'Poste': 
         <div class="coll-grid" id="products-grid">
           {products.map(p => {
             const accent = tipoColor[p.tipo];
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
             return (
               <article class="prod-card glass" data-tipo={p.tipo}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 0%,${accent}28 0%,${accent}06 100%)`} aria-hidden="true">
-                  <div class="prod-card__visual">
-                    {p.tipo === 'Poste' ? (
-                      <div class="prod-card__post" style={`background:${p.color==='Satín'?'#94A3B8':'#374151'}`}>
-                        <div class="prod-card__post-glow" style={`background:${accent}60`}></div>
-                      </div>
-                    ) : (
-                      <div class="prod-card__solar">
-                        <span class="prod-card__solar-panel">▦</span>
-                        <span class="prod-card__solar-icon">☀️</span>
-                      </div>
-                    )}
-                  </div>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 0%,${accent}28 0%,${accent}08 100%)`} aria-hidden="true">
+                  {img1 ? (
+                    <div class="prod-card__img-wrap group">
+                      <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                      {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
+                    </div>
+                  ) : (
+                    <div class="prod-card__visual">
+                      {p.tipo === 'Poste' ? (
+                        <div class="prod-card__post" style={`background:${p.color==='Satín'?'#94A3B8':'#374151'}`}>
+                          <div class="prod-card__post-glow" style={`background:${accent}60`}></div>
+                        </div>
+                      ) : (
+                        <div class="prod-card__solar">
+                          <span class="prod-card__solar-panel">▦</span>
+                          <span class="prod-card__solar-icon">☀️</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   {p.sensor && <span class="prod-card__sensor-tag">📡 Sensor</span>}
                 </div>
                 <div class="prod-card__body">
@@ -164,7 +173,8 @@ const tipoColor: Record<string,string> = { 'Aplique Solar': '#4ADE80', 'Poste': 
 .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-.prod-card__strip{height:80px;display:flex;align-items:center;justify-content:center;position:relative;}
+.prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
 .prod-card__visual{display:flex;align-items:center;justify-content:center;}
 .prod-card__post{width:10px;height:52px;border-radius:var(--radius-full);position:relative;}
 .prod-card__post-glow{position:absolute;top:-6px;left:-10px;width:30px;height:22px;border-radius:50%;filter:blur(8px);}

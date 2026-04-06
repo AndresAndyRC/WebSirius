@@ -4,6 +4,7 @@
  * Route: /colecciones/paneles-led-redondos
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 const products = [
   // 3W
@@ -190,7 +191,9 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
         </div>
 
         <div class="coll-grid" id="products-grid">
-          {products.map(p => (
+          {products.map(p => {
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
+            return (
             <article
               class="prod-card glass"
               data-watts={p.watts}
@@ -198,7 +201,16 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
               data-install={p.install}
             >
               <!-- Visual indicator light -->
-              <div class={`prod-card__light prod-card__light--${colorMeta[p.color].css}`} aria-hidden="true"></div>
+              <div class={`prod-card__light prod-card__light--${colorMeta[p.color].css}`} aria-hidden="true">
+                {img1 ? (
+                  <div class="prod-card__img-wrap group">
+                    <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                    {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
+                  </div>
+                ) : (
+                  <div class="prod-card__fallback-circle"></div>
+                )}
+              </div>
 
               <div class="prod-card__body">
                 <div class="prod-card__meta">
@@ -234,7 +246,8 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
                 </svg>
               </a>
             </article>
-          ))}
+            );
+          })}
         </div>
 
         <!-- Empty state -->

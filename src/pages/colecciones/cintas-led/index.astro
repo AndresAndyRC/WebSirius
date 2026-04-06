@@ -4,6 +4,7 @@
  * Route: /colecciones/cintas-led
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 // ── Color accent map ───────────────────────────────────────
 const colorMap: Record<string, string> = {
@@ -154,6 +155,7 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
             const accent = colorMap[p.color] ?? '#7EC8FF';
             const isGradient = p.color === 'RGB';
             const isAccesorio = p.tipo === 'Accesorio';
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
             return (
               <article
                 class="prod-card glass"
@@ -168,12 +170,21 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
                     : `background: radial-gradient(ellipse at 50% 0%, ${accent}44 0%, ${accent}08 100%)`}
                   aria-hidden="true"
                 >
-                  {isAccesorio ? (
-                    <span class="prod-card__strip-icon">🔌</span>
-                  ) : isGradient ? (
-                    <span class="prod-card__strip-icon">🌈</span>
+                  {img1 ? (
+                    <div class="prod-card__img-wrap group">
+                      <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                      {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
+                    </div>
                   ) : (
-                    <div class="prod-card__strip-bar" style={`background:${accent}; box-shadow: 0 0 18px ${accent}99`}></div>
+                    <>
+                      {isAccesorio ? (
+                        <span class="prod-card__strip-icon">🔌</span>
+                      ) : isGradient ? (
+                        <span class="prod-card__strip-icon">🌈</span>
+                      ) : (
+                        <div class="prod-card__strip-bar" style={`background:${accent}; box-shadow: 0 0 18px ${accent}99`}></div>
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -392,8 +403,9 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
 .prod-card:hover { border-color:rgba(232,121,249,0.30); transform:translateY(-3px); box-shadow:var(--shadow-md); }
 
 /* Color strip */
-.prod-card__strip { height:72px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.prod-card__strip-bar { width:80%; height:8px; border-radius:var(--radius-full); }
+.prod-card__strip { height:200px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__strip-bar { width:80%; height:8px; border-radius:var(--radius-full); margin-top: auto; margin-bottom: 20px; }
 .prod-card__strip-icon { font-size:2rem; line-height:1; }
 
 .prod-card__body { padding:var(--space-4) var(--space-4) var(--space-3); flex:1; }
