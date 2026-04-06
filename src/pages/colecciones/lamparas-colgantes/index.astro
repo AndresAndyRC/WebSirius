@@ -46,9 +46,9 @@ const colorAccent: Record<string, string> = {
       <h1 class="coll-title">Lámparas <span class="coll-title--accent">Colgantes</span></h1>
       <p class="coll-subtitle">Industrial, Vintage, Minimalista y Colorido — Rosca E27 — Diseños únicos.<br/>El punto focal que transforma por completo la energía de tus espacios. Para comedores, recepciones y estudios.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill coll-style-pill--ind">🏭 Industrial <em>negro &amp; dorado</em></span>
-        <span class="coll-style-pill coll-style-pill--mod">⬜ Minimalista <em>limpio y moderno</em></span>
-        <span class="coll-style-pill coll-style-pill--color">🎨 Colorido <em>azul &amp; vibrante</em></span>
+        <span class="coll-style-pill coll-style-pill--ind"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">factory</span> Industrial <em>negro &amp; dorado</em></span>
+        <span class="coll-style-pill coll-style-pill--mod"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> Minimalista <em>limpio y moderno</em></span>
+        <span class="coll-style-pill coll-style-pill--color"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> Colorido <em>azul &amp; vibrante</em></span>
       </div>
     </div>
   </section>
@@ -63,9 +63,9 @@ const colorAccent: Record<string, string> = {
           {uniqueEstilos.map(e => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="estilo" value={e} id={`e-${e}`}/><span>{e}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🪔 {products.length} modelos</span>
-          <span class="coll-cert">⚡ Rosca E27</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tungsten</span> {products.length} modelos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> Rosca E27</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
 
@@ -99,13 +99,13 @@ const colorAccent: Record<string, string> = {
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>🪔 {p.estilo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tungsten</span> {p.estilo}</span>
                     <span class="prod-card__install">E27</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
-                    <span class="prod-card__spec">🎨 {p.color}</span>
-                    <span class="prod-card__spec">📌 1×E27</span>
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> {p.color}</span>
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">push_pin</span> 1×E27</span>
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -116,7 +116,7 @@ const colorAccent: Record<string, string> = {
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🪔</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tungsten</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -126,9 +126,9 @@ const colorAccent: Record<string, string> = {
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🍽️</span><div><strong>Comedores y Salas</strong><p>Las formas cónicas y el acabado negro/dorado crean un ambiente sofisticado sobre mesas de comedor y salas.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">☕</span><div><strong>Cafés y Restaurantes</strong><p>Los diseños industriales y vintage combinan perfectamente con ladrillo expuesto y madera en negocios gastronómicos.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">💡</span><div><strong>Compatibles con LED Vintage</strong><p>Todas las luminarias tienen rosca E27, perfectas para usar con nuestros bombillos de filamento y luz cálida.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">restaurant</span>️</span><div><strong>Comedores y Salas</strong><p>Las formas cónicas y el acabado negro/dorado crean un ambiente sofisticado sobre mesas de comedor y salas.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_cafe</span></span><div><strong>Cafés y Restaurantes</strong><p>Los diseños industriales y vintage combinan perfectamente con ladrillo expuesto y madera en negocios gastronómicos.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span></span><div><strong>Compatibles con LED Vintage</strong><p>Todas las luminarias tienen rosca E27, perfectas para usar con nuestros bombillos de filamento y luz cálida.</p></div></div>
     </div>
   </section>
 
@@ -205,7 +205,7 @@ const colorAccent: Record<string, string> = {
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;padding-bottom:0;overflow:hidden;position:relative;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__pendant{display:flex;flex-direction:column;align-items:center;gap:0;}
 .prod-card__cord{width:2px;height:28px;background:linear-gradient(to bottom,rgba(255,255,255,.15),rgba(255,255,255,.35));}
 .prod-card__shade{width:44px;height:28px;border-radius:0 0 50% 50%;border:2px solid;border-top:none;}

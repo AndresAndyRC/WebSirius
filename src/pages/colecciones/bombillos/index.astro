@@ -50,9 +50,9 @@ const colorMap: Record<string, string> = {
       <h1 class="coll-title">Bombillos <span class="coll-title--accent">LED</span></h1>
       <p class="coll-subtitle">E12, E14, E27 y GU10 — Luz Blanca, Cálida y RGB — Desde 1W hasta 5W.<br/>Reemplaza cualquier bombillo tradicional y ahorra hasta un 80% en energía.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill coll-style-pill--e27">💡 E27 Estándar <em>uso general</em></span>
-        <span class="coll-style-pill coll-style-pill--gu10">🔦 GU10 <em>dicroico empotrado</em></span>
-        <span class="coll-style-pill coll-style-pill--pp">🟡 PinPon E12 <em>decorativo</em></span>
+        <span class="coll-style-pill coll-style-pill--e27"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span> E27 Estándar <em>uso general</em></span>
+        <span class="coll-style-pill coll-style-pill--gu10"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span> GU10 <em>dicroico empotrado</em></span>
+        <span class="coll-style-pill coll-style-pill--pp"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">circle</span> PinPon E12 <em>decorativo</em></span>
       </div>
     </div>
   </section>
@@ -72,10 +72,10 @@ const colorMap: Record<string, string> = {
           {uniqueTipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{t}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">💡 {products.length} productos</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">🛡️ Garantía 1 año</span>
-          <span class="coll-cert">⚡ Ahorro 80%</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span> {products.length} productos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ Garantía 1 año</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> Ahorro 80%</span>
         </div>
       </aside>
 
@@ -102,20 +102,20 @@ const colorMap: Record<string, string> = {
                     </div>
                   ) : (
                     <>
-                      {isRGB ? <span class="prod-card__strip-icon">🌈</span> : <span class="prod-card__bulb" style={`background:${accent};box-shadow:0 0 20px ${accent}99`}></span>}
+                      {isRGB ? <span class="prod-card__strip-icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span></span> : <span class="prod-card__bulb" style={`background:${accent};box-shadow:0 0 20px ${accent}99`}></span>}
                     </>
                   )}
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class={`prod-card__badge prod-card__badge--${p.tipo.toLowerCase()}`}>💡 {p.tipo}</span>
+                    <span class={`prod-card__badge prod-card__badge--${p.tipo.toLowerCase()}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span> {p.tipo}</span>
                     <span class="prod-card__install">{p.rosca}</span>
                     <span class="prod-card__color-dot" style={`background:${isRGB ? 'conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171)' : accent}`}></span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
                     <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
-                    <span class="prod-card__spec">🔆 {p.color === 'Blanca' ? '6000K' : p.color === 'Cálida' ? '2700K' : p.color}</span>
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> {p.color === 'Blanca' ? '6000K' : p.color === 'Cálida' ? '2700K' : p.color}</span>
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -126,7 +126,7 @@ const colorMap: Record<string, string> = {
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">💡</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -136,9 +136,9 @@ const colorMap: Record<string, string> = {
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">💡</span><div><strong>E27 — Rosca Universal</strong><p>El estándar más usado en hogares y oficinas. Compatible con luminarias de 3W y 5W.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔦</span><div><strong>GU10 — Foco Dicroico</strong><p>Para empotrar en rieles y spots direccionables. Disponible en blanco, cálido y RGB con mando.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🟡</span><div><strong>PinPon E12 — Decorativo</strong><p>Miniatura de 1W para guirnaldas, luces navideñas y decoración ambiental en múltiples colores.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span></span><div><strong>E27 — Rosca Universal</strong><p>El estándar más usado en hogares y oficinas. Compatible con luminarias de 3W y 5W.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span></span><div><strong>GU10 — Foco Dicroico</strong><p>Para empotrar en rieles y spots direccionables. Disponible en blanco, cálido y RGB con mando.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">circle</span></span><div><strong>PinPon E12 — Decorativo</strong><p>Miniatura de 1W para guirnaldas, luces navideñas y decoración ambiental en múltiples colores.</p></div></div>
     </div>
   </section>
 
@@ -218,7 +218,7 @@ const colorMap: Record<string, string> = {
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{border-color:rgba(253,230,138,.30);transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__bulb{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.25);}
 .prod-card__strip-icon{font-size:2rem;}
 .prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}

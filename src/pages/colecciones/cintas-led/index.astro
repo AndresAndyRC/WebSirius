@@ -88,9 +88,9 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
       </p>
 
       <div class="coll-style-pills">
-        <span class="coll-style-pill coll-style-pill--sili">🎞️ Siliconadas 12V <em>decoración interior</em></span>
-        <span class="coll-style-pill coll-style-pill--neon">🌈 Neón Flex 12V <em>avisos &amp; ambientes</em></span>
-        <span class="coll-style-pill coll-style-pill--hl">⚡ High Lumen 110V <em>techos comerciales</em></span>
+        <span class="coll-style-pill coll-style-pill--sili"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">movie</span>️ Siliconadas 12V <em>decoración interior</em></span>
+        <span class="coll-style-pill coll-style-pill--neon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> Neón Flex 12V <em>avisos &amp; ambientes</em></span>
+        <span class="coll-style-pill coll-style-pill--hl"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> High Lumen 110V <em>techos comerciales</em></span>
       </div>
     </div>
   </section>
@@ -131,10 +131,10 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">🎞️ 25 productos</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">🛡️ Garantía 1 año</span>
-          <span class="coll-cert">⚡ 12V y 110V</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">movie</span>️ 25 productos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ Garantía 1 año</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> 12V y 110V</span>
         </div>
       </aside>
 
@@ -178,9 +178,9 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
                   ) : (
                     <>
                       {isAccesorio ? (
-                        <span class="prod-card__strip-icon">🔌</span>
+                        <span class="prod-card__strip-icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">power</span></span>
                       ) : isGradient ? (
-                        <span class="prod-card__strip-icon">🌈</span>
+                        <span class="prod-card__strip-icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span></span>
                       ) : (
                         <div class="prod-card__strip-bar" style={`background:${accent}; box-shadow: 0 0 18px ${accent}99`}></div>
                       )}
@@ -191,7 +191,7 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
                     <span class={`prod-card__badge prod-card__badge--${p.tipo === 'Accesorio' ? 'acc' : p.voltaje === '110V' ? 'hl' : 'led12'}`}>
-                      {p.voltaje === '110V' ? '⚡' : '🎞️'} {p.tipo}
+                      {p.voltaje === '110V' ? 'bolt' : 'movie️'} {p.tipo}
                     </span>
                     {p.color !== '—' && (
                       <span class="prod-card__color-dot" style={`background:${isGradient ? 'conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171)' : accent}`} title={p.color}></span>
@@ -202,8 +202,8 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
                   <h3 class="prod-card__name">{p.name}</h3>
 
                   <div class="prod-card__specs">
-                    <span class="prod-card__spec">⚡ {p.voltaje}</span>
-                    {p.color !== '—' && <span class="prod-card__spec">🎨 {p.color}</span>}
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> {p.voltaje}</span>
+                    {p.color !== '—' && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> {p.color}</span>}
                     {p.price > 0 && (
                       <span class="prod-card__price">${p.price.toLocaleString('es-CO')} COP</span>
                     )}
@@ -228,7 +228,7 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
         </div>
 
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🎞️</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">movie</span>️</span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -240,21 +240,21 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
       <div class="coll-info-card">
-        <span class="coll-info-card__icon">🏠</span>
+        <span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">home</span></span>
         <div>
           <strong>Decoración interior</strong>
           <p>Cintas Siliconadas 12V para muebles, zócalos, escaleras y ambientes. Flexibles, adhesivas y resistentes a humedad leve.</p>
         </div>
       </div>
       <div class="coll-info-card">
-        <span class="coll-info-card__icon">🌈</span>
+        <span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span></span>
         <div>
           <strong>Avisos comerciales</strong>
           <p>Neón Flex 12V para letras, avisos y marcos decorativos. Doblable sin cortes, efecto neón suavizado y duradero.</p>
         </div>
       </div>
       <div class="coll-info-card">
-        <span class="coll-info-card__icon">⚡</span>
+        <span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span></span>
         <div>
           <strong>Techos de alto brillo</strong>
           <p>High Lumen 110V conexión directa sin transformador. Ideal para supermercados, talleres y locales de gran metraje.</p>
@@ -404,7 +404,7 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
 
 /* Color strip */
 .prod-card__strip { height:200px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__strip-bar { width:80%; height:8px; border-radius:var(--radius-full); margin-top: auto; margin-bottom: 20px; }
 .prod-card__strip-icon { font-size:2rem; line-height:1; }
 

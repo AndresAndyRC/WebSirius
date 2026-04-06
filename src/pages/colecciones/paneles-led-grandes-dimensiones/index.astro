@@ -108,7 +108,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
       <!-- Format pills -->
       <div class="coll-style-pills">
         <span class="coll-style-pill coll-style-pill--60x60">
-          ⬛ 60×60 cm
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> 60×60 cm
           <em>formato cuadrado</em>
         </span>
         <span class="coll-style-pill coll-style-pill--120x30">
@@ -116,7 +116,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
           <em>formato rectangular</em>
         </span>
         <span class="coll-style-pill coll-style-pill--accesorios">
-          🔧 Accesorios
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">build</span> Accesorios
           <em>drivers y ganchos</em>
         </span>
       </div>
@@ -174,10 +174,10 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">✅ RETIE</span>
-          <span class="coll-cert">✅ RETILAP</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">🛡️ Garantía 1–2 años</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETIE</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETILAP</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ Garantía 1–2 años</span>
         </div>
       </aside>
 
@@ -207,7 +207,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
                   </div>
                 ) : (
                   <div class={`prod-card__light-rect prod-card__light--${p.type === 'Accesorio' ? 'accessory' : p.style === 'Slim' ? 'slim' : p.style === 'Titanium' ? 'titanium' : 'standard'}`}>
-                    {p.type === 'Accesorio' && <div class="prod-card__light-icon">{p.style === 'Driver' ? '⚡' : '🔩'}</div>}
+                    {p.type === 'Accesorio' && <div class="prod-card__light-icon">{p.style === 'Driver' ? 'bolt' : 'settings'}</div>}
                   </div>
                 )}
               </div>
@@ -215,7 +215,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
               <div class="prod-card__body">
                 <div class="prod-card__meta">
                   <span class={`prod-card__badge prod-card__badge--${p.type === 'Accesorio' ? 'accessory' : p.style.toLowerCase()}`}>
-                    {p.type === 'Panel' ? '📐' : '🔧'} {p.style !== 'Gancho' && p.style !== 'Driver' ? p.style : p.type}
+                    {p.type === 'Panel' ? 'architecture' : 'build'} {p.style !== 'Gancho' && p.style !== 'Driver' ? p.style : p.type}
                   </span>
                   {p.size !== '—' && <span class="prod-card__install">{p.size}</span>}
                 </div>
@@ -231,7 +231,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
                       {p.watts}W
                     </span>
                   )}
-                  {p.color !== '—' && <span class="prod-card__spec">❄️ 6000K–6500K</span>}
+                  {p.color !== '—' && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">ac_unit</span> 6000K–6500K</span>}
                   <span class="prod-card__price">${p.price.toLocaleString('es-CO')} COP</span>
                 </div>
               </div>
@@ -254,7 +254,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
 
         <!-- Empty state -->
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">📐</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">architecture</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -266,7 +266,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
       <div class="coll-info-card">
-        <span class="coll-info-card__icon">⬛</span>
+        <span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span></span>
         <div>
           <strong>60×60 cm</strong>
           <p>El formato estándar para techos de tipo Armstrong. Perfectos para oficinas, salas de reuniones y locales.</p>
@@ -280,7 +280,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
         </div>
       </div>
       <div class="coll-info-card">
-        <span class="coll-info-card__icon">💡</span>
+        <span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span></span>
         <div>
           <strong>48W – 50W</strong>
           <p>Alta eficiencia lumínica (≥100 lm/W). Ahorra hasta 70% en energía versus fluorescentes tradicionales.</p>
@@ -515,7 +515,7 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 50%, rgba(220,235,255,0.08) 0%, transparent 70%);
 }
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 
 .prod-card__light-rect {
   width: 64px;

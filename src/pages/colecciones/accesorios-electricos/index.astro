@@ -19,7 +19,7 @@ const products = [
 
 const cats = ['Convertidor','Toma','Industrial','Herramienta','Interruptor'];
 const catColor: Record<string,string> = { Convertidor:'#94A3B8', Toma:'#60A5FA', Industrial:'#F97316', Herramienta:'#FACC15', Interruptor:'#34D399' };
-const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Industrial:'🔶', Herramienta:'🔧', Interruptor:'🔘' };
+const catIcon:  Record<string,string>  = { Convertidor:'power', Toma:'bolt', Industrial:'square', Herramienta:'build', Interruptor:'radio_button_checked' };
 ---
 <BaseLayout
   title="Accesorios e Insumos Eléctricos | Tés y Convertidores — SIRIUS"
@@ -39,9 +39,9 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
       <h1 class="coll-title">Accesorios <span class="coll-title--accent">Eléctricos</span></h1>
       <p class="coll-subtitle">Tés eléctricas, convertidores de enchufe, tés industriales, testers y push-buttons — Todo lo que necesitas para organizar y asegurar tus instalaciones eléctricas.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">⚡ Tomas múltiples</span>
-        <span class="coll-style-pill" style="background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.25);color:#F97316">🔶 Industrial 15A</span>
-        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399">🔘 Push-Button 30A</span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> Tomas múltiples</span>
+        <span class="coll-style-pill" style="background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.25);color:#F97316"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> Industrial 15A</span>
+        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">radio_button_checked</span> Push-Button 30A</span>
       </div>
     </div>
   </section>
@@ -56,10 +56,10 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
           {cats.map(c => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="cat" value={c} id={`c-${c}`}/><span>{catIcon[c]} {c}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🔌 {products.length} referencias</span>
-          <span class="coll-cert">🏠 Uso residencial</span>
-          <span class="coll-cert">🏭 Uso industrial</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">power</span> {products.length} referencias</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">home</span> Uso residencial</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">factory</span> Uso industrial</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
       <div class="coll-grid-wrap">
@@ -83,13 +83,13 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
                       {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
                     </div>
                   ) : (
-                    <span class="prod-card__cat-icon">{icon}</span>
+                    <span class="prod-card__cat-icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span>
                   )}
                   <div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.categoria}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span> {p.categoria}</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <p class="prod-card__desc">{p.desc}</p>
@@ -102,7 +102,7 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span>🔌</span>
+          <span><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">power</span></span>
           <p style="color:var(--color-text-secondary)">No hay resultados para este filtro.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -112,9 +112,9 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔌</span><div><strong>Tomas y Convertidores</strong><p>Tés eléctricas certificadas UL y convertidores de enchufe para adaptar cualquier conector en el hogar u oficina.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔧</span><div><strong>Testers Digitales</strong><p>Comprueba tensión, continuidad y polaridad de cualquier circuito. Modelos compacto y de gran pantalla.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔶</span><div><strong>Tés Industriales</strong><p>Las tés naranja 15A en cruz y recta son para uso en obras, talleres y eventos. Construcción robusta IP44.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">power</span></span><div><strong>Tomas y Convertidores</strong><p>Tés eléctricas certificadas UL y convertidores de enchufe para adaptar cualquier conector en el hogar u oficina.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">build</span></span><div><strong>Testers Digitales</strong><p>Comprueba tensión, continuidad y polaridad de cualquier circuito. Modelos compacto y de gran pantalla.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span></span><div><strong>Tés Industriales</strong><p>Las tés naranja 15A en cruz y recta son para uso en obras, talleres y eventos. Construcción robusta IP44.</p></div></div>
     </div>
   </section>
 
@@ -177,7 +177,7 @@ const catIcon:  Record<string,string>  = { Convertidor:'🔌', Toma:'⚡', Indus
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__cat-icon{font-size:2rem;position:relative;z-index:1;}
 .prod-card__elec-glow{position:absolute;width:48px;height:48px;border-radius:50%;filter:blur(14px);}
 .prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}

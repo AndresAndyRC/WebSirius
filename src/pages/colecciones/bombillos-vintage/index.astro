@@ -22,7 +22,7 @@ const products = [
 ];
 
 const uniqueFormas = ['G45', 'C35', 'A60', 'ST64', 'G80', 'G95', 'G125'];
-const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'💡', ST64:'💡', G80:'⭕', G95:'⭕', G125:'⭕', Accesorio:'🔩' };
+const formaIcons: Record<string, string> = { G45:'wb_iridescent', C35:'candle️', A60:'lightbulb', ST64:'lightbulb', G80:'radio_button_unchecked', G95:'radio_button_unchecked', G125:'radio_button_unchecked', Accesorio:'settings' };
 ---
 
 <BaseLayout
@@ -43,10 +43,10 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
       <h1 class="coll-title">Bombillos LED <span class="coll-title--accent">Vintage</span></h1>
       <p class="coll-subtitle">Filamentos expuestos, luz cálida 2700K — G45, C35, ST64, A60 y Globo G80/G95/G125.<br/>Estética retro con eficiencia moderna. Ideales para restaurantes, cafés y ambientes acogedores.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill coll-style-pill--globo">⭕ Globo G80–G125 <em>gran impacto visual</em></span>
-        <span class="coll-style-pill coll-style-pill--st64">💡 ST64 Edison <em>clásico filamento</em></span>
-        <span class="coll-style-pill coll-style-pill--vela">🕯️ C35 Vela <em>elegante y romántico</em></span>
-        <span class="coll-style-pill coll-style-pill--dimer">🎚️ Dimerizable <em>control de intensidad</em></span>
+        <span class="coll-style-pill coll-style-pill--globo"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">radio_button_unchecked</span> Globo G80–G125 <em>gran impacto visual</em></span>
+        <span class="coll-style-pill coll-style-pill--st64"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">lightbulb</span> ST64 Edison <em>clásico filamento</em></span>
+        <span class="coll-style-pill coll-style-pill--vela"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">candle</span>️ C35 Vela <em>elegante y romántico</em></span>
+        <span class="coll-style-pill coll-style-pill--dimer"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tune</span>️ Dimerizable <em>control de intensidad</em></span>
       </div>
     </div>
   </section>
@@ -61,10 +61,10 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
           {uniqueFormas.map(f => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="forma" value={f} id={`f-${f}`}/><span>{formaIcons[f]} {f}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🕯️ {products.length} productos</span>
-          <span class="coll-cert">🔆 Luz Cálida 2700K</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">⚡ Rosca E27</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">candle</span>️ {products.length} productos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> Luz Cálida 2700K</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> Rosca E27</span>
         </div>
       </aside>
 
@@ -90,20 +90,20 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
                 ) : (
                   <div class="prod-card__filament">
                     <span class="prod-card__filament-glow"></span>
-                    <span class="prod-card__forma-icon">{formaIcons[p.forma] ?? '💡'}</span>
+                    <span class="prod-card__forma-icon">{formaIcons[p.forma] ?? 'lightbulb'}</span>
                   </div>
                 )}
               </div>
               <div class="prod-card__body">
                 <div class="prod-card__meta">
-                  <span class="prod-card__badge">{p.forma === 'Accesorio' ? '🔩 Accesorio' : `🕯️ ${p.forma}`}</span>
-                  {p.dimer && <span class="prod-card__dimer">🎚️ Dimer</span>}
+                  <span class="prod-card__badge">{p.forma === 'Accesorio' ? 'settings Accesorio' : `candle️ ${p.forma}`}</span>
+                  {p.dimer && <span class="prod-card__dimer"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tune</span>️ Dimer</span>}
                   {p.rosca !== '—' && <span class="prod-card__install">{p.rosca}</span>}
                 </div>
                 <h3 class="prod-card__name">{p.name}</h3>
                 <div class="prod-card__specs">
                   {p.watts > 0 && <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>}
-                  {p.watts > 0 && <span class="prod-card__spec">🔆 2700K Cálida</span>}
+                  {p.watts > 0 && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> 2700K Cálida</span>}
                 </div>
               </div>
               <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -114,7 +114,7 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🕯️</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">candle</span>️</span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -124,9 +124,9 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🍽️</span><div><strong>Restaurantes y Cafés</strong><p>La luz cálida 2700K crea un ambiente acogedor que realza los colores de los alimentos y el diseño interior.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏡</span><div><strong>Salas y Comedores</strong><p>Los diseños Globo G80–G125 son el punto focal perfecto para comedores y salas de estar.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🎚️</span><div><strong>Control de Ambiente</strong><p>El modelo 6W dimerizable permite ajustar la intensidad de luz para cada momento del día.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">restaurant</span>️</span><div><strong>Restaurantes y Cafés</strong><p>La luz cálida 2700K crea un ambiente acogedor que realza los colores de los alimentos y el diseño interior.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">home</span></span><div><strong>Salas y Comedores</strong><p>Los diseños Globo G80–G125 son el punto focal perfecto para comedores y salas de estar.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">tune</span>️</span><div><strong>Control de Ambiente</strong><p>El modelo 6W dimerizable permite ajustar la intensidad de luz para cada momento del día.</p></div></div>
     </div>
   </section>
 
@@ -205,7 +205,7 @@ const formaIcons: Record<string, string> = { G45:'🔮', C35:'🕯️', A60:'�
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{border-color:rgba(251,191,36,.35);transform:translateY(-3px);box-shadow:var(--shadow-md),0 0 30px rgba(251,191,36,.08);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 30%,rgba(251,191,36,.22) 0%,rgba(251,191,36,.04) 70%,transparent 100%);position:relative;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__filament{position:relative;display:flex;align-items:center;justify-content:center;}
 .prod-card__filament-glow{position:absolute;width:50px;height:50px;border-radius:50%;background:rgba(251,191,36,.18);filter:blur(12px);}
 .prod-card__forma-icon{font-size:2.2rem;line-height:1;position:relative;z-index:1;}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getProductImage } from '../../../utils/imageCheck';
 
 const products = [
   { name: 'Bala LED Blanca 3W Luz Blanca',         slug: 'bala-led-blanca-3w-luz-blanca',         watts: 3,  lugar: 'Techo', color: 'Blanco', luz: 'Blanca',  forma: 'Cónica' },
@@ -12,7 +13,7 @@ const products = [
 ];
 
 const lugarColor: Record<string,string> = { Techo: '#60A5FA', Piso: '#4ADE80' };
-const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU10: '🔆' };
+const formaIcon: Record<string,string>  = { Cónica: 'flashlight_on', Redonda: 'radio_button_unchecked', GU10: 'brightness_high' };
 ---
 <BaseLayout
   title="Balas LED de Piso y Techo para Interior, Exterior y Jardín — SIRIUS"
@@ -32,8 +33,8 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
       <h1 class="coll-title">Balas LED de <span class="coll-title--accent">Piso y Techo</span></h1>
       <p class="coll-subtitle">Empotradas en techo 3W–9W y de piso acero satín 3W–6W — Blanca y Cálida.<br/>Para iluminación direcionada en interiores, jardines, senderos y fachadas residenciales.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">🔦 Techo / Ojo de buey <em>interior empotrado</em></span>
-        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80">⭕ Piso Satín <em>exterior jardín</em></span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span> Techo / Ojo de buey <em>interior empotrado</em></span>
+        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">radio_button_unchecked</span> Piso Satín <em>exterior jardín</em></span>
       </div>
     </div>
   </section>
@@ -45,7 +46,7 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Lugar</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="lugar" value="all" checked id="l-all"/><span>Todos</span></label>
-          {['Techo','Piso'].map(l => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="lugar" value={l} id={`l-${l}`}/><span>{l === 'Techo' ? '🔦' : '⭕'} {l}</span></label>)}
+          {['Techo','Piso'].map(l => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="lugar" value={l} id={`l-${l}`}/><span>{l === 'Techo' ? 'flashlight_on' : 'radio_button_unchecked'} {l}</span></label>)}
         </fieldset>
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Luz</legend>
@@ -53,9 +54,9 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
           {['Blanca','Cálida'].map(z => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="luz" value={z} id={`z-${z}`}/><span>{z}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🔦 {products.length} modelos</span>
-          <span class="coll-cert">🌿 Apto exterior</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span> {products.length} modelos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">eco</span> Apto exterior</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
 
@@ -70,33 +71,43 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
         <div class="coll-grid" id="products-grid">
           {products.map(p => {
             const accent = lugarColor[p.lugar];
-            const icon = formaIcon[p.forma] ?? '🔦';
+            const icon = formaIcon[p.forma] ?? 'flashlight_on';
             const isCeil = p.lugar === 'Techo';
+            const img1 = getProductImage(p.slug, '1'); const img2 = getProductImage(p.slug, '2');
             return (
               <article class="prod-card glass" data-lugar={p.lugar} data-luz={p.luz}>
                 <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% ${isCeil?'0%':'100%'},${accent}30 0%,${accent}07 100%)`} aria-hidden="true">
-                  {isCeil ? (
-                    <div class="prod-card__ceil">
-                      <div class="prod-card__ceil-fixture" style={`background:${p.color==='Negro'?'#374151':'#E2F0FF'};box-shadow:0 6px 20px ${accent}66`}></div>
-                      <div class="prod-card__ceil-beam" style={`background:linear-gradient(to bottom,${accent}55,transparent)`}></div>
+                  {img1 ? (
+                    <div class="prod-card__img-wrap group">
+                      <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
+                      {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
                     </div>
                   ) : (
-                    <div class="prod-card__floor">
-                      <div class="prod-card__floor-ring" style={`border-color:${accent}88;box-shadow:0 0 18px ${accent}66`}></div>
-                      <div class="prod-card__floor-glow" style={`background:${accent}40`}></div>
-                    </div>
+                    <>
+                      {isCeil ? (
+                        <div class="prod-card__ceil">
+                          <div class="prod-card__ceil-fixture" style={`background:${p.color==='Negro'?'#374151':'#E2F0FF'};box-shadow:0 6px 20px ${accent}66`}></div>
+                          <div class="prod-card__ceil-beam" style={`background:linear-gradient(to bottom,${accent}55,transparent)`}></div>
+                        </div>
+                      ) : (
+                        <div class="prod-card__floor">
+                          <div class="prod-card__floor-ring" style={`border-color:${accent}88;box-shadow:0 0 18px ${accent}66`}></div>
+                          <div class="prod-card__floor-glow" style={`background:${accent}40`}></div>
+                        </div>
+                      )}
+                      <span class="prod-card__lugar-tag" style={`background:${accent}22;color:${accent};border-color:${accent}44`}>{p.lugar}</span>
+                    </>
                   )}
-                  <span class="prod-card__lugar-tag" style={`background:${accent}22;color:${accent};border-color:${accent}44`}>{p.lugar}</span>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.forma}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span> {p.forma}</span>
                     <span class="prod-card__install">{p.color}</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
                     {p.watts>0 && <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>}
-                    {p.luz!=='—' && <span class="prod-card__spec">🔆 {p.luz==='Blanca'?'6000K':'3000K'}</span>}
+                    {p.luz!=='—' && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> {p.luz==='Blanca'?'6000K':'3000K'}</span>}
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -107,7 +118,7 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🔦</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -117,9 +128,9 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏠</span><div><strong>Ojo de Buey en Techo</strong><p>Las balas de techo 3W y 9W se empotran en cielos rasos y yesería. Iluminación focal precisa para cuadros, muebles y áreas.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🌿</span><div><strong>Jardín y Senderos</strong><p>Las balas de piso satín en acero inoxidable son resistentes a la intemperie. Perfectas para delimitar caminos y resaltar plantas.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔆</span><div><strong>GU10 Universal</strong><p>La bala GU10 de piso acepta cualquier bombillo dicroico intercambiable. Máxima flexibilidad de color y potencia.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">home</span></span><div><strong>Ojo de Buey en Techo</strong><p>Las balas de techo 3W y 9W se empotran en cielos rasos y yesería. Iluminación focal precisa para cuadros, muebles y áreas.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">eco</span></span><div><strong>Jardín y Senderos</strong><p>Las balas de piso satín en acero inoxidable son resistentes a la intemperie. Perfectas para delimitar caminos y resaltar plantas.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span></span><div><strong>GU10 Universal</strong><p>La bala GU10 de piso acepta cualquier bombillo dicroico intercambiable. Máxima flexibilidad de color y potencia.</p></div></div>
     </div>
   </section>
 
@@ -183,7 +194,8 @@ const formaIcon: Record<string,string>  = { Cónica: '🔦', Redonda: '⭕', GU1
 .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5);}
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-.prod-card__strip{height:80px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 /* Ceiling bulb render */
 .prod-card__ceil{display:flex;flex-direction:column;align-items:center;position:relative;}
 .prod-card__ceil-fixture{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.2);}

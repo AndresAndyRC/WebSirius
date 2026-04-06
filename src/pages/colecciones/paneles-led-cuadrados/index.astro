@@ -61,11 +61,11 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
       <!-- Style pills -->
       <div class="coll-style-pills">
         <span class="coll-style-pill coll-style-pill--standard">
-          🟦 Estándar
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> Estándar
           <em>con marco</em>
         </span>
         <span class="coll-style-pill coll-style-pill--frameless">
-          ⬜ Frameless
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> Frameless
           <em>sin marco, minimalista</em>
         </span>
       </div>
@@ -123,10 +123,10 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">✅ RETIE</span>
-          <span class="coll-cert">✅ RETILAP</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">🛡️ Garantía 1–5 años</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETIE</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETILAP</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ Garantía 1–5 años</span>
         </div>
       </aside>
 
@@ -167,7 +167,7 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
               <div class="prod-card__body">
                 <div class="prod-card__meta">
                   <span class={`prod-card__badge prod-card__badge--${p.style === 'Frameless' ? 'frameless' : 'standard'}`}>
-                    {p.style === 'Frameless' ? '⬜' : '🟦'} {p.style}
+                    {p.style === 'Frameless' ? 'square' : 'square'} {p.style}
                   </span>
                   <span class="prod-card__install">{p.install}</span>
                 </div>
@@ -181,8 +181,8 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
                     </svg>
                     {p.watts}W
                   </span>
-                  {p.size !== '—' && <span class="prod-card__spec">📐 {p.size}</span>}
-                  <span class="prod-card__spec">❄️ 6000K–6500K</span>
+                  {p.size !== '—' && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">architecture</span> {p.size}</span>}
+                  <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">ac_unit</span> 6000K–6500K</span>
                 </div>
               </div>
 
@@ -205,7 +205,7 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
 
         <!-- Empty state -->
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🔦</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -436,7 +436,7 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
   position: relative;
   overflow: hidden;
 }
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 
 .prod-card__light--standard  { background: radial-gradient(ellipse at 50% 40%, rgba(126,200,255,0.25) 0%, rgba(126,200,255,0.04) 70%, transparent 100%); }
 .prod-card__light--frameless { background: radial-gradient(ellipse at 50% 40%, rgba(220,235,255,0.20) 0%, rgba(220,235,255,0.03) 70%, transparent 100%); }

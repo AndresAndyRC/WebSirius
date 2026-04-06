@@ -15,7 +15,7 @@ const products = [
 ];
 
 const tipoColor: Record<string,string> = { Solar:'#FACC15', Recargable:'#34D399', Emergencia:'#F97316', Reflector:'#60A5FA' };
-const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', Emergencia:'🚨', Reflector:'🔦' };
+const tipoIcon:  Record<string,string>  = { Solar:'sunny', Recargable:'battery_full', Emergencia:'emergency', Reflector:'flashlight_on' };
 ---
 <BaseLayout
   title="Luces de Emergencia LED y Bombillos Recargables — SIRIUS"
@@ -35,10 +35,10 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
       <h1 class="coll-title">Iluminación de <span class="coll-title--accent">Emergencia</span></h1>
       <p class="coll-subtitle">Bombillos recargables 20W–50W, reflectores con brazo y lámparas normativas — Siempre encendidos aunque falte la luz.<br/>Soluciones para hogares, bodegas, hospitales y espacios que requieren iluminación de seguridad.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399">🔋 Recargables USB <em>20W a 50W</em></span>
-        <span class="coll-style-pill" style="background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.25);color:#F97316">🚨 Normativas <em>rotulación RETIE</em></span>
-        <span class="coll-style-pill" style="background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.25);color:#FACC15">☀️ Solar <em>sin red eléctrica</em></span>
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">🔦 Reflectores <em>brazo articulado</em></span>
+        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">battery_full</span> Recargables USB <em>20W a 50W</em></span>
+        <span class="coll-style-pill" style="background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.25);color:#F97316"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">emergency</span> Normativas <em>rotulación RETIE</em></span>
+        <span class="coll-style-pill" style="background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.25);color:#FACC15"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">sunny</span> Solar <em>sin red eléctrica</em></span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span> Reflectores <em>brazo articulado</em></span>
       </div>
     </div>
   </section>
@@ -50,12 +50,12 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Tipo</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
-          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{tipoIcon[t]} {t}</span></label>)}
+          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{tipoIcon[t]}</span> {t}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🚨 {products.length} productos</span>
-          <span class="coll-cert">⚡ Batería integrada</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">emergency</span> {products.length} productos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> Batería integrada</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
       <div class="coll-grid-wrap">
@@ -79,20 +79,20 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
                     </div>
                   ) : (
                     <>
-                      <div class="prod-card__emerg-icon">{tipoIcon[p.tipo]}</div>
+                      <div class="prod-card__emerg-icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{tipoIcon[p.tipo]}</span></div>
                       <div class="prod-card__pulse" style={`border-color:${accent}55;box-shadow:0 0 0 8px ${accent}15`}></div>
                     </>
                   )}
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{tipoIcon[p.tipo]} {p.tipo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{tipoIcon[p.tipo]}</span> {p.tipo}</span>
                     <span class="prod-card__feature">{p.feature}</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
                     <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
-                    <span class="prod-card__spec">🔆 6500K Blanca</span>
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> 6500K Blanca</span>
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -103,7 +103,7 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🚨</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">emergency</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -113,9 +113,9 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏥</span><div><strong>Normativa RETIE</strong><p>Las lámparas de emergencia 5.4W y 6W cumplen normativa para rutas de evacuación en edificaciones públicas y comerciales.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔋</span><div><strong>Recargables 20W–50W</strong><p>Los bombillos recargables funcionan durante apagones sin necesidad de red eléctrica. Carga USB estándar, batería de larga duración.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏗️</span><div><strong>Reflectores de Obra</strong><p>Los reflectores 10W y 20W con brazo articulado son ideales para construcción, eventos y áreas de trabajo nocturno.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_hospital</span></span><div><strong>Normativa RETIE</strong><p>Las lámparas de emergencia 5.4W y 6W cumplen normativa para rutas de evacuación en edificaciones públicas y comerciales.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">battery_full</span></span><div><strong>Recargables 20W–50W</strong><p>Los bombillos recargables funcionan durante apagones sin necesidad de red eléctrica. Carga USB estándar, batería de larga duración.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">construction</span>️</span><div><strong>Reflectores de Obra</strong><p>Los reflectores 10W y 20W con brazo articulado son ideales para construcción, eventos y áreas de trabajo nocturno.</p></div></div>
     </div>
   </section>
 
@@ -179,7 +179,7 @@ const tipoIcon:  Record<string,string>  = { Solar:'☀️', Recargable:'🔋', E
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__emerg-icon{font-size:2.2rem;position:relative;z-index:1;}
 .prod-card__pulse{width:52px;height:52px;border-radius:50%;border:2px solid;position:absolute;}
 .prod-card__body{padding:var(--space-4) var(--space-4) var(--space-3);flex:1;}

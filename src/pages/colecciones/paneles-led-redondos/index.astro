@@ -69,9 +69,9 @@ const products = [
 
 // Color temperature metadata
 const colorMeta: Record<string, { label: string; css: string; temp: string; icon: string }> = {
-  'Blanca':  { label: 'Luz Blanca',  css: 'cool',    temp: '6000K – 6500K', icon: '❄️' },
-  'Neutra':  { label: 'Luz Neutra',  css: 'neutral', temp: '4000K – 4500K', icon: '☀️' },
-  'Cálida':  { label: 'Luz Cálida',  css: 'warm',    temp: '2700K – 3500K', icon: '🔥' },
+  'Blanca':  { label: 'Luz Blanca',  css: 'cool',    temp: '6000K – 6500K', icon: 'ac_unit' },
+  'Neutra':  { label: 'Luz Neutra',  css: 'neutral', temp: '4000K – 4500K', icon: 'sunny' },
+  'Cálida':  { label: 'Luz Cálida',  css: 'warm',    temp: '2700K – 3500K', icon: 'local_fire_department' },
 };
 
 const uniqueWatts   = [...new Set(products.map(p => p.watts))].sort((a, b) => a - b);
@@ -112,7 +112,7 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
       <div class="coll-temp-pills">
         {uniqueColors.map(c => (
           <span class={`coll-temp-pill coll-temp-pill--${colorMeta[c].css}`}>
-            {colorMeta[c].icon} {colorMeta[c].label}
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{colorMeta[c].icon}</span> {colorMeta[c].label}
             <em>{colorMeta[c].temp}</em>
           </span>
         ))}
@@ -151,7 +151,7 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
           {uniqueColors.map(c => (
             <label class="coll-filter-chip">
               <input type="checkbox" class="filter-check" data-filter="color" value={c} id={`color-${c}`} />
-              <span>{colorMeta[c].icon} {colorMeta[c].label}</span>
+              <span><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{colorMeta[c].icon}</span> {colorMeta[c].label}</span>
             </label>
           ))}
         </fieldset>
@@ -171,10 +171,10 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">✅ RETIE</span>
-          <span class="coll-cert">✅ RETILAP</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
-          <span class="coll-cert">🛡️ Garantía 1–5 años</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETIE</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">check_circle</span> RETILAP</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ Garantía 1–5 años</span>
         </div>
       </aside>
 
@@ -215,7 +215,7 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
               <div class="prod-card__body">
                 <div class="prod-card__meta">
                   <span class={`prod-card__temp prod-card__temp--${colorMeta[p.color].css}`}>
-                    {colorMeta[p.color].icon} {colorMeta[p.color].label}
+                    <span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{colorMeta[p.color].icon}</span> {colorMeta[p.color].label}
                   </span>
                   <span class="prod-card__install">{p.install}</span>
                 </div>
@@ -252,7 +252,7 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
 
         <!-- Empty state -->
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🔦</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">flashlight_on</span></span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -593,8 +593,10 @@ const uniqueInstall = ['Incrustar', 'Sobreponer'];
   box-shadow: var(--shadow-md);
 }
 
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
+
 .prod-card__light {
-  height: 64px;
+  height: 200px;
   position: relative;
   overflow: hidden;
 }

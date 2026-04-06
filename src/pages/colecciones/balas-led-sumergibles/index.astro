@@ -26,9 +26,9 @@ const products = [
       <h1 class="coll-title">Balas LED <span class="coll-title--accent">Sumergibles</span></h1>
       <p class="coll-subtitle">RGB 9W, 18W y 24W — 12V — IP68 — Control remoto incluido en 18W y 24W.<br/>Iluminación segura para piscinas, fuentes decorativas y láminas de agua. Millones de colores.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">🌊 IP68 Sumergible <em>total impermeabilidad</em></span>
-        <span class="coll-style-pill" style="background:conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171) border-box;border-color:transparent;color:var(--color-text-primary)">🌈 RGB <em>control remoto</em></span>
-        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80">⚡ 12V <em>baja tensión segura</em></span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">water</span> IP68 Sumergible <em>total impermeabilidad</em></span>
+        <span class="coll-style-pill" style="background:conic-gradient(#F87171,#FACC15,#4ADE80,#60A5FA,#E879F9,#F87171) border-box;border-color:transparent;color:var(--color-text-primary)"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> RGB <em>control remoto</em></span>
+        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> 12V <em>baja tensión segura</em></span>
       </div>
     </div>
   </section>
@@ -38,11 +38,11 @@ const products = [
       <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros">
         <h2 class="coll-filters__title">Colección</h2>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🌊 {products.length} modelos</span>
-          <span class="coll-cert">🌈 Millones de colores</span>
-          <span class="coll-cert">⚡ 12V DC</span>
-          <span class="coll-cert">🛡️ IP68</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">water</span> {products.length} modelos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> Millones de colores</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span> 12V DC</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">security</span>️ IP68</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
         <div class="coll-info-mini">
           <p>Todos los modelos requieren transformador 12V (no incluido). Los modelos 18W y 24W incluyen control remoto IR.</p>
@@ -75,14 +75,14 @@ const products = [
               </div>
               <div class="prod-card__body">
                 <div class="prod-card__meta">
-                  <span class="prod-card__badge-rgb">🌈 RGB</span>
-                  {p.control && <span class="prod-card__feature">📡 Control remoto</span>}
+                  <span class="prod-card__badge-rgb"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> RGB</span>
+                  {p.control && <span class="prod-card__feature"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">sensors</span> Control remoto</span>}
                   <span class="prod-card__install">12V</span>
                 </div>
                 <h3 class="prod-card__name">{p.name}</h3>
                 <div class="prod-card__specs">
                   <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
-                  <span class="prod-card__spec">🌊 {p.ip} Sumergible</span>
+                  <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">water</span> {p.ip} Sumergible</span>
                 </div>
               </div>
               <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -98,9 +98,9 @@ const products = [
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏊</span><div><strong>Piscinas Residenciales</strong><p>Las balas de 9W son ideales para piscinas pequeñas y medianas. Las de 18W y 24W para piscinas olímpicas o comerciales.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">⛲</span><div><strong>Fuentes y Láminas de Agua</strong><p>El cuerpo IP68 permite sumersión total. Crea efectos cromáticos espectaculares en fuentes y espejos de agua decorativos.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">⚡</span><div><strong>Seguridad 12V</strong><p>Todos los modelos operan a 12V DC, la tensión segura para instalaciones en contacto con agua según normas eléctricas colombianas.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">pool</span></span><div><strong>Piscinas Residenciales</strong><p>Las balas de 9W son ideales para piscinas pequeñas y medianas. Las de 18W y 24W para piscinas olímpicas o comerciales.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">fountain</span></span><div><strong>Fuentes y Láminas de Agua</strong><p>El cuerpo IP68 permite sumersión total. Crea efectos cromáticos espectaculares en fuentes y espejos de agua decorativos.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">bolt</span></span><div><strong>Seguridad 12V</strong><p>Todos los modelos operan a 12V DC, la tensión segura para instalaciones en contacto con agua según normas eléctricas colombianas.</p></div></div>
     </div>
   </section>
 
@@ -145,7 +145,7 @@ const products = [
 .prod-card{border-radius:var(--radius-xl);border:1px solid rgba(96,165,250,.25);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(96,165,250,.20),var(--shadow-md);}
 .prod-card__strip--rgb{height:200px;background:linear-gradient(135deg,#1e3a5f 0%,#1a2744 50%,#1e3a5f 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__pool-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(96,165,250,.45) 0%,transparent 60%);}
 .prod-card__bubble{position:absolute;border-radius:50%;animation:rise 3s infinite ease-in;}
 .prod-card__bubble{width:8px;height:8px;background:rgba(255,255,255,.25);left:30%;bottom:-8px;}

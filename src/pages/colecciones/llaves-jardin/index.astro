@@ -8,7 +8,7 @@ const products = [
   { name: 'Llave Jardín Premium Palanca y Cuerpo Metálico Cromado', slug: 'llave-jardin-premium-palanca-y-cuerpo-metalico-cromado',  tipo: 'Premium',      acabado: 'Metálico Cromado' },
 ];
 const tipoColor: Record<string,string> = { Pesada:'#94A3B8', 'Super Pesada':'#60A5FA', Premium:'#FACC15' };
-const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙️', Premium:'👑' };
+const tipoIcon:  Record<string,string>  = { Pesada:'settings', 'Super Pesada':'settings_applications', Premium:'military_tech' };
 ---
 <BaseLayout
   title="Llaves de Jardín y Grifos de Pared Cromados — SIRIUS"
@@ -28,9 +28,9 @@ const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙�
       <h1 class="coll-title">Llaves de <span class="coll-title--accent">Jardín</span></h1>
       <p class="coll-subtitle">Pesada, Super Pesada y Premium con palanca — Rosca 1/2" — Cuerpo metálico cromado.<br/>Grifos de jardín que no se parten. Diseñados para uso residencial intensivo y riego profesional.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(148,163,184,.08);border-color:rgba(148,163,184,.25);color:#94A3B8">🔩 Pesada <em>uso diario</em></span>
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">⚙️ Super Pesada <em>máxima durabilidad</em></span>
-        <span class="coll-style-pill" style="background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.25);color:#FACC15">👑 Premium Palanca <em>cuerpo metálico total</em></span>
+        <span class="coll-style-pill" style="background:rgba(148,163,184,.08);border-color:rgba(148,163,184,.25);color:#94A3B8">settings Pesada <em>uso diario</em></span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">settings_applications Super Pesada <em>máxima durabilidad</em></span>
+        <span class="coll-style-pill" style="background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.25);color:#FACC15">military_tech Premium Palanca <em>cuerpo metálico total</em></span>
       </div>
     </div>
   </section>
@@ -40,10 +40,10 @@ const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙�
       <aside class="coll-filters glass" id="filters-panel" aria-label="Filtros">
         <h2 class="coll-filters__title">Colección</h2>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🔩 {products.length} modelos</span>
-          <span class="coll-cert">🏠 Rosca 1/2"</span>
-          <span class="coll-cert">🪙 Cuerpo cromado</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert">settings {products.length} modelos</span>
+          <span class="coll-cert">home Rosca 1/2"</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">monetization_on</span> Cuerpo cromado</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
       <div class="coll-grid-wrap">
@@ -70,17 +70,17 @@ const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙�
                       <div class="prod-card__water-drop" style={`background:${accent}`}></div>
                     </div>
                   )}
-                  <span class="prod-card__tipo-tag" style={`background:${accent}18;color:${accent};border-color:${accent}44`}>{icon} {p.tipo}</span>
+                  <span class="prod-card__tipo-tag" style={`background:${accent}18;color:${accent};border-color:${accent}44`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span> {p.tipo}</span>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span> {p.tipo}</span>
                     <span class="prod-card__install">Rosca 1/2"</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
-                    <span class="prod-card__spec">🪙 {p.acabado}</span>
-                    <span class="prod-card__spec">🔩 Metálico</span>
+                    <span class="prod-card__spec">monetization_on {p.acabado}</span>
+                    <span class="prod-card__spec">settings Metálico</span>
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -96,9 +96,9 @@ const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙�
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏡</span><div><strong>Uso Residencial</strong><p>La llave pesada y super pesada son ideales para casas, apartamentos y locales con uso frecuente de manguera.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">👑</span><div><strong>Premium con Palanca</strong><p>Cuerpo completamente metálico cromado con palanca ergonómica. Máxima durabilidad para uso profesional o agrícola.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔧</span><div><strong>Instalación Universal</strong><p>Rosca 1/2" estándar compatible con la gran mayoría de tuberías y accesorios hidráulicos en Colombia.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">home</span><div><strong>Uso Residencial</strong><p>La llave pesada y super pesada son ideales para casas, apartamentos y locales con uso frecuente de manguera.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">military_tech</span><div><strong>Premium con Palanca</strong><p>Cuerpo completamente metálico cromado con palanca ergonómica. Máxima durabilidad para uso profesional o agrícola.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon">build</span><div><strong>Instalación Universal</strong><p>Rosca 1/2" estándar compatible con la gran mayoría de tuberías y accesorios hidráulicos en Colombia.</p></div></div>
     </div>
   </section>
 
@@ -141,7 +141,7 @@ const tipoIcon:  Record<string,string>  = { Pesada:'🔩', 'Super Pesada':'⚙�
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__faucet{display:flex;align-items:center;gap:0;position:relative;}
 .prod-card__faucet-body{width:32px;height:32px;border-radius:var(--radius-md);}
 .prod-card__faucet-handle{width:20px;height:8px;border-radius:var(--radius-full);position:absolute;top:-6px;left:6px;}

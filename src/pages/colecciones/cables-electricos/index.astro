@@ -65,7 +65,7 @@ const tipoIcon: Record<string,string> = {
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Tipo de Cable</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
-          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">{tipoIcon[t]}</span> {t}</span></label>)}
+          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{tipoIcon[t]}</span></span> {t}</span></label>)}
         </fieldset>
 
         <fieldset class="coll-filter-group">
@@ -113,7 +113,7 @@ const tipoIcon: Record<string,string> = {
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px">{icon}</span> {p.tipo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span>
                     <span class="prod-card__badge" style="background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.30);color:#A855F7">{p.calibre} AWG</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
@@ -242,7 +242,7 @@ const tipoIcon: Record<string,string> = {
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__cat-icon{font-size:2rem;position:relative;z-index:1;}
 .prod-card__elec-glow{position:absolute;width:48px;height:48px;border-radius:50%;filter:blur(14px);}
 /* Cable wire */

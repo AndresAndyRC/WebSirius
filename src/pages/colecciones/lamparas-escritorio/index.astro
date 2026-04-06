@@ -13,7 +13,7 @@ const tipoColor: Record<string, string> = {
   'Infantil': '#4ADE80', 'Inalámbrica': '#60A5FA', 'Luxury': '#A78BFA', 'Art/Bamboo': '#A3805A',
 };
 const tipoIcon: Record<string, string> = {
-  'Infantil': '🦄', 'Inalámbrica': '📶', 'Luxury': '✨', 'Art/Bamboo': '🎋',
+  'Infantil': 'smart_toy', 'Inalámbrica': 'signal_cellular_alt', 'Luxury': 'auto_awesome', 'Art/Bamboo': 'forest',
 };
 ---
 <BaseLayout
@@ -34,10 +34,10 @@ const tipoIcon: Record<string, string> = {
       <h1 class="coll-title">Lámparas de <span class="coll-title--accent">Escritorio</span></h1>
       <p class="coll-subtitle">Recargables, con carga inalámbrica, infantiles y de lujo — 4W a 7W CCT.<br/>Protege tu vista y mejora tu productividad en el home office, estudio y escritorio infantil.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">📶 Carga Inalámbrica <em>sin cables</em></span>
-        <span class="coll-style-pill" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:#A78BFA">✨ Luxury Negro <em>alta gama</em></span>
-        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80">🦄 Kids <em>niños y jóvenes</em></span>
-        <span class="coll-style-pill" style="background:rgba(163,128,90,.08);border-color:rgba(163,128,90,.25);color:#A3805A">🎋 Bamboo <em>arte natural</em></span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">signal_cellular_alt</span> Carga Inalámbrica <em>sin cables</em></span>
+        <span class="coll-style-pill" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:#A78BFA"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">auto_awesome</span> Luxury Negro <em>alta gama</em></span>
+        <span class="coll-style-pill" style="background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#4ADE80"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">smart_toy</span> Kids <em>niños y jóvenes</em></span>
+        <span class="coll-style-pill" style="background:rgba(163,128,90,.08);border-color:rgba(163,128,90,.25);color:#A3805A"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">forest</span> Bamboo <em>arte natural</em></span>
       </div>
     </div>
   </section>
@@ -49,13 +49,13 @@ const tipoIcon: Record<string, string> = {
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Tipo</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
-          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{tipoIcon[t]} {t}</span></label>)}
+          {Object.keys(tipoColor).map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{tipoIcon[t]}</span> {t}</span></label>)}
         </fieldset>
         <div class="coll-cert-badges">
-          <span class="coll-cert">🖥️ {products.length} modelos</span>
-          <span class="coll-cert">🔆 CCT ajustable</span>
-          <span class="coll-cert">🔋 Recargables</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">desktop_windows</span>️ {products.length} modelos</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> CCT ajustable</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">battery_full</span> Recargables</span>
+          <span class="coll-cert"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
 
@@ -87,18 +87,18 @@ const tipoIcon: Record<string, string> = {
                       <div class="prod-card__lamp-glow" style={`background:${accent}40`}></div>
                     </div>
                   )}
-                  <span class="prod-card__tipo-badge">{icon}</span>
+                  <span class="prod-card__tipo-badge"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span>
-                    {p.feature === 'CCT' && <span class="prod-card__feature">🔆 CCT</span>}
-                    {p.feature === 'Recargable' && <span class="prod-card__feature">🔋 Recargable</span>}
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span> {p.tipo}</span>
+                    {p.feature === 'CCT' && <span class="prod-card__feature"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> CCT</span>}
+                    {p.feature === 'Recargable' && <span class="prod-card__feature"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">battery_full</span> Recargable</span>}
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
                   <div class="prod-card__specs">
                     <span class="prod-card__spec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>{p.watts}W</span>
-                    <span class="prod-card__spec">🖥️ Escritorio</span>
+                    <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">desktop_windows</span>️ Escritorio</span>
                   </div>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" style={`--cta-hover:${accent}10`} aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
@@ -109,7 +109,7 @@ const tipoIcon: Record<string, string> = {
           })}
         </div>
         <div class="coll-empty" id="empty-state" hidden>
-          <span class="coll-empty__icon">🖥️</span>
+          <span class="coll-empty__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">desktop_windows</span>️</span>
           <p class="coll-empty__text">No se encontraron productos con estos filtros.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -119,9 +119,9 @@ const tipoIcon: Record<string, string> = {
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🏡</span><div><strong>Home Office</strong><p>La Luxury Negro con CCT ajustable es perfecta para largas jornadas de trabajo. Temperatura de color adaptable a cada momento del día.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🎋</span><div><strong>Diseño Art Bamboo</strong><p>Materiales naturales con tecnología LED. La lámpara perfecta para estaciones de trabajo con estética minimalista o nórdica.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🦄</span><div><strong>Para los más pequeños</strong><p>La Kids Verde recargable tiene luz suave y forma amigable. Sin cables sueltos y con batería para llevarla a cualquier lugar.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">home</span></span><div><strong>Home Office</strong><p>La Luxury Negro con CCT ajustable es perfecta para largas jornadas de trabajo. Temperatura de color adaptable a cada momento del día.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">forest</span></span><div><strong>Diseño Art Bamboo</strong><p>Materiales naturales con tecnología LED. La lámpara perfecta para estaciones de trabajo con estética minimalista o nórdica.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">smart_toy</span></span><div><strong>Para los más pequeños</strong><p>La Kids Verde recargable tiene luz suave y forma amigable. Sin cables sueltos y con batería para llevarla a cualquier lugar.</p></div></div>
     </div>
   </section>
 
@@ -193,7 +193,7 @@ const tipoIcon: Record<string, string> = {
 .prod-card{border-radius:var(--radius-xl);border:1px solid var(--color-surface-border);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-normal),transform var(--duration-normal) var(--ease-out-expo),box-shadow var(--duration-normal);}
 .prod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
 .prod-card__strip{height:200px;display:flex;align-items:center;justify-content:center;position:relative;padding-bottom:0;overflow:hidden;}
-.prod-card__img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:20px} .prod-card__img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity 0.4s ease,transform 0.4s ease} .prod-card__img--hover{position:absolute;inset:0;padding:20px;opacity:0} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1.05)}
+.prod-card__img-wrap{position:relative;width:100%;height:100%;z-index:2} .prod-card__img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);object-fit:contain;transition:opacity 0.6s ease-out,transform 0.6s ease-out;will-change:opacity,transform} .prod-card__img--hover{opacity:0;transform:scale(0.98)} .prod-card:hover .hover-out{opacity:0} .prod-card:hover .prod-card__img--hover{opacity:1;transform:scale(1)}
 .prod-card__lamp{display:flex;flex-direction:column;align-items:center;position:relative;padding-bottom:0;}
 .prod-card__lamp-arm{width:3px;height:32px;border-radius:var(--radius-full);margin-bottom:0;}
 .prod-card__lamp-head{width:48px;height:22px;border-radius:0 0 50% 50%;border:2px solid;border-top:none;}
