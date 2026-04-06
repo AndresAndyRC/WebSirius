@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  { name: 'Llave de Lavaplatos Cuello Flexible', slug: 'llave-lavaplatos-flexible', tipo: 'Flexible', acb: 'Cromo', precio: '$85.000', desc: 'Llave doble chorro, cuello siliconado.' },
+  { name: 'Llave de Lavaplatos Monocontrol Inox', slug: 'llave-monocontrol-inox', tipo: 'Monocontrol', acb: 'Inox', precio: '$120.000', desc: 'Diseño minimalista con aireador de alta presión.' },
+  { name: 'Llave Sencilla de Pared Latón', slug: 'llave-sencilla-pared', tipo: 'Pared', acb: 'Latón', precio: '$55.000', desc: 'Instalación a pared de un cuarto de vuelta.' },
+  { name: 'Mezclador de Lavaplatos Extraíble Negro', slug: 'mezclador-extraible-negro', tipo: 'Mezclador', acb: 'Negro Mate', precio: '$190.000', desc: 'Manguera extraíble con 2 funciones de lluvia.' },
+];
+
+const tipos = ['Flexible', 'Monocontrol', 'Pared', 'Mezclador'];
+const acbs  = ['Cromo', 'Inox', 'Latón', 'Negro Mate'];
+
+const tipoColor: Record<string,string> = { Flexible: '#2dd4bf', Monocontrol: '#60a5fa', Pared: '#f472b6', Mezclador: '#a78bfa' };
+const tipoIcon: Record<string,string>  = { Flexible: '🚰', Monocontrol: '🎛️', Pared: '🔧', Mezclador: '🚿' };
+---
+<BaseLayout title="Llaves de Lavaplatos — SIRIUS" description="Llaves de lavaplatos monocontrol, flexibles y extractables. Múltiples acabados y alta durabilidad.">
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="coll-breadcrumb" aria-label="Miga de pan"><a href="/" class="coll-breadcrumb__link">Inicio</a><span>›</span><a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a><span>›</span><span class="coll-breadcrumb__current">Llaves Lavaplatos</span></nav>
+      <span class="coll-eyebrow">Cocina y Plomería</span>
+      <h1 class="coll-title">Llaves de <span class="coll-title--accent">Lavaplatos</span></h1>
+      <p class="coll-subtitle">Llaves y mezcladores duraderos con tecnología de ahorro de agua, cierres cerámicos de un cuarto de giro y diseños elegantes.</p>
+    </div>
+  </section>
+  <section class="coll-body">
+    <div class="container coll-layout">
+      <aside class="coll-filters glass" id="filters-panel">
+        <h2 class="coll-filters__title">Filtrar</h2>
+        <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Tipo</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked/><span>Todos</span></label>
+        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span>{tipoIcon[v]} {v}</span></label>)}</fieldset>
+        <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Acabado</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="acb" value="all" checked/><span>Todos</span></label>
+        {acbs.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="acb" value={v}/><span>{v}</span></label>)}</fieldset>
+      </aside>
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header"><span class="coll-count" id="product-count">{products.length} productos</span><button class="coll-mobile-filter-btn" id="filter-toggle">Filtros</button></div>
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => {
+            const accent = tipoColor[p.tipo]; const icon = tipoIcon[p.tipo];
+            return (
+              <article class="prod-card glass" data-tipo={p.tipo} data-acb={p.acb}>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
+                <div class="prod-card__body">
+                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.acb}</span></div>
+                  <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
+                </div>
+                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  type FS = { tipo: Set<string>; acb: Set<string> };
+  const state: FS = { tipo: new Set(['all']), acb: new Set(['all']) };
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+  function applyFilters() { let vis = 0; cards.forEach(c => { const show = (state.tipo.has('all') || state.tipo.has(c.dataset.tipo!)) && (state.acb.has('all') || state.acb.has(c.dataset.acb!)); c.hidden = !show; if (show) vis++; }); document.getElementById('product-count')!.textContent = `${vis} productos`; }
+  checks.forEach(cb => cb.addEventListener('change', () => { const key = cb.dataset.filter as keyof FS; const val = cb.value; if (val === 'all') { state[key].clear(); state[key].add('all'); checks.filter(c => c.dataset.filter === key && c.value !== 'all').forEach(c => { c.checked = false; }); cb.checked = true; } else { state[key].delete('all'); const allCb = checks.find(c => c.dataset.filter === key && c.value === 'all')!; allCb.checked = false; if (cb.checked) state[key].add(val); else state[key].delete(val); if (state[key].size === 0) { state[key].add('all'); allCb.checked = true; } } applyFilters(); }));
+</script>
+<style>
+.coll-hero{padding:var(--space-16) 0 var(--space-8);position:relative} .coll-title{font-size:var(--text-4xl);font-family:var(--font-display);font-weight:900;margin:0 0 var(--space-4)} .coll-title--accent{background:linear-gradient(135deg,#2dd4bf,#60a5fa);-webkit-background-clip:text;color:transparent} .coll-subtitle{color:var(--color-text-secondary);max-width:600px;margin-bottom:var(--space-6)} .coll-breadcrumb{display:flex;gap:var(--space-2);color:var(--color-text-tertiary);font-size:var(--text-xs);margin-bottom:var(--space-4)} .coll-breadcrumb a{color:var(--color-text-tertiary)} .coll-eyebrow{color:var(--color-brand-accent);font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;background:rgba(0,194,255,0.1);display:inline-block;margin-bottom:var(--space-4)}
+.coll-layout{display:grid;grid-template-columns:220px 1fr;gap:var(--space-8);padding-bottom:var(--space-16)} .coll-filters{padding:var(--space-5);border-radius:var(--radius-xl);border:1px solid rgba(255,255,255,0.1);position:sticky;top:100px} .coll-filter-group{border:none;padding:0;margin:0 0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-2)} .coll-filter-group:last-child{margin:0} .coll-filter-chip{display:flex;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary);cursor:pointer} .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5)} .prod-card{border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);overflow:hidden;display:flex;flex-direction:column} .prod-card__strip{height:70px;display:flex;align-items:center;justify-content:center;position:relative} .prod-card__cat-icon{font-size:24px;position:relative;z-index:1} .prod-card__elec-glow{position:absolute;width:40px;height:40px;border-radius:50%;filter:blur(10px)} .prod-card__body{padding:var(--space-4);flex:1} .prod-card__meta{display:flex;gap:var(--space-2);margin-bottom:var(--space-3)} .prod-card__badge{font-size:10px;padding:2px 6px;border-radius:10px;border:1px solid} .prod-card__name{font-size:var(--text-sm);font-weight:600;margin:0 0 var(--space-1)} .prod-card__desc{font-size:var(--text-xs);color:var(--color-text-tertiary);margin:0 0 var(--space-2)} .prod-card__price{font-weight:bold;color:var(--color-brand-primary);margin:0;font-size:var(--text-sm)} .prod-card__cta{display:flex;justify-content:center;padding:var(--space-3);font-size:var(--text-sm);color:var(--color-brand-accent);border-top:1px solid rgba(255,255,255,0.05)}
+@media(max-width:800px){.coll-layout{grid-template-columns:1fr} .coll-filters{display:none}}
+</style>

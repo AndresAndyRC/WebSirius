@@ -5,7 +5,7 @@
 export interface Props {
   title: string;
   description: string;
-  canonical: string;
+  canonical?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
   article?: {
@@ -20,7 +20,7 @@ export interface Props {
 const {
   title,
   description,
-  canonical,
+  canonical = Astro.url.pathname,
   ogImage = '/og-default.jpg',
   ogType = 'website',
   article,

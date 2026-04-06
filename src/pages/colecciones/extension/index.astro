@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const products = [
+  // ── Hogar (Básicas) ────────────────────────────────────────────
+  { name: 'Extensión Eléctrica Dúplex 2x14 6FT 1.8M', slug: 'extension-duplex-2x14-6ft-1-8m-linea-hogar', tipo: 'Hogar', longitud: '1.8M (6ft)', precio: '$6.400',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
+  { name: 'Extensión Eléctrica Dúplex 2x14 9FT 2.7M', slug: 'extension-duplex-2x14-9ft-2-7m-linea-hogar', tipo: 'Hogar', longitud: '2.7M (9ft)', precio: '$7.400',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
+  { name: 'Extensión Eléctrica Dúplex 2x14 12FT 3.6M',slug: 'extension-duplex-2x14-12ft-3-6m-linea-hogar',tipo: 'Hogar', longitud: '3.6M (12ft)',precio: '$9.000',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
+  // ── Uso Pesado ────────────────────────────────────────────────
+  { name: 'Extensión Revestida Naranja 3x14 6FT 1.8M',slug: 'extension-encauchetada-naranja-3x14',        tipo: 'Uso Pesado', longitud: '1.8M (6ft)', precio: '$15.000',  desc: 'Industrial Naranja · Polo a Tierra' },
+  { name: 'Extensión Revestida Naranja 3x14 15FT 4.5M',slug: 'extension-encauchetada-naranja-15ft',       tipo: 'Uso Pesado', longitud: '4.5M (15ft)',precio: '$25.000',  desc: 'Industrial Naranja · Polo a Tierra' },
+  { name: 'Extensión Revestida Naranja 3x14 25FT 7.5M',slug: 'extension-encauchetada-naranja-25ft',       tipo: 'Uso Pesado', longitud: '7.5M (25ft)',precio: '$38.000',  desc: 'Industrial Naranja · Polo a Tierra' },
+];
+
+const tipos      = ['Hogar', 'Uso Pesado'];
+const longitudes = ['1.8M (6ft)', '2.7M (9ft)', '3.6M (12ft)', '4.5M (15ft)', '7.5M (25ft)'];
+
+const tipoColor: Record<string,string> = { Hogar: '#94a3b8', 'Uso Pesado': '#f97316' };
+const tipoIcon: Record<string,string>  = { Hogar: '🔌', 'Uso Pesado': '🏗️' };
+---
+<BaseLayout title="Extensiones Eléctricas | Uso Pesado y Hogar — SIRIUS" description="¿Buscas extensiones eléctricas seguras? Tenemos desde 1.8m a 7.5m, cable blanco dúplex y uso pesado naranja encauchetado.">
+  <section class="coll-hero">
+    <div class="coll-hero__glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="coll-breadcrumb" aria-label="Miga de pan"><a href="/" class="coll-breadcrumb__link">Inicio</a><span>›</span><a href="/colecciones" class="coll-breadcrumb__link">Colecciones</a><span>›</span><span class="coll-breadcrumb__current">Extensiones</span></nav>
+      <span class="coll-eyebrow">Colección</span>
+      <h1 class="coll-title">Extensiones <span class="coll-title--accent">Eléctricas</span></h1>
+      <p class="coll-subtitle">Cables dúplex blancos para el hogar y encauchetados naranja de uso rudo industrial con polo a tierra, desde 1.8 hasta 7.5 metros de longitud.</p>
+    </div>
+  </section>
+  <section class="coll-body">
+    <div class="container coll-layout">
+      <aside class="coll-filters glass" id="filters-panel">
+        <h2 class="coll-filters__title">Filtrar</h2>
+        <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Tipo</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked/><span>Todos</span></label>
+        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span>{tipoIcon[v]} {v}</span></label>)}</fieldset>
+        <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Longitud</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="longitud" value="all" checked/><span>Todos</span></label>
+        {longitudes.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="longitud" value={v}/><span>{v}</span></label>)}</fieldset>
+      </aside>
+      <div class="coll-grid-wrap">
+        <div class="coll-grid-header"><span class="coll-count" id="product-count">{products.length} productos</span><button class="coll-mobile-filter-btn" id="filter-toggle">Filtros</button></div>
+        <div class="coll-grid" id="products-grid">
+          {products.map(p => {
+            const accent = tipoColor[p.tipo]; const icon = tipoIcon[p.tipo];
+            return (
+              <article class="prod-card glass" data-tipo={p.tipo} data-longitud={p.longitud}>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
+                <div class="prod-card__body">
+                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.longitud}</span></div>
+                  <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
+                </div>
+                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  type FS = { tipo: Set<string>; longitud: Set<string> };
+  const state: FS = { tipo: new Set(['all']), longitud: new Set(['all']) };
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.prod-card'));
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
+  function applyFilters() { let vis = 0; cards.forEach(c => { const show = (state.tipo.has('all') || state.tipo.has(c.dataset.tipo!)) && (state.longitud.has('all') || state.longitud.has(c.dataset.longitud!)); c.hidden = !show; if (show) vis++; }); document.getElementById('product-count')!.textContent = `${vis} productos`; }
+  checks.forEach(cb => cb.addEventListener('change', () => { const key = cb.dataset.filter as keyof FS; const val = cb.value; if (val === 'all') { state[key].clear(); state[key].add('all'); checks.filter(c => c.dataset.filter === key && c.value !== 'all').forEach(c => { c.checked = false; }); cb.checked = true; } else { state[key].delete('all'); const allCb = checks.find(c => c.dataset.filter === key && c.value === 'all')!; allCb.checked = false; if (cb.checked) state[key].add(val); else state[key].delete(val); if (state[key].size === 0) { state[key].add('all'); allCb.checked = true; } } applyFilters(); }));
+</script>
+<style>
+.coll-hero{padding:var(--space-16) 0 var(--space-8);position:relative} .coll-title{font-size:var(--text-4xl);font-family:var(--font-display);font-weight:900;margin:0 0 var(--space-4)} .coll-title--accent{background:linear-gradient(135deg,#f97316,#fbbf24);-webkit-background-clip:text;color:transparent} .coll-subtitle{color:var(--color-text-secondary);max-width:600px;margin-bottom:var(--space-6)} .coll-breadcrumb{display:flex;gap:var(--space-2);color:var(--color-text-tertiary);font-size:var(--text-xs);margin-bottom:var(--space-4)} .coll-breadcrumb a{color:var(--color-text-tertiary)} .coll-eyebrow{color:var(--color-brand-accent);font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;background:rgba(0,194,255,0.1);display:inline-block;margin-bottom:var(--space-4)}
+.coll-layout{display:grid;grid-template-columns:220px 1fr;gap:var(--space-8);padding-bottom:var(--space-16)} .coll-filters{padding:var(--space-5);border-radius:var(--radius-xl);border:1px solid rgba(255,255,255,0.1);position:sticky;top:100px} .coll-filter-group{border:none;padding:0;margin:0 0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-2)} .coll-filter-group:last-child{margin:0} .coll-filter-chip{display:flex;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-secondary);cursor:pointer} .coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5)} .prod-card{border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);overflow:hidden;display:flex;flex-direction:column} .prod-card__strip{height:70px;display:flex;align-items:center;justify-content:center;position:relative} .prod-card__cat-icon{font-size:24px;position:relative;z-index:1} .prod-card__elec-glow{position:absolute;width:40px;height:40px;border-radius:50%;filter:blur(10px)} .prod-card__body{padding:var(--space-4);flex:1} .prod-card__meta{display:flex;gap:var(--space-2);margin-bottom:var(--space-3)} .prod-card__badge{font-size:10px;padding:2px 6px;border-radius:10px;border:1px solid} .prod-card__name{font-size:var(--text-sm);font-weight:600;margin:0 0 var(--space-1)} .prod-card__desc{font-size:var(--text-xs);color:var(--color-text-tertiary);margin:0 0 var(--space-2)} .prod-card__price{font-weight:bold;color:var(--color-brand-primary);margin:0;font-size:var(--text-sm)} .prod-card__cta{display:flex;justify-content:center;padding:var(--space-3);font-size:var(--text-sm);color:var(--color-brand-accent);border-top:1px solid rgba(255,255,255,0.05)}
+@media(max-width:800px){.coll-layout{grid-template-columns:1fr} .coll-filters{display:none}}
+</style>
