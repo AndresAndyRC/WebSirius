@@ -8,15 +8,19 @@ import path from 'node:path';
  * @returns The public URL path if it exists, otherwise null
  */
 export function getProductImage(slug: string, num: string = '1'): string | null {
-  const relPath = `public/images/productos/${slug}/${num}.webp`;
-  const absolutePath = path.join(process.cwd(), relPath);
+  const extensions = ['.webp', '.jpg', '.jpeg', '.png'];
   
-  try {
-    if (fs.existsSync(absolutePath)) {
-      return `/images/productos/${slug}/${num}.webp`;
+  for (const ext of extensions) {
+    const relPath = `public/images/productos/${slug}/${num}${ext}`;
+    const absolutePath = path.join(process.cwd(), relPath);
+    
+    try {
+      if (fs.existsSync(absolutePath)) {
+        return `/images/productos/${slug}/${num}${ext}`;
+      }
+    } catch (error) {
+      // Ignore errors
     }
-  } catch (error) {
-    // Ignore errors for non-existent directories or permissions during build
   }
   return null;
 }
