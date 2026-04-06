@@ -104,4 +104,8 @@ Configurados en `vercel.json`:
 | `/blogs/ilumina-tus-espacios-blog` | `/blog` |
 | `/blogs/ilumina-tus-espacios-blog/:slug` | `/blog/:slug` |
 
+---
 
+## ⚠️ Estado de Migración de Imágenes
+
+*Nota:* Se le informo al cliente por los productos faltantes en las colecciones (ej. 21 imágenes como Paneles de Sobeponer específicos, Tableros, etc. que no tienen foto en la página principal originaría) y quedamos a la espera sobre el estado de estos productos para realizar su descarga final.
