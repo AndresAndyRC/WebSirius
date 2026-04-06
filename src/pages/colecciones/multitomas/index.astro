@@ -15,7 +15,7 @@ const tipos   = ['Estándar', 'Con USB', 'Smart / USB'];
 const salidas = ['3 Salidas', '4 Salidas', '6 Salidas'];
 
 const tipoColor: Record<string,string> = { Estándar: '#34d399', 'Con USB': '#f472b6', 'Smart / USB': '#8b5cf6' };
-const tipoIcon: Record<string,string>  = { Estándar: '⚡', 'Con USB': '📱', 'Smart / USB': '🧠' };
+const tipoIcon: Record<string,string>  = { Estándar: 'bolt', 'Con USB': 'smartphone', 'Smart / USB': 'psychology' };
 ---
 <BaseLayout title="Multitomas Eléctricas | Con USB y Certificadas — SIRIUS" description="Multitomas con puertos USB, Certificación RETIE y diseños Smart. Protege y conecta tus equipos electrónicos y herramientas.">
   <section class="coll-hero">
@@ -32,7 +32,7 @@ const tipoIcon: Record<string,string>  = { Estándar: '⚡', 'Con USB': '📱', 
       <aside class="coll-filters glass" id="filters-panel">
         <h2 class="coll-filters__title">Filtrar</h2>
         <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Tipo</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked/><span>Todos</span></label>
-        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span>{tipoIcon[v]} {v}</span></label>)}</fieldset>
+        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">{tipoIcon[v]}</span> {v}</span></label>)}</fieldset>
         <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Capacidad</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="salidas" value="all" checked/><span>Todos</span></label>
         {salidas.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="salidas" value={v}/><span>{v}</span></label>)}</fieldset>
       </aside>
@@ -43,9 +43,9 @@ const tipoIcon: Record<string,string>  = { Estándar: '⚡', 'Con USB': '📱', 
             const accent = tipoColor[p.tipo]; const icon = tipoIcon[p.tipo];
             return (
               <article class="prod-card glass" data-tipo={p.tipo} data-salidas={p.salidas}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon material-symbols-outlined">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
                 <div class="prod-card__body">
-                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.salidas}</span></div>
+                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px">{icon}</span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.salidas}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>

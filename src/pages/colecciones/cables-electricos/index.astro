@@ -27,7 +27,7 @@ const tipoColor: Record<string,string> = {
   THHN: '#60A5FA', Dúplex: '#34D399', Encauchetado: '#FB923C',
 };
 const tipoIcon: Record<string,string> = {
-  THHN: '⚡', Dúplex: '🔗', Encauchetado: '🛡️',
+  THHN: 'bolt', Dúplex: 'cable', Encauchetado: 'shield',
 };
 ---
 <BaseLayout
@@ -48,10 +48,10 @@ const tipoIcon: Record<string,string> = {
       <h1 class="coll-title">Cables <span class="coll-title--accent">Eléctricos</span></h1>
       <p class="coll-subtitle">Alambre THHN, Dúplex SPT y Encauchetado THHW — todos en rollos de 100m con tecnología CCA certificada RETIE para instalaciones residenciales, comerciales e industriales.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">⚡ THHN #12 y #14</span>
-        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399">🔗 Dúplex 2×10 a 2×14</span>
-        <span class="coll-style-pill" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:#FB923C">🛡️ Encauchetado THHW</span>
-        <span class="coll-style-pill" style="background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.25);color:#A855F7">📜 Certificado RETIE</span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" style="font-size:1.1em">bolt</span> THHN #12 y #14</span>
+        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399"><span class="material-symbols-outlined" style="font-size:1.1em">cable</span> Dúplex 2×10 a 2×14</span>
+        <span class="coll-style-pill" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:#FB923C"><span class="material-symbols-outlined" style="font-size:1.1em">shield</span> Encauchetado THHW</span>
+        <span class="coll-style-pill" style="background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.25);color:#A855F7"><span class="material-symbols-outlined" style="font-size:1.1em">receipt_long</span> Certificado RETIE</span>
       </div>
     </div>
   </section>
@@ -64,7 +64,7 @@ const tipoIcon: Record<string,string> = {
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Tipo de Cable</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
-          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{tipoIcon[t]} {t}</span></label>)}
+          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">{tipoIcon[t]}</span> {t}</span></label>)}
         </fieldset>
 
         <fieldset class="coll-filter-group">
@@ -74,11 +74,11 @@ const tipoIcon: Record<string,string> = {
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">🔌 {products.length} referencias</span>
-          <span class="coll-cert">📜 Certificado RETIE</span>
-          <span class="coll-cert">🏗️ Residencial e industrial</span>
-          <span class="coll-cert">📦 Rollos x 100m</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">power</span> {products.length} referencias</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">receipt_long</span> Certificado RETIE</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">construction</span> Residencial e industrial</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">inventory_2</span> Rollos x 100m</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
 
@@ -97,14 +97,14 @@ const tipoIcon: Record<string,string> = {
             return (
               <article class="prod-card glass" data-tipo={p.tipo} data-calibre={p.calibre}>
                 <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`} aria-hidden="true">
-                  <span class="prod-card__cat-icon">{icon}</span>
+                  <span class="prod-card__cat-icon material-symbols-outlined">{icon}</span>
                   <div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div>
                   <!-- Cable wire visual -->
                   <div class="prod-card__wire" style={`background:${accent}`} aria-hidden="true"></div>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px">{icon}</span> {p.tipo}</span>
                     <span class="prod-card__badge" style="background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.30);color:#A855F7">{p.calibre} AWG</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
@@ -120,7 +120,7 @@ const tipoIcon: Record<string,string> = {
         </div>
 
         <div class="coll-empty" id="empty-state" hidden>
-          <span>⚡</span>
+          <span class="material-symbols-outlined" style="font-size:48px">bolt</span>
           <p style="color:var(--color-text-secondary)">No hay cables para este filtro.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -130,9 +130,9 @@ const tipoIcon: Record<string,string> = {
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">⚡</span><div><strong>Alambre THHN — Instalaciones fijas</strong><p>Conductor CCA con aislamiento termoplástico THHN. Calibres #14 (15A) y #12 (20A). Colores normalizados para fácil identificación de fases.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔗</span><div><strong>Dúplex SPT — Circuitos domésticos</strong><p>Doble conductor paralelo, ideal para extensiones, lámparas y electrodomésticos. Disponible en 2×14, 2×12 y 2×10 AWG en rollos de 100m.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🛡️</span><div><strong>Encauchetado THHW — Flexible y resistente</strong><p>Cubierta de caucho THHW resistente a humedad, aceites y dobleces. Ideal para herramientas y equipos en movimiento constante.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">bolt</span><div><strong>Alambre THHN — Instalaciones fijas</strong><p>Conductor CCA con aislamiento termoplástico THHN. Calibres #14 (15A) y #12 (20A). Colores normalizados para fácil identificación de fases.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">cable</span><div><strong>Dúplex SPT — Circuitos domésticos</strong><p>Doble conductor paralelo, ideal para extensiones, lámparas y electrodomésticos. Disponible en 2×14, 2×12 y 2×10 AWG en rollos de 100m.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">shield</span><div><strong>Encauchetado THHW — Flexible y resistente</strong><p>Cubierta de caucho THHW resistente a humedad, aceites y dobleces. Ideal para herramientas y equipos en movimiento constante.</p></div></div>
     </div>
   </section>
 

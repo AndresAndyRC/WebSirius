@@ -28,7 +28,7 @@ const tipoColor: Record<string,string> = {
   USB: '#F472B6', GFCI: '#FB923C', Tapa: '#94A3B8',
 };
 const tipoIcon: Record<string,string> = {
-  Tomacorriente: '🔌', Interruptor: '🔘', Combinado: '⚡', USB: '📱', GFCI: '🛡️', Tapa: '🪪',
+  Tomacorriente: 'power', Interruptor: 'radio_button_checked', Combinado: 'bolt', USB: 'smartphone', GFCI: 'shield', Tapa: 'branding_watermark',
 };
 ---
 <BaseLayout
@@ -49,10 +49,10 @@ const tipoIcon: Record<string,string> = {
       <h1 class="coll-title">Tomacorrientes <span class="coll-title--accent">e Interruptores</span></h1>
       <p class="coll-subtitle">Más de 130 referencias en colores, acabados y capacidades. Tomacorrientes regulados, GFCI, con USB, interruptores sencillos, dobles y triples — todos certificados y de materiales que no se amarillean.</p>
       <div class="coll-style-pills">
-        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA">🔌 Tomacorrientes 15A</span>
-        <span class="coll-style-pill" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:#FB923C">🛡️ GFCI 20A</span>
-        <span class="coll-style-pill" style="background:rgba(244,114,182,.08);border-color:rgba(244,114,182,.25);color:#F472B6">📱 Con USB</span>
-        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399">🔘 Interruptores</span>
+        <span class="coll-style-pill" style="background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:#60A5FA"><span class="material-symbols-outlined" style="font-size:1.1em">power</span> Tomacorrientes 15A</span>
+        <span class="coll-style-pill" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:#FB923C"><span class="material-symbols-outlined" style="font-size:1.1em">shield</span> GFCI 20A</span>
+        <span class="coll-style-pill" style="background:rgba(244,114,182,.08);border-color:rgba(244,114,182,.25);color:#F472B6"><span class="material-symbols-outlined" style="font-size:1.1em">smartphone</span> Con USB</span>
+        <span class="coll-style-pill" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#34D399"><span class="material-symbols-outlined" style="font-size:1.1em">radio_button_checked</span> Interruptores</span>
       </div>
     </div>
   </section>
@@ -65,7 +65,7 @@ const tipoIcon: Record<string,string> = {
         <fieldset class="coll-filter-group">
           <legend class="coll-filter-group__legend">Tipo</legend>
           <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked id="t-all"/><span>Todos</span></label>
-          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span>{tipoIcon[t]} {t}</span></label>)}
+          {tipos.map(t => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={t} id={`t-${t}`}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">{tipoIcon[t]}</span> {t}</span></label>)}
         </fieldset>
 
         <fieldset class="coll-filter-group">
@@ -75,10 +75,10 @@ const tipoIcon: Record<string,string> = {
         </fieldset>
 
         <div class="coll-cert-badges">
-          <span class="coll-cert">🔌 132+ referencias</span>
-          <span class="coll-cert">🏠 Residencial y comercial</span>
-          <span class="coll-cert">🛡️ GFCI certificado</span>
-          <span class="coll-cert">🚚 Envío nacional</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">power</span> 132+ referencias</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">home</span> Residencial y comercial</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">shield</span> GFCI certificado</span>
+          <span class="coll-cert"><span class="material-symbols-outlined">local_shipping</span> Envío nacional</span>
         </div>
       </aside>
 
@@ -97,12 +97,12 @@ const tipoIcon: Record<string,string> = {
             return (
               <article class="prod-card glass" data-tipo={p.tipo} data-color={p.color}>
                 <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`} aria-hidden="true">
-                  <span class="prod-card__cat-icon">{icon}</span>
+                  <span class="prod-card__cat-icon material-symbols-outlined">{icon}</span>
                   <div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div>
                 </div>
                 <div class="prod-card__body">
                   <div class="prod-card__meta">
-                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span>
+                    <span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px">{icon}</span> {p.tipo}</span>
                     <span class="prod-card__badge" style="background:rgba(148,163,184,.10);border-color:rgba(148,163,184,.25);color:#94A3B8">{p.color}</span>
                   </div>
                   <h3 class="prod-card__name">{p.name}</h3>
@@ -117,7 +117,7 @@ const tipoIcon: Record<string,string> = {
         </div>
 
         <div class="coll-empty" id="empty-state" hidden>
-          <span>🔌</span>
+          <span class="material-symbols-outlined" style="font-size:48px">power</span>
           <p style="color:var(--color-text-secondary)">No hay productos para este filtro.</p>
           <button class="btn btn--ghost" id="reset-filters">Limpiar filtros</button>
         </div>
@@ -127,9 +127,9 @@ const tipoIcon: Record<string,string> = {
 
   <section class="coll-info-strip">
     <div class="container coll-info-strip__inner">
-      <div class="coll-info-card"><span class="coll-info-card__icon">🔌</span><div><strong>Tomacorrientes Certificados</strong><p>Tomas reguladas 15A en blanco, naranja hospitalario y gris para intemperie. Compatible con placas modulares.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">🛡️</span><div><strong>GFCI 20A — Seguridad extra</strong><p>Protección contra fallas a tierra para baños, cocinas y exteriores. Cumple norma NTC 2050 / RETIE.</p></div></div>
-      <div class="coll-info-card"><span class="coll-info-card__icon">📱</span><div><strong>Con puertos USB integrados</strong><p>Toma doble pol-a-tierra + 2 USB tipo A para cargar dispositivos sin bloqueadores. Instalación estándar.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">power</span><div><strong>Tomacorrientes Certificados</strong><p>Tomas reguladas 15A en blanco, naranja hospitalario y gris para intemperie. Compatible con placas modulares.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">shield</span><div><strong>GFCI 20A — Seguridad extra</strong><p>Protección contra fallas a tierra para baños, cocinas y exteriores. Cumple norma NTC 2050 / RETIE.</p></div></div>
+      <div class="coll-info-card"><span class="coll-info-card__icon material-symbols-outlined">smartphone</span><div><strong>Con puertos USB integrados</strong><p>Toma doble pol-a-tierra + 2 USB tipo A para cargar dispositivos sin bloqueadores. Instalación estándar.</p></div></div>
     </div>
   </section>
 

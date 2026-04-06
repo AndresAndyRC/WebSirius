@@ -26,6 +26,7 @@ const props = Astro.props;
     <!-- Preload fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- Google Analytics 4 — solo production -->
     <GoogleAnalytics />
   </head>
@@ -63,5 +64,10 @@ const props = Astro.props;
 }
 .skip-link:focus {
   top: var(--space-2);
+}
+.material-symbols-outlined {
+  vertical-align: middle;
+  line-height: inherit;
+  font-size: 1.2em;
 }
 </style>

@@ -21,12 +21,12 @@ interface Props {
 }
 
 const CATEGORIES = [
-  { id: 'all',           label: 'Todo el catálogo', icon: '✦' },
-  { id: 'iluminacion',   label: 'Iluminación LED',  icon: '💡' },
-  { id: 'electrico',     label: 'Eléctrico',         icon: '⚡' },
-  { id: 'exterior',      label: 'Exterior & Jardín', icon: '🌿' },
-  { id: 'especial',      label: 'Especiales',        icon: '🌟' },
-  { id: 'hogar',         label: 'Hogar & Baño',      icon: '🏠' },
+  { id: 'all',           label: 'Todo el catálogo', icon: 'apps' },
+  { id: 'iluminacion',   label: 'Iluminación LED',  icon: 'light_mode' },
+  { id: 'electrico',     label: 'Eléctrico',         icon: 'electrical_services' },
+  { id: 'exterior',      label: 'Exterior & Jardín', icon: 'eco' },
+  { id: 'especial',      label: 'Especiales',        icon: 'stars' },
+  { id: 'hogar',         label: 'Hogar & Baño',      icon: 'home' },
 ];
 
 export default function CollectionFilter({ collections }: Props) {
@@ -150,7 +150,7 @@ export default function CollectionFilter({ collections }: Props) {
               minHeight: '40px',
             }}
           >
-            <span>{cat.icon}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '1.2em', verticalAlign: '-4px' }}>{cat.icon}</span>
             {cat.label}
           </button>
         ))}
@@ -175,7 +175,7 @@ export default function CollectionFilter({ collections }: Props) {
           border: '1px dashed var(--color-surface-border)',
           borderRadius: 'var(--radius-2xl)',
         }}>
-          <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>🔍</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>search</span>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-base)' }}>
             No encontramos esa colección. Prueba con otro término.
           </p>
@@ -260,7 +260,7 @@ export default function CollectionFilter({ collections }: Props) {
                     border: '1px solid var(--color-surface-border)',
                     flexShrink: 0,
                   }}>
-                    {col.icon}
+                    <span className="material-symbols-outlined">{col.icon}</span>
                   </div>
 
                   {/* Name */}

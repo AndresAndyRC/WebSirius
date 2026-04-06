@@ -12,7 +12,7 @@ const tipos = ['Flexible', 'Monocontrol', 'Pared', 'Mezclador'];
 const acbs  = ['Cromo', 'Inox', 'Latón', 'Negro Mate'];
 
 const tipoColor: Record<string,string> = { Flexible: '#2dd4bf', Monocontrol: '#60a5fa', Pared: '#f472b6', Mezclador: '#a78bfa' };
-const tipoIcon: Record<string,string>  = { Flexible: '🚰', Monocontrol: '🎛️', Pared: '🔧', Mezclador: '🚿' };
+const tipoIcon: Record<string,string>  = { Flexible: 'water_damage', Monocontrol: 'tune', Pared: 'handyman', Mezclador: 'shower' };
 ---
 <BaseLayout title="Llaves de Lavaplatos — SIRIUS" description="Llaves de lavaplatos monocontrol, flexibles y extractables. Múltiples acabados y alta durabilidad.">
   <section class="coll-hero">
@@ -29,7 +29,7 @@ const tipoIcon: Record<string,string>  = { Flexible: '🚰', Monocontrol: '🎛�
       <aside class="coll-filters glass" id="filters-panel">
         <h2 class="coll-filters__title">Filtrar</h2>
         <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Tipo</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value="all" checked/><span>Todos</span></label>
-        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span>{tipoIcon[v]} {v}</span></label>)}</fieldset>
+        {tipos.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="tipo" value={v}/><span><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">{tipoIcon[v]}</span> {v}</span></label>)}</fieldset>
         <fieldset class="coll-filter-group"><legend class="coll-filter-group__legend">Acabado</legend><label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="acb" value="all" checked/><span>Todos</span></label>
         {acbs.map(v => <label class="coll-filter-chip"><input type="checkbox" class="filter-check" data-filter="acb" value={v}/><span>{v}</span></label>)}</fieldset>
       </aside>
@@ -40,9 +40,9 @@ const tipoIcon: Record<string,string>  = { Flexible: '🚰', Monocontrol: '🎛�
             const accent = tipoColor[p.tipo]; const icon = tipoIcon[p.tipo];
             return (
               <article class="prod-card glass" data-tipo={p.tipo} data-acb={p.acb}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,${accent}06 100%)`}><span class="prod-card__cat-icon material-symbols-outlined">{icon}</span><div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div></div>
                 <div class="prod-card__body">
-                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}>{icon} {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.acb}</span></div>
+                  <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px">{icon}</span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.acb}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
                 <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
