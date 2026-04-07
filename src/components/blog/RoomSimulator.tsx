@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 interface Scene {
   id: string;
   label: string;
-  emoji: string;
+  icon: string;
   kelvin: number;
   description: string;
   accentColor: string;
@@ -23,7 +23,7 @@ const SCENES: Scene[] = [
   {
     id: 'relax',
     label: 'Sala · Noche',
-    emoji: '🛋️',
+    icon: 'weekend',
     kelvin: 2700,
     description: 'Luz cálida para relajarse después del trabajo',
     accentColor: '#FF9A3E',
@@ -35,7 +35,7 @@ const SCENES: Scene[] = [
   {
     id: 'dinner',
     label: 'Comedor',
-    emoji: '🍽️',
+    icon: 'restaurant',
     kelvin: 3000,
     description: 'Cena perfecta bajo luz cálida dorada',
     accentColor: '#FFB347',
@@ -47,7 +47,7 @@ const SCENES: Scene[] = [
   {
     id: 'kitchen',
     label: 'Cocina',
-    emoji: '🍳',
+    icon: 'skillet',
     kelvin: 4000,
     description: 'Luz neutra para ver los colores con fidelidad',
     accentColor: '#C8DCFF',
@@ -59,7 +59,7 @@ const SCENES: Scene[] = [
   {
     id: 'office',
     label: 'Oficina',
-    emoji: '💻',
+    icon: 'computer',
     kelvin: 5000,
     description: 'Luz fría para máxima concentración',
     accentColor: '#9EC9FF',
@@ -71,7 +71,7 @@ const SCENES: Scene[] = [
   {
     id: 'workshop',
     label: 'Taller',
-    emoji: '🏭',
+    icon: 'precision_manufacturing',
     kelvin: 6500,
     description: 'Luz fría máxima para precisión técnica',
     accentColor: '#7EC8FF',
@@ -171,7 +171,7 @@ export default function RoomSimulator() {
               backdropFilter: 'blur(8px)',
             }}
           >
-            <span>{s.emoji}</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '1.2em' }}>{s.icon}</span>
             {s.label}
           </button>
         ))}
@@ -389,8 +389,11 @@ export default function RoomSimulator() {
             fontWeight: 600,
             color: 'rgba(255,255,255,0.85)',
             marginBottom: '0.125rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.25rem'
           }}>
-            {scene.emoji} {scene.label}
+            <span className="material-symbols-outlined" style={{ fontSize: '1.2em' }}>{scene.icon}</span> {scene.label}
           </p>
           <p style={{
             fontSize: 'var(--text-xs)',
