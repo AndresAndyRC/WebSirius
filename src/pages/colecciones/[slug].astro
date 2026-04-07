@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../utils/imageCheck';
 import { COLLECTIONS } from '../../data/colecciones';
 import todosLosProductos from '../../data/productos.json';
+import LightBeams from '@components/LightBeams.astro';
 
 export async function getStaticPaths() {
   return COLLECTIONS.map(collection => {
@@ -102,6 +103,20 @@ const themeColors: Record<string, string> = {
   especial: '#8B5CF6'
 };
 const accent = themeColors[collection.category] || '#ef4444';
+
+// Didactic Tips Array
+const expertTips = [
+  { 
+    title: '💡 Tip del Experto: Watts por Metro Cuadrado', 
+    desc: 'La regla dorada para una buena iluminación es calcular entre 4W y 5W de tecnología LED por cada metro cuadrado. Si tu habitación mide 12m², busca paneles que sumen en total unos 60W.',
+    icon: 'architecture' 
+  },
+  { 
+    title: '🌡️ Tip del Experto: ¿Cálida o Fría?', 
+    desc: 'Luz Cálida (3000K) le dice a tu cerebro que es hora de relajarse (ideal para salas y alcobas). Luz Fría (6500K) aumenta la concentración (perfecta para cocinas, estudios o talleres).',
+    icon: 'thermostat' 
+  }
+];
 ---
 
 <BaseLayout 
@@ -109,6 +124,7 @@ const accent = themeColors[collection.category] || '#ef4444';
   description={collection.description}
 >
   <section class="coll-hero">
+    <LightBeams variant="subtle" />
     <div class="coll-hero__glow" aria-hidden="true" style={`background: radial-gradient(ellipse at 50% 10%,${accent}22 0%,transparent 70%); filter: blur(80px); width: 100vw; height: 100vh; position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%; z-index: -1;`}></div>
     <div class="container" style="position: relative; z-index: 2;">
       <nav class="coll-breadcrumb" aria-label="Miga de pan">
@@ -152,13 +168,36 @@ const accent = themeColors[collection.category] || '#ef4444';
       <div class="coll-grid-wrap">
         <div class="coll-grid-header">
            <span class="coll-count" id="product-count">{products.length} productos</span>
+           
+           <div class="coll-quick-pills">
+              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Cálida\'], .filter-check[value=\'3000K\']').forEach(c=>c.click())">🛋️ Para Relajarse (3000K)</button>
+              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Blanca\'], .filter-check[value=\'6500K\']').forEach(c=>c.click())">💼 Para Trabajar (6500K)</button>
+           </div>
+           
            <button class="coll-mobile-filter-btn" id="filter-toggle">Filtros</button>
         </div>
         
         <div class="coll-grid" id="products-grid">
-          {products.map((p: any) => {
+          {products.map((p: any, index: number) => {
             const img1 = getProductImage(p.slug, '1'); 
             const img2 = getProductImage(p.slug, '2');
+            
+            // Didactic Tip Injection at index 3 and 10
+            let tipToInject = null;
+            if (index === 3) tipToInject = expertTips[0];
+            if (index === 10) tipToInject = expertTips[1];
+
+            // Thermal Aura Detection based on Kelvin
+            let tGlow = `rgba(255,255,255,0.05)`;
+            let tColor = accent;
+            const tempStr = (p['temperatura-de-color'] || p['color'] || '').toLowerCase();
+            if (tempStr.includes('calid') || tempStr.includes('3000') || tempStr.includes('cálid')) {
+               tGlow = `rgba(245, 166, 35, 0.5)`; tColor = '#F5A623';
+            } else if (tempStr.includes('fria') || tempStr.includes('blanca') || tempStr.includes('6500') || tempStr.includes('6000')) {
+               tGlow = `rgba(0, 194, 255, 0.5)`; tColor = '#00C2FF';
+            } else if (tempStr.includes('neutra') || tempStr.includes('4000')) {
+               tGlow = `rgba(255, 255, 255, 0.6)`; tColor = '#E8EFFF';
+            }
             
             // Build data attributes dynamically for client JS
             const dataAttrs: any = {};
@@ -171,17 +210,29 @@ const accent = themeColors[collection.category] || '#ef4444';
             const priceDisplay = !isZeroPrice ? `$${rawPrice.toLocaleString('es-CO')}` : null;
 
             return (
-              <article class="prod-card glass" {...dataAttrs}>
-                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%,${accent}22 0%,transparent 100%)`} aria-hidden="true">
+              <>
+              {tipToInject && (
+                <article class="prod-card glass tip-card educational-glow">
+                  <div class="tip-card__icon-wrap">
+                     <span class="material-symbols-outlined tip-card__icon">{tipToInject.icon}</span>
+                  </div>
+                  <div class="tip-card__content">
+                     <h3 class="tip-card__title">{tipToInject.title}</h3>
+                     <p class="tip-card__desc">{tipToInject.desc}</p>
+                  </div>
+                </article>
+              )}
+              <article class="prod-card glass" style={`--hover-glow: ${tGlow}; --card-accent: ${tColor};`} {...dataAttrs}>
+                <div class="prod-card__strip" style={`background:radial-gradient(ellipse at 50% 10%, var(--card-accent) 0%, transparent 100%); opacity: 0.8`} aria-hidden="true">
                   {img1 ? (
                     <div class="prod-card__img-wrap group">
                       <img src={img1} alt={p.name} class={`prod-card__img ${img2 ? 'hover-out' : ''}`} loading="lazy" />
                       {img2 && <img src={img2} alt={`${p.name} alternativa`} class="prod-card__img prod-card__img--hover" loading="lazy" />}
                     </div>
                   ) : (
-                    <span class="prod-card__cat-icon material-symbols-outlined" style={`color: ${accent}`}>{collection.icon}</span>
+                    <span class="prod-card__cat-icon material-symbols-outlined" style="color: var(--card-accent)">{collection.icon}</span>
                   )}
-                  <div class="prod-card__elec-glow" style={`background:${accent}33;box-shadow:0 0 18px ${accent}44`}></div>
+                  <div class="prod-card__elec-glow" style="background:var(--card-accent);box-shadow:0 0 18px var(--card-accent); opacity:0.15"></div>
                 </div>
                 
                 <div class="prod-card__body">
@@ -194,7 +245,7 @@ const accent = themeColors[collection.category] || '#ef4444';
                         if (k === 'volt' || k === 'voltaje') valDisplay += 'V';
                         if (k === 'ip') valDisplay = `IP${valDisplay}`;
                         return (
-                          <span class="prod-card__badge" style={`background:${accent}18; border-color:${accent}44; color:${accent}`}>
+                          <span class="prod-card__badge" style="background:rgba(255,255,255,0.05); border-color:var(--card-accent); color:var(--text-main)">
                             {valDisplay}
                           </span>
                         );
@@ -218,6 +269,7 @@ const accent = themeColors[collection.category] || '#ef4444';
                    <span class="material-symbols-outlined" style="font-size: 1.2em; margin-left: 4px;">arrow_forward</span>
                 </a>
               </article>
+              </>
             );
           })}
           
@@ -429,12 +481,13 @@ const accent = themeColors[collection.category] || '#ef4444';
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s, border-color 0.4s;
+    --hover-glow: rgba(255,255,255,0.1); /* fallback */
 }
 .prod-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px var(--hover-glow);
+    border-color: var(--card-accent, rgba(255, 255, 255, 0.3));
 }
 .prod-card__strip {
     height: 240px;
@@ -562,12 +615,95 @@ const accent = themeColors[collection.category] || '#ef4444';
     color: var(--text-muted, #94a3b8);
 }
 
+/* Didactic Pill Styles */
+.coll-quick-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+.didactic-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-main);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.didactic-pill:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.05);
+}
+
+/* Tip Card Styles (Full width interstitial) */
+.tip-card {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    padding: 2rem;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+.tip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(245, 166, 35, 0.15);
+}
+.educational-glow {
+    position: relative;
+    overflow: hidden;
+}
+.educational-glow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100px; height: 100px;
+    background: rgba(245, 166, 35, 0.4);
+    filter: blur(80px);
+}
+.tip-card__icon-wrap {
+    width: 60px; height: 60px;
+    background: rgba(245, 166, 35, 0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(245, 166, 35, 0.2);
+}
+.tip-card__icon {
+    font-size: 2rem;
+    color: #F5A623;
+}
+.tip-card__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #F5A623;
+    margin-bottom: 0.5rem;
+}
+.tip-card__desc {
+    color: var(--text-secondary, #cbd5e1);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    max-width: 800px;
+}
+
 @media(max-width: 900px) {
     .coll-layout {
         grid-template-columns: 1fr;
     } 
     .coll-filters {
         display: none;
+    }
+    .coll-quick-pills { display: none; } /* Hide on extreme mobile to save vertical space if needed, or keep scrollable */
+    .coll-grid-header { flex-wrap: wrap; gap: 1rem; }
+    .tip-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem;
     }
     .coll-mobile-filter-btn {
         display: block;
