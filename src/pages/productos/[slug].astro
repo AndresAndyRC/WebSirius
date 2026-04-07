@@ -17,15 +17,12 @@ const img1 = getProductImage(product.slug, '1');
 const img2 = getProductImage(product.slug, '2');
 const img3 = getProductImage(product.slug, '3');
 
-// Capitalize Breadcrumb correctly
 const formatCategory = (cat: string) => {
   return cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 };
 
-// Collect all images in an array
 const gallery = [img1, img2, img3].filter(Boolean);
 
-// Define generic specs (filtering out internal properties like slug, name, categoria)
 const excludedKeys = ['name', 'slug', 'categoria', 'desc', 'precio', 'price'];
 const specs = Object.entries(product)
   .filter(([key]) => !excludedKeys.includes(key))
@@ -44,295 +41,395 @@ const isZeroPrice = product.precio === '$0' || product.price === 0;
 const productPrice = (!isZeroPrice && product.precio) 
   ? product.precio 
   : (!isZeroPrice && product.price ? `$${product.price.toLocaleString()}` : null);
+
 ---
 
 <BaseLayout 
-  title={`${product.name} | SIRIUS`}
-  description={product.desc || `Mejora tus espacios con ${product.name} de SIRIUS Iluminación. ${productPrice ? `Disponible por ${productPrice}.` : ''} ¡Contáctanos!`}
+  title={`${product.name} | SIRIUS Premium`}
+  description={product.desc || `Descubre ${product.name} de SIRIUS Iluminación. Diseño y rendimiento avanzado.`}
 >
-  <div class="pdp-wrapper wrapper">
-    <!-- Breadcrumbs -->
-    <nav class="pdp-breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="/">Inicio</a><span class="separator">/</span></li>
-        <li><a href="/colecciones">Colecciones</a><span class="separator">/</span></li>
-        <li><a href={`/colecciones/${product.categoria}`}>{formatCategory(product.categoria)}</a><span class="separator">/</span></li>
-        <li aria-current="page">{product.name}</li>
-      </ol>
+  <div class="pdp-wrapper wrapper liquid-theme">
+    
+    <nav class="pdp-breadcrumbs animate-fade-in" aria-label="Breadcrumb">
+      <a class="nav-link" href="/">Inicio</a>
+      <span class="separator">/</span>
+      <a class="nav-link" href="/colecciones">Colecciones</a>
+      <span class="separator">/</span>
+      <a class="nav-link" href={`/colecciones/${product.categoria}`}>{formatCategory(product.categoria)}</a>
+      <span class="separator">/</span>
+      <span class="current" aria-current="page">{product.name}</span>
     </nav>
 
-    <main class="pdp-grid">
-      <!-- Image Gallery Column -->
-      <section class="pdp-gallery">
-        <div class="pdp-gallery-main">
+    <main class="pdp-modern-grid">
+      
+      <!-- Interactive Gallery Form (Left / Main side) -->
+      <section class="pdp-gallery-area animate-slide-up" style="--delay: 0.1s">
+        <div class="main-image-container" id="zoom-container">
+          <div class="ambient-glow"></div>
           {img1 ? (
-             <img src={img1} alt={product.name} id="main-product-image" class="zoomable" />
+             <img src={img1} alt={product.name} id="main-product-image" class="zoom-image glass-layered" />
           ) : (
              <div class="pdp-gallery-fallback">
-               <span class="material-symbols-outlined" style="font-size: 4rem; opacity: 0.2">image</span>
+               <span class="material-symbols-outlined glowing-icon">image</span>
              </div>
           )}
         </div>
+        
         {gallery.length > 1 && (
-          <div class="pdp-gallery-thumbnails">
+          <div class="pdp-thumbnails">
             {gallery.map((img, index) => (
-              <button class={`thumb-btn ${index === 0 ? 'active' : ''}`} data-image={img}>
-                <img src={img} alt={`Miniatura ${index + 1}`} loading="lazy" />
+              <button class={`thumb-ring ${index === 0 ? 'active' : ''}`} data-image={img} aria-label={`Ver imagen ${index + 1}`}>
+                <div class="thumb-inner">
+                  <img src={img} alt={`Miniatura ${index + 1}`} loading="lazy" />
+                </div>
               </button>
             ))}
           </div>
         )}
       </section>
 
-      <!-- Product Info Column -->
-      <section class="pdp-info">
-        {'isNew' in product && product.isNew && <span class="pdp-badge">Nueva Colección</span>}
-        <h1 class="pdp-title">{product.name}</h1>
-        
-        <div class="pdp-price">
-          {productPrice ? (
-            <span class="price-amount">{productPrice}</span>
-          ) : (
-             <span class="price-contact">Consultar Precio</span>
+      <!-- Info Area (Right Side) -->
+      <section class="pdp-details-area">
+        <div class="sticky-info">
+          
+          <div class="header-info animate-slide-up" style="--delay: 0.2s">
+            {'isNew' in product && product.isNew && <span class="badge new-badge">Premium Collection</span>}
+            <h1 class="pdp-headline">{product.name}</h1>
+            <div class="pdp-pricing">
+              {productPrice ? (
+                 <span class="price-val">{productPrice}</span>
+              ) : (
+                 <span class="price-contact-text">Consultar Precio</span>
+              )}
+            </div>
+          </div>
+
+          {product.desc && (
+            <p class="pdp-body-text animate-slide-up" style="--delay: 0.3s">
+              {product.desc}
+            </p>
           )}
-        </div>
 
-        {product.desc && (
-          <p class="pdp-description">{product.desc}</p>
-        )}
+          <!-- Technical Specs List -->
+          <div class="tech-specs animate-slide-up" style="--delay: 0.4s">
+            <h3 class="specs-title">Especificaciones Técnicas</h3>
+            <ul class="specs-list">
+              {specs.map((spec) => (
+                <li class="spec-row">
+                  <span class="spec-label">{spec.label}</span>
+                  <span class="spec-line"></span>
+                  <span class="spec-value">{spec.value as string}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div class="pdp-specs-box">
-          <h3>Especificaciones Técnicas</h3>
-          <ul>
-            {specs.map(spec => (
-              <li>
-                <span class="spec-label">{spec.label}</span>
-                <span class="spec-value">{spec.value}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+          <!-- Actions -->
+          <div class="pdp-actions animate-slide-up" style="--delay: 0.5s">
+            <button class="btn-action primary-action">
+              <span class="material-symbols-outlined">shopping_bag</span>
+              <span>Añadir al Carrito</span>
+            </button>
+            <a href={`https://wa.me/573000000000?text=Hola,%20busco%20información%20del%20${encodeURIComponent(product.name)}`} target="_blank" rel="noopener noreferrer" class="btn-action secondary-action">
+              <span class="material-symbols-outlined">chat</span>
+              <span>Consultar Asesor</span>
+            </a>
+          </div>
 
-        <div class="pdp-actions">
-          <button class="btn btn-primary btn-add-cart">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            Añadir al Carrito
-          </button>
-          <a href={`https://wa.me/573000000000?text=Hola,%20busco%20información%20del%20${encodeURIComponent(product.name)}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-whatsapp">
-            <span class="material-symbols-outlined">chat</span>
-            Chatear con Ventas
-          </a>
-        </div>
-
-        <div class="pdp-guarantees">
-            <div class="guarantee-item">
-              <span class="material-symbols-outlined">local_shipping</span>
-              Envío a nivel nacional
+          <!-- Premium Guarantees minimalist -->
+          <div class="pdp-trust-signals animate-slide-up" style="--delay: 0.6s">
+            <div class="trust-item">
+              <span class="material-symbols-outlined trust-icon">schedule</span>
+              <span>Envío 24/48h</span>
             </div>
-            <div class="guarantee-item">
-              <span class="material-symbols-outlined">verified</span>
-              Garantía Sirius Oficial
+            <div class="trust-item">
+              <span class="material-symbols-outlined trust-icon">verified</span>
+              <span>Garantía Oficial</span>
             </div>
-            <div class="guarantee-item">
-              <span class="material-symbols-outlined">payments</span>
-              Pago 100% Seguro
+            <div class="trust-item">
+              <span class="material-symbols-outlined trust-icon">lock</span>
+              <span>Compra Segura</span>
             </div>
+          </div>
+
         </div>
       </section>
+
     </main>
   </div>
 </BaseLayout>
 
 <style>
+  /* Base Variables */
+  :root {
+    --pdp-border: rgba(255, 255, 255, 0.08);
+    --pdp-bg: rgba(10, 10, 14, 0.4);
+    --pdp-surface: rgba(255, 255, 255, 0.03);
+    --pdp-text-dim: #94a3b8;
+  }
+
   .pdp-wrapper {
     padding-top: calc(var(--header-height) + 2rem);
-    padding-bottom: 4rem;
+    padding-bottom: 6rem;
+    min-height: 100vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* Animations */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-up {
+    opacity: 0;
+    animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay, 0s);
+  }
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeSlideUp 0.6s ease forwards;
   }
 
   /* Breadcrumbs */
   .pdp-breadcrumbs {
-    margin-bottom: 2rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  .pdp-breadcrumbs ol {
-    list-style: none;
-    padding: 0;
     display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--pdp-text-dim);
+    margin-bottom: 2.5rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    font-family: var(--font-display, 'Inter', sans-serif);
+    letter-spacing: 0.5px;
   }
-  .pdp-breadcrumbs a {
-    color: var(--text-muted);
+  .nav-link {
+    color: var(--pdp-text-dim);
     text-decoration: none;
-    transition: color 0.2s ease;
-    text-transform: capitalize;
+    transition: color 0.3s;
   }
-  .pdp-breadcrumbs a:hover {
-    color: var(--primary);
+  .nav-link:hover {
+    color: #fff;
   }
   .separator {
-    margin-left: 0.5rem;
-    opacity: 0.5;
+    opacity: 0.4;
+  }
+  .current {
+    color: #fff;
+    font-weight: 500;
   }
 
-  /* Grid Layout */
-  .pdp-grid {
+  /* Layout Grid */
+  .pdp-modern-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  @media (min-width: 900px) {
-    .pdp-grid {
-      grid-template-columns: 1fr 1fr;
+  @media (min-width: 1024px) {
+    .pdp-modern-grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 5rem;
       align-items: start;
     }
   }
 
-  /* Gallery */
-  .pdp-gallery {
+  /* Gallery side */
+  .pdp-gallery-area {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    position: sticky;
-    top: calc(var(--header-height) + 2rem);
+    gap: 2rem;
   }
-  .pdp-gallery-main {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    overflow: hidden;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  .main-image-container {
     position: relative;
-    padding: 2rem;
-  }
-  .pdp-gallery-main img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .pdp-gallery-main:hover img.zoomable {
-    transform: scale(1.15);
-  }
-  .pdp-gallery-fallback {
-    width: 100%;
-    height: 100%;
-    background: var(--bg-surface);
+    background: var(--pdp-surface);
+    border: 1px solid var(--pdp-border);
+    border-radius: 24px;
+    aspect-ratio: 4/4;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: crosshair;
+  }
+  @media (min-width: 1024px) {
+    .main-image-container {
+      aspect-ratio: 4/3.5;
+    }
   }
 
-  .pdp-gallery-thumbnails {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
+  .ambient-glow {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 60%);
+    filter: blur(50px);
+    z-index: 0;
+    pointer-events: none;
   }
-  .thumb-btn {
-    width: 80px;
-    height: 80px;
-    border-radius: 0.5rem;
-    border: 2px solid transparent;
-    cursor: pointer;
-    background: var(--bg-surface);
-    padding: 0.5rem;
-    transition: border-color 0.2s ease;
-  }
-  .thumb-btn img {
-    width: 100%;
-    height: 100%;
+
+  .zoom-image {
+    width: 65%;
+    height: 65%;
     object-fit: contain;
-  }
-  .thumb-btn:hover {
-    border-color: var(--primary-light);
-  }
-  .thumb-btn.active {
-    border-color: var(--primary);
-  }
-
-  /* Product Info */
-  .pdp-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .pdp-badge {
-    align-self: flex-start;
-    background: var(--primary);
-    color: #fff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .pdp-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    line-height: 1.1;
-    color: var(--text-main);
-    margin: 0;
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform-origin 0.2s ease-out;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.4));
+    transform-origin: center center;
   }
   
-  .pdp-price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
+  .pdp-gallery-fallback {
+    z-index: 1;
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
   }
-  .price-contact {
-    font-size: 1.5rem;
-    color: var(--text-muted);
+  .glowing-icon {
+    font-size: 4rem;
+    color: rgba(255,255,255,0.1);
   }
 
-  .pdp-description {
+  /* Thumbnails */
+  .pdp-thumbnails {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    .pdp-thumbnails { justify-content: flex-start; }
+  }
+
+  .thumb-ring {
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 3px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  .thumb-ring.active {
+    border-color: rgba(138, 43, 226, 0.6);
+  }
+  .thumb-inner {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background: var(--pdp-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.3s ease, background 0.3s;
+  }
+  .thumb-ring:hover .thumb-inner {
+    background: rgba(255,255,255,0.06);
+    transform: scale(0.95);
+  }
+  .thumb-inner img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  /* Details side */
+  .sticky-info {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .new-badge {
+    background: rgba(138, 43, 226, 0.15);
+    color: #cb9bfa;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+  }
+
+  .pdp-headline {
+    font-family: var(--font-display, 'Inter', sans-serif);
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0 0 1rem 0;
+  }
+
+  .price-val {
+    font-size: 2.8rem;
+    font-family: var(--font-display, 'Inter', sans-serif);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -1px;
+  }
+  
+  .price-contact-text {
+    font-size: 1.5rem;
+    color: var(--pdp-text-dim);
+  }
+
+  .pdp-body-text {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-muted);
+    color: var(--pdp-text-dim);
   }
 
-  /* Specifications Box */
-  .pdp-specs-box {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
+  /* Tech Specs */
+  .tech-specs {
+    background: var(--pdp-surface);
+    border: 1px solid var(--pdp-border);
+    border-radius: 16px;
     padding: 1.5rem;
   }
-  .pdp-specs-box h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
+  .specs-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
   }
-  .pdp-specs-box ul {
+  .specs-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.8rem;
   }
-  .pdp-specs-box li {
+  .spec-row {
     display: flex;
-    justify-content: space-between;
+    align-items: baseline;
     font-size: 0.95rem;
   }
   .spec-label {
-    color: var(--text-muted);
-    font-weight: 500;
+    color: var(--pdp-text-dim);
+    flex-shrink: 0;
+  }
+  .spec-line {
+    flex-grow: 1;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    margin: 0 1rem;
+    opacity: 0.5;
   }
   .spec-value {
-    color: var(--text-main);
-    font-weight: 600;
+    color: #fff;
+    font-weight: 500;
+    text-align: right;
+    flex-shrink: 0;
   }
 
   /* Actions */
@@ -340,100 +437,117 @@ const productPrice = (!isZeroPrice && product.precio)
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
   }
-  @media (min-width: 600px) {
+  @media (min-width: 640px) {
     .pdp-actions {
       flex-direction: row;
     }
-    .pdp-actions .btn {
-      flex: 1;
-    }
   }
 
-  .btn {
-    display: inline-flex;
+  .btn-action {
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-radius: 3rem;
-    font-weight: 600;
+    gap: 0.75rem;
+    padding: 1.2rem;
+    border-radius: 12px;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-  }
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-  }
-  .btn-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-main);
-    border: 2px solid var(--border-color);
-  }
-  .btn-secondary:hover {
-    border-color: var(--text-main);
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .btn-whatsapp {
-    border-color: #25D366;
-    color: #25D366;
-  }
-  .btn-whatsapp:hover {
-    background: #25D366;
+  .primary-action {
+    background: #fff;
     color: #000;
+    border: none;
+  }
+  .primary-action:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.15);
   }
 
-  .pdp-guarantees {
+  .secondary-action {
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+  }
+  .secondary-action:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* Trust Signals */
+  .pdp-trust-signals {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--pdp-border);
+    margin-top: 1rem;
+  }
+  .trust-item {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-  }
-  .guarantee-item {
-    display: flex;
     align-items: center;
-    gap: 0.75rem;
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    gap: 0.5rem;
+    color: var(--pdp-text-dim);
+    font-size: 0.8rem;
   }
-  .guarantee-item .material-symbols-outlined {
-    font-size: 1.5rem;
-    color: var(--text-main);
+  .trust-icon {
+    font-size: 1.4rem;
+    color: #fff;
+    opacity: 0.8;
   }
-  @media (min-width: 600px) {
-    .pdp-guarantees {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
+
 </style>
 
 <script>
-  // Simple thumbnail gallery switcher
-  const thumbs = document.querySelectorAll('.thumb-btn');
-  const mainImage = document.getElementById('main-product-image') as HTMLImageElement | null;
+  // Hover Zoom Effect
+  const container = document.getElementById('zoom-container');
+  const img = document.getElementById('main-product-image') as HTMLImageElement;
 
+  if (container && img) {
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const xPercent = (x / rect.width) * 100;
+      const yPercent = (y / rect.height) * 100;
+      
+      img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+      img.style.transform = 'scale(1.4)';
+    });
+
+    container.addEventListener('mouseleave', () => {
+      img.style.transformOrigin = 'center center';
+      img.style.transform = 'scale(1)';
+    });
+  }
+
+  // Thumbnails Switcher with smooth crossfade
+  const thumbs = document.querySelectorAll('.thumb-ring');
+  
   thumbs.forEach(btn => {
     btn.addEventListener('click', () => {
-      // update active state
+      if (btn.classList.contains('active')) return;
+      
       thumbs.forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
       
-      // change image
-      if (mainImage) {
-        mainImage.src = btn.getAttribute('data-image') || '';
+      const newSrc = btn.getAttribute('data-image');
+      if (img && newSrc) {
+        // Simple crossfade
+        img.animate([
+          { opacity: 0.5, filter: 'blur(4px)' },
+          { opacity: 1, filter: 'blur(0)' }
+        ], { duration: 300, easing: 'ease-out' });
+        
+        img.src = newSrc;
       }
     });
   });
