@@ -2,7 +2,6 @@
 /**
  * BaseLayout.astro — Root HTML shell: fonts, styles, SEO head, TopBar, Header, Footer
  */
-import TopBar from '@components/layout/TopBar.astro';
 import Header from '@components/layout/Header.astro';
 import Footer from '@components/layout/Footer.astro';
 import MetaTags from '@components/MetaTags.astro';
@@ -35,7 +34,6 @@ const props = Astro.props;
     <!-- Skip to content for keyboard users -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-    <TopBar />
     <Header />
 
     <main id="main-content" tabindex="-1">

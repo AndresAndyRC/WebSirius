@@ -61,36 +61,38 @@ const navLinks: { label: string; href: string; active?: boolean }[] = [
     </div>
   </div>
 
-  <!-- Mobile navigation -->
-  <nav id="mobile-nav" class="header__mobile-nav" aria-label="Menú móvil" hidden>
-    <ul class="header__mobile-list" role="list">
-      {navLinks.map(link => (
+  <!-- Mobile navigation with smooth drop animation -->
+  <div id="mobile-nav-wrapper" class="header__mobile-wrapper">
+    <nav id="mobile-nav" class="header__mobile-nav" aria-label="Menú móvil">
+      <ul class="header__mobile-list" role="list">
+        {navLinks.map(link => (
+          <li>
+            <a href={link.href} class="header__mobile-link">
+              {link.label}
+            </a>
+          </li>
+        ))}
         <li>
-          <a href={link.href} class="header__mobile-link">
-            {link.label}
+          <a
+            href="/colecciones"
+            class="btn btn--primary header__mobile-cta"
+          >
+            Ver Catálogo →
           </a>
         </li>
-      ))}
-      <li>
-        <a
-          href="/colecciones"
-          class="btn btn--primary header__mobile-cta"
-        >
-          Ver Catálogo →
-        </a>
-      </li>
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <script>
   const toggle = document.getElementById('menu-toggle');
-  const nav    = document.getElementById('mobile-nav');
+  const wrapper = document.getElementById('mobile-nav-wrapper');
 
   toggle?.addEventListener('click', () => {
     const isOpen = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!isOpen));
-    nav?.toggleAttribute('hidden');
+    wrapper?.classList.toggle('is-expanded');
     toggle.classList.toggle('is-open');
   });
 
@@ -98,7 +100,7 @@ const navLinks: { label: string; href: string; active?: boolean }[] = [
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
       toggle.setAttribute('aria-expanded', 'false');
-      nav?.setAttribute('hidden', '');
+      wrapper?.classList.remove('is-expanded');
       toggle.classList.remove('is-open');
     }
   });
@@ -107,10 +109,12 @@ const navLinks: { label: string; href: string; active?: boolean }[] = [
 <style>
 .header {
   position: sticky;
-  top: var(--topbar-h);
+  top: 0;
   z-index: var(--z-sticky);
   height: var(--header-h);
   border-bottom: 1px solid var(--color-surface-border);
+  background: rgba(10, 10, 14, 0.85); /* Ensures no gap below content on scroll */
+  backdrop-filter: blur(12px);
 }
 
 .header__inner {
@@ -249,16 +253,35 @@ const navLinks: { label: string; href: string; active?: boolean }[] = [
 }
 
 /* Mobile nav */
-.header__mobile-nav {
+.header__mobile-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
   background: var(--color-surface-raised);
-  border-top: 1px solid var(--color-surface-border);
-  padding: var(--space-4);
+  border-bottom: 1px solid transparent;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-out-expo), border-color var(--duration-fast);
+  z-index: -1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0);
+}
+
+.header__mobile-wrapper.is-expanded {
+  grid-template-rows: 1fr;
+  border-bottom-color: var(--color-surface-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.header__mobile-nav {
+  overflow: hidden;
 }
 
 .header__mobile-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  padding: var(--space-4);
 }
 
 .header__mobile-link {
