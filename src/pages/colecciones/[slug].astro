@@ -15,11 +15,65 @@ export async function getStaticPaths() {
 
 const { collection } = Astro.props;
 
-// Filter products based on category exact match
-const products = todosLosProductos.filter((p: any) => p.categoria === collection.id);
+// Dynamic Category Matching (Fuzzy based on new JSON structure)
+const products = todosLosProductos.filter((p: any) => {
+  const t = `${p.slug} ${p.title} ${(p.tags || []).join(' ')}`.toLowerCase();
+  const c = collection.id;
+
+  if (c === 'paneles-led-redondos') return t.includes('panel') && t.includes('redondo');
+  if (c === 'paneles-led-cuadrados') return t.includes('panel') && t.includes('cuadrad');
+  if (c === 'paneles-led-grandes-dimensiones') return t.includes('panel') && (t.includes('grande') || t.includes('industrial') || t.includes('60x60') || t.includes('120x30'));
+  if (c === 'cintas-led') return t.includes('cinta');
+  if (c === 'bombillos') return t.includes('bombillo') && !t.includes('vintage');
+  if (c === 'bombillos-vintage') return t.includes('bombillo') && t.includes('vintage');
+  if (c === 'lamparas-colgantes') return t.includes('lampara') && (t.includes('colgante') || t.includes('techo'));
+  if (c === 'lamparas-alta-potencia') return t.includes('lampara') && (t.includes('potencia') || t.includes('high') || t.includes('ufo'));
+  if (c === 'lamparas-escritorio') return t.includes('escritorio');
+  if (c === 'apliques-de-pared') return t.includes('aplique');
+  if (c === 'balas-led') return t.includes('bala');
+  if (c === 'linternas-led') return t.includes('linterna');
+  if (c === 'iluminacion-emergencia') return t.includes('emergencia');
+  
+  if (c === 'lamparas-jardin' || c === 'cintas-led-exterior') return t.includes('exterior') || t.includes('jardin');
+  if (c === 'iluminacion-solar') return t.includes('solar');
+  if (c === 'balas-led-sumergibles') return t.includes('sumergible') || t.includes('piscina');
+  if (c === 'llaves-jardin') return t.includes('llave') && (t.includes('jardin') || t.includes('exterior'));
+  if (c === 'extractores-aire') return t.includes('extractor');
+
+  if (c === 'tomacorrientes-interruptores') return t.includes('toma ') || t.includes('interruptor') || t.includes('toma-doble') || t.includes('linea-');
+  if (c === 'cables-electricos') return t.includes('cable');
+  if (c === 'breaker-s') return t.includes('breaker') || t.includes('disyuntor');
+  if (c === 'medidores-y-tableros-electricos') return t.includes('tablero') || t.includes('medidor');
+  if (c === 'extension') return t.includes('extension');
+  if (c === 'multitomas') return t.includes('multitoma');
+  if (c === 'limpiadores-y-lubricantes') return t.includes('limpiador') || t.includes('lubricante') || t.includes('wd40') || t.includes('wd-40');
+  
+  if (c === 'accesorios-para-bano') return t.includes('baño') || t.includes('bano') || t.includes('ducha');
+  if (c === 'llave-de-lavaplatos') return t.includes('lavaplato') || t.includes('griferia');
+  if (c === 'accesorios-de-ferreteria') return t.includes('tornillo') || t.includes('amarre') || t.includes('chazo') || t.includes('cinta-');
+
+  // Fallback map check
+  let score = 0;
+  collection.tags.forEach((tag: string) => {
+    if (t.includes(tag.toLowerCase())) score++;
+  });
+  return score >= 2;
+}).map((p: any) => {
+  // Inject specs as root properties for filtering and badges
+  const enhanced = { ...p };
+  if (enhanced.specs && Array.isArray(enhanced.specs)) {
+    enhanced.specs.forEach((s: any) => {
+      const k = s.label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      if (k && s.value) {
+        enhanced[k] = s.value;
+      }
+    });
+  }
+  return enhanced;
+});
 
 // Dynamically extract filters from this collection's products
-const excludedKeys = new Set(['name', 'slug', 'categoria', 'desc', 'precio', 'price', 'agotado', 'ip', 'control', 'isNew']);
+const excludedKeys = new Set(['name', 'slug', 'categoria', 'desc', 'precio', 'price', 'agotado', 'ip', 'control', 'isNew', 'title', 'vendor', 'sku', 'status', 'main_description_html', 'beneficios_html', 'aplicaciones_html', 'specs', 'faqs', 'tags', 'garantia', 'imagenes', 'images', 'url_producto']);
 const filterableKeys = new Set<string>();
 
 products.forEach((p: any) => {
@@ -112,8 +166,9 @@ const accent = themeColors[collection.category] || '#ef4444';
                 dataAttrs[`data-${k}`] = p[k];
             });
 
-            const priceDisplay = p.precio && p.precio !== '$0' ? p.precio : 
-                                 (p.price && p.price > 0 ? `$${p.price.toLocaleString()}` : null);
+            const rawPrice = parseFloat(p.precio || p.price);
+            const isZeroPrice = isNaN(rawPrice) || rawPrice === 0;
+            const priceDisplay = !isZeroPrice ? `$${rawPrice.toLocaleString('es-CO')}` : null;
 
             return (
               <article class="prod-card glass" {...dataAttrs}>
@@ -146,8 +201,8 @@ const accent = themeColors[collection.category] || '#ef4444';
                      })}
                   </div>
 
-                  <h3 class="prod-card__name">{p.name}</h3>
-                  <p class="prod-card__desc line-clamp">{p.desc}</p>
+                  <h3 class="prod-card__name">{p.title || p.name}</h3>
+                  <p class="prod-card__desc line-clamp">{(p.desc || (p.main_description_html || '').replace(/<[^>]*>?/gm, '')).substring(0, 120)}...</p>
                   
                   <div class="prod-card__price-row">
                     {priceDisplay ? (

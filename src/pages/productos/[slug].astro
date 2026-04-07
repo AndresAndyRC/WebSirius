@@ -18,14 +18,14 @@ const mainImg = gallery.length > 0 ? gallery[0] : null;
 // Specs directly from parsed data
 const specs = product.specs || [];
 
-const isZeroPrice = product.price === '0.00' || product.price === 0;
+const isZeroPrice = String(product.price) === '0.00' || String(product.price) === '0';
 const parsedPrice = parseFloat(product.price);
 const productPrice = (!isZeroPrice && !isNaN(parsedPrice)) 
   ? `$${parsedPrice.toLocaleString('es-CO')}` 
   : null;
 
 // Find Related Products by tags (max 4, excluding current)
-let relatedProducts = [];
+let relatedProducts: any[] = [];
 if (product.tags && product.tags.length > 0) {
   relatedProducts = productos.filter(p => 
     p.slug !== product.slug && 
@@ -39,7 +39,13 @@ if (relatedProducts.length < 4) {
   relatedProducts = [...new Set([...relatedProducts, ...fillers])].slice(0, 4);
 }
 
-const whtsMsg = encodeURIComponent(`Hola, busco información de: ${product.title} (SKU: ${product.sku})`);
+const whtsMsg = encodeURIComponent(`Hola, estoy interesado en el producto: ${product.title} (SKU: ${product.sku})`);
+
+// Remover emojis de los textos en HTML usando regex Unicode Property Escapes
+const cleanEmojis = (str: string) => {
+  if (!str) return '';
+  return str.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}\uFE0F]/gu, '');
+};
 
 // Short descriptions fix
 let cleanDescription = product.main_description_html?.trim() || '';
@@ -89,8 +95,8 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
         )}
       </section>
 
-      <!-- Info Area (Right Side) -->
-      <section class="pdp-details-area">
+      <!-- Info Area (Right Side - Buy Box) -->
+      <section class="pdp-buybox-area">
         <div class="sticky-info">
           
           <div class="header-info animate-slide-up" style="--delay: 0.2s">
@@ -108,57 +114,8 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
             </div>
           </div>
 
-          <!-- Parsed Description HTML -->
-          <div class="pdp-html-content animate-slide-up" style="--delay: 0.3s" set:html={cleanDescription}></div>
-
-          <!-- Beneficios (Only if available) -->
-          {product.beneficios_html && product.beneficios_html.trim() !== '' && (
-            <div class="pdp-html-content highlights-block animate-slide-up" style="--delay: 0.35s" set:html={product.beneficios_html}></div>
-          )}
-
-          <!-- Aplicaciones (Only if available) -->
-          {product.aplicaciones_html && product.aplicaciones_html.trim() !== '' && (
-            <div class="pdp-html-content applications-block animate-slide-up" style="--delay: 0.38s" set:html={product.aplicaciones_html}></div>
-          )}
-
-          <!-- Technical Specs List -->
-          {specs.length > 0 && (
-            <div class="tech-specs animate-slide-up" style="--delay: 0.4s">
-              <h3 class="section-title">Especificaciones Técnicas</h3>
-              <ul class="specs-list">
-                {specs.map((spec) => (
-                  <li class="spec-row">
-                    <span class="spec-label">{spec.label}</span>
-                    <span class="spec-line"></span>
-                    <span class="spec-value">{spec.value as string}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          <!-- FAQs Accordion -->
-          {product.faqs && product.faqs.length > 0 && (
-            <div class="pdp-faqs animate-slide-up" style="--delay: 0.45s">
-              <h3 class="section-title">Preguntas Frecuentes</h3>
-              <div class="accordion-group">
-                {product.faqs.map((faq) => (
-                   <details class="glass-accordion">
-                     <summary class="accordion-title">
-                       {faq.pregunta}
-                       <span class="material-symbols-outlined icon">expand_more</span>
-                     </summary>
-                     <div class="accordion-content">
-                       <p>{faq.respuesta}</p>
-                     </div>
-                   </details>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Quantity Selector & Actions -->
-          <div class="pdp-purchase-area animate-slide-up" style="--delay: 0.5s">
+          <!-- Quantity Selector & Actions FIRST -->
+          <div class="pdp-purchase-area animate-slide-up" style="--delay: 0.3s">
             <div class="quantity-selector">
               <button class="qty-btn minus" id="qty-minus" aria-label="Disminuir cantidad">
                 <span class="material-symbols-outlined">remove</span>
@@ -183,8 +140,8 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
             </div>
           </div>
 
-          <!-- Premium Guarantees minimalist -->
-          <div class="pdp-trust-signals animate-slide-up" style="--delay: 0.6s">
+          <!-- Trust Signals -->
+          <div class="pdp-trust-signals animate-slide-up" style="--delay: 0.4s">
             <div class="trust-item">
               <span class="material-symbols-outlined trust-icon">verified</span>
               <span>{product.garantia ? product.garantia.replace(/\n/g, ' ') : 'Garantía Oficial'}</span>
@@ -203,6 +160,66 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
       </section>
 
     </main>
+
+    <!-- Extended Product Details Area -->
+    <section class="pdp-extended-info-container">
+      <div class="pdp-extended-grid">
+        <div class="pdp-main-content">
+          <div class="pdp-html-content content-box glass-layered animate-slide-up" style="--delay: 0.5s">
+            <h2 class="section-title">Descripción Detallada</h2>
+            <div set:html={cleanDescription}></div>
+          </div>
+
+          <!-- Beneficios (Only if available) -->
+          {product.beneficios_html && product.beneficios_html.trim() !== '' && (
+            <div class="pdp-html-content highlights-block glass-layered animate-slide-up" style="--delay: 0.55s" set:html={cleanEmojis(product.beneficios_html)}></div>
+          )}
+
+          <!-- Aplicaciones (Only if available) -->
+          {product.aplicaciones_html && product.aplicaciones_html.trim() !== '' && (
+            <div class="pdp-html-content applications-block glass-layered animate-slide-up" style="--delay: 0.6s" set:html={cleanEmojis(product.aplicaciones_html)}></div>
+          )}
+        </div>
+
+        <div class="pdp-sidebar-content">
+          <!-- Technical Specs List -->
+          {specs.length > 0 && (
+            <div class="tech-specs glass-layered animate-slide-up" style="--delay: 0.65s">
+              <h3 class="section-title">Especificaciones Técnicas</h3>
+              <ul class="specs-list">
+                {specs.map((spec) => (
+                  <li class="spec-row">
+                    <span class="spec-label">{spec.label}</span>
+                    <span class="spec-line"></span>
+                    <span class="spec-value">{spec.value as string}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- FAQs Accordion -->
+      {product.faqs && product.faqs.length > 0 && (
+        <div class="pdp-faqs animate-slide-up" style="--delay: 0.7s">
+          <h3 class="section-title">Preguntas Frecuentes</h3>
+          <div class="accordion-group faq-grid">
+            {product.faqs.map((faq) => (
+               <details class="glass-accordion">
+                 <summary class="accordion-title">
+                   {faq.pregunta}
+                   <span class="material-symbols-outlined icon">expand_more</span>
+                 </summary>
+                 <div class="accordion-content">
+                   <p>{faq.respuesta}</p>
+                 </div>
+               </details>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
 
     <!-- Related Products Cross Selling -->
     {relatedProducts.length > 0 && (
@@ -412,13 +429,31 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
     border-radius: 16px; padding: 1.5rem;
   }
   .specs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
-  .spec-row { display: flex; align-items: baseline; font-size: 0.9rem; }
+  .spec-row { 
+    display: flex; flex-direction: column; gap: 0.3rem; 
+    padding: 0.8rem 0; border-bottom: 1px dashed rgba(255,255,255,0.1); 
+    font-size: 0.9rem; 
+  }
+  .spec-row:last-child { border-bottom: none; }
+  @media (min-width: 640px) {
+    .spec-row { flex-direction: row; align-items: baseline; justify-content: space-between; border-bottom: none; padding: 0; }
+  }
   .spec-label { color: var(--pdp-text-dim); flex-shrink: 0; }
-  .spec-line { flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.15); margin: 0 1rem; opacity: 0.5; }
-  .spec-value { color: #fff; font-weight: 500; text-align: right; flex-shrink: 0; }
+  .spec-line { display: none; }
+  @media (min-width: 640px) {
+    .spec-line { display: block; flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.15); margin: 0 1rem; opacity: 0.5; }
+  }
+  .spec-value { color: #fff; font-weight: 500; text-align: left; opacity: 0.95; word-wrap: break-word; }
+  @media (min-width: 640px) {
+    .spec-value { text-align: right; max-width: 60%; }
+  }
 
   /* Accordions */
-  .pdp-faqs { margin-top: 1rem; }
+  .pdp-faqs { margin-top: 3rem; }
+  .faq-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 1024px) {
+    .faq-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
   .accordion-group { display: flex; flex-direction: column; gap: 0.8rem; }
   .glass-accordion {
     background: var(--pdp-surface); border: 1px solid var(--pdp-border); border-radius: 12px;
@@ -478,6 +513,38 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
   }
   .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--pdp-text-dim); font-size: 0.8rem; text-align: center; }
   .trust-icon { font-size: 1.4rem; color: #fff; opacity: 0.8; }
+
+  /* Extended Info Area */
+  .pdp-extended-info-container {
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--pdp-border);
+  }
+  .pdp-extended-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .pdp-extended-grid {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .pdp-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .content-box { margin-bottom: 0; }
+  .glass-layered {
+    background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    border: 1px solid var(--pdp-border);
+    border-radius: 16px; padding: 2rem;
+  }
 
   /* Related Products */
   .pdp-related { margin-top: 6rem; border-top: 1px solid var(--pdp-border); padding-top: 4rem; }
