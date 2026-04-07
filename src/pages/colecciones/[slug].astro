@@ -79,9 +79,13 @@ const filterableKeys = new Set<string>();
 
 products.forEach((p: any) => {
   Object.keys(p).forEach(k => {
-    if (!excludedKeys.has(k)) filterableKeys.add(k);
+    // Exclude if it's in the excluded keys list OR if it consists purely of numbers
+    if (!excludedKeys.has(k) && !/^\d+$/.test(k)) {
+        filterableKeys.add(k);
+    }
   });
 });
+
 
 const filters: Record<string, string[]> = {};
 filterableKeys.forEach(key => {
@@ -142,26 +146,45 @@ const expertTips = [
     <div class="container coll-layout">
       
       <!-- Dynamic Filter Panel -->
-      <aside class="coll-filters glass" id="filters-panel">
-        <h2 class="coll-filters__title">Filtros</h2>
+      <aside class="coll-filters" id="filters-panel">
+        <div class="coll-filters__header">
+          <h2 class="coll-filters__title">
+            <span class="material-symbols-outlined">tune</span>
+            Filtros
+          </h2>
+          <button class="coll-filters__reset" id="reset-filters" title="Limpiar filtros">
+            <span class="material-symbols-outlined">refresh</span>
+          </button>
+        </div>
+        
+        <div class="coll-filters__scroll-area">
         {Object.entries(filters).map(([key, values]) => {
-            const displayTitle = key.charAt(0).toUpperCase() + key.slice(1);
+            let displayTitle = key.replace(/-/g, ' ');
+            displayTitle = displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1);
             return (
-              <fieldset class="coll-filter-group">
-                <legend class="coll-filter-group__legend">{displayTitle}</legend>
-                <label class="coll-filter-chip">
-                  <input type="checkbox" class="filter-check" data-filter={key} value="all" checked/>
-                  <span>Todos</span>
-                </label>
-                {values.map(v => (
-                  <label class="coll-filter-chip">
-                    <input type="checkbox" class="filter-check" data-filter={key} value={v}/>
-                    <span>{v}</span>
+              <details class="coll-filter-group" open>
+                <summary class="coll-filter-group__legend">
+                  {displayTitle}
+                  <span class="material-symbols-outlined expand-icon">expand_more</span>
+                </summary>
+                <div class="coll-filter-group__options">
+                  <label class="coll-filter-chip coll-filter-chip--all">
+                    <input type="checkbox" class="filter-check sr-only" data-filter={key} value="all" checked/>
+                    <span class="custom-checkbox"></span>
+                    <span class="chip-label">Todos</span>
                   </label>
-                ))}
-              </fieldset>
+                  {values.map(v => (
+                    <label class="coll-filter-chip">
+                      <input type="checkbox" class="filter-check sr-only" data-filter={key} value={v}/>
+                      <span class="custom-checkbox"></span>
+                      <span class="chip-label">{v}</span>
+                    </label>
+                  ))}
+                </div>
+              </details>
             );
         })}
+        </div>
       </aside>
 
       <!-- Products Grid -->
@@ -341,6 +364,21 @@ const expertTips = [
       applyFilters(); 
     });
   });
+
+  const resetBtn = document.getElementById('reset-filters');
+  if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+          checks.forEach(c => {
+             if (c.value === 'all') c.checked = true;
+             else c.checked = false;
+          });
+          filterKeys.forEach(k => {
+             state[k].clear();
+             state[k].add('all');
+          });
+          applyFilters();
+      });
+  }
 </script>
 
 <style>
@@ -400,62 +438,218 @@ const expertTips = [
     padding-bottom: var(--space-20);
 }
 
-/* Filters Panel */
+/* Filters Panel Refined CSS */
 .glass {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
 .coll-filters {
-    padding: var(--space-6);
+    padding: 0;
     border-radius: 1.25rem;
     position: sticky;
     top: calc(var(--header-height, 80px) + 2rem);
     height: max-content;
-    max-height: 80vh;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.4) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 }
+
+.coll-filters__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+}
+
 .coll-filters__title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-main, #fff);
+    letter-spacing: 0.5px;
 }
+
+.coll-filters__title .material-symbols-outlined {
+    font-size: 1.3rem;
+    color: var(--primary, #3b82f6);
+}
+
+.coll-filters__reset {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.coll-filters__reset:hover {
+    color: var(--text-main, #fff);
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.coll-filters__scroll-area {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 0.5rem 1.5rem 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.coll-filters__scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+.coll-filters__scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+.coll-filters__scroll-area::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
 .coll-filter-group {
     border: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
+    padding: 1.2rem 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.coll-filter-group:last-child {
+    border-bottom: none;
+}
+
+.coll-filter-group__legend {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    transition: color 0.3s;
+}
+.coll-filter-group__legend::-webkit-details-marker {
+    display: none;
+}
+.coll-filter-group__legend:hover {
+    color: var(--text-main, #fff);
+}
+.coll-filter-group__legend .expand-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+details[open] .coll-filter-group__legend .expand-icon {
+    transform: rotate(180deg);
+}
+
+.coll-filter-group__options {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    margin-top: 1.25rem;
+    animation: slideDown 0.3s ease-out forwards;
 }
-.coll-filter-group__legend {
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted, #94a3b8);
-    margin-bottom: 0.5rem;
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+
 .coll-filter-chip {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
     font-size: 0.95rem;
-    color: var(--text-main, #fff);
+    color: var(--text-secondary, #cbd5e1);
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
+    padding: 0.2rem 0;
 }
 .coll-filter-chip:hover {
-    opacity: 0.8;
+    color: var(--text-main, #fff);
 }
-.filter-check {
-    accent-color: var(--primary, #3b82f6);
-    width: 1.1rem;
-    height: 1.1rem;
-    cursor: pointer;
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.custom-checkbox::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 9px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) scale(0) translateY(-1px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+}
+
+.filter-check:checked + .custom-checkbox {
+    background: var(--primary, #3b82f6);
+    border-color: var(--primary, #3b82f6);
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+.filter-check:checked + .custom-checkbox::after {
+    transform: rotate(45deg) scale(1) translateY(-1px);
+    opacity: 1;
+}
+
+.filter-check:focus-visible + .custom-checkbox {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.chip-label {
+    line-height: 1.4;
+    word-break: break-word;
+}
+.filter-check:checked ~ .chip-label {
+    color: var(--text-main, #fff);
+    font-weight: 500;
 }
 
 /* Grid & Cards */
