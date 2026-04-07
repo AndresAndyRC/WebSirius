@@ -107,12 +107,12 @@ const accent = themeColors[collection.category] || '#ef4444';
 // Didactic Tips Array
 const expertTips = [
   { 
-    title: '💡 Tip del Experto: Watts por Metro Cuadrado', 
+    title: 'Tip del Experto: Watts por Metro Cuadrado', 
     desc: 'La regla dorada para una buena iluminación es calcular entre 4W y 5W de tecnología LED por cada metro cuadrado. Si tu habitación mide 12m², busca paneles que sumen en total unos 60W.',
     icon: 'architecture' 
   },
   { 
-    title: '🌡️ Tip del Experto: ¿Cálida o Fría?', 
+    title: 'Tip del Experto: ¿Cálida o Fría?', 
     desc: 'Luz Cálida (3000K) le dice a tu cerebro que es hora de relajarse (ideal para salas y alcobas). Luz Fría (6500K) aumenta la concentración (perfecta para cocinas, estudios o talleres).',
     icon: 'thermostat' 
   }
@@ -170,8 +170,12 @@ const expertTips = [
            <span class="coll-count" id="product-count">{products.length} productos</span>
            
            <div class="coll-quick-pills">
-              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Cálida\'], .filter-check[value=\'3000K\']').forEach(c=>c.click())">🛋️ Para Relajarse (3000K)</button>
-              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Blanca\'], .filter-check[value=\'6500K\']').forEach(c=>c.click())">💼 Para Trabajar (6500K)</button>
+              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Cálida\'], .filter-check[value=\'3000K\']').forEach(c=>c.click())">
+                 <span class="material-symbols-outlined" style="font-size:1.1em;margin-right:4px;">weekend</span> Para Relajarse (3000K)
+              </button>
+              <button class="didactic-pill" onclick="document.querySelectorAll('.filter-check[value=\'Luz Blanca\'], .filter-check[value=\'6500K\']').forEach(c=>c.click())">
+                 <span class="material-symbols-outlined" style="font-size:1.1em;margin-right:4px;">work</span> Para Trabajar (6500K)
+              </button>
            </div>
            
            <button class="coll-mobile-filter-btn" id="filter-toggle">Filtros</button>
@@ -459,9 +463,11 @@ const expertTips = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    min-height: 48px;
 }
 .coll-count {
     color: var(--text-muted, #94a3b8);
@@ -632,6 +638,10 @@ const expertTips = [
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
 }
 .didactic-pill:hover {
     background: rgba(255,255,255,0.15);
