@@ -43,8 +43,7 @@ const socialLinks = [
     <!-- Brand row -->
     <div class="footer__brand">
       <a href="/" class="footer__logo" aria-label="SIRIUS Iluminación — Inicio">
-        <span class="footer__logo-mark" aria-hidden="true">✦</span>
-        <span class="footer__logo-text font-display">SIRIUS</span>
+        <img src="/Logo-sirius.avif" alt="SIRIUS Iluminación" class="footer__logo-img" width="160" height="42" />
       </a>
       <p class="footer__tagline">
         La tecnología LED más avanzada para transformar tus espacios.<br />
@@ -148,8 +147,8 @@ const socialLinks = [
   gap: var(--space-2);
   margin-bottom: var(--space-4);
 }
-.footer__logo-mark { font-size: var(--text-xl); color: var(--color-brand-primary); }
-.footer__logo-text { font-size: var(--text-2xl); font-weight: var(--fw-bold); color: var(--color-text-primary); letter-spacing: -0.02em; }
+.footer__logo-img { height: 42px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); transition: transform var(--duration-fast); }
+.footer__logo:hover .footer__logo-img { transform: scale(1.02); }
 
 .footer__tagline {
   font-size: var(--text-sm);

@@ -115,4 +115,4 @@ Configurados en `vercel.json`:
 ## 📝 Tareas Pendientes
 
 - [ ] Agregar mejor estética a la página de los productos (Layout asimétrico, micro-animaciones, especificaciones técnicas ampliadas).
-- [ ] Poner logo e icono del cliente.
+- [x] Poner logo e icono del cliente.
