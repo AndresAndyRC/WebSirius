@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getProductImage } from '../../utils/imageCheck';
 import productos from '../../data/productos.json';
 
 export async function getStaticPaths() {
@@ -12,52 +11,54 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 
-// Determine available images
-const img1 = getProductImage(product.slug, '1');
-const img2 = getProductImage(product.slug, '2');
-const img3 = getProductImage(product.slug, '3');
+// Now we use the parsed properties natively
+const gallery = product.images || [];
+const mainImg = gallery.length > 0 ? gallery[0] : null;
 
-const formatCategory = (cat: string) => {
-  return cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-};
+// Specs directly from parsed data
+const specs = product.specs || [];
 
-const gallery = [img1, img2, img3].filter(Boolean);
+const isZeroPrice = product.price === '0.00' || product.price === 0;
+const parsedPrice = parseFloat(product.price);
+const productPrice = (!isZeroPrice && !isNaN(parsedPrice)) 
+  ? `$${parsedPrice.toLocaleString('es-CO')}` 
+  : null;
 
-const excludedKeys = ['name', 'slug', 'categoria', 'desc', 'precio', 'price'];
-const specs = Object.entries(product)
-  .filter(([key]) => !excludedKeys.includes(key))
-  .map(([key, value]) => {
-    let displayValue = value;
-    if (typeof value === 'boolean') {
-      displayValue = value ? 'Sí' : 'No';
-    }
-    return { 
-      label: key.charAt(0).toUpperCase() + key.slice(1), 
-      value: displayValue 
-    };
-  });
+// Find Related Products by tags (max 4, excluding current)
+let relatedProducts = [];
+if (product.tags && product.tags.length > 0) {
+  relatedProducts = productos.filter(p => 
+    p.slug !== product.slug && 
+    p.tags && 
+    p.tags.some(t => product.tags.includes(t))
+  ).slice(0, 4);
+}
+// If not enough related by tags, just pick 4 random
+if (relatedProducts.length < 4) {
+  const fillers = productos.filter(p => p.slug !== product.slug && !relatedProducts.includes(p)).slice(0, 4 - relatedProducts.length);
+  relatedProducts = [...new Set([...relatedProducts, ...fillers])].slice(0, 4);
+}
 
-const isZeroPrice = product.precio === '$0' || product.price === 0;
-const productPrice = (!isZeroPrice && product.precio) 
-  ? product.precio 
-  : (!isZeroPrice && product.price ? `$${product.price.toLocaleString()}` : null);
+const whtsMsg = encodeURIComponent(`Hola, busco información de: ${product.title} (SKU: ${product.sku})`);
 
+// Short descriptions fix
+let cleanDescription = product.main_description_html?.trim() || '';
+if (!cleanDescription) cleanDescription = `<p>Descubre el ${product.title} de SIRIUS.</p>`;
+const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 150);
 ---
 
 <BaseLayout 
-  title={`${product.name} | SIRIUS Premium`}
-  description={product.desc || `Descubre ${product.name} de SIRIUS Iluminación. Diseño y rendimiento avanzado.`}
+  title={`${product.title} | SIRIUS Premium`}
+  description={metaDescription}
 >
   <div class="pdp-wrapper wrapper liquid-theme">
     
     <nav class="pdp-breadcrumbs animate-fade-in" aria-label="Breadcrumb">
       <a class="nav-link" href="/">Inicio</a>
       <span class="separator">/</span>
-      <a class="nav-link" href="/colecciones">Colecciones</a>
+      <a class="nav-link" href="/colecciones">Catálogo</a>
       <span class="separator">/</span>
-      <a class="nav-link" href={`/colecciones/${product.categoria}`}>{formatCategory(product.categoria)}</a>
-      <span class="separator">/</span>
-      <span class="current" aria-current="page">{product.name}</span>
+      <span class="current" aria-current="page">{product.title}</span>
     </nav>
 
     <main class="pdp-modern-grid">
@@ -66,8 +67,8 @@ const productPrice = (!isZeroPrice && product.precio)
       <section class="pdp-gallery-area animate-slide-up" style="--delay: 0.1s">
         <div class="main-image-container" id="zoom-container">
           <div class="ambient-glow"></div>
-          {img1 ? (
-             <img src={img1} alt={product.name} id="main-product-image" class="zoom-image glass-layered" />
+          {mainImg ? (
+             <img src={mainImg} alt={product.title} id="main-product-image" class="zoom-image glass-layered" />
           ) : (
              <div class="pdp-gallery-fallback">
                <span class="material-symbols-outlined glowing-icon">image</span>
@@ -93,8 +94,11 @@ const productPrice = (!isZeroPrice && product.precio)
         <div class="sticky-info">
           
           <div class="header-info animate-slide-up" style="--delay: 0.2s">
-            {'isNew' in product && product.isNew && <span class="badge new-badge">Premium Collection</span>}
-            <h1 class="pdp-headline">{product.name}</h1>
+            <div class="pdp-meta-row">
+              <span class="badge new-badge">{product.vendor || 'SIRIUS'}</span>
+              <span class="sku-badge">SKU: {product.sku}</span>
+            </div>
+            <h1 class="pdp-headline">{product.title}</h1>
             <div class="pdp-pricing">
               {productPrice ? (
                  <span class="price-val">{productPrice}</span>
@@ -104,47 +108,90 @@ const productPrice = (!isZeroPrice && product.precio)
             </div>
           </div>
 
-          {product.desc && (
-            <p class="pdp-body-text animate-slide-up" style="--delay: 0.3s">
-              {product.desc}
-            </p>
+          <!-- Parsed Description HTML -->
+          <div class="pdp-html-content animate-slide-up" style="--delay: 0.3s" set:html={cleanDescription}></div>
+
+          <!-- Beneficios (Only if available) -->
+          {product.beneficios_html && product.beneficios_html.trim() !== '' && (
+            <div class="pdp-html-content highlights-block animate-slide-up" style="--delay: 0.35s" set:html={product.beneficios_html}></div>
+          )}
+
+          <!-- Aplicaciones (Only if available) -->
+          {product.aplicaciones_html && product.aplicaciones_html.trim() !== '' && (
+            <div class="pdp-html-content applications-block animate-slide-up" style="--delay: 0.38s" set:html={product.aplicaciones_html}></div>
           )}
 
           <!-- Technical Specs List -->
-          <div class="tech-specs animate-slide-up" style="--delay: 0.4s">
-            <h3 class="specs-title">Especificaciones Técnicas</h3>
-            <ul class="specs-list">
-              {specs.map((spec) => (
-                <li class="spec-row">
-                  <span class="spec-label">{spec.label}</span>
-                  <span class="spec-line"></span>
-                  <span class="spec-value">{spec.value as string}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {specs.length > 0 && (
+            <div class="tech-specs animate-slide-up" style="--delay: 0.4s">
+              <h3 class="section-title">Especificaciones Técnicas</h3>
+              <ul class="specs-list">
+                {specs.map((spec) => (
+                  <li class="spec-row">
+                    <span class="spec-label">{spec.label}</span>
+                    <span class="spec-line"></span>
+                    <span class="spec-value">{spec.value as string}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          <!-- FAQs Accordion -->
+          {product.faqs && product.faqs.length > 0 && (
+            <div class="pdp-faqs animate-slide-up" style="--delay: 0.45s">
+              <h3 class="section-title">Preguntas Frecuentes</h3>
+              <div class="accordion-group">
+                {product.faqs.map((faq) => (
+                   <details class="glass-accordion">
+                     <summary class="accordion-title">
+                       {faq.pregunta}
+                       <span class="material-symbols-outlined icon">expand_more</span>
+                     </summary>
+                     <div class="accordion-content">
+                       <p>{faq.respuesta}</p>
+                     </div>
+                   </details>
+                ))}
+              </div>
+            </div>
+          )}
 
-          <!-- Actions -->
-          <div class="pdp-actions animate-slide-up" style="--delay: 0.5s">
-            <button class="btn-action primary-action">
-              <span class="material-symbols-outlined">shopping_bag</span>
-              <span>Añadir al Carrito</span>
-            </button>
-            <a href={`https://wa.me/573000000000?text=Hola,%20busco%20información%20del%20${encodeURIComponent(product.name)}`} target="_blank" rel="noopener noreferrer" class="btn-action secondary-action">
-              <span class="material-symbols-outlined">chat</span>
-              <span>Consultar Asesor</span>
-            </a>
+          <!-- Quantity Selector & Actions -->
+          <div class="pdp-purchase-area animate-slide-up" style="--delay: 0.5s">
+            <div class="quantity-selector">
+              <button class="qty-btn minus" id="qty-minus" aria-label="Disminuir cantidad">
+                <span class="material-symbols-outlined">remove</span>
+              </button>
+              <input type="number" class="qty-input" id="qty-input" value="1" min="1" aria-label="Cantidad" readonly />
+              <button class="qty-btn plus" id="qty-plus" aria-label="Aumentar cantidad">
+                <span class="material-symbols-outlined">add</span>
+              </button>
+            </div>
+            
+            <div class="pdp-actions">
+              <button class="btn-action primary-action">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span>Añadir al Carrito</span>
+              </button>
+              <a href={`https://wa.me/573000000000?text=${whtsMsg}`} target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.66-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                </svg>
+                <span>Consultar</span>
+              </a>
+            </div>
           </div>
 
           <!-- Premium Guarantees minimalist -->
           <div class="pdp-trust-signals animate-slide-up" style="--delay: 0.6s">
             <div class="trust-item">
-              <span class="material-symbols-outlined trust-icon">schedule</span>
-              <span>Envío 24/48h</span>
+              <span class="material-symbols-outlined trust-icon">verified</span>
+              <span>{product.garantia ? product.garantia.replace(/\n/g, ' ') : 'Garantía Oficial'}</span>
             </div>
             <div class="trust-item">
-              <span class="material-symbols-outlined trust-icon">verified</span>
-              <span>Garantía Oficial</span>
+              <span class="material-symbols-outlined trust-icon">local_shipping</span>
+              <span>Envío 24/48h</span>
             </div>
             <div class="trust-item">
               <span class="material-symbols-outlined trust-icon">lock</span>
@@ -156,16 +203,45 @@ const productPrice = (!isZeroPrice && product.precio)
       </section>
 
     </main>
+
+    <!-- Related Products Cross Selling -->
+    {relatedProducts.length > 0 && (
+      <section class="pdp-related animate-slide-up" style="--delay: 0.8s">
+        <h2 class="section-title related-title">Productos Relacionados</h2>
+        <div class="related-grid">
+           {relatedProducts.map(rp => {
+             const rpIsZero = rp.price === '0.00' || rp.price === 0;
+             const rpPrice = (!rpIsZero && !isNaN(parseFloat(rp.price))) 
+                ? `$${parseFloat(rp.price).toLocaleString('es-CO')}` 
+                : 'Consultar';
+             return (
+               <a href={`/productos/${rp.slug}`} class="related-card glass-layered">
+                 <div class="rp-img-wrapper">
+                   <img src={rp.images?.[0] || ''} alt={rp.title} loading="lazy" />
+                 </div>
+                 <div class="rp-info">
+                   <span class="rp-vendor">{rp.vendor}</span>
+                   <h4 class="rp-title">{rp.title}</h4>
+                   <span class="rp-price">{rpPrice}</span>
+                 </div>
+               </a>
+             );
+           })}
+        </div>
+      </section>
+    )}
+    
   </div>
 </BaseLayout>
 
-<style>
+<style is:global>
   /* Base Variables */
   :root {
     --pdp-border: rgba(255, 255, 255, 0.08);
     --pdp-bg: rgba(10, 10, 14, 0.4);
     --pdp-surface: rgba(255, 255, 255, 0.03);
     --pdp-text-dim: #94a3b8;
+    --primary-purple: #8a2be2;
   }
 
   .pdp-wrapper {
@@ -205,21 +281,10 @@ const productPrice = (!isZeroPrice && product.precio)
     font-family: var(--font-display, 'Inter', sans-serif);
     letter-spacing: 0.5px;
   }
-  .nav-link {
-    color: var(--pdp-text-dim);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .nav-link:hover {
-    color: #fff;
-  }
-  .separator {
-    opacity: 0.4;
-  }
-  .current {
-    color: #fff;
-    font-weight: 500;
-  }
+  .nav-link { color: var(--pdp-text-dim); text-decoration: none; transition: color 0.3s; }
+  .nav-link:hover { color: #fff; }
+  .separator { opacity: 0.4; }
+  .current { color: #fff; font-weight: 500; }
 
   /* Layout Grid */
   .pdp-modern-grid {
@@ -241,7 +306,6 @@ const productPrice = (!isZeroPrice && product.precio)
     flex-direction: column;
     gap: 2rem;
   }
-
   .main-image-container {
     position: relative;
     background: var(--pdp-surface);
@@ -255,254 +319,183 @@ const productPrice = (!isZeroPrice && product.precio)
     cursor: crosshair;
   }
   @media (min-width: 1024px) {
-    .main-image-container {
-      aspect-ratio: 4/3.5;
-    }
+    .main-image-container { aspect-ratio: 4/3.5; }
   }
-
   .ambient-glow {
     position: absolute;
-    width: 70%;
-    height: 70%;
+    width: 70%; height: 70%;
     background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 60%);
     filter: blur(50px);
-    z-index: 0;
-    pointer-events: none;
+    z-index: 0; pointer-events: none;
   }
-
   .zoom-image {
-    width: 65%;
-    height: 65%;
-    object-fit: contain;
-    z-index: 1;
+    width: 65%; height: 65%;
+    object-fit: contain; z-index: 1;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform-origin 0.2s ease-out;
     filter: drop-shadow(0 30px 40px rgba(0,0,0,0.4));
     transform-origin: center center;
   }
-  
-  .pdp-gallery-fallback {
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .glowing-icon {
-    font-size: 4rem;
-    color: rgba(255,255,255,0.1);
-  }
+  .pdp-gallery-fallback { z-index: 1; display: flex; align-items: center; justify-content: center; }
+  .glowing-icon { font-size: 4rem; color: rgba(255,255,255,0.1); }
 
   /* Thumbnails */
   .pdp-thumbnails {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+    display: flex; gap: 1rem; justify-content: flex-start;
+    overflow-x: auto; padding-bottom: 0.5rem;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
   }
-  @media (min-width: 1024px) {
-    .pdp-thumbnails { justify-content: flex-start; }
-  }
-
+  .pdp-thumbnails::-webkit-scrollbar { display: none; }
   .thumb-ring {
-    background: transparent;
-    border: 2px solid transparent;
-    border-radius: 14px;
-    padding: 3px;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+    background: transparent; border: 2px solid transparent; border-radius: 14px;
+    padding: 3px; cursor: pointer; transition: border-color 0.3s ease; flex-shrink: 0;
   }
-  .thumb-ring.active {
-    border-color: rgba(138, 43, 226, 0.6);
-  }
+  .thumb-ring.active { border-color: rgba(138, 43, 226, 0.6); }
   .thumb-inner {
-    width: 70px;
-    height: 70px;
-    border-radius: 10px;
-    background: var(--pdp-surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    width: 70px; height: 70px; border-radius: 10px; background: var(--pdp-surface);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
     transition: transform 0.3s ease, background 0.3s;
   }
-  .thumb-ring:hover .thumb-inner {
-    background: rgba(255,255,255,0.06);
-    transform: scale(0.95);
-  }
-  .thumb-inner img {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-  }
+  .thumb-ring:hover .thumb-inner { background: rgba(255,255,255,0.06); transform: scale(0.95); }
+  .thumb-inner img { width: 80%; height: 80%; object-fit: contain; }
 
   /* Details side */
   .sticky-info {
-    position: sticky;
-    top: calc(var(--header-height) + 2rem);
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    position: sticky; top: calc(var(--header-height) + 2rem);
+    display: flex; flex-direction: column; gap: 2rem;
   }
 
+  .pdp-meta-row { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; }
   .badge {
-    display: inline-block;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
+    display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.7rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
   }
   .new-badge {
-    background: rgba(138, 43, 226, 0.15);
-    color: #cb9bfa;
-    border: 1px solid rgba(138, 43, 226, 0.3);
+    background: rgba(138, 43, 226, 0.15); color: #cb9bfa; border: 1px solid rgba(138, 43, 226, 0.3);
   }
+  .sku-badge { font-size: 0.75rem; color: var(--pdp-text-dim); font-family: monospace; }
 
   .pdp-headline {
     font-family: var(--font-display, 'Inter', sans-serif);
-    font-size: clamp(2.5rem, 3.5vw, 3.5rem);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: #fff;
-    margin: 0 0 1rem 0;
+    font-size: clamp(2rem, 3vw, 3rem); font-weight: 600; line-height: 1.1;
+    letter-spacing: -0.03em; color: #fff; margin: 0 0 0.5rem 0;
   }
 
-  .price-val {
-    font-size: 2.8rem;
-    font-family: var(--font-display, 'Inter', sans-serif);
-    font-weight: 300;
-    color: #fff;
-    letter-spacing: -1px;
+  .price-val { font-size: 2.8rem; font-family: var(--font-display, 'Inter', sans-serif); font-weight: 300; color: #fff; letter-spacing: -1px; }
+  .price-contact-text { font-size: 1.5rem; color: var(--pdp-text-dim); }
+
+  /* HTML Content Parsing */
+  .pdp-html-content {
+    font-size: 1.05rem; line-height: 1.6; color: var(--pdp-text-dim);
+  }
+  .pdp-html-content p { margin-bottom: 1rem; }
+  .pdp-html-content strong { color: #fff; font-weight: 500; }
+  .pdp-html-content h2 { font-size: 1.2rem; color: #fff; margin-top: 1.5rem; margin-bottom: 1rem; }
+  .pdp-html-content ul { list-style: none; padding-left: 0; margin-bottom: 1.5rem; }
+  .pdp-html-content li { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; }
+  .pdp-html-content li::before {
+    content: "•"; position: absolute; left: 0; color: var(--primary-purple); font-weight: bold;
   }
   
-  .price-contact-text {
-    font-size: 1.5rem;
-    color: var(--pdp-text-dim);
+  .highlights-block {
+    background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+    border: 1px solid var(--pdp-border); border-radius: 16px; padding: 1.5rem;
   }
 
-  .pdp-body-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--pdp-text-dim);
+  .section-title {
+    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
+    color: #fff; margin-bottom: 1.5rem; font-weight: 600;
   }
 
   /* Tech Specs */
   .tech-specs {
-    background: var(--pdp-surface);
-    border: 1px solid var(--pdp-border);
-    border-radius: 16px;
-    padding: 1.5rem;
+    background: var(--pdp-surface); border: 1px solid var(--pdp-border);
+    border-radius: 16px; padding: 1.5rem;
   }
-  .specs-title {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-  }
-  .specs-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  .spec-row {
-    display: flex;
-    align-items: baseline;
-    font-size: 0.95rem;
-  }
-  .spec-label {
-    color: var(--pdp-text-dim);
-    flex-shrink: 0;
-  }
-  .spec-line {
-    flex-grow: 1;
-    border-bottom: 1px dashed rgba(255,255,255,0.15);
-    margin: 0 1rem;
-    opacity: 0.5;
-  }
-  .spec-value {
-    color: #fff;
-    font-weight: 500;
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .specs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+  .spec-row { display: flex; align-items: baseline; font-size: 0.9rem; }
+  .spec-label { color: var(--pdp-text-dim); flex-shrink: 0; }
+  .spec-line { flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.15); margin: 0 1rem; opacity: 0.5; }
+  .spec-value { color: #fff; font-weight: 500; text-align: right; flex-shrink: 0; }
 
-  /* Actions */
-  .pdp-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  /* Accordions */
+  .pdp-faqs { margin-top: 1rem; }
+  .accordion-group { display: flex; flex-direction: column; gap: 0.8rem; }
+  .glass-accordion {
+    background: var(--pdp-surface); border: 1px solid var(--pdp-border); border-radius: 12px;
+    overflow: hidden; transition: all 0.3s ease;
   }
-  @media (min-width: 640px) {
-    .pdp-actions {
-      flex-direction: row;
-    }
+  .glass-accordion[open] { background: rgba(255,255,255,0.05); border-color: rgba(138,43,226,0.3); }
+  .accordion-title {
+    padding: 1.2rem; cursor: pointer; color: #fff; font-weight: 500; font-size: 0.95rem;
+    display: flex; justify-content: space-between; align-items: center; list-style: none; user-select: none;
   }
+  .accordion-title::-webkit-details-marker { display: none; }
+  .accordion-title:hover { background: rgba(255,255,255,0.02); }
+  .accordion-title .icon { transition: transform 0.3s ease; color: var(--pdp-text-dim); }
+  .glass-accordion[open] .accordion-title .icon { transform: rotate(180deg); color: #fff; }
+  .accordion-content { padding: 0 1.2rem 1.2rem; color: var(--pdp-text-dim); font-size: 0.9rem; line-height: 1.6; }
+
+  /* Purchase Area & Quantity */
+  .pdp-purchase-area { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+  .quantity-selector {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--pdp-surface); border: 1px solid var(--pdp-border);
+    border-radius: 12px; padding: 0.5rem; width: 140px;
+  }
+  .qty-btn {
+    background: transparent; border: none; color: #fff; width: 32px; height: 32px;
+    border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .qty-btn:hover { background: rgba(255,255,255,0.1); }
+  .qty-input {
+    background: transparent; border: none; color: #fff; width: 40px; text-align: center;
+    font-size: 1.1rem; font-weight: 600; outline: none; -moz-appearance: textfield;
+  }
+  .qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  
+  .pdp-actions { display: flex; gap: 1rem; flex-direction: column; }
+  @media (min-width: 640px) { .pdp-actions { flex-direction: row; align-items: stretch; } }
 
   .btn-action {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1.2rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    padding: 1.2rem; border-radius: 12px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  .primary-action { background: #fff; color: #000; border: none; }
+  .primary-action:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,255,255,0.15); }
   
-  .primary-action {
-    background: #fff;
-    color: #000;
-    border: none;
+  .btn-whatsapp {
+    background: rgba(37, 211, 102, 0.1); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3);
+    display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; border-radius: 12px;
+    gap: 0.8rem; text-decoration: none; font-weight: 600; transition: all 0.3s;
   }
-  .primary-action:hover {
-    background: #f0f0f0;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(255,255,255,0.15);
-  }
-
-  .secondary-action {
-    background: rgba(255,255,255,0.03);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-  }
-  .secondary-action:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.3);
-  }
+  .btn-whatsapp:hover { background: rgba(37, 211, 102, 0.2); transform: translateY(-2px); }
 
   /* Trust Signals */
   .pdp-trust-signals {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--pdp-border);
-    margin-top: 1rem;
+    display: flex; justify-content: space-around; padding-top: 1.5rem; border-top: 1px solid var(--pdp-border);
   }
-  .trust-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--pdp-text-dim);
-    font-size: 0.8rem;
-  }
-  .trust-icon {
-    font-size: 1.4rem;
-    color: #fff;
-    opacity: 0.8;
-  }
+  .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--pdp-text-dim); font-size: 0.8rem; text-align: center; }
+  .trust-icon { font-size: 1.4rem; color: #fff; opacity: 0.8; }
 
+  /* Related Products */
+  .pdp-related { margin-top: 6rem; border-top: 1px solid var(--pdp-border); padding-top: 4rem; }
+  .related-title { text-align: left; }
+  .related-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; margin-top: 2rem;
+  }
+  .related-card {
+    display: block; text-decoration: none; background: var(--pdp-surface); border: 1px solid var(--pdp-border);
+    border-radius: 16px; overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+  }
+  .related-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+  .rp-img-wrapper { aspect-ratio: 1; padding: 10%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); }
+  .rp-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .rp-info { padding: 1.5rem; }
+  .rp-vendor { font-size: 0.7rem; color: var(--pdp-text-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .rp-title { color: #fff; font-size: 1rem; margin: 0.5rem 0 1rem; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .rp-price { color: #fff; font-size: 1.1rem; font-family: monospace; }
 </style>
 
 <script>
@@ -529,26 +522,38 @@ const productPrice = (!isZeroPrice && product.precio)
     });
   }
 
-  // Thumbnails Switcher with smooth crossfade
+  // Thumbnails Switcher
   const thumbs = document.querySelectorAll('.thumb-ring');
-  
   thumbs.forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.classList.contains('active')) return;
-      
       thumbs.forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
       
       const newSrc = btn.getAttribute('data-image');
       if (img && newSrc) {
-        // Simple crossfade
         img.animate([
           { opacity: 0.5, filter: 'blur(4px)' },
           { opacity: 1, filter: 'blur(0)' }
         ], { duration: 300, easing: 'ease-out' });
-        
         img.src = newSrc;
       }
     });
   });
+
+  // Quantity Selector
+  const btnMinus = document.getElementById('qty-minus');
+  const btnPlus = document.getElementById('qty-plus');
+  const qtyInput = document.getElementById('qty-input') as HTMLInputElement;
+
+  if (btnMinus && btnPlus && qtyInput) {
+    btnMinus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value) || 1;
+      if (val > 1) qtyInput.value = (val - 1).toString();
+    });
+    btnPlus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value) || 1;
+      qtyInput.value = (val + 1).toString();
+    });
+  }
 </script>
