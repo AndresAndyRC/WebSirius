@@ -1,0 +1,20 @@
+[
+  {
+    "codigo": "SIRIUS_TEST_10",
+    "tipo": "porcentaje",
+    "valor": 10,
+    "activo": true
+  },
+  {
+    "codigo": "ENVIO50",
+    "tipo": "fijo",
+    "valor": 50000,
+    "activo": true
+  },
+  {
+    "codigo": "AGOTADO",
+    "tipo": "porcentaje",
+    "valor": 100,
+    "activo": false
+  }
+]

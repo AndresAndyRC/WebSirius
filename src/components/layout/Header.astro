@@ -2,6 +2,8 @@
 /**
  * Header.astro — Primary site header with logo + navigation
  */
+import CartToggle from '../cart/CartToggle';
+
 const navLinks: { label: string; href: string; active?: boolean }[] = [
   { label: 'Colecciones', href: '/colecciones' },
   { label: 'Blog',        href: '/blog' },
@@ -43,6 +45,9 @@ const navLinks: { label: string; href: string; active?: boolean }[] = [
       >
         Ver Catálogo
       </a>
+
+      <!-- Cart Toggle React Island -->
+      <CartToggle client:load />
 
       <!-- Mobile menu toggle -->
       <button

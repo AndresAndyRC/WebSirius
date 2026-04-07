@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CheckoutForm from '../components/cart/CheckoutForm.tsx';
+---
+
+<BaseLayout
+  title="Finalizar Compra | SIRIUS"
+  description="Estás a un paso de iluminar tus espacios de forma segura."
+>
+  <div class="checkout-wrapper liquid-theme animate-fade-in">
+    <div class="header-banner">
+      <h1 class="checkout-title">Pago Seguro</h1>
+      <p class="checkout-subtitle">Completa tu información para generar tu pedido</p>
+    </div>
+
+    <!-- React Island for the Cart & Checkout Form -->
+    <CheckoutForm client:only="react" />
+
+  </div>
+</BaseLayout>
+
+<style>
+  .checkout-wrapper {
+    padding-top: calc(var(--header-height) + 2rem);
+    padding-bottom: 6rem;
+    min-height: 100vh;
+  }
+  .header-banner {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .checkout-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .checkout-subtitle {
+    color: var(--color-text-secondary);
+  }
+</style>

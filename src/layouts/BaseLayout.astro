@@ -7,6 +7,7 @@ import Footer from '@components/layout/Footer.astro';
 import MetaTags from '@components/MetaTags.astro';
 import GoogleAnalytics from '@components/GoogleAnalytics.astro';
 import LightCursor from '@components/LightCursor.tsx';
+import CartDrawer from '@components/cart/CartDrawer.tsx';
 import type { Props as MetaProps } from '@components/MetaTags.astro';
 
 import '@styles/global.css';
@@ -45,6 +46,9 @@ const props = Astro.props;
     <Footer />
     <!-- Global cursor light glow (only desktop/hover devices) -->
     <LightCursor client:only="react" />
+
+    <!-- Global Cart Drawer -->
+    <CartDrawer client:load />
   </body>
 </html>
 

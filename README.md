@@ -116,3 +116,5 @@ Configurados en `vercel.json`:
 
 - [ ] Agregar mejor estética a la página de los productos (Layout asimétrico, micro-animaciones, especificaciones técnicas ampliadas).
 - [x] Poner logo e icono del cliente.
+- [ ] Discutir con el cliente la vía definitiva para el manejo y creación de cupones a futuro (Dashboard CMS vs JSON Estático).
+- [ ] **Importante:** Solicitar al cliente las llaves de producción de Wompi (Llave Pública, Secreto de Integridad y Secreto de Eventos) para configurar el entorno de pagos en Vercel.

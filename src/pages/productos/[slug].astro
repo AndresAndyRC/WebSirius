@@ -127,7 +127,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
             </div>
             
             <div class="pdp-actions">
-              <button class="btn-action primary-action">
+              <button class="btn-action primary-action" id="add-to-cart-btn" data-slug={product.slug} data-title={product.title} data-price={parsedPrice || 0} data-image={mainImg || ''} data-sku={product.sku || ''}>
                 <span class="material-symbols-outlined">shopping_bag</span>
                 <span>Añadir al Carrito</span>
               </button>
@@ -566,6 +566,8 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
 </style>
 
 <script>
+  import { addToCart } from '../../store/cartStore';
+
   // Hover Zoom Effect
   const container = document.getElementById('zoom-container');
   const img = document.getElementById('main-product-image') as HTMLImageElement;
@@ -621,6 +623,22 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
     btnPlus.addEventListener('click', () => {
       let val = parseInt(qtyInput.value) || 1;
       qtyInput.value = (val + 1).toString();
+    });
+  }
+
+  // Add to Cart Action
+  const addBtn = document.getElementById('add-to-cart-btn');
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      const quantity = parseInt(qtyInput?.value || '1');
+      addToCart({
+        slug: addBtn.dataset.slug!,
+        title: addBtn.dataset.title!,
+        price: parseFloat(addBtn.dataset.price!),
+        image: addBtn.dataset.image!,
+        sku: addBtn.dataset.sku!,
+        quantity: quantity
+      });
     });
   }
 </script>
