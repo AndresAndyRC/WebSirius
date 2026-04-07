@@ -2,15 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Medidores ────────────────────────────────────────────
-  { name: 'Medidor Electrónico Interno Monofásico 120V Análogo', slug: 'medidor-electronico-interno-monofasico-120v-2hilos-analogo-interior', tipo: 'Medidor', formato: 'Análogo', uso: 'Interno', precio: '$74.100', desc: '120V · 2 Hilos · Alta precisión' },
-  { name: 'Medidor Electrónico Interno Monofásico 120V LCD',     slug: 'medidor-electronico-interno-monofasico-120v-2-hilos-lcd',           tipo: 'Medidor', formato: 'Digital', uso: 'Interno', precio: '$82.700', desc: '120V · 2 Hilos · Pantalla LCD' },
-  { name: 'Medidor Electrónico Monofásico 120V Externo',         slug: 'medidor-electronico-monofasico-analogo-120v-externo',               tipo: 'Medidor', formato: 'Análogo', uso: 'Externo', precio: '$85.000', desc: '120V · 2 Hilos · Intemperie' },
-  // ── Tableros ───────────────────────────────────────────────
-  { name: 'Tablero Eléctrico Plástico 4 Circuitos',              slug: 'tablero-electrico-monofasico-4p-con-puerta-de-policarbonato',                            tipo: 'Tablero', formato: 'Plástico', uso: 'Interno', precio: '$22.000', desc: 'Para breakers enchufables' },
-  { name: 'Tablero Eléctrico Metálico 6 Circuitos',              slug: 'tablero-monofasico-6p-con-tapa-metalica',                                           tipo: 'Tablero', formato: 'Metálico', uso: 'Interno', precio: '$45.000', desc: 'Distribución residencial' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'medidores-y-tableros-electricos');
 
 const tipos    = ['Medidor', 'Tablero'];
 const formatos = ['Análogo', 'Digital', 'Plástico', 'Metálico'];
@@ -60,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Medidor: 'speed', Tablero: 'tune' };
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.formato} · {p.uso}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

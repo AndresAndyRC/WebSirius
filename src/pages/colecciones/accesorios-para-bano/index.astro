@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Accesorio Organizador de Acero Inox', slug: 'acople-sanitario-de-acero-inoxidable-40cm-1-2-x-7-8', tipo: 'Organizador', acb: 'Cromo', precio: '$45.000', desc: 'Estante organizador de 2 niveles resistente al agua.' },
-  { name: 'Toallero Barra 60cm Negro Mate', slug: 'juego-de-accesorios-bano-acero-negro-mate', tipo: 'Toallero', acb: 'Negro Mate', precio: '$35.000', desc: 'Soporte minimalista para toallas.' },
-  { name: 'Dispensador Jabón Líquido Inox', slug: 'juego-de-accesorios-bano-acero-negro-mate', tipo: 'Dispensador', acb: 'Cromo', precio: '$28.000', desc: 'Dispensador de pared con capacidad de 500ml.' },
-  { name: 'Portarrollos Papel Higiénico Negro', slug: 'juego-de-accesorios-bano-acero-negro-mate', tipo: 'Portarrollos', acb: 'Negro Mate', precio: '$18.000', desc: 'Soporte para papel higiénico fácil instalación.' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'accesorios-para-bano');
 
 const tipos = ['Organizador', 'Toallero', 'Dispensador', 'Portarrollos'];
 const acbs  = ['Cromo', 'Negro Mate'];
@@ -57,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Organizador: 'shelves', Toallero: 'sp
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.acb}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

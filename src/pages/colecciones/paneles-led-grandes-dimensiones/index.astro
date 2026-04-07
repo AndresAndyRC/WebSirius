@@ -6,70 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Paneles ────────────────────────────────────────────────
-  {
-    name: 'Panel LED 120x30cm 50W Luz Blanca',
-    slug: 'panel-led-120x30cm-50w-luz-blanca',
-    watts: 50,
-    size: '120×30cm',
-    color: 'Blanca',
-    type: 'Panel',
-    style: 'Estándar',
-    price: 86400,
-  },
-  {
-    name: 'Panel LED Titanium 60x60cm 48W Luz Blanca',
-    slug: 'panel-led-titanium-60x60cm-48w-luz-blanca',
-    watts: 48,
-    size: '60×60cm',
-    color: 'Blanca',
-    type: 'Panel',
-    style: 'Titanium',
-    price: 71300,
-  },
-  {
-    name: 'Panel LED 60x60cm 48W Luz Blanca',
-    slug: 'panel-led-60x60cm-48w-luz-blanca',
-    watts: 48,
-    size: '60×60cm',
-    color: 'Blanca',
-    type: 'Panel',
-    style: 'Estándar',
-    price: 74400,
-  },
-  {
-    name: 'Panel LED Slim 60x60cm 48W Luz Blanca',
-    slug: 'panel-led-slim-60x60cm-48w-luz-blanca',
-    watts: 48,
-    size: '60×60cm',
-    color: 'Blanca',
-    type: 'Panel',
-    style: 'Slim',
-    price: 79800,
-  },
-  // ── Accesorios ─────────────────────────────────────────────
-  {
-    name: 'Driver para Panel LED 48W - 52W',
-    slug: 'driver-para-panel-led-48w-52w',
-    watts: 52,
-    size: '—',
-    color: '—',
-    type: 'Accesorio',
-    style: 'Driver',
-    price: 21300,
-  },
-  {
-    name: 'Ganchos para Incrustar Paneles LED 30x60, 60x60 y 120x30',
-    slug: 'ganchos-para-incrustar-panel-60x60-y-120x30',
-    watts: 0,
-    size: '60×60 / 120×30',
-    color: '—',
-    type: 'Accesorio',
-    style: 'Gancho',
-    price: 7200,
-  },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'paneles-led-grandes-dimensiones');
 
 const uniqueWatts   = [...new Set(products.filter(p => p.watts > 0).map(p => p.watts))].sort((a, b) => a - b);
 const uniqueTypes   = ['Panel', 'Accesorio'];
@@ -237,11 +175,10 @@ const uniqueStyles  = ['Estándar', 'Titanium', 'Slim'];
               </div>
 
               <a
-                href={`https://siriuscol.com/products/${p.slug}`}
+                href={`/productos/${p.slug}`}
                 class="prod-card__cta"
                 aria-label={`Ver producto: ${p.name}`}
-                target="_blank"
-                rel="noopener"
+                
               >
                 Ver producto
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

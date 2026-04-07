@@ -1,0 +1,2413 @@
+[
+  {
+    "name": "Cinta Aislante 19mm x 20m Negra",
+    "slug": "cinta-aislante-5m-negra-certificacion-ul",
+    "tipo": "Consumible",
+    "material": "PVC",
+    "precio": "$4.500",
+    "desc": "Retardante de llama, uso profesional.",
+    "categoria": "accesorios-de-ferreteria"
+  },
+  {
+    "name": "Caja de Herramientas 16\"",
+    "slug": "caja-herramientas-16",
+    "tipo": "Herramienta",
+    "material": "Plástico",
+    "precio": "$35.000",
+    "desc": "Cierre metálico y bandeja organizadora.",
+    "categoria": "accesorios-de-ferreteria"
+  },
+  {
+    "name": "Destornillador Aislado Punta Pala",
+    "slug": "destornillador-aislado-1000v",
+    "tipo": "Herramienta",
+    "material": "Acero CR-V",
+    "precio": "$12.000",
+    "desc": "Certificado 1000V. Punta magnética.",
+    "categoria": "accesorios-de-ferreteria"
+  },
+  {
+    "name": "Amarres Plásticos Negros x100 20cm",
+    "slug": "amarre-plastico-en-nylon-20cm-x-2-5mm-negro-bolsa-100und",
+    "tipo": "Consumible",
+    "material": "Nylon",
+    "precio": "$6.500",
+    "desc": "Correas de sujeción para organización de cables.",
+    "categoria": "accesorios-de-ferreteria"
+  },
+  {
+    "name": "Convertidor de Redondo a Plano Negro",
+    "slug": "convertidor-redondo-a-plano-negro",
+    "categoria": "accesorios-electricos",
+    "desc": "Adaptador enchufe"
+  },
+  {
+    "name": "Convertidor Polo a Tierra 3 a 2",
+    "slug": "convertidor-polo-tierra-3-a-2",
+    "categoria": "accesorios-electricos",
+    "desc": "Elimina polo tierra"
+  },
+  {
+    "name": "Convertidor Polo Tierra 3 a 2 Gris Set x2",
+    "slug": "convertidor-polo-tierra-3-a-2-gris-set-x2",
+    "categoria": "accesorios-electricos",
+    "desc": "Pack x2 gris"
+  },
+  {
+    "name": "Te Eléctrica Blanca",
+    "slug": "te-electrica-blanca",
+    "categoria": "accesorios-electricos",
+    "desc": "Toma múltiple"
+  },
+  {
+    "name": "Te Eléctrica Escualizable 10A Blanca UL",
+    "slug": "te-electrica-escualizable-10a-blanca-ul",
+    "categoria": "accesorios-electricos",
+    "desc": "UL certificada 10A"
+  },
+  {
+    "name": "Te Eléctrica Escualizable Gris con Polo Tierra",
+    "slug": "te-electrica-ecualizadle-gris-con-polo-a-tierra",
+    "categoria": "accesorios-electricos",
+    "desc": "Polo a tierra"
+  },
+  {
+    "name": "Te Industrial Naranja en Cruz 15A",
+    "slug": "te-industrial-naranja-en-cruz",
+    "categoria": "accesorios-electricos",
+    "desc": "Cruz 15A"
+  },
+  {
+    "name": "Te Industrial Naranja Recta 15A",
+    "slug": "te-industrial-naranja-recta-15a",
+    "categoria": "accesorios-electricos",
+    "desc": "Recta 15A"
+  },
+  {
+    "name": "Tester Probador Corriente Digital Pequeño",
+    "slug": "tester-probador-corriente-digital-pequeno",
+    "categoria": "accesorios-electricos",
+    "desc": "Compacto"
+  },
+  {
+    "name": "Tester Probador Corriente Digital Grande",
+    "slug": "tester-probador-corriente-digital-grande",
+    "categoria": "accesorios-electricos",
+    "desc": "Gran pantalla"
+  },
+  {
+    "name": "Interruptor Push Button ON-OFF 15A",
+    "slug": "interruptor-push-button-on-off-15a",
+    "categoria": "accesorios-electricos",
+    "desc": "15 Amperios"
+  },
+  {
+    "name": "Interruptor Push Button ON-OFF 30A",
+    "slug": "interruptor-push-button-on-off-30a",
+    "categoria": "accesorios-electricos",
+    "desc": "30 Amperios"
+  },
+  {
+    "name": "Accesorio Organizador de Acero Inox",
+    "slug": "acople-sanitario-de-acero-inoxidable-40cm-1-2-x-7-8",
+    "tipo": "Organizador",
+    "acb": "Cromo",
+    "precio": "$45.000",
+    "desc": "Estante organizador de 2 niveles resistente al agua.",
+    "categoria": "accesorios-para-bano"
+  },
+  {
+    "name": "Toallero Barra 60cm Negro Mate",
+    "slug": "juego-de-accesorios-bano-acero-negro-mate",
+    "tipo": "Toallero",
+    "acb": "Negro Mate",
+    "precio": "$35.000",
+    "desc": "Soporte minimalista para toallas.",
+    "categoria": "accesorios-para-bano"
+  },
+  {
+    "name": "Dispensador Jabón Líquido Inox",
+    "slug": "juego-de-accesorios-bano-acero-negro-mate",
+    "tipo": "Dispensador",
+    "acb": "Cromo",
+    "precio": "$28.000",
+    "desc": "Dispensador de pared con capacidad de 500ml.",
+    "categoria": "accesorios-para-bano"
+  },
+  {
+    "name": "Portarrollos Papel Higiénico Negro",
+    "slug": "juego-de-accesorios-bano-acero-negro-mate",
+    "tipo": "Portarrollos",
+    "acb": "Negro Mate",
+    "precio": "$18.000",
+    "desc": "Soporte para papel higiénico fácil instalación.",
+    "categoria": "accesorios-para-bano"
+  },
+  {
+    "name": "Tortuga LED Lisa Negra 12W Luz Blanca",
+    "slug": "tortuga-led-lisa-negra-12w-luz-blanca",
+    "watts": 12,
+    "tipo": "Tortuga",
+    "color": "Negro",
+    "luz": "Blanca",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Tortuga LED Lisa Blanca 12W Luz Cálida",
+    "slug": "tortuga-led-lisa-blanca-12w-luz-calida",
+    "watts": 12,
+    "tipo": "Tortuga",
+    "color": "Blanco",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Nicho LED 3W Negro Luz Cálida",
+    "slug": "nicho-led-3w-negro-luz-calida",
+    "watts": 3,
+    "tipo": "Nicho",
+    "color": "Negro",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Nicho LED 3W Gris Luz Cálida",
+    "slug": "nicho-led-3w-gris-luz-calida",
+    "watts": 3,
+    "tipo": "Nicho",
+    "color": "Gris",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Box Negro 6W 10×10 Luz Cálida",
+    "slug": "aplique-led-box-negro-6w-10x10-luz-calida",
+    "watts": 6,
+    "tipo": "Box",
+    "color": "Negro",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Box Blanco 6W 10×10 Luz Cálida",
+    "slug": "aplique-led-box-blanco-6w-10x10-luz-calida",
+    "watts": 6,
+    "tipo": "Box",
+    "color": "Blanco",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Corbatín 2×3W Blanco Luz Cálida",
+    "slug": "aplique-led-corbatin-2x3w-blanco-luz-calida",
+    "watts": 6,
+    "tipo": "Corbatín",
+    "color": "Blanco",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Corbatín 2×3W Negro Luz Cálida",
+    "slug": "aplique-led-corbatin-2x3w-negro-luz-calida",
+    "watts": 6,
+    "tipo": "Corbatín",
+    "color": "Negro",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique de Pared GU10 ×2 Cilindro Blanco",
+    "slug": "aplique-pared-gu10-x2-cilindro-blanco",
+    "watts": 0,
+    "tipo": "Cilindro",
+    "color": "Blanco",
+    "luz": "—",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique de Pared GU10 ×2 Cilindro Gris",
+    "slug": "aplique-pared-gu10-x2-cilindro-gris",
+    "watts": 0,
+    "tipo": "Cilindro",
+    "color": "Gris",
+    "luz": "—",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Ball 360 12W Negro Luz Cálida",
+    "slug": "aplique-led-ball-360-12w-negro-luz-calida",
+    "watts": 12,
+    "tipo": "Ball 360",
+    "color": "Negro",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Aplique LED Up & Down 6W Blanco Luz Cálida",
+    "slug": "aplique-led-up-down-6w-blanco-luz-calida",
+    "watts": 6,
+    "tipo": "Up&Down",
+    "color": "Blanco",
+    "luz": "Cálida",
+    "categoria": "apliques-de-pared"
+  },
+  {
+    "name": "Bala LED Blanca 3W Luz Blanca",
+    "slug": "bala-led-blanca-3w-luz-blanca",
+    "watts": 3,
+    "lugar": "Techo",
+    "color": "Blanco",
+    "luz": "Blanca",
+    "forma": "Cónica",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Negra 3W Luz Blanca",
+    "slug": "bala-led-negra-3w-luz-blanca",
+    "watts": 3,
+    "lugar": "Techo",
+    "color": "Negro",
+    "luz": "Blanca",
+    "forma": "Cónica",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Negra 3W Luz Cálida",
+    "slug": "bala-led-negra-3w-luz-calida",
+    "watts": 3,
+    "lugar": "Techo",
+    "color": "Negro",
+    "luz": "Cálida",
+    "forma": "Cónica",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Blanca Redonda 9W Luz Blanca",
+    "slug": "bala-led-blanca-redonda-9w-luz-blanca",
+    "watts": 9,
+    "lugar": "Techo",
+    "color": "Blanco",
+    "luz": "Blanca",
+    "forma": "Redonda",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Piso 3W Satín Redonda Luz Cálida",
+    "slug": "bala-led-piso-3w-satin-redonda-luz-calida",
+    "watts": 3,
+    "lugar": "Piso",
+    "color": "Satín",
+    "luz": "Cálida",
+    "forma": "Redonda",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Piso 6W Satín Redonda Luz Blanca",
+    "slug": "bala-led-piso-6w-satin-redonda-luz-blanca",
+    "watts": 6,
+    "lugar": "Piso",
+    "color": "Satín",
+    "luz": "Blanca",
+    "forma": "Redonda",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED de Piso GU10 Satín Redonda",
+    "slug": "bala-led-piso-gu10-satin-redonda",
+    "watts": 0,
+    "lugar": "Piso",
+    "color": "Satín",
+    "luz": "—",
+    "forma": "GU10",
+    "categoria": "balas-led"
+  },
+  {
+    "name": "Bala LED Sumergible RGB 9W 12V",
+    "slug": "bala-led-sumergible-12v-rgb-9w",
+    "watts": 9,
+    "control": false,
+    "ip": "IP68",
+    "categoria": "balas-led-sumergibles"
+  },
+  {
+    "name": "Bala LED Sumergible RGB 18W 12V",
+    "slug": "bala-led-sumergible-12v-rgb-18w-con-control",
+    "watts": 18,
+    "control": true,
+    "ip": "IP68",
+    "categoria": "balas-led-sumergibles"
+  },
+  {
+    "name": "Bala LED Sumergible RGB 24W 12V",
+    "slug": "bala-led-sumergible-12v-rgb-24w-con-control",
+    "watts": 24,
+    "control": true,
+    "ip": "IP68",
+    "categoria": "balas-led-sumergibles"
+  },
+  {
+    "name": "Bombillo LED Pinpon 1W Luz Blanca",
+    "slug": "bombillo-led-pinpon-1w-luz-blanca",
+    "watts": 1,
+    "rosca": "E12",
+    "tipo": "PinPon",
+    "color": "Blanca",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED Pinpon 1W Luz Cálida",
+    "slug": "bombillo-led-pinpon-1w-luz-calida",
+    "watts": 1,
+    "rosca": "E12",
+    "tipo": "PinPon",
+    "color": "Cálida",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED PinPon 1W Verde",
+    "slug": "bombillo-led-pinpon-1w-verde",
+    "watts": 1,
+    "rosca": "E12",
+    "tipo": "PinPon",
+    "color": "Verde",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED Pinpon 1W Azul",
+    "slug": "bombillo-led-pinpon-1w-azul",
+    "watts": 1,
+    "rosca": "E12",
+    "tipo": "PinPon",
+    "color": "Azul",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED Pinpon 1W RGB",
+    "slug": "bombillo-led-pinpon-1w-rgb",
+    "watts": 1,
+    "rosca": "E12",
+    "tipo": "PinPon",
+    "color": "RGB",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED 3W Luz Blanca",
+    "slug": "bombillo-led-3w-e27-luz-blanca",
+    "watts": 3,
+    "rosca": "E27",
+    "tipo": "Estándar",
+    "color": "Blanca",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED 3W Luz Cálida",
+    "slug": "bombillo-led-3w-e27-luz-calida",
+    "watts": 3,
+    "rosca": "E27",
+    "tipo": "Estándar",
+    "color": "Cálida",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED 5W Luz Blanca",
+    "slug": "bombillo-led-5w-e27-luz-blanca",
+    "watts": 5,
+    "rosca": "E27",
+    "tipo": "Estándar",
+    "color": "Blanca",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED GU10 5W Luz Blanca",
+    "slug": "bombillo-led-gu10-5w-luz-blanca",
+    "watts": 5,
+    "rosca": "GU10",
+    "tipo": "GU10",
+    "color": "Blanca",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED GU10 5W Luz Cálida",
+    "slug": "bombillo-led-gu10-5w-luz-calida",
+    "watts": 5,
+    "rosca": "GU10",
+    "tipo": "GU10",
+    "color": "Cálida",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED GU10 5W RGB con Control Remoto",
+    "slug": "bombillo-led-gu10-5w-rgb-con-control-remoto",
+    "watts": 5,
+    "rosca": "GU10",
+    "tipo": "GU10",
+    "color": "RGB",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED Vela 5W Luz Blanca",
+    "slug": "bombillo-led-vela-e14-5w-luz-blanca",
+    "watts": 5,
+    "rosca": "E14",
+    "tipo": "Vela",
+    "color": "Blanca",
+    "price": 0,
+    "categoria": "bombillos"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento G45 Pinpon 2W",
+    "slug": "bombillo-led-vintage-de-filamento-g45-pinpon-2w",
+    "watts": 2,
+    "forma": "G45",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento G45 Pinpon 4W",
+    "slug": "bombillo-led-filamento-g45-pinpon-4w",
+    "watts": 4,
+    "forma": "G45",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Filamento 6W Dimerizable",
+    "slug": "bombillo-led-filamento-6w-dimerizable",
+    "watts": 6,
+    "forma": "A60",
+    "rosca": "E27",
+    "dimer": true,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento C35 Vela 4W",
+    "slug": "bombillo-led-filamento-c35-vela-4w-120v-e27-luz-calida",
+    "watts": 4,
+    "forma": "C35",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento ST64 4W",
+    "slug": "bombillo-led-filamento-st64-4w-120v-e27-luz-calida",
+    "watts": 4,
+    "forma": "ST64",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento A60 4W",
+    "slug": "bombillo-led-filamento-a60-4w-120v-e27-luz-calida",
+    "watts": 4,
+    "forma": "A60",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento G80 Globo 4W",
+    "slug": "bombillo-led-filamento-g80-globo-4w-120v-e27-luz-calida",
+    "watts": 4,
+    "forma": "G80",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento G95 Globo 4W",
+    "slug": "bombillo-led-filamento-g95-globo-4w-120v-e27-luz-calida",
+    "watts": 4,
+    "forma": "G95",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Bombillo LED Vintage Filamento G125 Globo 4W",
+    "slug": "bombillo-led-filamento-g125-globo-4w-120v-e27luz-calida",
+    "watts": 4,
+    "forma": "G125",
+    "rosca": "E27",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Portalámpara Colgante Vintage Color Plata",
+    "slug": "portalampara-colgante-vintage-color-plata",
+    "watts": 0,
+    "forma": "Accesorio",
+    "rosca": "—",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Portalámpara Colgante Vintage Color Cobre",
+    "slug": "portalampara-colgante-vintage-color-cobre",
+    "watts": 0,
+    "forma": "Accesorio",
+    "rosca": "—",
+    "dimer": false,
+    "categoria": "bombillos-vintage"
+  },
+  {
+    "name": "Breaker Enchufable 1P 15A",
+    "slug": "breaker-1p-15a-enchufable",
+    "tipo": "Enchufable",
+    "polos": "1P",
+    "amperaje": "15A",
+    "precio": "$9.600",
+    "desc": "10kA · Curva C",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Enchufable 1P 20A",
+    "slug": "breaker-1p-20a-enchufable",
+    "tipo": "Enchufable",
+    "polos": "1P",
+    "amperaje": "20A",
+    "precio": "$11.200",
+    "desc": "10kA · Curva C",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Enchufable 1P 30A",
+    "slug": "breaker-1p-30a-enchufable",
+    "tipo": "Enchufable",
+    "polos": "1P",
+    "amperaje": "30A",
+    "precio": "$11.200",
+    "desc": "10kA · Curva C",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Enchufable 2P 40A",
+    "slug": "breaker-1p-40a-enchufable",
+    "tipo": "Enchufable",
+    "polos": "2P",
+    "amperaje": "40A",
+    "precio": "$22.400",
+    "desc": "10kA · Curva C · Bipolar",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Riel DIN 1P 16A",
+    "slug": "breaker-riel-1p-63a",
+    "tipo": "Riel DIN",
+    "polos": "1P",
+    "amperaje": "16A",
+    "precio": "$10.500",
+    "desc": "10kA · Industrial / Residencial",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Riel DIN 1P 20A",
+    "slug": "breaker-1p-20a-enchufable",
+    "tipo": "Riel DIN",
+    "polos": "1P",
+    "amperaje": "20A",
+    "precio": "$10.500",
+    "desc": "10kA · Industrial / Residencial",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Riel DIN 2P 32A",
+    "slug": "breaker-riel-2p-63a",
+    "tipo": "Riel DIN",
+    "polos": "2P",
+    "amperaje": "32A",
+    "precio": "$21.000",
+    "desc": "10kA · Bipolar · Industrial",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Breaker Riel DIN 3P 63A",
+    "slug": "breaker-riel-3p-63a",
+    "tipo": "Riel DIN",
+    "polos": "3P",
+    "amperaje": "63A",
+    "precio": "$36.500",
+    "desc": "10kA · Tripolar · Fuerza",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Interruptor Diferencial 2P 40A 30mA",
+    "slug": "interruptor-diferencial-2p-40a-30ma",
+    "tipo": "Diferencial",
+    "polos": "2P",
+    "amperaje": "40A",
+    "precio": "$65.000",
+    "desc": "Protección contra fugas a tierra",
+    "categoria": "breaker-s"
+  },
+  {
+    "name": "Cable Blanco THHN 14AWG CCA Rollo x 100m",
+    "slug": "cable-blanco-thhn-14awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#14",
+    "color": "Blanco",
+    "precio": "$181.400",
+    "desc": "100m · CCA · Termoplástico",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Rojo THHN 14AWG CCA Rollo x 100m",
+    "slug": "cable-rojo-thhn-14awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#14",
+    "color": "Rojo",
+    "precio": "$181.400",
+    "desc": "100m · CCA · Fase",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Negro THHN 14AWG CCA Rollo x 100m",
+    "slug": "cable-negro-thhn-14awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#14",
+    "color": "Negro",
+    "precio": "$181.400",
+    "desc": "100m · CCA · Neutro/Fase",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Azul THHN 14AWG CCA Rollo x 100m",
+    "slug": "cable-azul-thhn-14awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#14",
+    "color": "Azul",
+    "precio": "$181.400",
+    "desc": "100m · CCA · Neutro",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Blanco THHN 12AWG CCA Rollo x 100m",
+    "slug": "cable-blanco-thhn-12awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#12",
+    "color": "Blanco",
+    "precio": "$250.300",
+    "desc": "100m · CCA · Mayor capacidad",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Rojo THHN 12AWG CCA Rollo x 100m",
+    "slug": "cable-rojo-thhn-12awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#12",
+    "color": "Rojo",
+    "precio": "$250.300",
+    "desc": "100m · CCA · Fase 20A",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Negro THHN 12AWG CCA Rollo x 100m",
+    "slug": "cable-negro-thhn-12awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#12",
+    "color": "Negro",
+    "precio": "$250.300",
+    "desc": "100m · CCA · Neutro 20A",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Verde THHN 12AWG CCA Rollo x 100m",
+    "slug": "cable-verde-thhn-12awg-cca-rollo-x-100m",
+    "tipo": "THHN",
+    "calibre": "#12",
+    "color": "Verde",
+    "precio": "$250.300",
+    "desc": "100m · CCA · Tierra",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Dúplex Blanco SPT 2x14 AWG CCA Rollo x 100m",
+    "slug": "cable-duplex-blanco-spt-2x14awg-cca-rollo-x-100m",
+    "tipo": "Dúplex",
+    "calibre": "2x14",
+    "color": "Blanco",
+    "precio": "$305.200",
+    "desc": "100m · SPT · Doble conductor",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Dúplex Blanco SPT 2x12 AWG CCA Rollo x 100m",
+    "slug": "cable-duplex-blanco-spt-2x12awg-cca-rollo-x-100m",
+    "tipo": "Dúplex",
+    "calibre": "2x12",
+    "color": "Blanco",
+    "precio": "$474.600",
+    "desc": "100m · SPT · Mayor sección",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Dúplex Blanco SPT 2x10 AWG CCA Rollo x 100m",
+    "slug": "cable-duplex-blanco-spt-2x10awg-cca-rollo-x-100m",
+    "tipo": "Dúplex",
+    "calibre": "2x10",
+    "color": "Blanco",
+    "precio": "$712.200",
+    "desc": "100m · SPT · Alta carga",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cable Encauchetado Negro THHW 2x14AWG CCA Rollo x 100m",
+    "slug": "cable-encauchetado-negro-thhw-2x14awg-cca-rollo-x-100m",
+    "tipo": "Encauchetado",
+    "calibre": "2x14",
+    "color": "Negro",
+    "precio": "$592.400",
+    "desc": "100m · THHW · Flexible · Resistente",
+    "categoria": "cables-electricos"
+  },
+  {
+    "name": "Cinta LED 12V Siliconada Verde",
+    "slug": "cinta-led-12v-siliconada-verde",
+    "voltaje": "12V",
+    "tipo": "Siliconada",
+    "color": "Verde",
+    "price": 21500,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED 12V Siliconada Roja",
+    "slug": "cinta-led-12v-siliconada-roja",
+    "voltaje": "12V",
+    "tipo": "Siliconada",
+    "color": "Roja",
+    "price": 21500,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED 12V Siliconada 5M Fucsia",
+    "slug": "cinta-led-12v-siliconada-fucsia",
+    "voltaje": "12V",
+    "tipo": "Siliconada",
+    "color": "Fucsia",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED 12V Siliconada 5M RGB",
+    "slug": "cinta-led-12v-siliconada-5m-rgb",
+    "voltaje": "12V",
+    "tipo": "Siliconada",
+    "color": "RGB",
+    "price": 28300,
+    "agotado": true,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED 12V Siliconada UV",
+    "slug": "cinta-led-12v-siliconada-uv",
+    "voltaje": "12V",
+    "tipo": "Siliconada",
+    "color": "UV",
+    "price": 41000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Running 12V 10M Luz Blanca",
+    "slug": "cinta-led-running-12v-10m",
+    "voltaje": "12V",
+    "tipo": "Running",
+    "color": "Luz Blanca",
+    "price": 126100,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Dorada",
+    "slug": "cinta-led-neon-flex-12v-5m-dorada",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Dorada",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Naranja",
+    "slug": "cinta-led-neon-flex-12v-5m-naranja",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Naranja",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Fucsia",
+    "slug": "cinta-led-neon-flex-12v-5m-fucsia",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Fucsia",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Roja",
+    "slug": "cinta-led-neon-flex-12v-5m-roja",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Roja",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Verde",
+    "slug": "cinta-led-neon-flex-12v-5m-verde",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Verde",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Azul Aguamarina",
+    "slug": "cinta-led-neon-flex-12v-5m-azul-aguamarina",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Azul Aguamarina",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V 5M Azul",
+    "slug": "cinta-led-neon-flex-12v-5m-azul",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "Azul",
+    "price": 22000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED Neón Flex 12V RGB 5M",
+    "slug": "cinta-led-neon-flex-12v-rgb-5m",
+    "voltaje": "12V",
+    "tipo": "Neón Flex",
+    "color": "RGB",
+    "price": 62200,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED High Lumen 110V 10M Luz Blanca",
+    "slug": "cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-blanca",
+    "voltaje": "110V",
+    "tipo": "High Lumen",
+    "color": "Luz Blanca",
+    "price": 175700,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED High Lumen 110V 10M Luz Neutra",
+    "slug": "cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-neutra",
+    "voltaje": "110V",
+    "tipo": "High Lumen",
+    "color": "Luz Neutra",
+    "price": 175700,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Cinta LED High Lumen 110V 10M Luz Cálida",
+    "slug": "cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-calida",
+    "voltaje": "110V",
+    "tipo": "High Lumen",
+    "color": "Luz Cálida",
+    "price": 175700,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Conector Cinta LED Running 12V",
+    "slug": "conector-cinta-led-running-12v",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 1000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Kit Controlador para Cinta Running 12V",
+    "slug": "kit-controlador-para-cinta-running-12v",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 20000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Conector para Cinta LED Neón Flex 12V",
+    "slug": "conector-para-cinta-led-neon-flex-12v",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 2000,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Tapa Cinta Neón Flex 12V",
+    "slug": "tapa-cinta-neon-flex-12v",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 400,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Grapa Cinta Neón Flex 12V",
+    "slug": "grapa-cinta-neon-flex-12v",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 400,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Adaptador para Cinta LED 12V 3A",
+    "slug": "adaptador-para-cinta-led-12v-3a",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 19600,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Adaptador para Cinta LED 12V 5A",
+    "slug": "adaptador-para-cinta-led-12v-5a",
+    "voltaje": "12V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 20200,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Conector Cinta LED High Lumen 110V",
+    "slug": "conector-cinta-led-high-lumen-110v",
+    "voltaje": "110V",
+    "tipo": "Accesorio",
+    "color": "—",
+    "price": 0,
+    "agotado": false,
+    "categoria": "cintas-led"
+  },
+  {
+    "name": "Extensión Eléctrica Dúplex 2x14 6FT 1.8M",
+    "slug": "extension-duplex-2x14-6ft-1-8m-linea-hogar",
+    "tipo": "Hogar",
+    "longitud": "1.8M (6ft)",
+    "precio": "$6.400",
+    "desc": "Línea Hogar · Cable Blanco · 2x14 AWG",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extensión Eléctrica Dúplex 2x14 9FT 2.7M",
+    "slug": "extension-duplex-2x14-9ft-2-7m-linea-hogar",
+    "tipo": "Hogar",
+    "longitud": "2.7M (9ft)",
+    "precio": "$7.400",
+    "desc": "Línea Hogar · Cable Blanco · 2x14 AWG",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extensión Eléctrica Dúplex 2x14 12FT 3.6M",
+    "slug": "extension-duplex-2x14-12ft-3-6m-linea-hogar",
+    "tipo": "Hogar",
+    "longitud": "3.6M (12ft)",
+    "precio": "$9.000",
+    "desc": "Línea Hogar · Cable Blanco · 2x14 AWG",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extensión Revestida Naranja 3x14 6FT 1.8M",
+    "slug": "extension-electrica-3m-de-3-salidas-para-exterior-naranja",
+    "tipo": "Uso Pesado",
+    "longitud": "1.8M (6ft)",
+    "precio": "$15.000",
+    "desc": "Industrial Naranja · Polo a Tierra",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extensión Revestida Naranja 3x14 15FT 4.5M",
+    "slug": "extension-duplex-2x14-15ft-4-5m-linea-hogar",
+    "tipo": "Uso Pesado",
+    "longitud": "4.5M (15ft)",
+    "precio": "$25.000",
+    "desc": "Industrial Naranja · Polo a Tierra",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extensión Revestida Naranja 3x14 25FT 7.5M",
+    "slug": "extension-electrica-8m-de-3-salidas-para-exterior-naranja",
+    "tipo": "Uso Pesado",
+    "longitud": "7.5M (25ft)",
+    "precio": "$38.000",
+    "desc": "Industrial Naranja · Polo a Tierra",
+    "categoria": "extension"
+  },
+  {
+    "name": "Extractor de Aire 4\" con Rejilla Blanca",
+    "slug": "extractor-de-aire-4-con-rejilla-blanco",
+    "diametro": "4\"",
+    "aplicacion": "Baño / Cocina",
+    "categoria": "extractores-aire"
+  },
+  {
+    "name": "Extractor de Aire 8\" con Rejilla Blanca",
+    "slug": "extractor-de-aire-8-con-rejilla-blanco",
+    "diametro": "8\"",
+    "aplicacion": "Bodega / Oficina",
+    "categoria": "extractores-aire"
+  },
+  {
+    "name": "Bombillo Solar de Emergencia LED 12W",
+    "slug": "bombillo-solar-led-emergencia-12w",
+    "watts": 12,
+    "tipo": "Solar",
+    "feature": "Solar + Batería",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Bombillo LED Recargable 20W",
+    "slug": "bombillo-led-recargable-20w",
+    "watts": 20,
+    "tipo": "Recargable",
+    "feature": "Carga USB",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Bombillo LED Recargable 30W",
+    "slug": "bombillo-led-recargable-30w-con-gancho",
+    "watts": 30,
+    "tipo": "Recargable",
+    "feature": "Con Gancho",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Bombillo LED Recargable 50W",
+    "slug": "bombillo-led-recargable-50w",
+    "watts": 50,
+    "tipo": "Recargable",
+    "feature": "Alta potencia",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Lámpara de Emergencia LED 5.4W",
+    "slug": "lampara-led-de-emergencia-5-4w",
+    "watts": 5.4,
+    "tipo": "Emergencia",
+    "feature": "Normativa",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Lámpara de Emergencia LED 6W 45CM",
+    "slug": "lampara-led-de-emergencia-6w-45cm",
+    "watts": 6,
+    "tipo": "Emergencia",
+    "feature": "Tubo 45cm",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Lámpara de Emergencia LED Tipo Bala 5W",
+    "slug": "lampara-led-de-emergencia-5w-bala-luz-blanca",
+    "watts": 5,
+    "tipo": "Emergencia",
+    "feature": "Tipo Bala",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Reflector de Emergencia LED 10W",
+    "slug": "reflector-led-emergencia-10w-brazo-base-amarillo-luz-blanca",
+    "watts": 10,
+    "tipo": "Reflector",
+    "feature": "Brazo articulado",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Reflector de Emergencia LED 20W",
+    "slug": "reflector-led-emergencia-20w",
+    "watts": 20,
+    "tipo": "Reflector",
+    "feature": "Alta luminosidad",
+    "categoria": "iluminacion-emergencia"
+  },
+  {
+    "name": "Aplique Pared Solar LED 2W con Sensor Luz Blanca",
+    "slug": "aplique-pared-solar-led-2w-con-sensor-luz-blanca",
+    "watts": 2,
+    "tipo": "Aplique",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Aplique Pared Solar LED 2W con Sensor Luz Cálida",
+    "slug": "aplique-solar-led-2w-con-sensor-luz-calida",
+    "watts": 2,
+    "tipo": "Aplique",
+    "luz": "Cálida",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Aplique Solar LED Luxury 2W con Sensor",
+    "slug": "aplique-solar-led-luxury-black-2w-con-sensor-luz-blanca",
+    "watts": 2,
+    "tipo": "Luxury",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida",
+    "slug": "aplique-solar-led-2-5w-3000k-con-sensor",
+    "watts": 2.5,
+    "tipo": "Aplique",
+    "luz": "Cálida",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Alumbrado Público LED 30W",
+    "slug": "luminaria-solar-led-alumbrado-publico-30w-luz-blanca",
+    "watts": 30,
+    "tipo": "Luminaria",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Alumbrado Público LED 100W",
+    "slug": "luminaria-solar-led-alumbrado-publico-100w-luz-blanca",
+    "watts": 100,
+    "tipo": "Luminaria",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar LED Alumbrado Público 200W",
+    "slug": "luminaria-solar-led-alumbrado-publico-200w-6500k-con-panel-integrado",
+    "watts": 200,
+    "tipo": "Luminaria",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Alumbrado Público LED 400W",
+    "slug": "luminaria-solar-led-alumbrado-publico-400w-luz-blanca",
+    "watts": 400,
+    "tipo": "Luminaria",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Bombillo Solar de Emergencia LED 12W",
+    "slug": "bombillo-solar-led-emergencia-12w",
+    "watts": 12,
+    "tipo": "Bombillo",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Trompo 200W",
+    "slug": "luminaria-solar-trompo-200w",
+    "watts": 200,
+    "tipo": "Trompo",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Trompo 300W",
+    "slug": "luminaria-solar-trompo-300w",
+    "watts": 300,
+    "tipo": "Trompo",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Luminaria Solar Trompo 400W",
+    "slug": "luminaria-solar-trompo-400w",
+    "watts": 400,
+    "tipo": "Trompo",
+    "luz": "Blanca",
+    "categoria": "iluminacion-solar"
+  },
+  {
+    "name": "Tubo LED T8 9W Luz Blanca",
+    "slug": "tubo-led-t8-9w-luz-blanca",
+    "watts": 9,
+    "tipo": "Tubo T8",
+    "color": "Blanca",
+    "size": "60cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Tubo LED T8 18W 120 cm Luz Blanca",
+    "slug": "tubo-led-t8-18w-luz-blanca",
+    "watts": 18,
+    "tipo": "Tubo T8",
+    "color": "Blanca",
+    "size": "120cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 5W 30 cm Luz Cálida",
+    "slug": "lampara-led-t5-5w-30-cm-luz-calida",
+    "watts": 5,
+    "tipo": "Tubo T5",
+    "color": "Cálida",
+    "size": "30cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 10W 60cm Luz Blanca",
+    "slug": "lampara-led-t5-10w-60cm-blanco",
+    "watts": 10,
+    "tipo": "Tubo T5",
+    "color": "Blanca",
+    "size": "60cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 10W 60 cm Luz Cálida",
+    "slug": "lampara-led-t5-10w-60-cm-luz-calida",
+    "watts": 10,
+    "tipo": "Tubo T5",
+    "color": "Cálida",
+    "size": "60cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 14W 90 cm Luz Blanca",
+    "slug": "lampara-led-t5-14w-90cm",
+    "watts": 14,
+    "tipo": "Tubo T5",
+    "color": "Blanca",
+    "size": "90cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 14W 90 cm Luz Cálida",
+    "slug": "lampara-led-t5-14w-90-cm-luz-calida",
+    "watts": 14,
+    "tipo": "Tubo T5",
+    "color": "Cálida",
+    "size": "90cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED T5 18W 120 cm Luz Cálida",
+    "slug": "lampara-led-t5-18w-120-cm-luz-calida",
+    "watts": 18,
+    "tipo": "Tubo T5",
+    "color": "Cálida",
+    "size": "120cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara Hermética LED 2×18W 120 cm",
+    "slug": "lampara-hermetica-led-2x18w",
+    "watts": 36,
+    "tipo": "Hermética",
+    "color": "Blanca",
+    "size": "120cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara Acrílica Antipolvo 2×18W 120cm (A)",
+    "slug": "lampara-acrilica-antipolvo-2x18w-120-cm-luz-blanca",
+    "watts": 36,
+    "tipo": "Antipolvo",
+    "color": "Blanca",
+    "size": "120cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara Acrílica Antipolvo 2×18W 120cm (B)",
+    "slug": "lampara-acrilico-2x18w-120cm-antipolvo",
+    "watts": 36,
+    "tipo": "Antipolvo",
+    "color": "Blanca",
+    "size": "120cm",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara LED de Alta Potencia 52W Titanium",
+    "slug": "lampara-led-de-alta-potencia-52w",
+    "watts": 52,
+    "tipo": "Alta Potencia",
+    "color": "Blanca",
+    "size": "—",
+    "categoria": "lamparas-alta-potencia"
+  },
+  {
+    "name": "Lámpara Colgante Casco Negro y Dorado",
+    "slug": "lampara-colgante-casco-negro-oro-1xe27",
+    "estilo": "Industrial",
+    "color": "Negro/Dorado",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Colmena",
+    "slug": "lampara-colgante-colmena-negro-1xe27",
+    "estilo": "Geométrico",
+    "color": "Negro",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cono Negro",
+    "slug": "lampara-colgante-cono-negro-1xe27",
+    "estilo": "Minimalista",
+    "color": "Negro",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Botella Negra y Dorada",
+    "slug": "lampara-colgante-botella-negra-oro-1xe27",
+    "estilo": "Vintage",
+    "color": "Negro/Dorado",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Natura",
+    "slug": "lampara-colgante-natura-1xe27",
+    "estilo": "Natural",
+    "color": "Natural",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Circular Blanca",
+    "slug": "lampara-colgante-circular-blanca-1xe27",
+    "estilo": "Moderno",
+    "color": "Blanco",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Plato Blanco",
+    "slug": "lampara-colgante-plato-blanco-1xe21",
+    "estilo": "Moderno",
+    "color": "Blanco",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cónica Azul",
+    "slug": "lampara-colgante-conica-azul-1xe27",
+    "estilo": "Colorido",
+    "color": "Azul",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cónica Azul Grisáceo",
+    "slug": "lampara-colgante-conica-azul-grisaceo-1xe27",
+    "estilo": "Colorido",
+    "color": "Azul Grisáceo",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cónica Delgada Azul",
+    "slug": "lampara-colgante-conica-delgada-azul-1xe27",
+    "estilo": "Colorido",
+    "color": "Azul",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cónica Delgada Café",
+    "slug": "lampara-colgante-conica-delgada-cafe-1xe27",
+    "estilo": "Natural",
+    "color": "Café",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara Colgante Cónica Delgada Blanca",
+    "slug": "lampara-colgante-conica-delgada-blanca-1xe27",
+    "estilo": "Moderno",
+    "color": "Blanco",
+    "categoria": "lamparas-colgantes"
+  },
+  {
+    "name": "Lámpara LED Mesa Kids Verde 4W Recargable",
+    "slug": "lampara-led-mesa-kids-verde-4w-recargable",
+    "watts": 4,
+    "tipo": "Infantil",
+    "feature": "Recargable",
+    "precio": 0,
+    "categoria": "lamparas-escritorio"
+  },
+  {
+    "name": "Lámpara LED Escritorio 5W CCT Carga Inalámbrica",
+    "slug": "lampara-led-escritorio-blanco-5w-cct-carga-inalambrica",
+    "watts": 5,
+    "tipo": "Inalámbrica",
+    "feature": "CCT",
+    "precio": 0,
+    "categoria": "lamparas-escritorio"
+  },
+  {
+    "name": "Lámpara LED Escritorio Luxury Negro 5W CCT",
+    "slug": "lampara-led-escritorio-luxury-negro-5w",
+    "watts": 5,
+    "tipo": "Luxury",
+    "feature": "CCT",
+    "precio": 0,
+    "categoria": "lamparas-escritorio"
+  },
+  {
+    "name": "Lámpara LED Escritorio Art Bamboo 7W CCT",
+    "slug": "lampara-led-escritorio-art-bamboo-7w-cct",
+    "watts": 7,
+    "tipo": "Art/Bamboo",
+    "feature": "CCT",
+    "precio": 0,
+    "categoria": "lamparas-escritorio"
+  },
+  {
+    "name": "Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida",
+    "slug": "aplique-solar-led-2-5w-3000k-con-sensor",
+    "watts": 2.5,
+    "tipo": "Aplique Solar",
+    "sensor": true,
+    "color": "Negro",
+    "categoria": "lamparas-jardin"
+  },
+  {
+    "name": "Poste LED 10W Negro Luz Cálida",
+    "slug": "poste-led-10w-negro-luz-calida",
+    "watts": 10,
+    "tipo": "Poste",
+    "sensor": false,
+    "color": "Negro",
+    "categoria": "lamparas-jardin"
+  },
+  {
+    "name": "Poste LED Negro Base E27",
+    "slug": "poste-led-base-e27-negro",
+    "watts": 0,
+    "tipo": "Poste",
+    "sensor": false,
+    "color": "Negro",
+    "categoria": "lamparas-jardin"
+  },
+  {
+    "name": "Poste LED Satín E27",
+    "slug": "poste-led-base-e27-satin",
+    "watts": 0,
+    "tipo": "Poste",
+    "sensor": false,
+    "color": "Satín",
+    "categoria": "lamparas-jardin"
+  },
+  {
+    "name": "Limpiacontactos Electrónico",
+    "slug": "limpiador-de-contactos-electronicos-400ml",
+    "tipo": "Limpiador",
+    "app": "Electrónica",
+    "precio": "$15.000",
+    "desc": "Limpia contactos, tarjetas y circuitos",
+    "categoria": "limpiadores-y-lubricantes"
+  },
+  {
+    "name": "Lubricante Multiusos WD-40 5.5oz",
+    "slug": "lubricante-multiusos-mr-40-200ml",
+    "tipo": "Lubricante",
+    "app": "Mecánica",
+    "precio": "$22.000",
+    "desc": "Desplaza humedad y afloja piezas",
+    "categoria": "limpiadores-y-lubricantes"
+  },
+  {
+    "name": "Limpiador de Motores y Partes",
+    "slug": "limpiador-motores",
+    "tipo": "Limpiador",
+    "app": "Mecánica",
+    "precio": "$18.500",
+    "desc": "Desengrasante de alta potencia",
+    "categoria": "limpiadores-y-lubricantes"
+  },
+  {
+    "name": "Silicona Dieléctrica en Spray",
+    "slug": "silicona-en-spray-400-ml-aroma-manzana",
+    "tipo": "Lubricante",
+    "app": "Electrónica",
+    "precio": "$24.000",
+    "desc": "Lubrica y aísla conexiones eléctricas",
+    "categoria": "limpiadores-y-lubricantes"
+  },
+  {
+    "name": "Linterna Recargable 4LED",
+    "slug": "linterna-recargable-4led",
+    "leds": 4,
+    "tipo": "Mano",
+    "price": 0,
+    "categoria": "linternas-led"
+  },
+  {
+    "name": "Linterna Recargable 7LED",
+    "slug": "linterna-recargable-7led",
+    "leds": 7,
+    "tipo": "Mano",
+    "price": 0,
+    "categoria": "linternas-led"
+  },
+  {
+    "name": "Linterna Recargable 15LED Tipo Minero",
+    "slug": "linterna-recargable-15led-tipo-minero",
+    "leds": 15,
+    "tipo": "Minera",
+    "price": 0,
+    "categoria": "linternas-led"
+  },
+  {
+    "name": "Linterna Recargable 19LED",
+    "slug": "linterna-recargable-19led",
+    "leds": 19,
+    "tipo": "Mano",
+    "price": 0,
+    "categoria": "linternas-led"
+  },
+  {
+    "name": "Llave de Lavaplatos Cuello Flexible",
+    "slug": "llave-lavaplatos-meson-flexible-premium-acero-inoxidable",
+    "tipo": "Flexible",
+    "acb": "Cromo",
+    "precio": "$85.000",
+    "desc": "Llave doble chorro, cuello siliconado.",
+    "categoria": "llave-de-lavaplatos"
+  },
+  {
+    "name": "Llave de Lavaplatos Monocontrol Inox",
+    "slug": "llave-lavaplatos-de-meson-luxury-negro-mate-artdeko",
+    "tipo": "Monocontrol",
+    "acb": "Inox",
+    "precio": "$120.000",
+    "desc": "Diseño minimalista con aireador de alta presión.",
+    "categoria": "llave-de-lavaplatos"
+  },
+  {
+    "name": "Llave Sencilla de Pared Latón",
+    "slug": "llave-lavamanos-sencilla-cromada-de-palanca",
+    "tipo": "Pared",
+    "acb": "Latón",
+    "precio": "$55.000",
+    "desc": "Instalación a pared de un cuarto de vuelta.",
+    "categoria": "llave-de-lavaplatos"
+  },
+  {
+    "name": "Mezclador de Lavaplatos Extraíble Negro",
+    "slug": "mezclador-lavaplatos-8-cuello-fijo-con-palanca",
+    "tipo": "Mezclador",
+    "acb": "Negro Mate",
+    "precio": "$190.000",
+    "desc": "Manguera extraíble con 2 funciones de lluvia.",
+    "categoria": "llave-de-lavaplatos"
+  },
+  {
+    "name": "Llave Jardín 1/2\" Pesada Cromada",
+    "slug": "llave-jardin-terminal-1-2-pesada-cromada",
+    "tipo": "Pesada",
+    "acabado": "Cromado",
+    "categoria": "llaves-jardin"
+  },
+  {
+    "name": "Llave Jardín 1/2\" Super Pesada Cromada",
+    "slug": "llave-jardin-terminal-1-2-super-pesada-cromada",
+    "tipo": "Super Pesada",
+    "acabado": "Cromado",
+    "categoria": "llaves-jardin"
+  },
+  {
+    "name": "Llave Jardín Premium Palanca y Cuerpo Metálico Cromado",
+    "slug": "llave-jardin-premium-palanca-y-cuerpo-metalico-cromado",
+    "tipo": "Premium",
+    "acabado": "Metálico Cromado",
+    "categoria": "llaves-jardin"
+  },
+  {
+    "name": "Medidor Electrónico Interno Monofásico 120V Análogo",
+    "slug": "medidor-electronico-interno-monofasico-120v-2hilos-analogo-interior",
+    "tipo": "Medidor",
+    "formato": "Análogo",
+    "uso": "Interno",
+    "precio": "$74.100",
+    "desc": "120V · 2 Hilos · Alta precisión",
+    "categoria": "medidores-y-tableros-electricos"
+  },
+  {
+    "name": "Medidor Electrónico Interno Monofásico 120V LCD",
+    "slug": "medidor-electronico-interno-monofasico-120v-2-hilos-lcd",
+    "tipo": "Medidor",
+    "formato": "Digital",
+    "uso": "Interno",
+    "precio": "$82.700",
+    "desc": "120V · 2 Hilos · Pantalla LCD",
+    "categoria": "medidores-y-tableros-electricos"
+  },
+  {
+    "name": "Medidor Electrónico Monofásico 120V Externo",
+    "slug": "medidor-electronico-monofasico-analogo-120v-externo",
+    "tipo": "Medidor",
+    "formato": "Análogo",
+    "uso": "Externo",
+    "precio": "$85.000",
+    "desc": "120V · 2 Hilos · Intemperie",
+    "categoria": "medidores-y-tableros-electricos"
+  },
+  {
+    "name": "Tablero Eléctrico Plástico 4 Circuitos",
+    "slug": "tablero-electrico-monofasico-4p-con-puerta-de-policarbonato",
+    "tipo": "Tablero",
+    "formato": "Plástico",
+    "uso": "Interno",
+    "precio": "$22.000",
+    "desc": "Para breakers enchufables",
+    "categoria": "medidores-y-tableros-electricos"
+  },
+  {
+    "name": "Tablero Eléctrico Metálico 6 Circuitos",
+    "slug": "tablero-monofasico-6p-con-tapa-metalica",
+    "tipo": "Tablero",
+    "formato": "Metálico",
+    "uso": "Interno",
+    "precio": "$45.000",
+    "desc": "Distribución residencial",
+    "categoria": "medidores-y-tableros-electricos"
+  },
+  {
+    "name": "Multitoma 3 Salidas Cable 50cm",
+    "slug": "multitoma-3-salidas-0-5m-cable",
+    "tipo": "Estándar",
+    "salidas": "3 Salidas",
+    "precio": "$9.500",
+    "desc": "Polo a tierra · Switche ON/OFF",
+    "categoria": "multitomas"
+  },
+  {
+    "name": "Multitoma 6 Salidas Cable 85cm",
+    "slug": "multitoma-6-salidas-cable-85cm",
+    "tipo": "Estándar",
+    "salidas": "6 Salidas",
+    "precio": "$11.500",
+    "desc": "Polo a tierra · Switche ON/OFF",
+    "categoria": "multitomas"
+  },
+  {
+    "name": "Multitoma 6 Salidas Cable 90cm",
+    "slug": "multitoma-6-salidas-cable-0-9-m",
+    "tipo": "Estándar",
+    "salidas": "6 Salidas",
+    "precio": "$12.500",
+    "desc": "Polo a tierra · Switche ON/OFF",
+    "categoria": "multitomas"
+  },
+  {
+    "name": "Multitoma 4 Salidas + 2 USB",
+    "slug": "multitoma-3-salidas-2-usb",
+    "tipo": "Con USB",
+    "salidas": "4 Salidas",
+    "precio": "$32.000",
+    "desc": "2 Puertos USB 2.1A · Supresor de picos",
+    "categoria": "multitomas"
+  },
+  {
+    "name": "Multitoma 6 Salidas + 2 USB (Smart)",
+    "slug": "multitoma-smart-3-salidas-4-usb-1m-cable",
+    "tipo": "Smart / USB",
+    "salidas": "6 Salidas",
+    "precio": "$48.000",
+    "desc": "Diseño torre · Carga rápida",
+    "categoria": "multitomas"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 3W 2.5\" Luz Blanca",
+    "slug": "panel-led-cuadrado-3w-2-5-luz-blanca-incrustar",
+    "watts": 3,
+    "size": "2.5\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 6W 4\" Luz Blanca",
+    "slug": "panel-led-cuadrado-6w-4-luz-blanca-incrustar",
+    "watts": 6,
+    "size": "4\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 9W 5\" Luz Blanca",
+    "slug": "panel-led-cuadrado-9w-5-luz-blanca-incrustar",
+    "watts": 9,
+    "size": "5\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 12W 6\" Luz Blanca",
+    "slug": "panel-led-cuadrado-12w-6-luz-blanca-incrustar",
+    "watts": 12,
+    "size": "6\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 18W 8\" Luz Blanca",
+    "slug": "panel-led-cuadrado-18w-8-luz-blanca-incrustar",
+    "watts": 18,
+    "size": "8\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Incrustar 24W 10\" Luz Blanca",
+    "slug": "panel-led-cuadrado-24w-10-luz-blanca-incrustar",
+    "watts": 24,
+    "size": "10\"",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Sobreponer 6W 4\" Luz Blanca",
+    "slug": "panel-led-cuadrado-6w-4-luz-blanca-sobreponer",
+    "watts": 6,
+    "size": "4\"",
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Sobreponer 12W 6\" Luz Blanca",
+    "slug": "panel-led-cuadrado-12w-6-luz-blanca-sobreponer",
+    "watts": 12,
+    "size": "6\"",
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Sobreponer 18W 8\" Luz Blanca",
+    "slug": "panel-led-cuadrado-18w-8-luz-blanca-sobreponer",
+    "watts": 18,
+    "size": "8\"",
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Cuadrado de Sobreponer 24W 10\" Luz Blanca",
+    "slug": "panel-led-cuadrado-24w-10-luz-blanca-sobreponer",
+    "watts": 24,
+    "size": "10\"",
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "style": "Estándar",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Frameless de Incrustar Cuadrado 9W Luz Blanca",
+    "slug": "panel-led-frameless-cuadrado-9w-luz-blanca-incrustar",
+    "watts": 9,
+    "size": "—",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Frameless",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED Frameless de Incrustar Cuadrado 36W Luz Blanca",
+    "slug": "panel-led-frameless-cuadrado-36w-luz-blanca-incrustar",
+    "watts": 36,
+    "size": "—",
+    "color": "Blanca",
+    "install": "Incrustar",
+    "style": "Frameless",
+    "categoria": "paneles-led-cuadrados"
+  },
+  {
+    "name": "Panel LED 120x30cm 50W Luz Blanca",
+    "slug": "panel-led-120x30cm-50w-luz-blanca",
+    "watts": 50,
+    "size": "120×30cm",
+    "color": "Blanca",
+    "type": "Panel",
+    "style": "Estándar",
+    "price": 86400,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Panel LED Titanium 60x60cm 48W Luz Blanca",
+    "slug": "panel-led-titanium-60x60cm-48w-luz-blanca",
+    "watts": 48,
+    "size": "60×60cm",
+    "color": "Blanca",
+    "type": "Panel",
+    "style": "Titanium",
+    "price": 71300,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Panel LED 60x60cm 48W Luz Blanca",
+    "slug": "panel-led-60x60cm-48w-luz-blanca",
+    "watts": 48,
+    "size": "60×60cm",
+    "color": "Blanca",
+    "type": "Panel",
+    "style": "Estándar",
+    "price": 74400,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Panel LED Slim 60x60cm 48W Luz Blanca",
+    "slug": "panel-led-slim-60x60cm-48w-luz-blanca",
+    "watts": 48,
+    "size": "60×60cm",
+    "color": "Blanca",
+    "type": "Panel",
+    "style": "Slim",
+    "price": 79800,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Driver para Panel LED 48W - 52W",
+    "slug": "driver-para-panel-led-48w-52w",
+    "watts": 52,
+    "size": "—",
+    "color": "—",
+    "type": "Accesorio",
+    "style": "Driver",
+    "price": 21300,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Ganchos para Incrustar Paneles LED 30x60, 60x60 y 120x30",
+    "slug": "ganchos-para-incrustar-panel-60x60-y-120x30",
+    "watts": 0,
+    "size": "60×60 / 120×30",
+    "color": "—",
+    "type": "Accesorio",
+    "style": "Gancho",
+    "price": 7200,
+    "categoria": "paneles-led-grandes-dimensiones"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 3W 2.5\" Luz Blanca",
+    "slug": "panel-led-3w-2-5-blanco-redondo-incrustar",
+    "watts": 3,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 3W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-3w-luz-calida",
+    "watts": 3,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 3W 2.5\" Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-3w-2-5-luz-calida",
+    "watts": 3,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 4W Luz Blanca",
+    "slug": "panel-led-4w-3-5-blanco-redondo-incrustar",
+    "watts": 4,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 6W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-6w-luz-blanca",
+    "watts": 6,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 6W 4\" Luz Blanca",
+    "slug": "panel-led-6w-4-blanco-redondo-incrustar",
+    "watts": 6,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 6W 4\" Luz Neutra",
+    "slug": "panel-led-6w-4-luz-neutra-redondo-incrustar",
+    "watts": 6,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 6W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-6w-luz-calida",
+    "watts": 6,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 9W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-9w-luz-blanca",
+    "watts": 9,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 9W 5\" Luz Blanca",
+    "slug": "panel-led-9w-5-blanco-redondo-incrustar",
+    "watts": 9,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 9W 5\" Luz Neutra",
+    "slug": "panel-led-9w-5-luz-neutra-redondo-incrustar",
+    "watts": 9,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 9W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-9w-luz-calida",
+    "watts": 9,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 12W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-12w-luz-blanca",
+    "watts": 12,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 12W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-12w-luz-blanca",
+    "watts": 12,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 12W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-12w-luz-calida",
+    "watts": 12,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 18W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-18w-luz-blanca",
+    "watts": 18,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 18W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-18w-luz-blanca",
+    "watts": 18,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 18W Luz Cálida",
+    "slug": "panel-led-18w-8-luz-calida-redondo-incrustar",
+    "watts": 18,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 24W Luz Blanca",
+    "slug": "panel-led-frameless-redondo-de-incrustar-24w-luz-blanca",
+    "watts": 24,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 24W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-24w-luz-neutra",
+    "watts": 24,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 24W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-24w-luz-calida",
+    "watts": 24,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 36W Luz Blanca",
+    "slug": "panel-led-frameless-redondo-de-incrustar-36w-luz-blanca",
+    "watts": 36,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 36W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-36w-luz-neutra",
+    "watts": 36,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 36W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-36w-luz-calida",
+    "watts": 36,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 48W Luz Blanca",
+    "slug": "panel-led-frameless-redondo-de-incrustar-48w-luz-blanca",
+    "watts": 48,
+    "color": "Blanca",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 48W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-48w-luz-neutra",
+    "watts": 48,
+    "color": "Neutra",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Incrustar 48W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-48w-luz-calida",
+    "watts": 48,
+    "color": "Cálida",
+    "install": "Incrustar",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 6W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-6w-luz-blanca",
+    "watts": 6,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 6W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-6w-luz-blanca",
+    "watts": 6,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 6W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-6w-luz-blanca",
+    "watts": 6,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 9W Luz Blanca",
+    "slug": "panel-led-redondo-de-incrustar-9w-luz-blanca",
+    "watts": 9,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 9W Luz Neutra",
+    "slug": "panel-led-redondo-de-incrustar-9w-luz-blanca",
+    "watts": 9,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 9W Luz Cálida",
+    "slug": "panel-led-redondo-de-incrustar-9w-luz-blanca",
+    "watts": 9,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 12W Luz Blanca",
+    "slug": "panel-led-redondo-de-sobreponer-12w-luz-blanca",
+    "watts": 12,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 12W Luz Neutra",
+    "slug": "panel-led-12w-6-luz-neutra-redondo-sobreponer",
+    "watts": 12,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 12W Luz Cálida",
+    "slug": "panel-led-redondo-de-sobreponer-12w-luz-calida",
+    "watts": 12,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 18W Luz Blanca",
+    "slug": "panel-led-redondo-de-sobreponer-18w-luz-blanca",
+    "watts": 18,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 18W Luz Neutra",
+    "slug": "panel-led-redondo-de-sobreponer-18w-luz-neutra",
+    "watts": 18,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 18W Luz Cálida",
+    "slug": "panel-led-frameless-redondo-de-sobreponer-18w-luz-calida",
+    "watts": 18,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 24W Luz Blanca",
+    "slug": "panel-led-24w-10-luz-blanca-redondo-sobreponer",
+    "watts": 24,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 24W Luz Neutra",
+    "slug": "panel-led-redondo-de-sobreponer-24w-luz-neutra",
+    "watts": 24,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 24W Luz Cálida",
+    "slug": "panel-led-redondo-de-sobreponer-24w-luz-calida",
+    "watts": 24,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 36W Luz Blanca",
+    "slug": "panel-led-frameless-redondo-36w-luz-blanca-sobreponer",
+    "watts": 36,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 36W Luz Neutra",
+    "slug": "panel-led-redondo-de-sobreponer-36w-luz-neutra",
+    "watts": 36,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 36W Luz Cálida",
+    "slug": "panel-led-redondo-de-sobreponer-36w-luz-calida",
+    "watts": 36,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 48W Luz Blanca",
+    "slug": "panel-led-redondo-de-sobreponer-48w-luz-blanca",
+    "watts": 48,
+    "color": "Blanca",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 48W Luz Neutra",
+    "slug": "panel-led-redondo-de-sobreponer-48w-luz-neutra",
+    "watts": 48,
+    "color": "Neutra",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Panel LED Redondo de Sobreponer 48W Luz Cálida",
+    "slug": "panel-led-redondo-de-sobreponer-48w-luz-calida",
+    "watts": 48,
+    "color": "Cálida",
+    "install": "Sobreponer",
+    "categoria": "paneles-led-redondos"
+  },
+  {
+    "name": "Toma Doble Blanca Regulada 15A",
+    "slug": "toma-doble-blanca-regulada-15a",
+    "tipo": "Tomacorriente",
+    "color": "Blanco",
+    "desc": "Doble · 15A · Regulada",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Toma Doble Naranja Regulada 15A",
+    "slug": "toma-doble-naranja-hospitalaria-regulada-15a",
+    "tipo": "Tomacorriente",
+    "color": "Naranja",
+    "desc": "Hospitalaria · 15A",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Toma Doble con Polo a Tierra Blanca",
+    "slug": "toma-doble-con-polo-a-tierra-blanca",
+    "tipo": "Tomacorriente",
+    "color": "Blanco",
+    "desc": "Polo a tierra · 15A",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Toma Sencillo Polo a Tierra + USB x2 Blanco",
+    "slug": "toma-sencillo-polo-a-tierra-usb-x2-blanco",
+    "tipo": "USB",
+    "color": "Blanco",
+    "desc": "2 puertos USB · polo a tierra",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Toma GFCI Blanca 20A",
+    "slug": "toma-gfci-20a-blanca",
+    "tipo": "GFCI",
+    "color": "Blanco",
+    "desc": "Protección GFCI · 20A",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Interruptor Sencillo Conmutable Blanco",
+    "slug": "interruptor-sencillo-conmutable-blanco",
+    "tipo": "Interruptor",
+    "color": "Blanco",
+    "desc": "Sencillo · conmutable",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Interruptor Doble Conmutable Blanco",
+    "slug": "interruptor-doble-conmutable-blanco",
+    "tipo": "Interruptor",
+    "color": "Blanco",
+    "desc": "Doble · conmutable",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Interruptor Triple Conmutable Blanco",
+    "slug": "interruptor-triple-conmutable-blanco",
+    "tipo": "Interruptor",
+    "color": "Blanco",
+    "desc": "Triple · conmutable",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Toma + Interruptor Blanco",
+    "slug": "toma-interruptor-blanco",
+    "tipo": "Combinado",
+    "color": "Blanco",
+    "desc": "Toma + interruptor integrado",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Tapa Blanca para Tomacorriente Regulada 15A",
+    "slug": "tapa-toma-doble-blanca",
+    "tipo": "Tapa",
+    "color": "Blanco",
+    "desc": "Toma doble · placa frontal",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Tapa Naranja para Toma Doble 15A",
+    "slug": "tapa-toma-doble-naranja",
+    "tipo": "Tapa",
+    "color": "Naranja",
+    "desc": "Hospitalaria · placa frontal",
+    "categoria": "tomacorrientes-interruptores"
+  },
+  {
+    "name": "Tapa Gris para Intemperie Tomacorriente 15A",
+    "slug": "tapa-gris-para-intemperie",
+    "tipo": "Tapa",
+    "color": "Gris",
+    "desc": "Exterior · resistente a humedad",
+    "categoria": "tomacorrientes-interruptores"
+  }
+]

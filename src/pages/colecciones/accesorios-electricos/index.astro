@@ -2,20 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Convertidor de Redondo a Plano Negro',         slug: 'convertidor-redondo-a-plano-negro',          categoria: 'Convertidor', desc: 'Adaptador enchufe' },
-  { name: 'Convertidor Polo a Tierra 3 a 2',             slug: 'convertidor-polo-tierra-3-a-2',              categoria: 'Convertidor', desc: 'Elimina polo tierra' },
-  { name: 'Convertidor Polo Tierra 3 a 2 Gris Set x2',   slug: 'convertidor-polo-tierra-3-a-2-gris-set-x2',  categoria: 'Convertidor', desc: 'Pack x2 gris' },
-  { name: 'Te Eléctrica Blanca',                         slug: 'te-electrica-blanca',                        categoria: 'Toma', desc: 'Toma múltiple' },
-  { name: 'Te Eléctrica Escualizable 10A Blanca UL',      slug: 'te-electrica-escualizable-10a-blanca-ul',    categoria: 'Toma', desc: 'UL certificada 10A' },
-  { name: 'Te Eléctrica Escualizable Gris con Polo Tierra',slug: 'te-electrica-ecualizadle-gris-con-polo-a-tierra', categoria: 'Toma', desc: 'Polo a tierra' },
-  { name: 'Te Industrial Naranja en Cruz 15A',            slug: 'te-industrial-naranja-en-cruz',              categoria: 'Industrial', desc: 'Cruz 15A' },
-  { name: 'Te Industrial Naranja Recta 15A',              slug: 'te-industrial-naranja-recta-15a',            categoria: 'Industrial', desc: 'Recta 15A' },
-  { name: 'Tester Probador Corriente Digital Pequeño',    slug: 'tester-probador-corriente-digital-pequeno',  categoria: 'Herramienta', desc: 'Compacto' },
-  { name: 'Tester Probador Corriente Digital Grande',     slug: 'tester-probador-corriente-digital-grande',   categoria: 'Herramienta', desc: 'Gran pantalla' },
-  { name: 'Interruptor Push Button ON-OFF 15A',           slug: 'interruptor-push-button-on-off-15a',         categoria: 'Interruptor', desc: '15 Amperios' },
-  { name: 'Interruptor Push Button ON-OFF 30A',           slug: 'interruptor-push-button-on-off-30a',         categoria: 'Interruptor', desc: '30 Amperios' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'accesorios-electricos');
 
 const cats = ['Convertidor','Toma','Industrial','Herramienta','Interruptor'];
 const catColor: Record<string,string> = { Convertidor:'#94A3B8', Toma:'#60A5FA', Industrial:'#F97316', Herramienta:'#FACC15', Interruptor:'#34D399' };
@@ -94,7 +82,7 @@ const catIcon:  Record<string,string>  = { Convertidor:'power', Toma:'bolt', Ind
                   <h3 class="prod-card__name">{p.name}</h3>
                   <p class="prod-card__desc">{p.desc}</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

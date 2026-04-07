@@ -2,20 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Tortuga LED Lisa Negra 12W Luz Blanca',       slug: 'tortuga-led-lisa-negra-12w-luz-blanca',            watts: 12, tipo: 'Tortuga',   color: 'Negro',  luz: 'Blanca' },
-  { name: 'Tortuga LED Lisa Blanca 12W Luz Cálida',      slug: 'tortuga-led-lisa-blanca-12w-luz-calida',           watts: 12, tipo: 'Tortuga',   color: 'Blanco', luz: 'Cálida' },
-  { name: 'Nicho LED 3W Negro Luz Cálida',               slug: 'nicho-led-3w-negro-luz-calida',                    watts: 3,  tipo: 'Nicho',     color: 'Negro',  luz: 'Cálida' },
-  { name: 'Nicho LED 3W Gris Luz Cálida',                slug: 'nicho-led-3w-gris-luz-calida',                     watts: 3,  tipo: 'Nicho',     color: 'Gris',   luz: 'Cálida' },
-  { name: 'Aplique LED Box Negro 6W 10×10 Luz Cálida',   slug: 'aplique-led-box-negro-6w-10x10-luz-calida',        watts: 6,  tipo: 'Box',       color: 'Negro',  luz: 'Cálida' },
-  { name: 'Aplique LED Box Blanco 6W 10×10 Luz Cálida',  slug: 'aplique-led-box-blanco-6w-10x10-luz-calida',       watts: 6,  tipo: 'Box',       color: 'Blanco', luz: 'Cálida' },
-  { name: 'Aplique LED Corbatín 2×3W Blanco Luz Cálida', slug: 'aplique-led-corbatin-2x3w-blanco-luz-calida',      watts: 6,  tipo: 'Corbatín',  color: 'Blanco', luz: 'Cálida' },
-  { name: 'Aplique LED Corbatín 2×3W Negro Luz Cálida',  slug: 'aplique-led-corbatin-2x3w-negro-luz-calida',       watts: 6,  tipo: 'Corbatín',  color: 'Negro',  luz: 'Cálida' },
-  { name: 'Aplique de Pared GU10 ×2 Cilindro Blanco',   slug: 'aplique-pared-gu10-x2-cilindro-blanco',            watts: 0,  tipo: 'Cilindro',  color: 'Blanco', luz: '—' },
-  { name: 'Aplique de Pared GU10 ×2 Cilindro Gris',     slug: 'aplique-pared-gu10-x2-cilindro-gris',              watts: 0,  tipo: 'Cilindro',  color: 'Gris',   luz: '—' },
-  { name: 'Aplique LED Ball 360 12W Negro Luz Cálida',   slug: 'aplique-led-ball-360-12w-negro-luz-calida',        watts: 12, tipo: 'Ball 360',  color: 'Negro',  luz: 'Cálida' },
-  { name: 'Aplique LED Up & Down 6W Blanco Luz Cálida',  slug: 'aplique-led-up-down-6w-blanco-luz-calida',         watts: 6,  tipo: 'Up&Down',   color: 'Blanco', luz: 'Cálida' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'apliques-de-pared');
 
 const uniqueTipos = ['Tortuga','Nicho','Box','Corbatín','Cilindro','Ball 360','Up&Down'];
 const tipoColor: Record<string,string> = {
@@ -110,7 +98,7 @@ const tipoIcon: Record<string,string> = {
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">palette</span> {p.color}</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

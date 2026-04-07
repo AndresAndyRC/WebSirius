@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Lámpara LED Mesa Kids Verde 4W Recargable',       slug: 'lampara-led-mesa-kids-verde-4w-recargable',          watts: 4, tipo: 'Infantil',    feature: 'Recargable', precio: 0 },
-  { name: 'Lámpara LED Escritorio 5W CCT Carga Inalámbrica', slug: 'lampara-led-escritorio-blanco-5w-cct-carga-inalambrica', watts: 5, tipo: 'Inalámbrica', feature: 'CCT', precio: 0 },
-  { name: 'Lámpara LED Escritorio Luxury Negro 5W CCT',       slug: 'lampara-led-escritorio-luxury-negro-5w',              watts: 5, tipo: 'Luxury',      feature: 'CCT', precio: 0 },
-  { name: 'Lámpara LED Escritorio Art Bamboo 7W CCT',         slug: 'lampara-led-escritorio-art-bamboo-7w-cct',            watts: 7, tipo: 'Art/Bamboo',  feature: 'CCT', precio: 0 },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'lamparas-escritorio');
 
 const tipoColor: Record<string, string> = {
   'Infantil': '#4ADE80', 'Inalámbrica': '#60A5FA', 'Luxury': '#A78BFA', 'Art/Bamboo': '#A3805A',
@@ -101,7 +97,7 @@ const tipoIcon: Record<string, string> = {
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">desktop_windows</span>️ Escritorio</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" style={`--cta-hover:${accent}10`} aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" style={`--cta-hover:${accent}10`} aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

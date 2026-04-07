@@ -2,11 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Llave Jardín 1/2" Pesada Cromada',                      slug: 'llave-jardin-terminal-1-2-pesada-cromada',                tipo: 'Pesada',       acabado: 'Cromado' },
-  { name: 'Llave Jardín 1/2" Super Pesada Cromada',                 slug: 'llave-jardin-terminal-1-2-super-pesada-cromada',          tipo: 'Super Pesada', acabado: 'Cromado' },
-  { name: 'Llave Jardín Premium Palanca y Cuerpo Metálico Cromado', slug: 'llave-jardin-premium-palanca-y-cuerpo-metalico-cromado',  tipo: 'Premium',      acabado: 'Metálico Cromado' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'llaves-jardin');
 const tipoColor: Record<string,string> = { Pesada:'#94A3B8', 'Super Pesada':'#60A5FA', Premium:'#FACC15' };
 const tipoIcon:  Record<string,string>  = { Pesada:'settings', 'Super Pesada':'settings_applications', Premium:'military_tech' };
 ---
@@ -83,7 +80,7 @@ const tipoIcon:  Record<string,string>  = { Pesada:'settings', 'Super Pesada':'s
                     <span class="prod-card__spec">settings Metálico</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

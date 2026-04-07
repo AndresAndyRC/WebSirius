@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Llave de Lavaplatos Cuello Flexible', slug: 'llave-lavaplatos-meson-flexible-premium-acero-inoxidable', tipo: 'Flexible', acb: 'Cromo', precio: '$85.000', desc: 'Llave doble chorro, cuello siliconado.' },
-  { name: 'Llave de Lavaplatos Monocontrol Inox', slug: 'llave-lavaplatos-de-meson-luxury-negro-mate-artdeko', tipo: 'Monocontrol', acb: 'Inox', precio: '$120.000', desc: 'Diseño minimalista con aireador de alta presión.' },
-  { name: 'Llave Sencilla de Pared Latón', slug: 'llave-lavamanos-sencilla-cromada-de-palanca', tipo: 'Pared', acb: 'Latón', precio: '$55.000', desc: 'Instalación a pared de un cuarto de vuelta.' },
-  { name: 'Mezclador de Lavaplatos Extraíble Negro', slug: 'mezclador-lavaplatos-8-cuello-fijo-con-palanca', tipo: 'Mezclador', acb: 'Negro Mate', precio: '$190.000', desc: 'Manguera extraíble con 2 funciones de lluvia.' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'llave-de-lavaplatos');
 
 const tipos = ['Flexible', 'Monocontrol', 'Pared', 'Mezclador'];
 const acbs  = ['Cromo', 'Inox', 'Latón', 'Negro Mate'];
@@ -57,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Flexible: 'water_damage', Monocontrol
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.acb}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

@@ -2,24 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── THHN #14 AWG ────────────────────────────────────────────
-  { name: 'Cable Blanco THHN 14AWG CCA Rollo x 100m', slug: 'cable-blanco-thhn-14awg-cca-rollo-x-100m', tipo: 'THHN', calibre: '#14', color: 'Blanco',  precio: '$181.400',  desc: '100m · CCA · Termoplástico' },
-  { name: 'Cable Rojo THHN 14AWG CCA Rollo x 100m',   slug: 'cable-rojo-thhn-14awg-cca-rollo-x-100m',   tipo: 'THHN', calibre: '#14', color: 'Rojo',    precio: '$181.400',  desc: '100m · CCA · Fase' },
-  { name: 'Cable Negro THHN 14AWG CCA Rollo x 100m',  slug: 'cable-negro-thhn-14awg-cca-rollo-x-100m',  tipo: 'THHN', calibre: '#14', color: 'Negro',   precio: '$181.400',  desc: '100m · CCA · Neutro/Fase' },
-  { name: 'Cable Azul THHN 14AWG CCA Rollo x 100m',   slug: 'cable-azul-thhn-14awg-cca-rollo-x-100m',   tipo: 'THHN', calibre: '#14', color: 'Azul',    precio: '$181.400',  desc: '100m · CCA · Neutro' },
-  // ── THHN #12 AWG ────────────────────────────────────────────
-  { name: 'Cable Blanco THHN 12AWG CCA Rollo x 100m', slug: 'cable-blanco-thhn-12awg-cca-rollo-x-100m', tipo: 'THHN', calibre: '#12', color: 'Blanco',  precio: '$250.300',  desc: '100m · CCA · Mayor capacidad' },
-  { name: 'Cable Rojo THHN 12AWG CCA Rollo x 100m',   slug: 'cable-rojo-thhn-12awg-cca-rollo-x-100m',   tipo: 'THHN', calibre: '#12', color: 'Rojo',    precio: '$250.300',  desc: '100m · CCA · Fase 20A' },
-  { name: 'Cable Negro THHN 12AWG CCA Rollo x 100m',  slug: 'cable-negro-thhn-12awg-cca-rollo-x-100m',  tipo: 'THHN', calibre: '#12', color: 'Negro',   precio: '$250.300',  desc: '100m · CCA · Neutro 20A' },
-  { name: 'Cable Verde THHN 12AWG CCA Rollo x 100m',  slug: 'cable-verde-thhn-12awg-cca-rollo-x-100m',  tipo: 'THHN', calibre: '#12', color: 'Verde',   precio: '$250.300',  desc: '100m · CCA · Tierra' },
-  // ── Dúplex SPT ──────────────────────────────────────────────
-  { name: 'Cable Dúplex Blanco SPT 2x14 AWG CCA Rollo x 100m', slug: 'cable-duplex-blanco-spt-2x14awg-cca-rollo-x-100m', tipo: 'Dúplex', calibre: '2x14', color: 'Blanco', precio: '$305.200', desc: '100m · SPT · Doble conductor' },
-  { name: 'Cable Dúplex Blanco SPT 2x12 AWG CCA Rollo x 100m', slug: 'cable-duplex-blanco-spt-2x12awg-cca-rollo-x-100m', tipo: 'Dúplex', calibre: '2x12', color: 'Blanco', precio: '$474.600', desc: '100m · SPT · Mayor sección' },
-  { name: 'Cable Dúplex Blanco SPT 2x10 AWG CCA Rollo x 100m', slug: 'cable-duplex-blanco-spt-2x10awg-cca-rollo-x-100m', tipo: 'Dúplex', calibre: '2x10', color: 'Blanco', precio: '$712.200', desc: '100m · SPT · Alta carga' },
-  // ── Encauchetado ─────────────────────────────────────────────
-  { name: 'Cable Encauchetado Negro THHW 2x14AWG CCA Rollo x 100m', slug: 'cable-encauchetado-negro-thhw-2x14awg-cca-rollo-x-100m', tipo: 'Encauchetado', calibre: '2x14', color: 'Negro', precio: '$592.400', desc: '100m · THHW · Flexible · Resistente' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'cables-electricos');
 
 const tipos    = ['THHN', 'Dúplex', 'Encauchetado'];
 const calibres = ['#14', '#12', '2x14', '2x12', '2x10'];
@@ -120,7 +104,7 @@ const tipoIcon: Record<string,string> = {
                   <p class="prod-card__desc">{p.desc}</p>
                   <p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

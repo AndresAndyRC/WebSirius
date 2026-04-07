@@ -6,20 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Lámpara Colgante Casco Negro y Dorado',    slug: 'lampara-colgante-casco-negro-oro-1xe27',          estilo: 'Industrial', color: 'Negro/Dorado' },
-  { name: 'Lámpara Colgante Colmena',                  slug: 'lampara-colgante-colmena-negro-1xe27',             estilo: 'Geométrico',  color: 'Negro' },
-  { name: 'Lámpara Colgante Cono Negro',               slug: 'lampara-colgante-cono-negro-1xe27',                estilo: 'Minimalista', color: 'Negro' },
-  { name: 'Lámpara Colgante Botella Negra y Dorada',   slug: 'lampara-colgante-botella-negra-oro-1xe27',         estilo: 'Vintage',     color: 'Negro/Dorado' },
-  { name: 'Lámpara Colgante Natura',                   slug: 'lampara-colgante-natura-1xe27',                    estilo: 'Natural',     color: 'Natural' },
-  { name: 'Lámpara Colgante Circular Blanca',          slug: 'lampara-colgante-circular-blanca-1xe27',           estilo: 'Moderno',     color: 'Blanco' },
-  { name: 'Lámpara Colgante Plato Blanco',             slug: 'lampara-colgante-plato-blanco-1xe21',              estilo: 'Moderno',     color: 'Blanco' },
-  { name: 'Lámpara Colgante Cónica Azul',              slug: 'lampara-colgante-conica-azul-1xe27',               estilo: 'Colorido',    color: 'Azul' },
-  { name: 'Lámpara Colgante Cónica Azul Grisáceo',     slug: 'lampara-colgante-conica-azul-grisaceo-1xe27',      estilo: 'Colorido',    color: 'Azul Grisáceo' },
-  { name: 'Lámpara Colgante Cónica Delgada Azul',      slug: 'lampara-colgante-conica-delgada-azul-1xe27',       estilo: 'Colorido',    color: 'Azul' },
-  { name: 'Lámpara Colgante Cónica Delgada Café',      slug: 'lampara-colgante-conica-delgada-cafe-1xe27',       estilo: 'Natural',     color: 'Café' },
-  { name: 'Lámpara Colgante Cónica Delgada Blanca',    slug: 'lampara-colgante-conica-delgada-blanca-1xe27',     estilo: 'Moderno',     color: 'Blanco' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'lamparas-colgantes');
 
 const uniqueEstilos = ['Industrial', 'Geométrico', 'Minimalista', 'Vintage', 'Natural', 'Moderno', 'Colorido'];
 const colorAccent: Record<string, string> = {
@@ -108,7 +96,7 @@ const colorAccent: Record<string, string> = {
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">push_pin</span> 1×E27</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

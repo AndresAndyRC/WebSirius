@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Linterna Recargable 4LED',          slug: 'linterna-recargable-4led',          leds: 4,  tipo: 'Mano',   price: 0 },
-  { name: 'Linterna Recargable 7LED',          slug: 'linterna-recargable-7led',          leds: 7,  tipo: 'Mano',   price: 0 },
-  { name: 'Linterna Recargable 15LED Tipo Minero', slug: 'linterna-recargable-15led-tipo-minero', leds: 15, tipo: 'Minera', price: 0 },
-  { name: 'Linterna Recargable 19LED',         slug: 'linterna-recargable-19led',         leds: 19, tipo: 'Mano',   price: 0 },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'linternas-led');
 
 const tipoColor: Record<string,string> = { Mano: '#FACC15', Minera: '#F97316' };
 const powerLabel: Record<number,string> = { 4:'Básica', 7:'Estándar', 15:'Profesional', 19:'Alta potencia' };
@@ -105,7 +101,7 @@ const powerLabel: Record<number,string> = { 4:'Básica', 7:'Estándar', 15:'Prof
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">battery_full</span> USB recargable</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

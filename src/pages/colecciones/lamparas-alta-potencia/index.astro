@@ -6,24 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Tubos T8 ─────────────────────────────────────────────
-  { name: 'Tubo LED T8 9W Luz Blanca',                  slug: 'tubo-led-t8-9w-luz-blanca',                        watts: 9,  tipo: 'Tubo T8',    color: 'Blanca',  size: '60cm'  },
-  { name: 'Tubo LED T8 18W 120 cm Luz Blanca',          slug: 'tubo-led-t8-18w-luz-blanca',                       watts: 18, tipo: 'Tubo T8',    color: 'Blanca',  size: '120cm' },
-  // ── Tubos T5 ─────────────────────────────────────────────
-  { name: 'Lámpara LED T5 5W 30 cm Luz Cálida',         slug: 'lampara-led-t5-5w-30-cm-luz-calida',               watts: 5,  tipo: 'Tubo T5',    color: 'Cálida',  size: '30cm'  },
-  { name: 'Lámpara LED T5 10W 60cm Luz Blanca',         slug: 'lampara-led-t5-10w-60cm-blanco',                   watts: 10, tipo: 'Tubo T5',    color: 'Blanca',  size: '60cm'  },
-  { name: 'Lámpara LED T5 10W 60 cm Luz Cálida',        slug: 'lampara-led-t5-10w-60-cm-luz-calida',              watts: 10, tipo: 'Tubo T5',    color: 'Cálida',  size: '60cm'  },
-  { name: 'Lámpara LED T5 14W 90 cm Luz Blanca',        slug: 'lampara-led-t5-14w-90cm',                          watts: 14, tipo: 'Tubo T5',    color: 'Blanca',  size: '90cm'  },
-  { name: 'Lámpara LED T5 14W 90 cm Luz Cálida',        slug: 'lampara-led-t5-14w-90-cm-luz-calida',              watts: 14, tipo: 'Tubo T5',    color: 'Cálida',  size: '90cm'  },
-  { name: 'Lámpara LED T5 18W 120 cm Luz Cálida',       slug: 'lampara-led-t5-18w-120-cm-luz-calida',             watts: 18, tipo: 'Tubo T5',    color: 'Cálida',  size: '120cm' },
-  // ── Herméticas / Antipolvo ────────────────────────────────
-  { name: 'Lámpara Hermética LED 2×18W 120 cm',         slug: 'lampara-hermetica-led-2x18w',                      watts: 36, tipo: 'Hermética',  color: 'Blanca',  size: '120cm' },
-  { name: 'Lámpara Acrílica Antipolvo 2×18W 120cm (A)', slug: 'lampara-acrilica-antipolvo-2x18w-120-cm-luz-blanca', watts: 36, tipo: 'Antipolvo',  color: 'Blanca',  size: '120cm' },
-  { name: 'Lámpara Acrílica Antipolvo 2×18W 120cm (B)', slug: 'lampara-acrilico-2x18w-120cm-antipolvo',           watts: 36, tipo: 'Antipolvo',  color: 'Blanca',  size: '120cm' },
-  // ── Alta Potencia ─────────────────────────────────────────
-  { name: 'Lámpara LED de Alta Potencia 52W Titanium',  slug: 'lampara-led-de-alta-potencia-52w',                 watts: 52, tipo: 'Alta Potencia', color: 'Blanca', size: '—'   },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'lamparas-alta-potencia');
 
 const uniqueTipos = ['Tubo T8', 'Tubo T5', 'Hermética', 'Antipolvo', 'Alta Potencia'];
 const tipoColor: Record<string, string> = {
@@ -115,7 +99,7 @@ const tipoColor: Record<string, string> = {
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> {p.color === 'Blanca' ? '6000K–6500K' : '3000K–3500K'}</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

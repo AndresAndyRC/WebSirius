@@ -6,20 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Bombillo LED Vintage Filamento G45 Pinpon 2W',  slug: 'bombillo-led-vintage-de-filamento-g45-pinpon-2w',       watts: 2, forma: 'G45',  rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento G45 Pinpon 4W',  slug: 'bombillo-led-filamento-g45-pinpon-4w',                  watts: 4, forma: 'G45',  rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Filamento 6W Dimerizable',         slug: 'bombillo-led-filamento-6w-dimerizable',                 watts: 6, forma: 'A60',  rosca: 'E27', dimer: true  },
-  { name: 'Bombillo LED Vintage Filamento C35 Vela 4W',    slug: 'bombillo-led-filamento-c35-vela-4w-120v-e27-luz-calida', watts: 4, forma: 'C35',  rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento ST64 4W',        slug: 'bombillo-led-filamento-st64-4w-120v-e27-luz-calida',    watts: 4, forma: 'ST64', rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento A60 4W',         slug: 'bombillo-led-filamento-a60-4w-120v-e27-luz-calida',     watts: 4, forma: 'A60',  rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento G80 Globo 4W',   slug: 'bombillo-led-filamento-g80-globo-4w-120v-e27-luz-calida', watts: 4, forma: 'G80', rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento G95 Globo 4W',   slug: 'bombillo-led-filamento-g95-globo-4w-120v-e27-luz-calida', watts: 4, forma: 'G95', rosca: 'E27', dimer: false },
-  { name: 'Bombillo LED Vintage Filamento G125 Globo 4W',  slug: 'bombillo-led-filamento-g125-globo-4w-120v-e27luz-calida', watts: 4, forma: 'G125',rosca: 'E27', dimer: false },
-  // Accesorios
-  { name: 'Portalámpara Colgante Vintage Color Plata', slug: 'portalampara-colgante-vintage-color-plata', watts: 0, forma: 'Accesorio', rosca: '—', dimer: false },
-  { name: 'Portalámpara Colgante Vintage Color Cobre', slug: 'portalampara-colgante-vintage-color-cobre', watts: 0, forma: 'Accesorio', rosca: '—', dimer: false },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'bombillos-vintage');
 
 const uniqueFormas = ['G45', 'C35', 'A60', 'ST64', 'G80', 'G95', 'G125'];
 const formaIcons: Record<string, string> = { G45:'wb_iridescent', C35:'candle️', A60:'lightbulb', ST64:'lightbulb', G80:'radio_button_unchecked', G95:'radio_button_unchecked', G125:'radio_button_unchecked', Accesorio:'settings' };
@@ -106,7 +94,7 @@ const formaIcons: Record<string, string> = { G45:'wb_iridescent', C35:'candle️
                   {p.watts > 0 && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> 2700K Cálida</span>}
                 </div>
               </div>
-              <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+              <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                 Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </article>

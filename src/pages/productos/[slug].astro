@@ -1,0 +1,440 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProductImage } from '../../utils/imageCheck';
+import productos from '../../data/productos.json';
+
+export async function getStaticPaths() {
+  return productos.map(p => ({
+    params: { slug: p.slug },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+
+// Determine available images
+const img1 = getProductImage(product.slug, '1');
+const img2 = getProductImage(product.slug, '2');
+const img3 = getProductImage(product.slug, '3');
+
+// Capitalize Breadcrumb correctly
+const formatCategory = (cat: string) => {
+  return cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+};
+
+// Collect all images in an array
+const gallery = [img1, img2, img3].filter(Boolean);
+
+// Define generic specs (filtering out internal properties like slug, name, categoria)
+const excludedKeys = ['name', 'slug', 'categoria', 'desc', 'precio', 'price'];
+const specs = Object.entries(product)
+  .filter(([key]) => !excludedKeys.includes(key))
+  .map(([key, value]) => {
+    let displayValue = value;
+    if (typeof value === 'boolean') {
+      displayValue = value ? 'Sí' : 'No';
+    }
+    return { 
+      label: key.charAt(0).toUpperCase() + key.slice(1), 
+      value: displayValue 
+    };
+  });
+
+const isZeroPrice = product.precio === '$0' || product.price === 0;
+const productPrice = (!isZeroPrice && product.precio) 
+  ? product.precio 
+  : (!isZeroPrice && product.price ? `$${product.price.toLocaleString()}` : null);
+---
+
+<BaseLayout 
+  title={`${product.name} | SIRIUS`}
+  description={product.desc || `Mejora tus espacios con ${product.name} de SIRIUS Iluminación. ${productPrice ? `Disponible por ${productPrice}.` : ''} ¡Contáctanos!`}
+>
+  <div class="pdp-wrapper wrapper">
+    <!-- Breadcrumbs -->
+    <nav class="pdp-breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Inicio</a><span class="separator">/</span></li>
+        <li><a href="/colecciones">Colecciones</a><span class="separator">/</span></li>
+        <li><a href={`/colecciones/${product.categoria}`}>{formatCategory(product.categoria)}</a><span class="separator">/</span></li>
+        <li aria-current="page">{product.name}</li>
+      </ol>
+    </nav>
+
+    <main class="pdp-grid">
+      <!-- Image Gallery Column -->
+      <section class="pdp-gallery">
+        <div class="pdp-gallery-main">
+          {img1 ? (
+             <img src={img1} alt={product.name} id="main-product-image" class="zoomable" />
+          ) : (
+             <div class="pdp-gallery-fallback">
+               <span class="material-symbols-outlined" style="font-size: 4rem; opacity: 0.2">image</span>
+             </div>
+          )}
+        </div>
+        {gallery.length > 1 && (
+          <div class="pdp-gallery-thumbnails">
+            {gallery.map((img, index) => (
+              <button class={`thumb-btn ${index === 0 ? 'active' : ''}`} data-image={img}>
+                <img src={img} alt={`Miniatura ${index + 1}`} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <!-- Product Info Column -->
+      <section class="pdp-info">
+        {'isNew' in product && product.isNew && <span class="pdp-badge">Nueva Colección</span>}
+        <h1 class="pdp-title">{product.name}</h1>
+        
+        <div class="pdp-price">
+          {productPrice ? (
+            <span class="price-amount">{productPrice}</span>
+          ) : (
+             <span class="price-contact">Consultar Precio</span>
+          )}
+        </div>
+
+        {product.desc && (
+          <p class="pdp-description">{product.desc}</p>
+        )}
+
+        <div class="pdp-specs-box">
+          <h3>Especificaciones Técnicas</h3>
+          <ul>
+            {specs.map(spec => (
+              <li>
+                <span class="spec-label">{spec.label}</span>
+                <span class="spec-value">{spec.value}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="pdp-actions">
+          <button class="btn btn-primary btn-add-cart">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            Añadir al Carrito
+          </button>
+          <a href={`https://wa.me/573000000000?text=Hola,%20busco%20información%20del%20${encodeURIComponent(product.name)}`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-whatsapp">
+            <span class="material-symbols-outlined">chat</span>
+            Chatear con Ventas
+          </a>
+        </div>
+
+        <div class="pdp-guarantees">
+            <div class="guarantee-item">
+              <span class="material-symbols-outlined">local_shipping</span>
+              Envío a nivel nacional
+            </div>
+            <div class="guarantee-item">
+              <span class="material-symbols-outlined">verified</span>
+              Garantía Sirius Oficial
+            </div>
+            <div class="guarantee-item">
+              <span class="material-symbols-outlined">payments</span>
+              Pago 100% Seguro
+            </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .pdp-wrapper {
+    padding-top: calc(var(--header-height) + 2rem);
+    padding-bottom: 4rem;
+  }
+
+  /* Breadcrumbs */
+  .pdp-breadcrumbs {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .pdp-breadcrumbs ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pdp-breadcrumbs a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    text-transform: capitalize;
+  }
+  .pdp-breadcrumbs a:hover {
+    color: var(--primary);
+  }
+  .separator {
+    margin-left: 0.5rem;
+    opacity: 0.5;
+  }
+
+  /* Grid Layout */
+  .pdp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 900px) {
+    .pdp-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* Gallery */
+  .pdp-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+  }
+  .pdp-gallery-main {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+  }
+  .pdp-gallery-main img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .pdp-gallery-main:hover img.zoomable {
+    transform: scale(1.15);
+  }
+  .pdp-gallery-fallback {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pdp-gallery-thumbnails {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .thumb-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: var(--bg-surface);
+    padding: 0.5rem;
+    transition: border-color 0.2s ease;
+  }
+  .thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .thumb-btn:hover {
+    border-color: var(--primary-light);
+  }
+  .thumb-btn.active {
+    border-color: var(--primary);
+  }
+
+  /* Product Info */
+  .pdp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .pdp-badge {
+    align-self: flex-start;
+    background: var(--primary);
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .pdp-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1.1;
+    color: var(--text-main);
+    margin: 0;
+  }
+  
+  .pdp-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .price-contact {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+  }
+
+  .pdp-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* Specifications Box */
+  .pdp-specs-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+  .pdp-specs-box h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+  .pdp-specs-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .pdp-specs-box li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+  }
+  .spec-label {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .spec-value {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  /* Actions */
+  .pdp-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 600px) {
+    .pdp-actions {
+      flex-direction: row;
+    }
+    .pdp-actions .btn {
+      flex: 1;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+  }
+  .btn-secondary:hover {
+    border-color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .btn-whatsapp {
+    border-color: #25D366;
+    color: #25D366;
+  }
+  .btn-whatsapp:hover {
+    background: #25D366;
+    color: #000;
+  }
+
+  .pdp-guarantees {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+  .guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .guarantee-item .material-symbols-outlined {
+    font-size: 1.5rem;
+    color: var(--text-main);
+  }
+  @media (min-width: 600px) {
+    .pdp-guarantees {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<script>
+  // Simple thumbnail gallery switcher
+  const thumbs = document.querySelectorAll('.thumb-btn');
+  const mainImage = document.getElementById('main-product-image') as HTMLImageElement | null;
+
+  thumbs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // update active state
+      thumbs.forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // change image
+      if (mainImage) {
+        mainImage.src = btn.getAttribute('data-image') || '';
+      }
+    });
+  });
+</script>

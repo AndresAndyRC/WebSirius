@@ -2,15 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Básicas ───────────────────────────────────────────────
-  { name: 'Multitoma 3 Salidas Cable 50cm',        slug: 'multitoma-3-salidas-0-5m-cable',        tipo: 'Estándar',     salidas: '3 Salidas', precio: '$9.500',  desc: 'Polo a tierra · Switche ON/OFF' },
-  { name: 'Multitoma 6 Salidas Cable 85cm',        slug: 'multitoma-6-salidas-cable-85cm',        tipo: 'Estándar',     salidas: '6 Salidas', precio: '$11.500', desc: 'Polo a tierra · Switche ON/OFF' },
-  { name: 'Multitoma 6 Salidas Cable 90cm',        slug: 'multitoma-6-salidas-cable-0-9-m',       tipo: 'Estándar',     salidas: '6 Salidas', precio: '$12.500', desc: 'Polo a tierra · Switche ON/OFF' },
-  // ── Con USB ───────────────────────────────────────────────
-  { name: 'Multitoma 4 Salidas + 2 USB',           slug: 'multitoma-3-salidas-2-usb',             tipo: 'Con USB',      salidas: '4 Salidas', precio: '$32.000', desc: '2 Puertos USB 2.1A · Supresor de picos' },
-  { name: 'Multitoma 6 Salidas + 2 USB (Smart)',   slug: 'multitoma-smart-3-salidas-4-usb-1m-cable',       tipo: 'Smart / USB',  salidas: '6 Salidas', precio: '$48.000', desc: 'Diseño torre · Carga rápida' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'multitomas');
 
 const tipos   = ['Estándar', 'Con USB', 'Smart / USB'];
 const salidas = ['3 Salidas', '4 Salidas', '6 Salidas'];
@@ -60,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Estándar: 'bolt', 'Con USB': 'smartp
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.salidas}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

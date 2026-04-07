@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Limpiacontactos Electrónico', slug: 'limpiador-de-contactos-electronicos-400ml', tipo: 'Limpiador', app: 'Electrónica', precio: '$15.000', desc: 'Limpia contactos, tarjetas y circuitos' },
-  { name: 'Lubricante Multiusos WD-40 5.5oz', slug: 'lubricante-multiusos-mr-40-200ml', tipo: 'Lubricante', app: 'Mecánica', precio: '$22.000', desc: 'Desplaza humedad y afloja piezas' },
-  { name: 'Limpiador de Motores y Partes', slug: 'limpiador-motores', tipo: 'Limpiador', app: 'Mecánica', precio: '$18.500', desc: 'Desengrasante de alta potencia' },
-  { name: 'Silicona Dieléctrica en Spray', slug: 'silicona-en-spray-400-ml-aroma-manzana', tipo: 'Lubricante', app: 'Electrónica', precio: '$24.000', desc: 'Lubrica y aísla conexiones eléctricas' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'limpiadores-y-lubricantes');
 
 const tipos = ['Limpiador', 'Lubricante'];
 const apps = ['Electrónica', 'Mecánica'];
@@ -57,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Limpiador: 'sanitizer', Lubricante: '
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.app}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

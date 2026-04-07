@@ -2,10 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Extractor de Aire 4" con Rejilla Blanca', slug: 'extractor-de-aire-4-con-rejilla-blanco', diametro: '4"', aplicacion: 'Baño / Cocina' },
-  { name: 'Extractor de Aire 8" con Rejilla Blanca', slug: 'extractor-de-aire-8-con-rejilla-blanco', diametro: '8"', aplicacion: 'Bodega / Oficina' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'extractores-aire');
 ---
 <BaseLayout
   title='Extractores de Aire para Baño y Cocina — SIRIUS'
@@ -79,7 +77,7 @@ const products = [
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">square</span> Rejilla blanca</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

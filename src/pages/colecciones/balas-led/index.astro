@@ -2,15 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Bala LED Blanca 3W Luz Blanca',         slug: 'bala-led-blanca-3w-luz-blanca',         watts: 3,  lugar: 'Techo', color: 'Blanco', luz: 'Blanca',  forma: 'Cónica' },
-  { name: 'Bala LED Negra 3W Luz Blanca',          slug: 'bala-led-negra-3w-luz-blanca',          watts: 3,  lugar: 'Techo', color: 'Negro',  luz: 'Blanca',  forma: 'Cónica' },
-  { name: 'Bala LED Negra 3W Luz Cálida',          slug: 'bala-led-negra-3w-luz-calida',          watts: 3,  lugar: 'Techo', color: 'Negro',  luz: 'Cálida',  forma: 'Cónica' },
-  { name: 'Bala LED Blanca Redonda 9W Luz Blanca', slug: 'bala-led-blanca-redonda-9w-luz-blanca', watts: 9,  lugar: 'Techo', color: 'Blanco', luz: 'Blanca',  forma: 'Redonda' },
-  { name: 'Bala LED Piso 3W Satín Redonda Luz Cálida', slug: 'bala-led-piso-3w-satin-redonda-luz-calida', watts: 3, lugar: 'Piso', color: 'Satín', luz: 'Cálida', forma: 'Redonda' },
-  { name: 'Bala LED Piso 6W Satín Redonda Luz Blanca', slug: 'bala-led-piso-6w-satin-redonda-luz-blanca', watts: 6, lugar: 'Piso', color: 'Satín', luz: 'Blanca', forma: 'Redonda' },
-  { name: 'Bala LED de Piso GU10 Satín Redonda',   slug: 'bala-led-piso-gu10-satin-redonda',      watts: 0,  lugar: 'Piso', color: 'Satín', luz: '—',      forma: 'GU10' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'balas-led');
 
 const lugarColor: Record<string,string> = { Techo: '#60A5FA', Piso: '#4ADE80' };
 const formaIcon: Record<string,string>  = { Cónica: 'flashlight_on', Redonda: 'radio_button_unchecked', GU10: 'brightness_high' };
@@ -110,7 +103,7 @@ const formaIcon: Record<string,string>  = { Cónica: 'flashlight_on', Redonda: '
                     {p.luz!=='—' && <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> {p.luz==='Blanca'?'6000K':'3000K'}</span>}
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

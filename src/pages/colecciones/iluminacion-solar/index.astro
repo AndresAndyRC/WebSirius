@@ -2,20 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Aplique Pared Solar LED 2W con Sensor Luz Blanca',               slug: 'aplique-pared-solar-led-2w-con-sensor-luz-blanca',         watts: 2,   tipo: 'Aplique',    luz: 'Blanca' },
-  { name: 'Aplique Pared Solar LED 2W con Sensor Luz Cálida',               slug: 'aplique-solar-led-2w-con-sensor-luz-calida',               watts: 2,   tipo: 'Aplique',    luz: 'Cálida' },
-  { name: 'Aplique Solar LED Luxury 2W con Sensor',                          slug: 'aplique-solar-led-luxury-black-2w-con-sensor-luz-blanca',  watts: 2,   tipo: 'Luxury',     luz: 'Blanca' },
-  { name: 'Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida',         slug: 'aplique-solar-led-2-5w-3000k-con-sensor',                 watts: 2.5, tipo: 'Aplique',    luz: 'Cálida' },
-  { name: 'Luminaria Solar Alumbrado Público LED 30W',                       slug: 'luminaria-solar-led-alumbrado-publico-30w-luz-blanca',     watts: 30,  tipo: 'Luminaria',  luz: 'Blanca' },
-  { name: 'Luminaria Solar Alumbrado Público LED 100W',                      slug: 'luminaria-solar-led-alumbrado-publico-100w-luz-blanca',    watts: 100, tipo: 'Luminaria',  luz: 'Blanca' },
-  { name: 'Luminaria Solar LED Alumbrado Público 200W',                      slug: 'luminaria-solar-led-alumbrado-publico-200w-6500k-con-panel-integrado', watts: 200, tipo: 'Luminaria', luz: 'Blanca' },
-  { name: 'Luminaria Solar Alumbrado Público LED 400W',                      slug: 'luminaria-solar-led-alumbrado-publico-400w-luz-blanca',    watts: 400, tipo: 'Luminaria',  luz: 'Blanca' },
-  { name: 'Bombillo Solar de Emergencia LED 12W',                            slug: 'bombillo-solar-led-emergencia-12w',                        watts: 12,  tipo: 'Bombillo',   luz: 'Blanca' },
-  { name: 'Luminaria Solar Trompo 200W',                                     slug: 'luminaria-solar-trompo-200w',                             watts: 200, tipo: 'Trompo',     luz: 'Blanca' },
-  { name: 'Luminaria Solar Trompo 300W',                                     slug: 'luminaria-solar-trompo-300w',                             watts: 300, tipo: 'Trompo',     luz: 'Blanca' },
-  { name: 'Luminaria Solar Trompo 400W',                                     slug: 'luminaria-solar-trompo-400w',                             watts: 400, tipo: 'Trompo',     luz: 'Blanca' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'iluminacion-solar');
 
 const tipoColor: Record<string,string> = { Aplique:'#4ADE80', Luxury:'#A78BFA', Luminaria:'#60A5FA', Bombillo:'#FACC15', Trompo:'#F97316' };
 const tipoIcon:  Record<string,string>  = { Aplique:'eco', Luxury:'auto_awesome', Luminaria:'light', Bombillo:'sunny', Trompo:'brightness_high' };
@@ -100,7 +88,7 @@ const uniqueTipos = ['Aplique','Luxury','Luminaria','Bombillo','Trompo'];
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">sensors</span> Sensor integrado</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

@@ -2,12 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Aplique de Jardín Solar LED 2.5W con Sensor Luz Cálida', slug: 'aplique-solar-led-2-5w-3000k-con-sensor', watts: 2.5, tipo: 'Aplique Solar', sensor: true,  color: 'Negro' },
-  { name: 'Poste LED 10W Negro Luz Cálida',                          slug: 'poste-led-10w-negro-luz-calida',          watts: 10,  tipo: 'Poste',        sensor: false, color: 'Negro' },
-  { name: 'Poste LED Negro Base E27',                                slug: 'poste-led-base-e27-negro',               watts: 0,   tipo: 'Poste',        sensor: false, color: 'Negro' },
-  { name: 'Poste LED Satín E27',                                     slug: 'poste-led-base-e27-satin',               watts: 0,   tipo: 'Poste',        sensor: false, color: 'Satín' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'lamparas-jardin');
 
 const tipoColor: Record<string,string> = { 'Aplique Solar': '#4ADE80', 'Poste': '#FBBF24' };
 ---
@@ -96,7 +92,7 @@ const tipoColor: Record<string,string> = { 'Aplique Solar': '#4ADE80', 'Poste': 
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">nightlight_round</span> Luz Cálida 3000K</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

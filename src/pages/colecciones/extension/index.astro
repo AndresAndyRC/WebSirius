@@ -2,16 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Hogar (Básicas) ────────────────────────────────────────────
-  { name: 'Extensión Eléctrica Dúplex 2x14 6FT 1.8M', slug: 'extension-duplex-2x14-6ft-1-8m-linea-hogar', tipo: 'Hogar', longitud: '1.8M (6ft)', precio: '$6.400',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
-  { name: 'Extensión Eléctrica Dúplex 2x14 9FT 2.7M', slug: 'extension-duplex-2x14-9ft-2-7m-linea-hogar', tipo: 'Hogar', longitud: '2.7M (9ft)', precio: '$7.400',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
-  { name: 'Extensión Eléctrica Dúplex 2x14 12FT 3.6M',slug: 'extension-duplex-2x14-12ft-3-6m-linea-hogar',tipo: 'Hogar', longitud: '3.6M (12ft)',precio: '$9.000',  desc: 'Línea Hogar · Cable Blanco · 2x14 AWG' },
-  // ── Uso Pesado ────────────────────────────────────────────────
-  { name: 'Extensión Revestida Naranja 3x14 6FT 1.8M',slug: 'extension-electrica-3m-de-3-salidas-para-exterior-naranja',        tipo: 'Uso Pesado', longitud: '1.8M (6ft)', precio: '$15.000',  desc: 'Industrial Naranja · Polo a Tierra' },
-  { name: 'Extensión Revestida Naranja 3x14 15FT 4.5M',slug: 'extension-duplex-2x14-15ft-4-5m-linea-hogar',       tipo: 'Uso Pesado', longitud: '4.5M (15ft)',precio: '$25.000',  desc: 'Industrial Naranja · Polo a Tierra' },
-  { name: 'Extensión Revestida Naranja 3x14 25FT 7.5M',slug: 'extension-electrica-8m-de-3-salidas-para-exterior-naranja',       tipo: 'Uso Pesado', longitud: '7.5M (25ft)',precio: '$38.000',  desc: 'Industrial Naranja · Polo a Tierra' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'extension');
 
 const tipos      = ['Hogar', 'Uso Pesado'];
 const longitudes = ['1.8M (6ft)', '2.7M (9ft)', '3.6M (12ft)', '4.5M (15ft)', '7.5M (25ft)'];
@@ -61,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Hogar: 'power', 'Uso Pesado': 'constr
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.longitud}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}

@@ -2,17 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Bombillo Solar de Emergencia LED 12W',  slug: 'bombillo-solar-led-emergencia-12w',                    watts: 12, tipo: 'Solar',     feature: 'Solar + Batería' },
-  { name: 'Bombillo LED Recargable 20W',           slug: 'bombillo-led-recargable-20w',                          watts: 20, tipo: 'Recargable', feature: 'Carga USB' },
-  { name: 'Bombillo LED Recargable 30W',           slug: 'bombillo-led-recargable-30w-con-gancho',               watts: 30, tipo: 'Recargable', feature: 'Con Gancho' },
-  { name: 'Bombillo LED Recargable 50W',           slug: 'bombillo-led-recargable-50w',                          watts: 50, tipo: 'Recargable', feature: 'Alta potencia' },
-  { name: 'Lámpara de Emergencia LED 5.4W',        slug: 'lampara-led-de-emergencia-5-4w',                       watts: 5.4,tipo: 'Emergencia', feature: 'Normativa' },
-  { name: 'Lámpara de Emergencia LED 6W 45CM',     slug: 'lampara-led-de-emergencia-6w-45cm',                    watts: 6,  tipo: 'Emergencia', feature: 'Tubo 45cm' },
-  { name: 'Lámpara de Emergencia LED Tipo Bala 5W',slug: 'lampara-led-de-emergencia-5w-bala-luz-blanca',         watts: 5,  tipo: 'Emergencia', feature: 'Tipo Bala' },
-  { name: 'Reflector de Emergencia LED 10W',       slug: 'reflector-led-emergencia-10w-brazo-base-amarillo-luz-blanca', watts: 10, tipo: 'Reflector', feature: 'Brazo articulado' },
-  { name: 'Reflector de Emergencia LED 20W',       slug: 'reflector-led-emergencia-20w',                         watts: 20, tipo: 'Reflector', feature: 'Alta luminosidad' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'iluminacion-emergencia');
 
 const tipoColor: Record<string,string> = { Solar:'#FACC15', Recargable:'#34D399', Emergencia:'#F97316', Reflector:'#60A5FA' };
 const tipoIcon:  Record<string,string>  = { Solar:'sunny', Recargable:'battery_full', Emergencia:'emergency', Reflector:'flashlight_on' };
@@ -95,7 +86,7 @@ const tipoIcon:  Record<string,string>  = { Solar:'sunny', Recargable:'battery_f
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> 6500K Blanca</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

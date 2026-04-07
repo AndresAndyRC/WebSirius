@@ -22,38 +22,8 @@ const colorMap: Record<string, string> = {
   'Azul Aguamarina': '#34D399',
 };
 
-const products = [
-  // ── Siliconadas 12V ───────────────────────────────────────
-  { name: 'Cinta LED 12V Siliconada Verde',       slug: 'cinta-led-12v-siliconada-verde',         voltaje: '12V', tipo: 'Siliconada', color: 'Verde',        price: 21500, agotado: false },
-  { name: 'Cinta LED 12V Siliconada Roja',        slug: 'cinta-led-12v-siliconada-roja',          voltaje: '12V', tipo: 'Siliconada', color: 'Roja',         price: 21500, agotado: false },
-  { name: 'Cinta LED 12V Siliconada 5M Fucsia',   slug: 'cinta-led-12v-siliconada-fucsia',        voltaje: '12V', tipo: 'Siliconada', color: 'Fucsia',       price: 22000, agotado: false },
-  { name: 'Cinta LED 12V Siliconada 5M RGB',      slug: 'cinta-led-12v-siliconada-5m-rgb',        voltaje: '12V', tipo: 'Siliconada', color: 'RGB',          price: 28300, agotado: true  },
-  { name: 'Cinta LED 12V Siliconada UV',          slug: 'cinta-led-12v-siliconada-uv',            voltaje: '12V', tipo: 'Siliconada', color: 'UV',           price: 41000, agotado: false },
-  // ── Running 12V ───────────────────────────────────────────
-  { name: 'Cinta LED Running 12V 10M Luz Blanca', slug: 'cinta-led-running-12v-10m',              voltaje: '12V', tipo: 'Running',    color: 'Luz Blanca',   price: 126100,agotado: false },
-  // ── Neón Flex 12V ─────────────────────────────────────────
-  { name: 'Cinta LED Neón Flex 12V 5M Dorada',    slug: 'cinta-led-neon-flex-12v-5m-dorada',      voltaje: '12V', tipo: 'Neón Flex',  color: 'Dorada',       price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Naranja',   slug: 'cinta-led-neon-flex-12v-5m-naranja',     voltaje: '12V', tipo: 'Neón Flex',  color: 'Naranja',      price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Fucsia',    slug: 'cinta-led-neon-flex-12v-5m-fucsia',      voltaje: '12V', tipo: 'Neón Flex',  color: 'Fucsia',       price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Roja',      slug: 'cinta-led-neon-flex-12v-5m-roja',        voltaje: '12V', tipo: 'Neón Flex',  color: 'Roja',         price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Verde',     slug: 'cinta-led-neon-flex-12v-5m-verde',       voltaje: '12V', tipo: 'Neón Flex',  color: 'Verde',        price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Azul Aguamarina', slug: 'cinta-led-neon-flex-12v-5m-azul-aguamarina', voltaje: '12V', tipo: 'Neón Flex', color: 'Azul Aguamarina', price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V 5M Azul',      slug: 'cinta-led-neon-flex-12v-5m-azul',        voltaje: '12V', tipo: 'Neón Flex',  color: 'Azul',         price: 22000, agotado: false },
-  { name: 'Cinta LED Neón Flex 12V RGB 5M',       slug: 'cinta-led-neon-flex-12v-rgb-5m',         voltaje: '12V', tipo: 'Neón Flex',  color: 'RGB',          price: 62200, agotado: false },
-  // ── High Lumen 110V ───────────────────────────────────────
-  { name: 'Cinta LED High Lumen 110V 10M Luz Blanca', slug: 'cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-blanca', voltaje: '110V', tipo: 'High Lumen', color: 'Luz Blanca',  price: 175700, agotado: false },
-  { name: 'Cinta LED High Lumen 110V 10M Luz Neutra', slug: 'cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-neutra', voltaje: '110V', tipo: 'High Lumen', color: 'Luz Neutra',  price: 175700, agotado: false },
-  { name: 'Cinta LED High Lumen 110V 10M Luz Cálida', slug: 'cinta-led-high-lumen-rollo-de-10m-adhesiva-luz-calida', voltaje: '110V', tipo: 'High Lumen', color: 'Luz Cálida',  price: 175700, agotado: false },
-  // ── Accesorios ─────────────────────────────────────────────
-  { name: 'Conector Cinta LED Running 12V',        slug: 'conector-cinta-led-running-12v',         voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 1000,  agotado: false },
-  { name: 'Kit Controlador para Cinta Running 12V',slug: 'kit-controlador-para-cinta-running-12v', voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 20000, agotado: false },
-  { name: 'Conector para Cinta LED Neón Flex 12V', slug: 'conector-para-cinta-led-neon-flex-12v',  voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 2000,  agotado: false },
-  { name: 'Tapa Cinta Neón Flex 12V',              slug: 'tapa-cinta-neon-flex-12v',               voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 400,   agotado: false },
-  { name: 'Grapa Cinta Neón Flex 12V',             slug: 'grapa-cinta-neon-flex-12v',              voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 400,   agotado: false },
-  { name: 'Adaptador para Cinta LED 12V 3A',       slug: 'adaptador-para-cinta-led-12v-3a',        voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 19600, agotado: false },
-  { name: 'Adaptador para Cinta LED 12V 5A',       slug: 'adaptador-para-cinta-led-12v-5a',        voltaje: '12V', tipo: 'Accesorio',  color: '—',            price: 20200, agotado: false },
-  { name: 'Conector Cinta LED High Lumen 110V',    slug: 'conector-cinta-led-high-lumen-110v',     voltaje: '110V', tipo: 'Accesorio', color: '—',            price: 0,     agotado: false },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'cintas-led');
 
 const uniqueVoltajes = ['12V', '110V'];
 const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Accesorio'];
@@ -211,11 +181,10 @@ const uniqueTipos    = ['Siliconada', 'Neón Flex', 'Running', 'High Lumen', 'Ac
                 </div>
 
                 <a
-                  href={`https://siriuscol.com/products/${p.slug}`}
+                  href={`/productos/${p.slug}`}
                   class="prod-card__cta"
                   aria-label={`Ver producto: ${p.name}`}
-                  target="_blank"
-                  rel="noopener"
+                  
                 >
                   Ver producto
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

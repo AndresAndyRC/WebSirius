@@ -2,24 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Tomacorrientes ──────────────────────────────────────────
-  { name: 'Toma Doble Blanca Regulada 15A',           slug: 'toma-doble-blanca-regulada-15a',                      tipo: 'Tomacorriente', color: 'Blanco',    desc: 'Doble · 15A · Regulada' },
-  { name: 'Toma Doble Naranja Regulada 15A',          slug: 'toma-doble-naranja-hospitalaria-regulada-15a',         tipo: 'Tomacorriente', color: 'Naranja',   desc: 'Hospitalaria · 15A' },
-  { name: 'Toma Doble con Polo a Tierra Blanca',      slug: 'toma-doble-con-polo-a-tierra-blanca',                 tipo: 'Tomacorriente', color: 'Blanco',    desc: 'Polo a tierra · 15A' },
-  { name: 'Toma Sencillo Polo a Tierra + USB x2 Blanco', slug: 'toma-sencillo-polo-a-tierra-usb-x2-blanco',       tipo: 'USB',           color: 'Blanco',    desc: '2 puertos USB · polo a tierra' },
-  { name: 'Toma GFCI Blanca 20A',                     slug: 'toma-gfci-20a-blanca',                                tipo: 'GFCI',          color: 'Blanco',    desc: 'Protección GFCI · 20A' },
-  // ── Interruptores ───────────────────────────────────────────
-  { name: 'Interruptor Sencillo Conmutable Blanco',   slug: 'interruptor-sencillo-conmutable-blanco',              tipo: 'Interruptor',   color: 'Blanco',    desc: 'Sencillo · conmutable' },
-  { name: 'Interruptor Doble Conmutable Blanco',      slug: 'interruptor-doble-conmutable-blanco',                 tipo: 'Interruptor',   color: 'Blanco',    desc: 'Doble · conmutable' },
-  { name: 'Interruptor Triple Conmutable Blanco',     slug: 'interruptor-triple-conmutable-blanco',                tipo: 'Interruptor',   color: 'Blanco',    desc: 'Triple · conmutable' },
-  // ── Combinados ──────────────────────────────────────────────
-  { name: 'Toma + Interruptor Blanco',                slug: 'toma-interruptor-blanco',                             tipo: 'Combinado',     color: 'Blanco',    desc: 'Toma + interruptor integrado' },
-  // ── Tapas ───────────────────────────────────────────────────
-  { name: 'Tapa Blanca para Tomacorriente Regulada 15A', slug: 'tapa-toma-doble-blanca',                          tipo: 'Tapa',          color: 'Blanco',    desc: 'Toma doble · placa frontal' },
-  { name: 'Tapa Naranja para Toma Doble 15A',         slug: 'tapa-toma-doble-naranja',                             tipo: 'Tapa',          color: 'Naranja',   desc: 'Hospitalaria · placa frontal' },
-  { name: 'Tapa Gris para Intemperie Tomacorriente 15A', slug: 'tapa-gris-para-intemperie',                       tipo: 'Tapa',          color: 'Gris',      desc: 'Exterior · resistente a humedad' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'tomacorrientes-interruptores');
 
 const tipos  = ['Tomacorriente', 'Interruptor', 'Combinado', 'USB', 'GFCI', 'Tapa'];
 const colores = ['Blanco', 'Negro', 'Dorado', 'Gris', 'Naranja', 'Stainless'];
@@ -117,7 +101,7 @@ const tipoIcon: Record<string,string> = {
                   <h3 class="prod-card__name">{p.name}</h3>
                   <p class="prod-card__desc">{p.desc}</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

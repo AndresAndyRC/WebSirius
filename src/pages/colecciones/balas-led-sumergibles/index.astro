@@ -2,11 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  { name: 'Bala LED Sumergible RGB 9W 12V',  slug: 'bala-led-sumergible-12v-rgb-9w',          watts: 9,  control: false, ip: 'IP68' },
-  { name: 'Bala LED Sumergible RGB 18W 12V', slug: 'bala-led-sumergible-12v-rgb-18w-con-control', watts: 18, control: true,  ip: 'IP68' },
-  { name: 'Bala LED Sumergible RGB 24W 12V', slug: 'bala-led-sumergible-12v-rgb-24w-con-control', watts: 24, control: true,  ip: 'IP68' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'balas-led-sumergibles');
 ---
 <BaseLayout
   title="Balas LED Sumergibles para Piscinas 12V RGB — SIRIUS"
@@ -85,7 +82,7 @@ const products = [
                   <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">water</span> {p.ip} Sumergible</span>
                 </div>
               </div>
-              <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+              <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                 Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </article>

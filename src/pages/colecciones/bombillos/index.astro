@@ -6,24 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── PinPon E12 ───────────────────────────────────────────
-  { name: 'Bombillo LED Pinpon 1W Luz Blanca', slug: 'bombillo-led-pinpon-1w-luz-blanca', watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Blanca', price: 0 },
-  { name: 'Bombillo LED Pinpon 1W Luz Cálida',  slug: 'bombillo-led-pinpon-1w-luz-calida',  watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Cálida', price: 0 },
-  { name: 'Bombillo LED PinPon 1W Verde',       slug: 'bombillo-led-pinpon-1w-verde',       watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Verde',  price: 0 },
-  { name: 'Bombillo LED Pinpon 1W Azul',        slug: 'bombillo-led-pinpon-1w-azul',        watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'Azul',   price: 0 },
-  { name: 'Bombillo LED Pinpon 1W RGB',         slug: 'bombillo-led-pinpon-1w-rgb',         watts: 1, rosca: 'E12', tipo: 'PinPon', color: 'RGB',    price: 0 },
-  // ── E27 Estándar ─────────────────────────────────────────
-  { name: 'Bombillo LED 3W Luz Blanca',  slug: 'bombillo-led-3w-e27-luz-blanca',  watts: 3,  rosca: 'E27', tipo: 'Estándar', color: 'Blanca', price: 0 },
-  { name: 'Bombillo LED 3W Luz Cálida',  slug: 'bombillo-led-3w-e27-luz-calida',  watts: 3,  rosca: 'E27', tipo: 'Estándar', color: 'Cálida', price: 0 },
-  { name: 'Bombillo LED 5W Luz Blanca',  slug: 'bombillo-led-5w-e27-luz-blanca',  watts: 5,  rosca: 'E27', tipo: 'Estándar', color: 'Blanca', price: 0 },
-  // ── GU10 ─────────────────────────────────────────────────
-  { name: 'Bombillo LED GU10 5W Luz Blanca',              slug: 'bombillo-led-gu10-5w-luz-blanca',              watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'Blanca', price: 0 },
-  { name: 'Bombillo LED GU10 5W Luz Cálida',              slug: 'bombillo-led-gu10-5w-luz-calida',              watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'Cálida', price: 0 },
-  { name: 'Bombillo LED GU10 5W RGB con Control Remoto',  slug: 'bombillo-led-gu10-5w-rgb-con-control-remoto',  watts: 5, rosca: 'GU10', tipo: 'GU10',     color: 'RGB',    price: 0 },
-  // ── Vela E14 ─────────────────────────────────────────────
-  { name: 'Bombillo LED Vela 5W Luz Blanca', slug: 'bombillo-led-vela-e14-5w-luz-blanca', watts: 5, rosca: 'E14', tipo: 'Vela', color: 'Blanca', price: 0 },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'bombillos');
 
 const uniqueRoscas = ['E12', 'E27', 'E14', 'GU10'];
 const uniqueTipos  = ['PinPon', 'Estándar', 'GU10', 'Vela'];
@@ -118,7 +102,7 @@ const colorMap: Record<string, string> = {
                     <span class="prod-card__spec"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">brightness_high</span> {p.color === 'Blanca' ? '6000K' : p.color === 'Cálida' ? '2700K' : p.color}</span>
                   </div>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} target="_blank" rel="noopener">
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" aria-label={`Ver: ${p.name}`} >
                   Ver producto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>

@@ -6,23 +6,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Incrustar ─────────────────────────────────────────────
-  { name: 'Panel LED Cuadrado de Incrustar 3W 2.5" Luz Blanca',  slug: 'panel-led-cuadrado-3w-2-5-luz-blanca-incrustar',    watts: 3,  size: '2.5"', color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  { name: 'Panel LED Cuadrado de Incrustar 6W 4" Luz Blanca',    slug: 'panel-led-cuadrado-6w-4-luz-blanca-incrustar',      watts: 6,  size: '4"',   color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  { name: 'Panel LED Cuadrado de Incrustar 9W 5" Luz Blanca',    slug: 'panel-led-cuadrado-9w-5-luz-blanca-incrustar',      watts: 9,  size: '5"',   color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  { name: 'Panel LED Cuadrado de Incrustar 12W 6" Luz Blanca',   slug: 'panel-led-cuadrado-12w-6-luz-blanca-incrustar',     watts: 12, size: '6"',   color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  { name: 'Panel LED Cuadrado de Incrustar 18W 8" Luz Blanca',   slug: 'panel-led-cuadrado-18w-8-luz-blanca-incrustar',     watts: 18, size: '8"',   color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  { name: 'Panel LED Cuadrado de Incrustar 24W 10" Luz Blanca',  slug: 'panel-led-cuadrado-24w-10-luz-blanca-incrustar',    watts: 24, size: '10"',  color: 'Blanca', install: 'Incrustar', style: 'Estándar'  },
-  // ── Sobreponer ────────────────────────────────────────────
-  { name: 'Panel LED Cuadrado de Sobreponer 6W 4" Luz Blanca',   slug: 'panel-led-cuadrado-6w-4-luz-blanca-sobreponer',     watts: 6,  size: '4"',   color: 'Blanca', install: 'Sobreponer', style: 'Estándar' },
-  { name: 'Panel LED Cuadrado de Sobreponer 12W 6" Luz Blanca',  slug: 'panel-led-cuadrado-12w-6-luz-blanca-sobreponer',    watts: 12, size: '6"',   color: 'Blanca', install: 'Sobreponer', style: 'Estándar' },
-  { name: 'Panel LED Cuadrado de Sobreponer 18W 8" Luz Blanca',  slug: 'panel-led-cuadrado-18w-8-luz-blanca-sobreponer',    watts: 18, size: '8"',   color: 'Blanca', install: 'Sobreponer', style: 'Estándar' },
-  { name: 'Panel LED Cuadrado de Sobreponer 24W 10" Luz Blanca', slug: 'panel-led-cuadrado-24w-10-luz-blanca-sobreponer',   watts: 24, size: '10"',  color: 'Blanca', install: 'Sobreponer', style: 'Estándar' },
-  // ── Frameless ─────────────────────────────────────────────
-  { name: 'Panel LED Frameless de Incrustar Cuadrado 9W Luz Blanca',  slug: 'panel-led-frameless-cuadrado-9w-luz-blanca-incrustar',  watts: 9,  size: '—', color: 'Blanca', install: 'Incrustar', style: 'Frameless' },
-  { name: 'Panel LED Frameless de Incrustar Cuadrado 36W Luz Blanca', slug: 'panel-led-frameless-cuadrado-36w-luz-blanca-incrustar', watts: 36, size: '—', color: 'Blanca', install: 'Incrustar', style: 'Frameless' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'paneles-led-cuadrados');
 
 const uniqueWatts   = [...new Set(products.map(p => p.watts))].sort((a, b) => a - b);
 const uniqueInstall = ['Incrustar', 'Sobreponer'];
@@ -187,11 +172,10 @@ const uniqueStyles  = ['Estándar', 'Frameless'];
               </div>
 
               <a
-                href={`https://siriuscol.com/products/${p.slug}`}
+                href={`/productos/${p.slug}`}
                 class="prod-card__cta"
                 aria-label={`Ver producto: ${p.name}`}
-                target="_blank"
-                rel="noopener"
+                
               >
                 Ver producto
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

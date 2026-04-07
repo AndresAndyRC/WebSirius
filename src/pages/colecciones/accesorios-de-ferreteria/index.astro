@@ -2,13 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../../utils/imageCheck';
 
-const products = [
-  // ── Herramientas ───────────────────────────────────────────
-  { name: 'Cinta Aislante 19mm x 20m Negra', slug: 'cinta-aislante-5m-negra-certificacion-ul', tipo: 'Consumible', material: 'PVC', precio: '$4.500', desc: 'Retardante de llama, uso profesional.' },
-  { name: 'Caja de Herramientas 16"', slug: 'caja-herramientas-16', tipo: 'Herramienta', material: 'Plástico', precio: '$35.000', desc: 'Cierre metálico y bandeja organizadora.' },
-  { name: 'Destornillador Aislado Punta Pala', slug: 'destornillador-aislado-1000v', tipo: 'Herramienta', material: 'Acero CR-V', precio: '$12.000', desc: 'Certificado 1000V. Punta magnética.' },
-  { name: 'Amarres Plásticos Negros x100 20cm', slug: 'amarre-plastico-en-nylon-20cm-x-2-5mm-negro-bolsa-100und', tipo: 'Consumible', material: 'Nylon', precio: '$6.500', desc: 'Correas de sujeción para organización de cables.' },
-];
+import todosLosProductos from '../../../data/productos.json';
+const products = todosLosProductos.filter(p => p.categoria === 'accesorios-de-ferreteria');
 
 const tipos    = ['Herramienta', 'Consumible'];
 const material = ['PVC', 'Plástico', 'Acero CR-V', 'Nylon'];
@@ -58,7 +53,7 @@ const tipoIcon: Record<string,string>  = { Herramienta: 'build', Consumible: 'te
                   <div class="prod-card__meta"><span class="prod-card__badge" style={`background:${accent}18;border-color:${accent}44;color:${accent}`}><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-2px"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:inherit; vertical-align:middle;">{icon}</span></span> {p.tipo}</span><span class="prod-card__badge" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#cbd5e1">{p.material}</span></div>
                   <h3 class="prod-card__name">{p.name}</h3><p class="prod-card__desc">{p.desc}</p><p class="prod-card__price">{p.precio} COP</p>
                 </div>
-                <a href={`https://siriuscol.com/products/${p.slug}`} class="prod-card__cta" target="_blank" rel="noopener">Ver producto</a>
+                <a href={`/productos/${p.slug}`} class="prod-card__cta" rel="noopener">Ver producto</a>
               </article>
             );
           })}
