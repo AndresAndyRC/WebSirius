@@ -10,6 +10,12 @@
   --color-brand-accent:    #00C2FF;   /* Electric blue — cool accent */
   --color-brand-gold:      #D4A843;   /* Rich gold for premium feel */
 
+  /* Brand primary — opacity variants */
+  --color-brand-primary-08: rgba(245, 166, 35, 0.08);
+  --color-brand-primary-12: rgba(245, 166, 35, 0.12);
+  --color-brand-primary-28: rgba(245, 166, 35, 0.28);
+  --color-brand-primary-50: rgba(245, 166, 35, 0.50);
+
   /* ─── Surface System ────────────────────────────────────── */
   --color-surface-base:    #0D1117;   /* Page background */
   --color-surface-raised:  #161B27;   /* Cards, panels */
@@ -116,6 +122,7 @@
   --z-sticky:   200;
   --z-modal:    300;
   --z-toast:    400;
+  --z-cursor:   500;
 
   /* ─── TopBar Height ─────────────────────────────────────── */
   --topbar-h:  40px;

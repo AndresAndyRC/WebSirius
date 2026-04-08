@@ -20,13 +20,11 @@ interface Particle {
 interface LightParticlesProps {
   count?: number;
   colors?: string[];
-  height?: number;
 }
 
 export default function LightParticles({
   count = 40,
   colors = ['#F5A623', '#00C2FF', '#FFD27F', '#7EC8FF'],
-  height = 600,
 }: LightParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
@@ -63,7 +61,6 @@ export default function LightParticles({
     }));
 
     const draw = (t: number) => {
-      const dt = t - timeRef.current;
       timeRef.current = t;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);

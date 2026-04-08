@@ -5,7 +5,7 @@
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const faqs = [
+const faqItems = [
   {
     q: '¿Los productos tienen garantía?',
     a: 'Todos nuestros productos tienen 1 año de garantía hasta 5 años dependiendo del producto, por defectos de fábrica. Nuestra garantía cubre fallos en componentes electrónicos, problemas de fabricación y pérdida de eficiencia lumínica fuera de los rangos especificados.',
@@ -47,6 +47,19 @@ const faqs = [
     icon: '🎚️',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
 ---
 
 <BaseLayout
@@ -54,6 +67,7 @@ const faqs = [
   description="Encuentra respuestas rápidas y detalladas a las preguntas más comunes sobre nuestros productos LED, garantías, envíos y normas RETIE/RETILAP."
   canonical="/faqs"
   ogImage="/og-default.jpg"
+  jsonLd={faqSchema}
 >
 
   <!-- ── Hero ── -->
@@ -117,7 +131,7 @@ const faqs = [
 
       <!-- Accordion list -->
       <div class="faq-list">
-        {faqs.map((item, i) => (
+        {faqItems.map((item, i) => (
           <details class="faq-item glass" name="faqs">
             <summary class="faq-item__summary">
               <span class="faq-item__icon" aria-hidden="true">{item.icon}</span>

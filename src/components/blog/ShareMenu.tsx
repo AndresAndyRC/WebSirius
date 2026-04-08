@@ -2,7 +2,7 @@
  * ShareMenu.tsx — React island for share functionality
  * Hydrated client-side with `client:visible`
  */
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface ShareMenuProps {
   url: string;
@@ -61,6 +61,13 @@ const shareTargets = [
 export default function ShareMenu({ url, title }: ShareMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleToggle = () => setIsOpen(prev => !prev);
 
@@ -68,7 +75,7 @@ export default function ShareMenu({ url, title }: ShareMenuProps) {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      timerRef.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback
     }

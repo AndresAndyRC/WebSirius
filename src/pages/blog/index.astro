@@ -12,6 +12,12 @@ const allPosts = (await getCollection('blog')).sort(
 
 const siteUrl = Astro.site?.toString() ?? 'https://siriuscol.com';
 const canonicalUrl = `${siteUrl}blog`;
+
+const dateFormatter = new Intl.DateTimeFormat('es-CO', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 <BaseLayout
@@ -45,11 +51,7 @@ const canonicalUrl = `${siteUrl}blog`;
       ) : (
         <ul class="blog-index-grid" role="list">
           {allPosts.map(post => {
-            const formattedDate = new Intl.DateTimeFormat('es-CO', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }).format(new Date(post.data.publishedDate));
+            const formattedDate = dateFormatter.format(new Date(post.data.publishedDate));
 
             return (
               <li class="blog-card">

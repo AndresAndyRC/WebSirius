@@ -150,7 +150,7 @@ export default function CollectionFilter({ collections }: Props) {
               minHeight: '40px',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '1.2em', verticalAlign: '-4px' }}>{cat.icon}</span>
+            <span className="material-symbols-outlined" aria-hidden="true" style={{ fontSize: '1.2em', verticalAlign: '-4px' }}>{cat.icon}</span>
             {cat.label}
           </button>
         ))}
@@ -175,7 +175,7 @@ export default function CollectionFilter({ collections }: Props) {
           border: '1px dashed var(--color-surface-border)',
           borderRadius: 'var(--radius-2xl)',
         }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>search</span>
+          <span className="material-symbols-outlined" aria-hidden="true" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>search</span>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-base)' }}>
             No encontramos esa colección. Prueba con otro término.
           </p>
@@ -260,7 +260,7 @@ export default function CollectionFilter({ collections }: Props) {
                     border: '1px solid var(--color-surface-border)',
                     flexShrink: 0,
                   }}>
-                    <span className="material-symbols-outlined">{col.icon}</span>
+                    <span className="material-symbols-outlined" aria-hidden="true">{col.icon}</span>
                   </div>
 
                   {/* Name */}
