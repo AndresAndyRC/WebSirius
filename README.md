@@ -118,3 +118,4 @@ Configurados en `vercel.json`:
 - [x] Poner logo e icono del cliente.
 - [ ] Discutir con el cliente la vía definitiva para el manejo y creación de cupones a futuro (Dashboard CMS vs JSON Estático).
 - [ ] **Importante:** Solicitar al cliente las llaves de producción de Wompi (Llave Pública, Secreto de Integridad y Secreto de Eventos) para configurar el entorno de pagos en Vercel.
+- [ ] Migrar el JSON de productos (`productos.json`) a una base de datos PostgreSQL en Supabase para mejor rendimiento y escalabilidad.
