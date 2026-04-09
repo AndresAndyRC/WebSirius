@@ -3,14 +3,13 @@ import { defineConfig } from 'astro/config';
 import mdx    from '@astrojs/mdx';
 import react  from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://siriuscol.com',
 
-  // ── Vercel hybrid output (SSR + SSG) ──────────────────────────
-  // Permite páginas estáticas por defecto pero habilita Endpoints (API)
-  output: 'hybrid',
+  // ── Vercel output (SSR + SSG) ─────────────────────────────────
+  // En Astro actual, el output estático por defecto cubre este caso.
   adapter: vercel({
     webAnalytics: { enabled: false }, // usamos GA4 manual
   }),
