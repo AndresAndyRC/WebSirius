@@ -156,13 +156,22 @@ const jsonLd = [
           </div>
         </div>
 
-        <!-- Spectrum bar (decorativa) -->
-        <div class="home-hero__spectrum">
-          <div class="home-hero__spectrum-bar"></div>
-          <div class="home-hero__spectrum-labels">
-            <span style="color: var(--color-warm)"><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">light_mode</span> 2700K</span>
-            <span style="color: #E8EFFF"><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">bolt</span> 4000K</span>
-            <span style="color: var(--color-cool)"><span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:-3px;">ac_unit</span> 6500K</span>
+        <!-- Temperature Spectrum Legend (Infographic Style) -->
+        <div class="spectrum-legend" aria-hidden="true">
+          <div class="spectrum-legend__line-bg"></div>
+          <div class="spectrum-legend__labels">
+            <div class="spectrum-point" style="--pt-color: var(--color-warm)">
+              <span class="material-symbols-outlined">light_mode</span>
+              <span class="spectrum-point__value">2700K</span>
+            </div>
+            <div class="spectrum-point" style="--pt-color: #E8EFFF">
+              <span class="material-symbols-outlined">bolt</span>
+              <span class="spectrum-point__value">4000K</span>
+            </div>
+            <div class="spectrum-point" style="--pt-color: var(--color-cool)">
+              <span class="material-symbols-outlined">ac_unit</span>
+              <span class="spectrum-point__value">6500K</span>
+            </div>
           </div>
         </div>
 
@@ -585,43 +594,67 @@ const jsonLd = [
     font-weight: var(--fw-semibold);
   }
 
-  /* ─ Spectrum ─ */
-  .home-hero__spectrum {
-    background: var(--color-surface-raised);
-    border: 1px solid var(--color-surface-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-4) var(--space-5);
+  /* ─ Spectrum Legend ─ */
+  .spectrum-legend {
     width: 100%;
+    margin-block: var(--space-4) var(--space-2);
+    position: relative;
+    padding-bottom: 8px; /* Offset bottom boundary */
   }
 
-  .home-hero__spectrum-bar {
-    height: 10px;
+  .spectrum-legend__line-bg {
+    position: absolute;
+    bottom: 11px; /* Center of dot is 8px (padding) + 3px (half of 6px height) = 11px */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      rgba(255,154,62, 0.1) 0%, 
+      rgba(255,154,62, 1) 15%, 
+      rgba(255,255,255, 1) 50%, 
+      rgba(126,200,255, 1) 85%,
+      rgba(126,200,255, 0.1) 100%
+    );
     border-radius: var(--radius-full);
-    background: linear-gradient(90deg, #ff9a3e 0%, #ffffff 50%, #7ec8ff 100%);
-    box-shadow: 0 0 20px rgba(245, 166, 35, 0.3),
-      0 0 40px rgba(245, 166, 35, 0.15),
-      inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    animation: spectrum-glow 4s ease-in-out infinite;
-    margin-bottom: var(--space-3);
+    z-index: 1;
   }
 
-  @keyframes spectrum-glow {
-    0%,
-    100% {
-      box-shadow: 0 0 16px rgba(245, 166, 35, 0.25),
-        0 0 32px rgba(126, 200, 255, 0.12);
-    }
-    50% {
-      box-shadow: 0 0 28px rgba(245, 166, 35, 0.45),
-        0 0 56px rgba(126, 200, 255, 0.25);
-    }
-  }
-
-  .home-hero__spectrum-labels {
+  .spectrum-legend__labels {
     display: flex;
     justify-content: space-between;
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
+    position: relative;
+    z-index: 2;
+  }
+
+  .spectrum-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--pt-color);
+  }
+
+  .spectrum-point .material-symbols-outlined {
+    font-size: 1.25rem;
+    filter: drop-shadow(0 0 6px var(--pt-color));
+    margin-bottom: 2px;
+  }
+
+  .spectrum-point__value {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-bold);
+    margin-bottom: 14px; /* Space between text and dot */
+  }
+
+  /* Fixed geometry dot placed with flex flow */
+  .spectrum-point::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pt-color);
+    box-shadow: 0 0 10px 2px var(--pt-color);
+    flex-shrink: 0;
   }
 
   /* ─ Chips ─ */
