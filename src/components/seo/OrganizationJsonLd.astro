@@ -1,0 +1,37 @@
+---
+/**
+ * OrganizationJsonLd.astro — Schema.org Organization + WebSite globales
+ * Se inyecta en BaseLayout para todas las paginas
+ */
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SIRIUS Iluminación",
+    "url": "https://siriuscol.com",
+    "logo": "https://siriuscol.com/Logo-sirius.avif",
+    "sameAs": [
+      "https://www.instagram.com/siriuscol",
+      "https://wa.me/573000000000"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SIRIUS Premium LED",
+    "url": "https://siriuscol.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://siriuscol.com/colecciones?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+];
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemas)} />

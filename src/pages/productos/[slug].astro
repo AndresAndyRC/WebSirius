@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { supabase } from '../../lib/supabase';
+import { sanitizeHtml } from '../../lib/sanitize';
+import ProductJsonLd from '../../components/seo/ProductJsonLd.astro';
+import BreadcrumbJsonLd from '../../components/seo/BreadcrumbJsonLd.astro';
 
 export async function getStaticPaths() {
   const { data: productos, error } = await supabase.from('productos').select('*');
@@ -54,15 +57,32 @@ const cleanEmojis = (str: string) => {
 };
 
 // Short descriptions fix
-let cleanDescription = product.main_description_html?.trim() || '';
+let cleanDescription = sanitizeHtml(product.main_description_html?.trim() || '');
 if (!cleanDescription) cleanDescription = `<p>Descubre el ${product.title} de SIRIUS.</p>`;
 const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 150);
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`${product.title} | SIRIUS Premium`}
   description={metaDescription}
 >
+  <ProductJsonLd product={product} />
+  <BreadcrumbJsonLd items={[
+    { name: 'Inicio', url: 'https://siriuscol.com/' },
+    { name: 'Catálogo', url: 'https://siriuscol.com/colecciones' },
+    { name: product.title, url: `https://siriuscol.com/productos/${product.slug}` }
+  ]} />
+  {product.faqs && product.faqs.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": product.faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.pregunta,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.respuesta }
+      }))
+    })} />
+  )}
   <div class="pdp-wrapper wrapper liquid-theme">
     
     <nav class="pdp-breadcrumbs animate-fade-in" aria-label="Breadcrumb">
@@ -178,12 +198,12 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
 
           <!-- Beneficios (Only if available) -->
           {product.beneficios_html && product.beneficios_html.trim() !== '' && (
-            <div class="pdp-html-content highlights-block glass-layered animate-slide-up" style="--delay: 0.55s" set:html={cleanEmojis(product.beneficios_html)}></div>
+            <div class="pdp-html-content highlights-block glass-layered animate-slide-up" style="--delay: 0.55s" set:html={sanitizeHtml(cleanEmojis(product.beneficios_html))}></div>
           )}
 
           <!-- Aplicaciones (Only if available) -->
           {product.aplicaciones_html && product.aplicaciones_html.trim() !== '' && (
-            <div class="pdp-html-content applications-block glass-layered animate-slide-up" style="--delay: 0.6s" set:html={cleanEmojis(product.aplicaciones_html)}></div>
+            <div class="pdp-html-content applications-block glass-layered animate-slide-up" style="--delay: 0.6s" set:html={sanitizeHtml(cleanEmojis(product.aplicaciones_html))}></div>
           )}
         </div>
 

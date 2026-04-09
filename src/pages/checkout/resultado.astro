@@ -1,0 +1,236 @@
+---
+/**
+ * Resultado de Pago — Post-checkout de Wompi
+ * Route: /checkout/resultado?id={transactionId}
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+const transactionId = Astro.url.searchParams.get('id');
+
+let transaction: any = null;
+let fetchError = false;
+
+if (transactionId) {
+  try {
+    const res = await fetch(`https://production.wompi.co/v1/transactions/${transactionId}`);
+    if (res.ok) {
+      const data = await res.json();
+      transaction = data.data;
+    } else {
+      fetchError = true;
+    }
+  } catch {
+    fetchError = true;
+  }
+}
+
+const statusConfig: Record<string, { label: string; icon: string; color: string; message: string }> = {
+  APPROVED: {
+    label: 'Pago Aprobado',
+    icon: 'check_circle',
+    color: '#6bff96',
+    message: 'Tu pago ha sido procesado exitosamente. Recibirás un correo de confirmación con los detalles de tu pedido.',
+  },
+  DECLINED: {
+    label: 'Pago Rechazado',
+    icon: 'cancel',
+    color: '#ff6b6b',
+    message: 'Tu pago fue rechazado por la entidad financiera. Por favor intenta con otro método de pago o contacta a tu banco.',
+  },
+  VOIDED: {
+    label: 'Pago Anulado',
+    icon: 'block',
+    color: '#ffaa6b',
+    message: 'La transacción ha sido anulada. Si crees que esto es un error, contacta a nuestro equipo de soporte.',
+  },
+  ERROR: {
+    label: 'Error en el Pago',
+    icon: 'error',
+    color: '#ff6b6b',
+    message: 'Ocurrió un error procesando tu pago. Por favor intenta nuevamente o contacta soporte.',
+  },
+  PENDING: {
+    label: 'Pago Pendiente',
+    icon: 'schedule',
+    color: '#ffdd6b',
+    message: 'Tu pago está siendo procesado. Te notificaremos por correo cuando se confirme.',
+  },
+};
+
+const status = transaction?.status || 'PENDING';
+const config = statusConfig[status] || statusConfig.PENDING;
+const reference = transaction?.reference || '';
+const amount = transaction?.amount_in_cents ? (transaction.amount_in_cents / 100).toLocaleString('es-CO') : '';
+---
+
+<BaseLayout
+  title={`${config.label} | SIRIUS`}
+  description="Resultado de tu transacción con SIRIUS Iluminación"
+>
+  <div class="resultado-wrapper">
+    <div class="resultado-card glass">
+      <div class="resultado-icon" style={`color: ${config.color}`}>
+        <span class="material-symbols-outlined">{config.icon}</span>
+      </div>
+
+      <h1 class="resultado-title" style={`color: ${config.color}`}>{config.label}</h1>
+      <p class="resultado-message">{config.message}</p>
+
+      {transaction && (
+        <div class="resultado-details">
+          {reference && (
+            <div class="detail-row">
+              <span class="detail-label">Referencia</span>
+              <span class="detail-value">{reference}</span>
+            </div>
+          )}
+          {amount && (
+            <div class="detail-row">
+              <span class="detail-label">Monto</span>
+              <span class="detail-value">${amount} COP</span>
+            </div>
+          )}
+          {transaction.payment_method_type && (
+            <div class="detail-row">
+              <span class="detail-label">Método</span>
+              <span class="detail-value">{transaction.payment_method_type}</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {!transactionId && !fetchError && (
+        <p class="resultado-message">No se encontró información de la transacción.</p>
+      )}
+
+      {fetchError && (
+        <p class="resultado-message">No pudimos verificar el estado de tu pago en este momento. Recibirás una confirmación por correo electrónico.</p>
+      )}
+
+      <div class="resultado-actions">
+        <a href="/colecciones" class="btn-primary">Seguir Comprando</a>
+        <a href="/contacto" class="btn-secondary">Contactar Soporte</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .resultado-wrapper {
+    padding-top: calc(var(--header-height) + 4rem);
+    padding-bottom: 6rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-inline: 1rem;
+  }
+
+  .resultado-card {
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .resultado-icon {
+    margin-bottom: 1.5rem;
+  }
+
+  .resultado-icon .material-symbols-outlined {
+    font-size: 4rem;
+  }
+
+  .resultado-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .resultado-message {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .resultado-details {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .detail-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+  }
+
+  .detail-value {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: monospace;
+  }
+
+  .resultado-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #fff;
+    color: #000;
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+  }
+</style>

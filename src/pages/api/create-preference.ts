@@ -32,20 +32,31 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Calcula el total real consultando Supabase para evitar manipulación del lado del cliente
-    let total = 0;
+    // Batch query: 1 round-trip en lugar de N (resuelve problema N+1)
+    const slugs = items.map((i: { slug: string }) => i.slug);
+    const { data: productos, error } = await supabase
+      .from('productos')
+      .select('slug, price')
+      .in('slug', slugs);
+
+    if (error || !productos) {
+      return new Response(JSON.stringify({ error: 'Error al consultar los productos.' }), { status: 500 });
+    }
+
+    const priceMap = new Map<string, number>(
+      productos.map((p: { slug: string; price: string }) => [p.slug, parseFloat(p.price)])
+    );
+
+    // Detectar productos fantasma: slugs del carrito que no existen en la BD
     for (const item of items) {
-      const { data: producto, error } = await supabase
-        .from('productos')
-        .select('price')
-        .eq('slug', item.slug)
-        .single();
-        
-      if (error || !producto) {
+      if (!priceMap.has(item.slug)) {
         return new Response(JSON.stringify({ error: `El producto ${item.title || item.slug} no existe o no está disponible.` }), { status: 404 });
       }
+    }
 
-      const dbPrice = parseFloat(producto.price);
-      total += (dbPrice * item.quantity);
+    let total = 0;
+    for (const item of items) {
+      total += (priceMap.get(item.slug)! * item.quantity);
     }
 
     // Aplicar descuento en el servidor de forma segura

@@ -19,6 +19,9 @@ import CheckoutForm from '../components/cart/CheckoutForm.tsx';
   </div>
 </BaseLayout>
 
+<!-- Wompi Widget SDK — PCI DSS v4.0.1 Req 6.4.3: unico script externo autorizado en checkout -->
+<script is:inline src="https://checkout.wompi.co/widget.js"></script>
+
 <style>
   .checkout-wrapper {
     padding-top: calc(var(--header-height) + 2rem);
