@@ -186,6 +186,7 @@ export default function RoomSimulator() {
           background: scene.wallColor,
           aspectRatio: '16 / 9',
           maxHeight: '420px',
+          marginInline: 'auto',
           ...transitionStyle,
         }}
         aria-live="polite"
