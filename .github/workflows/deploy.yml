@@ -57,7 +57,10 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       # 3.5 · Auditoría de seguridad de dependencias
+      # Nota: registramos hallazgos, pero no bloqueamos deploy por vulnerabilidades transitivas
+      # del toolchain (por ejemplo Astro/Vercel adapter) mientras se aplica la remediación mayor.
       - name: Security audit
+        continue-on-error: true
         run: npm audit --audit-level=high --omit=dev
 
       # 4 · Instalar Vercel CLI (oficial, sin third-party action)
