@@ -45,16 +45,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2 · Setup Node 20 + caché npm automático
-      - name: Setup Node.js 20
+      # 2 · Setup Node 22 LTS + caché npm automático
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
-      # 3 · Instalar dependencias (respeta package-lock.json)
+      # 3 · Instalar dependencias (npm ci respeta package-lock.json estrictamente)
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
+
+      # 3.5 · Auditoría de seguridad de dependencias
+      - name: Security audit
+        run: npm audit --audit-level=high --omit=dev
 
       # 4 · Instalar Vercel CLI (oficial, sin third-party action)
       - name: Install Vercel CLI

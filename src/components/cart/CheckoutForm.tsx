@@ -71,14 +71,20 @@ export default function CheckoutForm() {
       
       if (!res.ok) throw new Error(data.error);
 
-      // 2. Open Wompi Widget using the generated signature and reference
-      // Wompi requires including a <script> in the DOM or redirecting to their hosted checkout.
-      // For this demo, we simulate the redirection.
-      
-      const WIDGET_URL = `https://checkout.wompi.co/p/?public-key=${data.publicKey}&currency=${data.currency}&amount-in-cents=${data.amountInCents}&reference=${data.reference}&signature:integrity=${data.signature}`;
-      
-      console.log('Firma SHA-256 válida generada en servidor:', data.signature);
-      window.location.href = WIDGET_URL;
+      // 2. Abrir Wompi Widget embebido con los datos firmados en el servidor
+      const checkout = new (window as any).WidgetCheckout({
+        currency: data.currency,
+        amountInCents: data.amountInCents,
+        reference: data.reference,
+        publicKey: data.publicKey,
+        signature: { integrity: data.signature },
+        redirectUrl: `${window.location.origin}/checkout/resultado`,
+      });
+      checkout.open((result: any) => {
+        if (result && result.transaction) {
+          window.location.href = `/checkout/resultado?id=${result.transaction.id}`;
+        }
+      });
 
     } catch(err) {
       alert('Hubo un problema contactando con el servidor bancario: ' + err);

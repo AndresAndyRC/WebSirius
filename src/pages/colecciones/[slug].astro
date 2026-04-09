@@ -4,6 +4,8 @@ import { getProductImage } from '../../utils/imageCheck';
 import { COLLECTIONS } from '../../data/colecciones';
 import { supabase } from '../../lib/supabase';
 import LightBeams from '@components/LightBeams.astro';
+import CollectionJsonLd from '../../components/seo/CollectionJsonLd.astro';
+import BreadcrumbJsonLd from '../../components/seo/BreadcrumbJsonLd.astro';
 
 export async function getStaticPaths() {
   const { data: todosLosProductos, error } = await supabase.from('productos').select('*');
@@ -126,10 +128,16 @@ const expertTips = [
 ];
 ---
 
-<BaseLayout 
-  title={`${collection.name} — SIRIUS`} 
+<BaseLayout
+  title={`${collection.name} — SIRIUS`}
   description={collection.description}
 >
+  <CollectionJsonLd name={collection.name} products={products} />
+  <BreadcrumbJsonLd items={[
+    { name: 'Inicio', url: 'https://siriuscol.com/' },
+    { name: 'Colecciones', url: 'https://siriuscol.com/colecciones' },
+    { name: collection.name, url: `https://siriuscol.com/colecciones/${collection.id}` }
+  ]} />
   <section class="coll-hero">
     <LightBeams variant="subtle" />
     <div class="coll-hero__glow" aria-hidden="true" style={`background: radial-gradient(ellipse at 50% 10%,${accent}22 0%,transparent 70%); filter: blur(80px); width: 100vw; height: 100vh; position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%; z-index: -1;`}></div>

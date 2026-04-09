@@ -1,0 +1,65 @@
+---
+/**
+ * ProductJsonLd.astro — Schema.org Product + Offer para PDPs
+ * Habilita Google Rich Results (snippets con precio) y citación en AI generativa
+ */
+interface Props {
+  product: any;
+}
+
+const { product } = Astro.props;
+
+const stripHtml = (html: string) => (html || '').replace(/<[^>]*>/g, '').trim();
+const description = stripHtml(product.main_description_html || '').substring(0, 500) || `${product.title} - Iluminación LED premium SIRIUS`;
+
+const price = parseFloat(product.price);
+const hasPrice = !isNaN(price) && price > 0;
+
+// Fecha de vigencia del precio: 90 días desde hoy
+const priceValidUntil = new Date();
+priceValidUntil.setDate(priceValidUntil.getDate() + 90);
+
+const schema: any = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.title,
+  "description": description,
+  "image": product.images || [],
+  "sku": product.sku || product.slug,
+  "brand": {
+    "@type": "Brand",
+    "name": product.vendor || "SIRIUS Premium"
+  },
+  "url": `https://siriuscol.com/productos/${product.slug}`,
+  "dateModified": new Date().toISOString().split('T')[0],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".pdp-headline", ".pdp-html-content"]
+  }
+};
+
+if (hasPrice) {
+  schema.offers = {
+    "@type": "Offer",
+    "price": price.toString(),
+    "priceCurrency": "COP",
+    "availability": "https://schema.org/InStock",
+    "url": `https://siriuscol.com/productos/${product.slug}`,
+    "priceValidUntil": priceValidUntil.toISOString().split('T')[0],
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "CO"
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30
+    }
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

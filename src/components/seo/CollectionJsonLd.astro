@@ -1,0 +1,40 @@
+---
+/**
+ * CollectionJsonLd.astro — Schema.org ItemList para paginas de colecciones
+ */
+interface Props {
+  name: string;
+  products: any[];
+}
+
+const { name, products } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": name,
+  "numberOfItems": products.length,
+  "itemListElement": products.map((p: any, index: number) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "url": `https://siriuscol.com/productos/${p.slug}`,
+    "name": p.title,
+    ...(parseFloat(p.price) > 0 && {
+      "item": {
+        "@type": "Product",
+        "name": p.title,
+        "url": `https://siriuscol.com/productos/${p.slug}`,
+        "image": p.images?.[0] || '',
+        "offers": {
+          "@type": "Offer",
+          "price": parseFloat(p.price).toString(),
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    })
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
