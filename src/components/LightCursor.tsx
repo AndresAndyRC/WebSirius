@@ -56,7 +56,7 @@ export default function LightCursor({
       style={{
         position: 'fixed',
         pointerEvents: 'none',
-        zIndex: 9999,
+        zIndex: 500,
         width: `${size}px`,
         height: `${size}px`,
         borderRadius: '50%',

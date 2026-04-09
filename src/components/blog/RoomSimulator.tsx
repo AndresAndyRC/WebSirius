@@ -171,7 +171,7 @@ export default function RoomSimulator() {
               backdropFilter: 'blur(8px)',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '1.2em' }}>{s.icon}</span>
+            <span className="material-symbols-outlined" aria-hidden="true" style={{ fontSize: '1.2em' }}>{s.icon}</span>
             {s.label}
           </button>
         ))}
@@ -393,7 +393,7 @@ export default function RoomSimulator() {
             alignItems: 'center',
             gap: '0.25rem'
           }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '1.2em' }}>{scene.icon}</span> {scene.label}
+            <span className="material-symbols-outlined" aria-hidden="true" style={{ fontSize: '1.2em' }}>{scene.icon}</span> {scene.label}
           </p>
           <p style={{
             fontSize: 'var(--text-xs)',

@@ -67,7 +67,7 @@ button, input, select, textarea {
 
 /* ─── Selection ──────────────────────────────────────────── */
 ::selection {
-  background-color: rgba(245,166,35,0.28);
+  background-color: var(--color-brand-primary-28);
   color: var(--color-text-primary);
 }
 
@@ -75,7 +75,7 @@ button, input, select, textarea {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-surface-base); }
 ::-webkit-scrollbar-thumb {
-  background: rgba(245,166,35,0.30);
+  background: var(--color-brand-primary-28);
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-primary); }
@@ -217,22 +217,22 @@ button, input, select, textarea {
 .btn:active { transform: translateY(0); }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--color-brand-primary), #E8941A);
+  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-gold));
   color: var(--color-text-inverse);
   box-shadow: 0 4px 16px rgba(245,166,35,0.35);
 }
 .btn--primary:hover {
-  box-shadow: 0 6px 24px rgba(245,166,35,0.50);
+  box-shadow: 0 6px 24px var(--color-brand-primary-50);
   background: linear-gradient(135deg, #FFBA4D, var(--color-brand-primary));
 }
 
 .btn--secondary {
   background: transparent;
   color: var(--color-brand-primary);
-  border: 1.5px solid rgba(245,166,35,0.50);
+  border: 1.5px solid var(--color-brand-primary-50);
 }
 .btn--secondary:hover {
-  background: rgba(245,166,35,0.08);
+  background: var(--color-brand-primary-08);
   border-color: var(--color-brand-primary);
 }
 
@@ -287,7 +287,7 @@ button, input, select, textarea {
   font-weight: var(--fw-semibold);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: rgba(245,166,35,0.12);
+  background: var(--color-brand-primary-12);
   color: var(--color-brand-primary);
   border: 1px solid rgba(245,166,35,0.25);
 }

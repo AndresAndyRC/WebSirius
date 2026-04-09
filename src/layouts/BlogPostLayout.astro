@@ -53,7 +53,7 @@ const toc = data.toc ?? [];
     <div class="container">
       <div class="blog-grid">
         <!-- Main article -->
-        <article class="blog-article prose" id="article-content" aria-labelledby="article-title">
+        <article class="blog-article prose" id="article-content" aria-label={data.title}>
           <slot />
           <NewsletterForm />
           <Comments />

@@ -27,6 +27,18 @@
   </url>
 
   <url>
+    <loc>https://siriuscol.com/colecciones/paneles-led-redondos</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://siriuscol.com/faqs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://siriuscol.com/contacto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

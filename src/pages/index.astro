@@ -6,12 +6,47 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import LightBeams from "@components/LightBeams.astro";
 import LightParticles from "@components/LightParticles.tsx";
 import RoomSimulator from "@components/blog/RoomSimulator.tsx";
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'SIRIUS Iluminación LED',
+    url: 'https://siriuscol.com',
+    logo: 'https://siriuscol.com/favicon.svg',
+    description: 'Empresa colombiana especializada en iluminación LED de alta eficiencia para espacios residenciales, comerciales e industriales.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+57-316-307-0062',
+      contactType: 'customer service',
+      availableLanguage: 'Spanish',
+    },
+    sameAs: [
+      'https://www.facebook.com/saborsirius',
+      'https://www.instagram.com/siriusiluminacion',
+      'https://www.tiktok.com/@siriusiluminacion',
+    ],
+    areaServed: {
+      '@type': 'Country',
+      name: 'Colombia',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'SIRIUS Iluminación LED',
+    url: 'https://siriuscol.com',
+    inLanguage: 'es-CO',
+    description: 'Iluminación LED de alta eficiencia para Colombia. Paneles, cintas, bombillos y más con garantía de 2 años.',
+  },
+];
 ---
 
 <BaseLayout
   title="SIRIUS Iluminación LED — Colombia"
   description="La tecnología LED más avanzada para transformar tus espacios. Paneles, reflectores y accesorios con garantía de 2 años. Envíos a todo Colombia."
   canonical="https://siriuscol.com"
+  jsonLd={jsonLd}
 >
   <!-- ═══════════════════════════════════════════════════
        HERO — Animated light beams + particles + content

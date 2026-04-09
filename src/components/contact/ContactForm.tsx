@@ -67,14 +67,18 @@ export default function ContactForm() {
 
     setStatus('sending');
 
-    // Simulate send (replace with your actual endpoint)
-    await new Promise(r => setTimeout(r, 1800));
+    try {
+      // Simulate send (replace with your actual endpoint)
+      await new Promise(r => setTimeout(r, 1800));
 
-    // In production: POST to a form handler / Formspree / Netlify Forms
-    // const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(fields) });
-    setStatus('success');
-    setFields({ name: '', email: '', phone: '', topic: '', message: '' });
-    setTouched({});
+      // In production: POST to a form handler / Formspree / Netlify Forms
+      // const res = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(fields) });
+      setStatus('success');
+      setFields({ name: '', email: '', phone: '', topic: '', message: '' });
+      setTouched({});
+    } catch {
+      setStatus('error');
+    }
   };
 
   // ── Shared input style builder ──
@@ -142,6 +146,38 @@ export default function ContactForm() {
           }}
         >
           Enviar otro mensaje
+        </button>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div style={{
+        textAlign: 'center',
+        padding: '3rem 2rem',
+        background: 'rgba(239,68,68,0.06)',
+        border: '1px solid rgba(239,68,68,0.25)',
+        borderRadius: 'var(--radius-2xl)',
+      }} role="alert">
+        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>⚠️</div>
+        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '0.75rem' }}>
+          Hubo un error. Intenta nuevamente.
+        </h3>
+        <button
+          onClick={() => setStatus('idle')}
+          style={{
+            padding: '0.625rem 1.5rem',
+            background: 'rgba(239,68,68,0.12)',
+            border: '1px solid rgba(239,68,68,0.30)',
+            borderRadius: 'var(--radius-full)',
+            color: '#ef4444',
+            fontWeight: 600,
+            fontSize: 'var(--text-sm)',
+            cursor: 'pointer',
+          }}
+        >
+          Intentar de nuevo
         </button>
       </div>
     );

@@ -48,7 +48,7 @@ const articleJsonLd = {
     },
   },
   mainEntityOfPage: {
-    '@type': '@id',
+    '@type': 'WebPage',
     '@id':   canonicalUrl,
   },
   ...(data.heroImage ? { image: `${siteUrl}${data.heroImage}` } : {}),
