@@ -64,7 +64,8 @@ export default function CheckoutForm() {
       const res = await fetch('/api/create-preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ total, items })
+        // Enviamos el cupón directamente para que el backend lo aplique verificando precio en Supabase
+        body: JSON.stringify({ items, couponCode: coupon })
       });
       const data = await res.json();
       

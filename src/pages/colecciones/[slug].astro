@@ -2,19 +2,22 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getProductImage } from '../../utils/imageCheck';
 import { COLLECTIONS } from '../../data/colecciones';
-import todosLosProductos from '../../data/productos.json';
+import { supabase } from '../../lib/supabase';
 import LightBeams from '@components/LightBeams.astro';
 
 export async function getStaticPaths() {
+  const { data: todosLosProductos, error } = await supabase.from('productos').select('*');
+  if (error) console.error('Error fetching products:', error);
+
   return COLLECTIONS.map(collection => {
     return {
       params: { slug: collection.id },
-      props: { collection },
+      props: { collection, todosLosProductos: todosLosProductos || [] },
     };
   });
 }
 
-const { collection } = Astro.props;
+const { collection, todosLosProductos } = Astro.props;
 
 // Dynamic Category Matching (Fuzzy based on new JSON structure)
 const products = todosLosProductos.filter((p: any) => {
@@ -74,7 +77,7 @@ const products = todosLosProductos.filter((p: any) => {
 });
 
 // Dynamically extract filters from this collection's products
-const excludedKeys = new Set(['name', 'slug', 'categoria', 'desc', 'precio', 'price', 'agotado', 'ip', 'control', 'isNew', 'title', 'vendor', 'sku', 'status', 'main_description_html', 'beneficios_html', 'aplicaciones_html', 'specs', 'faqs', 'tags', 'garantia', 'imagenes', 'images', 'url_producto']);
+const excludedKeys = new Set(['id', 'created_at', 'updated_at', 'name', 'slug', 'categoria', 'desc', 'precio', 'price', 'agotado', 'ip', 'control', 'isNew', 'title', 'vendor', 'sku', 'status', 'main_description_html', 'beneficios_html', 'aplicaciones_html', 'specs', 'faqs', 'tags', 'garantia', 'imagenes', 'images', 'url_producto']);
 const filterableKeys = new Set<string>();
 
 products.forEach((p: any) => {

@@ -1,15 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import productos from '../../data/productos.json';
+import { supabase } from '../../lib/supabase';
 
 export async function getStaticPaths() {
-  return productos.map(p => ({
+  const { data: productos, error } = await supabase.from('productos').select('*');
+  if (error) {
+    console.error('Error fetching products from Supabase:', error);
+    return [];
+  }
+
+  return (productos || []).map(p => ({
     params: { slug: p.slug },
-    props: { product: p },
+    props: { product: p, todosLosProductos: productos },
   }));
 }
 
-const { product } = Astro.props;
+const { product, todosLosProductos } = Astro.props;
 
 // Now we use the parsed properties natively
 const gallery = product.images || [];
@@ -27,15 +33,15 @@ const productPrice = (!isZeroPrice && !isNaN(parsedPrice))
 // Find Related Products by tags (max 4, excluding current)
 let relatedProducts: any[] = [];
 if (product.tags && product.tags.length > 0) {
-  relatedProducts = productos.filter(p => 
+  relatedProducts = todosLosProductos.filter((p: any) => 
     p.slug !== product.slug && 
     p.tags && 
-    p.tags.some(t => product.tags.includes(t))
+    p.tags.some((t: string) => product.tags.includes(t))
   ).slice(0, 4);
 }
 // If not enough related by tags, just pick 4 random
 if (relatedProducts.length < 4) {
-  const fillers = productos.filter(p => p.slug !== product.slug && !relatedProducts.includes(p)).slice(0, 4 - relatedProducts.length);
+  const fillers = todosLosProductos.filter((p: any) => p.slug !== product.slug && !relatedProducts.includes(p)).slice(0, 4 - relatedProducts.length);
   relatedProducts = [...new Set([...relatedProducts, ...fillers])].slice(0, 4);
 }
 
@@ -84,7 +90,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
         
         {gallery.length > 1 && (
           <div class="pdp-thumbnails">
-            {gallery.map((img, index) => (
+            {gallery.map((img: string, index: number) => (
               <button class={`thumb-ring ${index === 0 ? 'active' : ''}`} data-image={img} aria-label={`Ver imagen ${index + 1}`}>
                 <div class="thumb-inner">
                   <img src={img} alt={`Miniatura ${index + 1}`} loading="lazy" />
@@ -187,7 +193,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
             <div class="tech-specs glass-layered animate-slide-up" style="--delay: 0.65s">
               <h3 class="section-title">Especificaciones Técnicas</h3>
               <ul class="specs-list">
-                {specs.map((spec) => (
+                {specs.map((spec: {label: string, value: string}) => (
                   <li class="spec-row">
                     <span class="spec-label">{spec.label}</span>
                     <span class="spec-line"></span>
@@ -205,7 +211,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
         <div class="pdp-faqs animate-slide-up" style="--delay: 0.7s">
           <h3 class="section-title">Preguntas Frecuentes</h3>
           <div class="accordion-group faq-grid">
-            {product.faqs.map((faq) => (
+            {product.faqs.map((faq: {pregunta: string, respuesta: string}) => (
                <details class="glass-accordion">
                  <summary class="accordion-title">
                    {faq.pregunta}

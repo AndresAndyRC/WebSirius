@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import { supabase } from '../../lib/supabase';
+import cupones from '../../data/cupones.json';
 
 export const prerender = false;
 
@@ -22,12 +24,43 @@ async function generateWompiSignature(reference: string, amountInCents: number, 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const { total, items } = body;
+    const { items, couponCode } = body;
 
     // Validate inputs
-    if (!total || typeof total !== 'number') {
-      return new Response(JSON.stringify({ error: 'Monto inválido' }), { status: 400 });
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return new Response(JSON.stringify({ error: 'El carrito está vacío o es inválido' }), { status: 400 });
     }
+
+    // Calcula el total real consultando Supabase para evitar manipulación del lado del cliente
+    let total = 0;
+    for (const item of items) {
+      const { data: producto, error } = await supabase
+        .from('productos')
+        .select('price')
+        .eq('slug', item.slug)
+        .single();
+        
+      if (error || !producto) {
+        return new Response(JSON.stringify({ error: `El producto ${item.title || item.slug} no existe o no está disponible.` }), { status: 404 });
+      }
+
+      const dbPrice = parseFloat(producto.price);
+      total += (dbPrice * item.quantity);
+    }
+
+    // Aplicar descuento en el servidor de forma segura
+    if (couponCode) {
+      const cupon = cupones.find((c) => c.codigo === couponCode.trim().toUpperCase());
+      if (cupon && cupon.activo) {
+        if (cupon.tipo === 'porcentaje') {
+          total = total - (total * (cupon.valor / 100));
+        } else if (cupon.tipo === 'fijo') {
+          total = total - cupon.valor;
+        }
+      }
+    }
+
+    total = Math.max(0, total); // Evita totales negativos
 
     // Reference logic (must be unique per transaction)
     const reference = `SIRIUS-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
