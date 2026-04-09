@@ -113,13 +113,12 @@ const STATS = [
             border: 'rgba(244,114,182,0.20)',
           },
         ].map(cat => (
-          <div
-            class="spotlight-card"
-            style={`--s-color:${cat.color};--s-bg:${cat.bg};--s-border:${cat.border}`}
-          >
-            <div class="spotlight-card__icon material-symbols-outlined">{cat.icon}</div>
-            <h3 class="spotlight-card__title">{cat.title}</h3>
-            <p class="spotlight-card__desc">{cat.desc}</p>
+          <div class="category-ref" style={`--s-color:${cat.color};--s-bg:${cat.bg};`}>
+            <div class="category-ref__header">
+              <span class="category-ref__icon material-symbols-outlined" aria-hidden="true">{cat.icon}</span>
+              <h3 class="category-ref__title">{cat.title}</h3>
+            </div>
+            <p class="category-ref__desc">{cat.desc}</p>
           </div>
         ))}
       </div>
@@ -300,53 +299,55 @@ const STATS = [
   white-space: nowrap;
 }
 
-/* ── Spotlight ───────────────────────────────────────────── */
+/* ── Category References ─────────────────────────────────── */
 .section--sm { padding-block: var(--space-10); }
 
 .cats-spotlight__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  gap: var(--space-8) var(--space-6);
 }
 
-.spotlight-card {
+.category-ref {
   display: flex;
   flex-direction: column;
+  gap: var(--space-2);
+}
+
+.category-ref__header {
+  display: flex;
+  align-items: center;
   gap: var(--space-3);
-  padding: var(--space-5);
-  background: var(--s-bg);
-  border: 1px solid var(--s-border);
-  border-radius: var(--radius-xl);
-  transition: transform var(--duration-normal) var(--ease-out-expo), box-shadow var(--duration-normal);
 }
 
-.spotlight-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
-}
-
-.spotlight-card__icon {
-  font-size: 1.75rem;
+.category-ref__icon {
+  font-size: 1.25rem;
   line-height: 1;
-  width: 48px; height: 48px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--color-surface-overlay);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--s-border);
+  color: var(--s-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--s-bg);
+  box-shadow: 0 0 16px var(--s-bg);
 }
 
-.spotlight-card__title {
+.category-ref__title {
   font-family: var(--font-display);
   font-size: var(--text-base);
   font-weight: var(--fw-bold);
-  color: var(--s-color);
+  color: var(--color-text-primary);
   line-height: 1.2;
 }
 
-.spotlight-card__desc {
+.category-ref__desc {
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   line-height: var(--lh-relaxed);
+  padding-left: 48px;
+  margin-top: -4px;
 }
 
 /* ── Catalog ─────────────────────────────────────────────── */
