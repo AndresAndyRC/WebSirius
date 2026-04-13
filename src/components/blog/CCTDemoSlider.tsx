@@ -21,8 +21,8 @@ const LIGHTS: Light[] = [
     label: 'Luz Cálida',
     ambiance: 'Relajante y romántica',
     rooms: 'Sala · Habitación · Comedor',
-    color: '#FF9A3E',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,154,62,0.20) 0%, rgba(200,80,0,0.05) 60%, transparent 100%)',
+    color: '#FFA957',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,169,87,0.20) 0%, rgba(255,169,87,0.05) 60%, transparent 100%)',
     emoji: '🛋️',
   },
   {
@@ -30,8 +30,8 @@ const LIGHTS: Light[] = [
     label: 'Cálida+',
     ambiance: 'Acogedora y cálida',
     rooms: 'Sala · Pasillo · Restaurante',
-    color: '#FFB347',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,179,71,0.18) 0%, transparent 100%)',
+    color: '#FFB46B',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,180,107,0.18) 0%, transparent 100%)',
     emoji: '🏠',
   },
   {
@@ -39,8 +39,8 @@ const LIGHTS: Light[] = [
     label: 'Blanca Cálida',
     ambiance: 'Suave y familiar',
     rooms: 'Sala · Cocina · Oficina home',
-    color: '#FFD27F',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,210,127,0.15) 0%, transparent 100%)',
+    color: '#FFC287',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,194,135,0.15) 0%, transparent 100%)',
     emoji: '🍳',
   },
   {
@@ -48,8 +48,8 @@ const LIGHTS: Light[] = [
     label: 'Luz Neutra',
     ambiance: 'Natural y equilibrada',
     rooms: 'Cocina · Baño · Oficina',
-    color: '#E8EFFF',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(200,220,255,0.12) 0%, transparent 100%)',
+    color: '#FFD1A3',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,209,163,0.12) 0%, transparent 100%)',
     emoji: '⚖️',
   },
   {
@@ -57,8 +57,8 @@ const LIGHTS: Light[] = [
     label: 'Neutra+',
     ambiance: 'Brillante y nítida',
     rooms: 'Cocina · Consultorio · Tienda',
-    color: '#C8DCFF',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(173,204,255,0.12) 0%, transparent 100%)',
+    color: '#FFDFC4',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,223,196,0.12) 0%, transparent 100%)',
     emoji: '🏪',
   },
   {
@@ -66,8 +66,8 @@ const LIGHTS: Light[] = [
     label: 'Luz Fría',
     ambiance: 'Energizante y alerta',
     rooms: 'Taller · Bodega · Exterior',
-    color: '#9EC9FF',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(126,200,255,0.12) 0%, transparent 100%)',
+    color: '#FFECE0',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(255,236,224,0.12) 0%, transparent 100%)',
     emoji: '💻',
   },
   {
@@ -75,8 +75,8 @@ const LIGHTS: Light[] = [
     label: 'Blanca Día',
     ambiance: 'Máxima concentración',
     rooms: 'Quirófano · Industrial · Seguridad',
-    color: '#7EC8FF',
-    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(100,180,255,0.14) 0%, transparent 100%)',
+    color: '#E4F0FF',
+    bgGradient: 'radial-gradient(ellipse at 60% 40%, rgba(228,240,255,0.14) 0%, transparent 100%)',
     emoji: '🏭',
   },
 ];
@@ -222,9 +222,9 @@ export default function CCTDemoSlider() {
             style={{
               height: '10px',
               borderRadius: 'var(--radius-full)',
-              background: 'linear-gradient(90deg, #FF9A3E 0%, #FFD27F 25%, #E8EFFF 50%, #C8DCFF 75%, #7EC8FF 100%)',
+              background: 'linear-gradient(90deg, #FFA957 0%, #FFB46B 25%, #FFD1A3 50%, #FFECE0 75%, #E4F0FF 100%)',
               marginBottom: '0.75rem',
-              boxShadow: '0 0 16px rgba(245,166,35,0.2), 0 0 32px rgba(126,200,255,0.1)',
+              boxShadow: '0 0 16px rgba(255,169,87,0.2), 0 0 32px rgba(228,240,255,0.1)',
             }}
             aria-hidden="true"
           />
