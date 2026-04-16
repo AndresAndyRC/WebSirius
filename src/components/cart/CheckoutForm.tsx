@@ -164,19 +164,37 @@ export default function CheckoutForm() {
       <div className="checkout-details" style={{ padding: '2rem' }}>
         <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', color: '#fff' }}>Datos de Envío</h2>
         <form onSubmit={handlePay} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          
           <div style={{ display: 'flex', gap: '1rem' }}>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Nombre Completo</label>
+              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Nombres</label>
               <input required type="text" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Correo Electrónico</label>
+              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Apellido</label>
+              <input required type="text" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Número de celular</label>
+              <input required type="tel" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
+            </div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Correo electrónico</label>
               <input required type="email" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
             </div>
           </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Dirección de Envío</label>
-            <input required type="text" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
+            <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Dirección de envío</label>
+            <input required type="text" placeholder="Ej: Calle 123 # 45 - 67" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Datos adicionales de la dirección</label>
+            <input type="text" placeholder="Ej: Apto 301, Torre 2, Barrio, Referencia" style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: '#fff' }} />
           </div>
           
           <button 
