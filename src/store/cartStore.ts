@@ -8,6 +8,7 @@ export interface CartItem {
   image: string;
   quantity: number;
   sku: string;
+  variantId: string;
 }
 
 export const cartItems = persistentAtom<CartItem[]>('cart', [], {
