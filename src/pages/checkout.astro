@@ -81,7 +81,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <script>
   import { cartItems } from '../store/cartStore';
-  import { createCart } from '../lib/shopify';
 
   const spinner = document.getElementById('spinner');
   const titleEl = document.getElementById('redirect-title');
@@ -119,8 +118,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         merchandiseId: i.variantId,
         quantity: i.quantity,
       }));
-      const { checkoutUrl } = await createCart(lines);
-      window.location.href = checkoutUrl;
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ lines }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.checkoutUrl) {
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      window.location.href = data.checkoutUrl;
     } catch (e: any) {
       showError(e?.message || 'Error desconocido al crear el carrito.');
     }
