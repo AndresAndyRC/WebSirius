@@ -59,7 +59,32 @@
   ],
   "redirects": [
     {
+      "source": "/collections/:collection/products/:handle",
+      "destination": "/productos/:handle",
+      "permanent": true
+    },
+    {
+      "source": "/products/:handle",
+      "destination": "/productos/:handle",
+      "permanent": true
+    },
+    {
+      "source": "/collections/:handle",
+      "destination": "/colecciones/:handle",
+      "permanent": true
+    },
+    {
       "source": "/collections",
+      "destination": "/colecciones",
+      "permanent": true
+    },
+    {
+      "source": "/products",
+      "destination": "/colecciones",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
       "destination": "/colecciones",
       "permanent": true
     },

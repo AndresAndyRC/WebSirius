@@ -1,18 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { supabase } from '../../lib/supabase';
+import { getAllProducts, toLegacyProduct } from '../../lib/shopify';
 import { sanitizeHtml } from '../../lib/sanitize';
 import ProductJsonLd from '../../components/seo/ProductJsonLd.astro';
 import BreadcrumbJsonLd from '../../components/seo/BreadcrumbJsonLd.astro';
 
 export async function getStaticPaths() {
-  const { data: productos, error } = await supabase.from('productos').select('*');
-  if (error) {
-    console.error('Error fetching products from Supabase:', error);
-    return [];
-  }
+  const shopifyProducts = await getAllProducts();
+  const productos = shopifyProducts.map(toLegacyProduct);
 
-  return (productos || []).map(p => ({
+  return productos.map(p => ({
     params: { slug: p.slug },
     props: { product: p, todosLosProductos: productos },
   }));
@@ -23,9 +20,6 @@ const { product, todosLosProductos } = Astro.props;
 // Now we use the parsed properties natively
 const gallery = product.images || [];
 const mainImg = gallery.length > 0 ? gallery[0] : null;
-
-// Specs directly from parsed data
-const specs = product.specs || [];
 
 const isZeroPrice = String(product.price) === '0.00' || String(product.price) === '0';
 const parsedPrice = parseFloat(product.price);
@@ -153,7 +147,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
             </div>
             
             <div class="pdp-actions">
-              <button class="btn-action primary-action" id="add-to-cart-btn" data-slug={product.slug} data-title={product.title} data-price={parsedPrice || 0} data-image={mainImg || ''} data-sku={product.sku || ''}>
+              <button class="btn-action primary-action" id="add-to-cart-btn" data-slug={product.slug} data-title={product.title} data-price={parsedPrice || 0} data-image={mainImg || ''} data-sku={product.sku || ''} data-variant-id={product.variant_id || ''}>
                 <span class="material-symbols-outlined">shopping_bag</span>
                 <span>Añadir al Carrito</span>
               </button>
@@ -208,41 +202,21 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
         </div>
 
         <div class="pdp-sidebar-content">
-          <!-- Technical Specs List -->
-          {specs.length > 0 && (
+          <!-- Technical Specs (rich text from Shopify metafield "Características Técnicas") -->
+          {product.caracteristicas_html && (
             <div class="tech-specs glass-layered animate-slide-up" style="--delay: 0.65s">
               <h3 class="section-title">Especificaciones Técnicas</h3>
-              <ul class="specs-list">
-                {specs.map((spec: {label: string, value: string}) => (
-                  <li class="spec-row">
-                    <span class="spec-label">{spec.label}</span>
-                    <span class="spec-line"></span>
-                    <span class="spec-value">{spec.value as string}</span>
-                  </li>
-                ))}
-              </ul>
+              <div class="pdp-html-content tech-specs-rich" set:html={sanitizeHtml(product.caracteristicas_html)}></div>
             </div>
           )}
         </div>
       </div>
 
-      <!-- FAQs Accordion -->
-      {product.faqs && product.faqs.length > 0 && (
+      <!-- FAQs (rich text from Shopify metafield "Preguntas Frecuentes") -->
+      {product.faq_html && (
         <div class="pdp-faqs animate-slide-up" style="--delay: 0.7s">
           <h3 class="section-title">Preguntas Frecuentes</h3>
-          <div class="accordion-group faq-grid">
-            {product.faqs.map((faq: {pregunta: string, respuesta: string}) => (
-               <details class="glass-accordion">
-                 <summary class="accordion-title">
-                   {faq.pregunta}
-                   <span class="material-symbols-outlined icon">expand_more</span>
-                 </summary>
-                 <div class="accordion-content">
-                   <p>{faq.respuesta}</p>
-                 </div>
-               </details>
-            ))}
-          </div>
+          <div class="pdp-html-content faq-rich glass-layered" set:html={sanitizeHtml(product.faq_html)}></div>
         </div>
       )}
     </section>
@@ -663,6 +637,7 @@ const metaDescription = cleanDescription.replace(/<[^>]*>?/gm, '').substring(0, 
         price: parseFloat(addBtn.dataset.price!),
         image: addBtn.dataset.image!,
         sku: addBtn.dataset.sku!,
+        variantId: addBtn.dataset.variantId!,
         quantity: quantity
       });
     });
