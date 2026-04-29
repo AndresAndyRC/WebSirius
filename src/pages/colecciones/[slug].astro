@@ -29,9 +29,13 @@ export async function getStaticPaths() {
 
 const { collection, todosLosProductos } = Astro.props;
 
+// Ocultar productos sin stock. Cuando Shopify los reactive (availableForSale = true),
+// el siguiente build (vía webhook Shopify→Vercel) los vuelve a mostrar.
+const productosDisponibles = todosLosProductos.filter((p: any) => p.available !== false);
+
 // Inject specs as root properties for the dynamic filter UI.
 // Hoy specs vienen vacíos (Bloque D los llenará desde metafields).
-const products = todosLosProductos.map((p: any) => {
+const products = productosDisponibles.map((p: any) => {
   const enhanced = { ...p };
   if (enhanced.specs && Array.isArray(enhanced.specs)) {
     enhanced.specs.forEach((s: any) => {
