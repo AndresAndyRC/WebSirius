@@ -5,17 +5,17 @@
 const year = new Date().getFullYear();
 
 const quickLinks = [
-  { label: 'Productos',       href: 'https://siriuscol.com/collections' },
-  { label: 'Blog',            href: '/blog' },
-  { label: 'Preguntas Frecuentes', href: 'https://siriuscol.com/pages/pushdaddy-faq-1' },
-  { label: 'Contacto',        href: 'https://siriuscol.com/pages/contact' },
+  { label: 'Productos',            href: '/colecciones' },
+  { label: 'Blog',                 href: '/blog' },
+  { label: 'Preguntas Frecuentes', href: '/faqs' },
+  { label: 'Contacto',             href: '/contacto' },
 ];
 
 const legalLinks = [
-  { label: 'Política de privacidad', href: 'https://siriuscol.com/policies/privacy-policy' },
-  { label: 'Términos y condiciones', href: 'https://siriuscol.com/policies/terms-of-service' },
-  { label: 'Política de devoluciones', href: 'https://siriuscol.com/policies/refund-policy' },
-  { label: 'Política de envíos',     href: 'https://siriuscol.com/policies/shipping-policy' },
+  { label: 'Política de privacidad',   href: '/politicas/privacidad' },
+  { label: 'Términos y condiciones',   href: '/politicas/terminos' },
+  { label: 'Política de devoluciones', href: '/politicas/devoluciones' },
+  { label: 'Política de envíos',       href: '/politicas/envios' },
 ];
 
 const socialLinks = [
@@ -78,7 +78,7 @@ const socialLinks = [
         <h3 class="footer__col-title">Legal</h3>
         <ul>
           {legalLinks.map(l => (
-            <li><a href={l.href} class="footer__link" target="_blank" rel="noopener noreferrer">{l.label}</a></li>
+            <li><a href={l.href} class="footer__link">{l.label}</a></li>
           ))}
         </ul>
       </div>

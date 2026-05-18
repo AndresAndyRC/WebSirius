@@ -1,0 +1,96 @@
+---
+/** Términos y condiciones — Route: /politicas/terminos */
+import LegalLayout from '@layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'introduccion',          label: 'Introducción' },
+  { id: 'uso-del-sitio',         label: '1. Uso del sitio' },
+  { id: 'registro',              label: '2. Registro de cuenta' },
+  { id: 'pedidos-pagos',         label: '3. Pedidos y pagos' },
+  { id: 'envios',                label: '4. Envíos y entregas' },
+  { id: 'propiedad-intelectual', label: '5. Derechos de propiedad intelectual' },
+  { id: 'responsabilidad',       label: '6. Limitación de responsabilidad' },
+  { id: 'modificaciones',        label: '7. Modificaciones de los términos' },
+  { id: 'ley-aplicable',         label: '8. Ley aplicable' },
+  { id: 'contacto',              label: '9. Contacto' },
+];
+---
+
+<LegalLayout
+  title="Términos y condiciones"
+  description="Términos y condiciones de uso de la tienda en línea de SIRIUS Iluminación: pedidos, pagos, envíos, propiedad intelectual y responsabilidades."
+  lastUpdated="2026-05-18"
+  emoji="📋"
+  toc={toc}
+>
+  <section id="introduccion">
+    <p>Bienvenido a SIRIUS. Estos Términos y condiciones regulan el acceso y el uso de nuestro sitio web y la compra de productos de iluminación LED a través de él. Al acceder o utilizar el sitio, aceptas quedar vinculado por estos términos. Si no estás de acuerdo con ellos, por favor abstente de utilizar el sitio.</p>
+  </section>
+
+  <section id="uso-del-sitio">
+    <h2>1. Uso del sitio</h2>
+    <h3>1.1. Licencia de uso</h3>
+    <p>SIRIUS te otorga una licencia limitada, no exclusiva y no transferible para acceder y utilizar el sitio con el único propósito de comprar los productos ofrecidos.</p>
+    <h3>1.2. Restricciones</h3>
+    <p>No puedes copiar, modificar, distribuir, transmitir, mostrar, reproducir, publicar, licenciar, crear trabajos derivados ni transferir ninguna información obtenida del sitio sin el consentimiento previo y por escrito de SIRIUS.</p>
+  </section>
+
+  <section id="registro">
+    <h2>2. Registro de cuenta</h2>
+    <h3>2.1. Cuenta de usuario</h3>
+    <p>Para realizar pedidos, es posible que debas registrarte proporcionando información precisa y completa sobre ti, y mantenerla actualizada. Eres responsable de mantener la confidencialidad de las credenciales de tu cuenta.</p>
+    <h3>2.2. Uso de la cuenta</h3>
+    <p>Eres responsable de todas las actividades que ocurran bajo tu cuenta y debes notificar de inmediato a SIRIUS sobre cualquier uso no autorizado o sospechoso de la misma.</p>
+  </section>
+
+  <section id="pedidos-pagos">
+    <h2>3. Pedidos y pagos</h2>
+    <h3>3.1. Precios y disponibilidad</h3>
+    <p>Todos los precios de los productos están sujetos a cambios sin previo aviso. SIRIUS se reserva el derecho de modificar o discontinuar cualquier producto en cualquier momento.</p>
+    <h3>3.2. Información de pago</h3>
+    <p>La información de pago que proporciones debe ser válida y legítima. Los pagos se procesan a través de métodos seguros provistos por nuestras pasarelas de pago.</p>
+  </section>
+
+  <section id="envios">
+    <h2>4. Envíos y entregas</h2>
+    <h3>4.1. Envío</h3>
+    <p>Los pedidos se procesan y envían con prontitud, aunque los plazos de entrega pueden variar según la ubicación. SIRIUS no se responsabiliza por retrasos atribuibles a terceros transportadores.</p>
+    <h3>4.2. Entrega</h3>
+    <p>La responsabilidad sobre el producto se transfiere al momento de su recepción por parte del transportador. Te recomendamos verificar la integridad del producto al recibirlo.</p>
+    <p>Para más detalles, consulta nuestra <a href="/politicas/envios">Política de envíos</a>.</p>
+  </section>
+
+  <section id="propiedad-intelectual">
+    <h2>5. Derechos de propiedad intelectual</h2>
+    <p>Todos los derechos de propiedad intelectual relacionados con el sitio —incluidos textos, imágenes, logotipos, diseños y software— pertenecen exclusivamente a SIRIUS o a sus licenciantes, y están protegidos por las leyes aplicables.</p>
+  </section>
+
+  <section id="responsabilidad">
+    <h2>6. Limitación de responsabilidad</h2>
+    <h3>6.1. Exclusión de garantías</h3>
+    <p>Los servicios y productos se proporcionan «tal cual», sin garantías expresas o implícitas más allá de las exigidas por la ley aplicable.</p>
+    <h3>6.2. Limitación de responsabilidad</h3>
+    <p>En la medida permitida por la ley, SIRIUS no será responsable de daños directos, indirectos, incidentales o consecuentes derivados del uso del sitio o de los productos.</p>
+  </section>
+
+  <section id="modificaciones">
+    <h2>7. Modificaciones de los términos</h2>
+    <p>SIRIUS puede actualizar estos Términos y condiciones en cualquier momento. Los cambios entran en vigor desde su publicación en el sitio; el uso continuado del sitio implica la aceptación de los términos vigentes.</p>
+  </section>
+
+  <section id="ley-aplicable">
+    <h2>8. Ley aplicable</h2>
+    <p>Estos términos se rigen e interpretan de acuerdo con las leyes de la República de Colombia, lugar de establecimiento de SIRIUS.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>9. Contacto</h2>
+    <p>Si tienes preguntas sobre estos Términos y condiciones, puedes contactarnos:</p>
+    <ul>
+      <li><strong>Dirección:</strong> Calle 22 # 49-36, Fusagasugá, Cundinamarca, Colombia.</li>
+      <li><strong>Correo:</strong> <a href="mailto:marketingdigitalsteel@gmail.com">marketingdigitalsteel@gmail.com</a></li>
+      <li><strong>Teléfono:</strong> <a href="tel:+573163070062">+57 316 307 0062</a></li>
+    </ul>
+    <p>También puedes escribirnos desde nuestra <a href="/contacto">página de Contacto</a>.</p>
+  </section>
+</LegalLayout>

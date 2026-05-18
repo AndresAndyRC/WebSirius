@@ -39,6 +39,10 @@ export const GET: APIRoute = async () => {
     { loc: `${SITE}/blog`,        changefreq: 'weekly',  priority: '0.8', lastmod: today },
     { loc: `${SITE}/faqs`,        changefreq: 'monthly', priority: '0.7' },
     { loc: `${SITE}/contacto`,    changefreq: 'monthly', priority: '0.7' },
+    { loc: `${SITE}/politicas/privacidad`,   changefreq: 'yearly', priority: '0.3' },
+    { loc: `${SITE}/politicas/terminos`,     changefreq: 'yearly', priority: '0.3' },
+    { loc: `${SITE}/politicas/devoluciones`, changefreq: 'yearly', priority: '0.3' },
+    { loc: `${SITE}/politicas/envios`,       changefreq: 'yearly', priority: '0.3' },
   ];
 
   const collectionUrls: Url[] = COLLECTIONS.map((c) => ({

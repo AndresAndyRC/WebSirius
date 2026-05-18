@@ -72,12 +72,22 @@ Para el deploy automático (CI/CD), configura estos **Secrets** en tu repositori
 ## 📁 Estructura de páginas
 
 ```
-/                  → Homepage con hero animado + Room Simulator
-/blog              → Listado de artículos
-/blog/[slug]       → Artículo individual (MDX)
-/colecciones       → Catálogo filtrable (34 colecciones)
-/contacto          → Página de contacto con formulario
+/                       → Homepage con hero animado + Room Simulator
+/blog                   → Listado de artículos
+/blog/[slug]            → Artículo individual (MDX)
+/colecciones            → Catálogo filtrable (34 colecciones)
+/colecciones/[slug]     → Colección individual
+/productos/[slug]       → Ficha de producto
+/faqs                   → Preguntas frecuentes
+/contacto               → Página de contacto con formulario
+/politicas/privacidad   → Política de privacidad
+/politicas/terminos     → Términos y condiciones
+/politicas/devoluciones → Política de devoluciones
+/politicas/envios       → Política de envíos
 ```
+
+> Las 4 páginas de `/politicas/` comparten el layout `src/layouts/LegalLayout.astro`.
+> Ver `docs/migracion-footer-y-politicas.md`.
 
 ## ✍️ Agregar un artículo al blog
 
@@ -101,6 +111,11 @@ Configurados en `vercel.json`:
 |---|---|
 | `/collections` | `/colecciones` |
 | `/pages/contact` | `/contacto` |
+| `/pages/pushdaddy-faq-1` | `/faqs` |
+| `/policies/privacy-policy` | `/politicas/privacidad` |
+| `/policies/terms-of-service` | `/politicas/terminos` |
+| `/policies/refund-policy` | `/politicas/devoluciones` |
+| `/policies/shipping-policy` | `/politicas/envios` |
 | `/blogs/ilumina-tus-espacios-blog` | `/blog` |
 | `/blogs/ilumina-tus-espacios-blog/:slug` | `/blog/:slug` |
 

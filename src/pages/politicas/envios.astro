@@ -1,0 +1,74 @@
+---
+/** Política de envíos — Route: /politicas/envios */
+import LegalLayout from '@layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'introduccion', label: 'Introducción' },
+  { id: 'procesamiento', label: '1. Procesamiento de pedidos' },
+  { id: 'metodos', label: '2. Métodos de envío' },
+  { id: 'plazos', label: '3. Plazos de entrega' },
+  { id: 'seguimiento', label: '4. Seguimiento de envíos' },
+  { id: 'direccion', label: '5. Dirección de envío' },
+  { id: 'contacto', label: '6. Contacto' },
+];
+---
+
+<LegalLayout
+  title="Política de envíos"
+  description="Política de envíos de SIRIUS Iluminación: tiempos de procesamiento, métodos de envío, plazos de entrega y seguimiento de pedidos en toda Colombia."
+  lastUpdated="2026-05-18"
+  emoji="🚚"
+  toc={toc}
+>
+  <section id="introduccion">
+    <p>En SIRIUS nos comprometemos a ofrecer un proceso de envío eficiente y confiable para garantizar la entrega oportuna de tus productos de iluminación LED. Esta Política de envíos describe nuestras prácticas y procedimientos relacionados con el envío de los pedidos realizados a través de nuestro sitio web.</p>
+  </section>
+
+  <section id="procesamiento">
+    <h2>1. Procesamiento de pedidos</h2>
+    <h3>1.1. Tiempo de procesamiento</h3>
+    <p>Los pedidos se procesan dentro de un plazo de 1 a 3 días hábiles, salvo que se indique lo contrario en la página del producto o durante la compra.</p>
+    <h3>1.2. Confirmación del pedido</h3>
+    <p>Una vez procesado tu pedido, recibirás una confirmación por correo electrónico con los detalles de la compra, la información de envío y el número de seguimiento, si aplica.</p>
+  </section>
+
+  <section id="metodos">
+    <h2>2. Métodos de envío</h2>
+    <h3>2.1. Opciones de envío</h3>
+    <p>Ofrecemos servicios de envío estándar, express e internacional, según la disponibilidad y la ubicación de entrega. Realizamos despachos a nivel nacional con la transportadora que el cliente prefiera.</p>
+    <h3>2.2. Costo del envío</h3>
+    <p>El costo del envío se calcula automáticamente durante el proceso de compra según el método seleccionado, el peso del pedido y la ubicación de entrega.</p>
+  </section>
+
+  <section id="plazos">
+    <h2>3. Plazos de entrega</h2>
+    <h3>3.1. Plazos estimados</h3>
+    <p>Los plazos estimados de entrega se indican durante el proceso de compra y varían según la ubicación y el método de envío seleccionado.</p>
+    <h3>3.2. Retrasos</h3>
+    <p>En caso de retrasos debidos a circunstancias fuera de nuestro control, mantendremos comunicación contigo sobre el estado de tu pedido.</p>
+  </section>
+
+  <section id="seguimiento">
+    <h2>4. Seguimiento de envíos</h2>
+    <h3>4.1. Número de seguimiento</h3>
+    <p>En la mayoría de los pedidos se proporciona un número de seguimiento que te permite rastrear tu envío en línea.</p>
+    <h3>4.2. Actualizaciones</h3>
+    <p>Te proporcionaremos las actualizaciones relevantes sobre cualquier cambio en el estado de la entrega de tu pedido.</p>
+  </section>
+
+  <section id="direccion">
+    <h2>5. Dirección de envío</h2>
+    <h3>5.1. Responsabilidad del cliente</h3>
+    <p>Es responsabilidad del cliente proporcionar una dirección de envío precisa y completa. SIRIUS no se responsabiliza por pérdidas o retrasos ocasionados por información de envío incorrecta o incompleta.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>6. Contacto</h2>
+    <p>Si tienes preguntas sobre nuestra Política de envíos, contáctanos:</p>
+    <ul>
+      <li><strong>Correo:</strong> <a href="mailto:marketingdigitalsteel@gmail.com">marketingdigitalsteel@gmail.com</a></li>
+      <li><strong>Teléfono:</strong> <a href="tel:+573163070062">+57 316 307 0062</a></li>
+    </ul>
+    <p>También puedes escribirnos desde nuestra <a href="/contacto">página de Contacto</a>.</p>
+  </section>
+</LegalLayout>
