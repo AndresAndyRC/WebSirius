@@ -1,18 +1,21 @@
-import { createStorefrontApiClient } from '@shopify/storefront-api-client';
-
-const storeDomain = import.meta.env.PUBLIC_SHOPIFY_STORE_DOMAIN;
-const publicAccessToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
-const apiVersion = import.meta.env.PUBLIC_SHOPIFY_API_VERSION || '2024-10';
-
-if (!storeDomain || !publicAccessToken) {
-  throw new Error('Missing Shopify Storefront API env vars (PUBLIC_SHOPIFY_STORE_DOMAIN, PUBLIC_SHOPIFY_STOREFRONT_TOKEN)');
-}
-
-const client = createStorefrontApiClient({
-  storeDomain,
-  apiVersion,
-  publicAccessToken,
-});
+/**
+ * src/lib/shopify.ts
+ * ───────────────────────────────────────────────────────────────────────────
+ * MODO DEMO DE PORTAFOLIO — DESCONECTADO DE SHOPIFY.
+ *
+ * Este módulo conserva exactamente la misma API pública que la integración
+ * original con la Storefront API de Shopify (getAllProducts, getProductByHandle,
+ * getCollectionByHandle, toLegacyProduct, createCart), pero NO realiza ninguna
+ * llamada de red ni requiere credenciales. Los datos provienen de un catálogo
+ * ficticio local (`src/data/demoCatalog.ts`).
+ *
+ * Motivo: el proyecto no fue aceptado por el cliente; se conserva como demo de
+ * portafolio sin afectar su tienda real. El checkout está deshabilitado.
+ *
+ * Para reconectar a Shopify en el futuro, restaura la versión de red de este
+ * archivo desde el historial de git (commit anterior a la conversión a demo).
+ */
+import { DEMO_PRODUCTS, demoProductByHandle, demoCollectionProducts } from '../data/demoCatalog';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -60,93 +63,6 @@ export interface ShopifyCollection {
   image: ShopifyImage | null;
   products: ShopifyProduct[];
 }
-
-// ─── Fragments / Queries ────────────────────────────────────────────────────
-
-// Metafields que queremos del producto. Mantén este array sincronizado con
-// los pares namespace.key configurados en Shopify Admin → Custom data → Products.
-const PRODUCT_METAFIELDS = [
-  { namespace: 'custom', key: 'descripci_n' },                  // Descripción
-  { namespace: 'custom', key: 'preguntas_frecuentes' },         // FAQ
-  { namespace: 'custom', key: 'garant_a_del_producto' },        // Garantía
-  { namespace: 'custom', key: 'caracter_sticas_t_cnicas' },     // Características Técnicas
-];
-
-const METAFIELDS_IDENTIFIERS_LITERAL = JSON.stringify(PRODUCT_METAFIELDS).replace(/"([^"]+)":/g, '$1:');
-
-const PRODUCT_FRAGMENT = /* GraphQL */ `
-  fragment ProductFields on Product {
-    id
-    handle
-    title
-    descriptionHtml
-    vendor
-    tags
-    productType
-    availableForSale
-    priceRange { minVariantPrice { amount currencyCode } }
-    images(first: 10) { edges { node { url altText } } }
-    variants(first: 25) {
-      edges {
-        node {
-          id
-          sku
-          availableForSale
-          price { amount currencyCode }
-        }
-      }
-    }
-    metafields(identifiers: ${METAFIELDS_IDENTIFIERS_LITERAL}) {
-      namespace
-      key
-      type
-      value
-    }
-  }
-`;
-
-const ALL_PRODUCTS_QUERY = /* GraphQL */ `
-  ${PRODUCT_FRAGMENT}
-  query AllProducts($cursor: String) {
-    products(first: 250, after: $cursor) {
-      pageInfo { hasNextPage endCursor }
-      edges { node { ...ProductFields } }
-    }
-  }
-`;
-
-const PRODUCT_BY_HANDLE_QUERY = /* GraphQL */ `
-  ${PRODUCT_FRAGMENT}
-  query ProductByHandle($handle: String!) {
-    product(handle: $handle) { ...ProductFields }
-  }
-`;
-
-const COLLECTION_BY_HANDLE_QUERY = /* GraphQL */ `
-  ${PRODUCT_FRAGMENT}
-  query CollectionByHandle($handle: String!, $cursor: String) {
-    collection(handle: $handle) {
-      id
-      handle
-      title
-      description
-      image { url altText }
-      products(first: 250, after: $cursor) {
-        pageInfo { hasNextPage endCursor }
-        edges { node { ...ProductFields } }
-      }
-    }
-  }
-`;
-
-const CREATE_CART_MUTATION = /* GraphQL */ `
-  mutation CreateCart($lines: [CartLineInput!]!) {
-    cartCreate(input: { lines: $lines }) {
-      cart { id checkoutUrl }
-      userErrors { field message }
-    }
-  }
-`;
 
 // ─── Rich text (Shopify) → HTML ────────────────────────────────────────────
 // Shopify devuelve los metafields tipo "rich_text_field" como JSON con un AST
@@ -227,90 +143,31 @@ function metafieldByKey(metafields: any[] | null | undefined, key: string): stri
   return found?.value || null;
 }
 
-// ─── Normalizers ────────────────────────────────────────────────────────────
+// ─── Public API (modo demo: datos locales, sin red) ─────────────────────────
+// Mantienen las mismas firmas que la versión Shopify; ahora leen del catálogo
+// ficticio en `src/data/demoCatalog.ts`.
 
-function normalizeProduct(node: any): ShopifyProduct {
-  return {
-    id: node.id,
-    handle: node.handle,
-    title: node.title,
-    descriptionHtml: node.descriptionHtml || '',
-    vendor: node.vendor || '',
-    tags: node.tags || [],
-    productType: node.productType || '',
-    availableForSale: node.availableForSale,
-    priceRange: node.priceRange,
-    images: (node.images?.edges || []).map((e: any) => ({
-      url: e.node.url,
-      altText: e.node.altText,
-    })),
-    variants: (node.variants?.edges || []).map((e: any) => ({
-      id: e.node.id,
-      sku: e.node.sku,
-      availableForSale: e.node.availableForSale,
-      price: e.node.price,
-    })),
-    metafields: node.metafields || [],
-  };
-}
-
-// ─── Public API ─────────────────────────────────────────────────────────────
+import { COLLECTIONS } from '../data/colecciones';
 
 export async function getAllProducts(): Promise<ShopifyProduct[]> {
-  const all: ShopifyProduct[] = [];
-  let cursor: string | null = null;
-
-  while (true) {
-    const { data, errors } = await client.request(ALL_PRODUCTS_QUERY, {
-      variables: { cursor },
-    });
-    if (errors) throw new Error(`Shopify getAllProducts: ${JSON.stringify(errors)}`);
-
-    const edges = data?.products?.edges || [];
-    for (const e of edges) all.push(normalizeProduct(e.node));
-
-    if (!data?.products?.pageInfo?.hasNextPage) break;
-    cursor = data.products.pageInfo.endCursor;
-  }
-
-  return all;
+  return DEMO_PRODUCTS;
 }
 
 export async function getProductByHandle(handle: string): Promise<ShopifyProduct | null> {
-  const { data, errors } = await client.request(PRODUCT_BY_HANDLE_QUERY, {
-    variables: { handle },
-  });
-  if (errors) throw new Error(`Shopify getProductByHandle(${handle}): ${JSON.stringify(errors)}`);
-  return data?.product ? normalizeProduct(data.product) : null;
+  return demoProductByHandle(handle);
 }
 
 export async function getCollectionByHandle(handle: string): Promise<ShopifyCollection | null> {
-  const products: ShopifyProduct[] = [];
-  let cursor: string | null = null;
-  let head: any = null;
+  const products = demoCollectionProducts(handle);
+  if (!products) return null;
 
-  while (true) {
-    const { data, errors } = await client.request(COLLECTION_BY_HANDLE_QUERY, {
-      variables: { handle, cursor },
-    });
-    if (errors) throw new Error(`Shopify getCollectionByHandle(${handle}): ${JSON.stringify(errors)}`);
-
-    if (!data?.collection) return null;
-    if (!head) head = data.collection;
-
-    const edges = data.collection.products?.edges || [];
-    for (const e of edges) products.push(normalizeProduct(e.node));
-
-    if (!data.collection.products?.pageInfo?.hasNextPage) break;
-    cursor = data.collection.products.pageInfo.endCursor;
-  }
-
+  const meta = COLLECTIONS.find(c => c.id === handle);
   return {
-    id: head.id,
-    handle: head.handle,
-    title: head.title,
-    description: head.description || '',
-    image: head.image ? { url: head.image.url, altText: head.image.altText } : null,
+    id: `gid://shopify/Collection/demo-${handle}`,
+    handle,
+    title: meta?.name || handle,
+    description: meta?.description || '',
+    image: null,
     products,
   };
 }
@@ -379,21 +236,14 @@ export function toLegacyProduct(p: ShopifyProduct): LegacyProduct {
   };
 }
 
+/**
+ * MODO DEMO: el checkout está deshabilitado. Esta función ya no contacta a
+ * Shopify; lanzar siempre evita que cualquier flujo cree pedidos reales en la
+ * tienda del cliente. La UI del carrito sigue funcionando, pero al ir a pagar
+ * se muestra un aviso de demostración (ver `src/pages/checkout.astro`).
+ */
 export async function createCart(
-  lines: { merchandiseId: string; quantity: number }[],
+  _lines: { merchandiseId: string; quantity: number }[],
 ): Promise<{ id: string; checkoutUrl: string }> {
-  const { data, errors } = await client.request(CREATE_CART_MUTATION, {
-    variables: { lines },
-  });
-  if (errors) throw new Error(`Shopify createCart: ${JSON.stringify(errors)}`);
-
-  const userErrors = data?.cartCreate?.userErrors || [];
-  if (userErrors.length > 0) {
-    throw new Error(`Shopify createCart user errors: ${JSON.stringify(userErrors)}`);
-  }
-
-  const cart = data?.cartCreate?.cart;
-  if (!cart) throw new Error('Shopify createCart: no cart returned');
-
-  return { id: cart.id, checkoutUrl: cart.checkoutUrl };
+  throw new Error('Checkout deshabilitado: este es un demo de portafolio, no se procesan pedidos.');
 }
